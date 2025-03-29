@@ -1,8 +1,9 @@
 export type SiteConfig = typeof siteConfig
 
 export const siteConfig = {
-  name: 'Next.js + HeroUI',
-  description: 'Make beautiful websites regardless of your design experience.',
+  name: 'Moonchain IHO',
+  description: 'The mining revolution begins with Moonchain’s Initial Hardware Offering (IHO), delivering the world’s first free, cutting-edge physical hardware miners to holders of Moonchain tokens via an Ethereum-based smart contract.',
+  favicon: 'https://explorer.moonchain.com/assets/favicon/favicon.ico',
   navItems: [
     {
       label: 'Products',

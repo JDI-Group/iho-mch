@@ -38,7 +38,7 @@ const accordions = [
 export default function IndexPage() {
   return (
     <HomeLayout>
-      <div className="hidden md:block w-full h-screen">
+      <section className="hidden md:block w-full h-screen">
         <div className=" flex h-full justify-center gap-[100px] items-center">
           <div className="flex-1 flex flex-col items-center relative z-10 gap-8 text-center">
             <div className="text-3xl lg:text-5xl font-bold">
@@ -73,11 +73,10 @@ export default function IndexPage() {
             <FloatProjects />
           </div>
         </div>
-      </div>
+      </section>
 
-      <div className="md:hidden min-h-screen flex flex-col">
-        <div className="h-16" />
-        <div className="relative z-30 mt-6 text-center flex flex-col gap-4 mb-12">
+      <section className="md:hidden min-h-screen flex flex-col">
+        <div className="pt-16 relative z-30 mt-6 text-center flex flex-col gap-4 mb-12">
           <div className="flex flex-col justify-center items-center text-3xl font-bold">
             INITIAL HARDWARE OFFERING (IHO)
           </div>
@@ -101,9 +100,9 @@ export default function IndexPage() {
             LEARN MORE
           </Button>
         </div>
-      </div>
+      </section>
 
-      <div className="flex w-full justify-center lg:justify-between flex-col lg:flex-row items-center gap-8 lg:gap-12 py-12 lg:h-screen font-bold">
+      <section className="flex w-full justify-center lg:justify-between flex-col lg:flex-row items-center gap-8 lg:gap-12 py-12 lg:h-screen font-bold">
         <Card className="w-full lg:flex-1 lg:h-[200px] h-[180px]">
           <CardBody className="h-full px-6 flex flex-col items-center justify-center gap-4 text-center">
             <div className="text-2xl">SELECT</div>
@@ -122,9 +121,9 @@ export default function IndexPage() {
             <div>Your mining hardware is delivered FREE, connect & start mining!</div>
           </CardBody>
         </Card>
-      </div>
+      </section>
 
-      <div className="relative z-10">
+      <section className="relative z-10">
         <div className="mb-8">
           <div className={title({ size: 'sm' })}>
             FAQs
@@ -137,7 +136,7 @@ export default function IndexPage() {
             </AccordionItem>
           ))}
         </Accordion>
-      </div>
+      </section>
 
     </HomeLayout>
   )
