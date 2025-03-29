@@ -1,8 +1,8 @@
-import type { PropWithHtmlProps } from '@hairy/react-lib'
+import type { PropsWithDetailedHTML } from '@hairy/react-lib'
 import { Link } from '@heroui/link'
 import clsx from 'clsx'
 
-export function Footer(props: PropWithHtmlProps) {
+export function Footer(props: PropsWithDetailedHTML) {
   return (
     <footer {...props} className={clsx('w-full flex items-center justify-center py-3', props.className)}>
       <Link

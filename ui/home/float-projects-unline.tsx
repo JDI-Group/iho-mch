@@ -1,7 +1,7 @@
-import type { PropWithHtmlProps } from '@hairy/react-lib'
+import type { PropsWithDetailedHTML } from '@hairy/react-lib'
 import clsx from 'clsx'
 
-export function FloatProjectsUnline(props: PropWithHtmlProps) {
+export function FloatProjectsUnline(props: PropsWithDetailedHTML) {
   return (
     <div className={clsx('relative', props.className)} {...props}>
       <div className="w-full h-full flex justify-center items-center absolute">

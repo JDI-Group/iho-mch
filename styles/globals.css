@@ -2,46 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --main-background:
-    linear-gradient(0deg, var(--main-bg-form) 0%, var(--main-bg-form) 100%),
-    linear-gradient(180deg, #666 0%, var(--main-bg-to) 100%);
-}
-/* :root {
-  --dark-background:
-    linear-gradient(
-      0deg,
-      rgba(0, 0, 0, 0.40) 0%,
-      rgba(0, 0, 0, 0.40) 100%
-    ),
-    linear-gradient(
-      180deg,
-      #666 0%,
-      #000 100%
-    );
-  --light-background:
-    linear-gradient(
-      0deg,
-       rgba(255, 255, 255, 0.40) 0%,
-       rgba(255, 255, 255, 0.40) 100%
-    ),
-    linear-gradient(
-      180deg,
-      #666 0%,
-      #E9ECEF 100%
-    );
-} */
-
-@property --main-bg-form {
-  syntax: '<color>';
-  inherits: false;
-}
-
-@property --main-bg-to {
-  syntax: '<color>';
-  inherits: false;
-}
-
 .rainbow-wrapper button div {
   border: none !important;
 }

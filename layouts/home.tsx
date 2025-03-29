@@ -1,4 +1,4 @@
-import type { PropWithHtmlProps } from '@hairy/react-lib'
+import type { PropsWithDetailedHTML } from '@hairy/react-lib'
 
 import type { PropsWithChildren } from 'react'
 import clsx from 'clsx'
@@ -6,7 +6,7 @@ import { Footer } from './components/footer'
 import { Head } from './components/head'
 import { Navbar } from './components/navbar'
 
-export default function HomeLayout({ children, className }: PropWithHtmlProps<PropsWithChildren>) {
+export default function HomeLayout({ children, className }: PropsWithDetailedHTML<PropsWithChildren>) {
   return (
     <div
       className={clsx('relative flex flex-col h-screen font-barlow', className)}
