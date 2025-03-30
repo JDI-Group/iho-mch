@@ -1,15 +1,21 @@
 import type { PropsWithChildren } from 'react'
+import { FILE_PREFIX } from '@/config/constants'
+
 import { useStoreUser } from '@/hooks/use-store-user'
 
 import store from '@/store'
-
 import {
   useFetchRequestIntercept,
   useFetchResponseIntercept,
   useStore,
   useWhenever,
 } from '@hairy/react-lib'
-import { jsonTryParse } from '@hairy/utils'
+import { cloneDeepWith, jsonTryParse } from '@hairy/utils'
+
+function customizer(value: any) {
+  if (typeof value === 'string' && value.includes(FILE_PREFIX))
+    return `/api/files/${value.split(FILE_PREFIX)[1]}`
+}
 
 export function BootstrapProvider(props: PropsWithChildren) {
   const authentication = useStore(store.authentication)
@@ -25,7 +31,13 @@ export function BootstrapProvider(props: PropsWithChildren) {
     const data = jsonTryParse(text)
     if (data?.statusCode)
       throw data
-
+    if (response.url.endsWith('/product')) {
+      return new Response(cloneDeepWith(data, customizer), {
+        status: response.status,
+        statusText: response.statusText,
+        headers: response.headers,
+      })
+    }
     return response
   })
 

@@ -1,30 +1,39 @@
+import { settings } from '@/config/settings'
+import { Modal, ModalBody, ModalContent, ModalHeader } from '@heroui/modal'
+import { Tab, Tabs } from '@heroui/tabs'
 import { useExtendOverlay } from '@overlastic/react'
-import { Modal, Tabs } from 'antd'
-import { FormShipping } from './form-shipping'
+
+export interface SettingsDialogProps {
+  target?: typeof settings[number]['title']
+}
 
 export function SettingsDialog() {
   const { visible, resolve } = useExtendOverlay({
     duration: 500,
   })
 
-  const items = [
-    {
-      title: 'Address',
-      child: <FormShipping />,
-    },
-  ]
-
   return (
-    <Modal open={visible} title="Settings" onCancel={resolve} footer={null}>
-      <Tabs
-        items={
-          items.map(item => ({
-            children: item.child,
-            label: item.title,
-            key: item.title,
-          }))
-        }
-      />
+    <Modal
+      isKeyboardDismissDisabled={true}
+      isOpen={visible}
+      onOpenChange={resolve}
+      size="lg"
+    >
+      <ModalContent>
+        <ModalHeader className="flex flex-col gap-1">
+          Settings
+        </ModalHeader>
+        <ModalBody>
+          <Tabs aria-label="Options" variant="underlined">
+            {settings.map(item => (
+              <Tab key={item.title} title={item.title}>
+                {item.child()}
+              </Tab>
+            ))}
+          </Tabs>
+        </ModalBody>
+      </ModalContent>
+
     </Modal>
   )
 }

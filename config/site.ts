@@ -32,20 +32,24 @@ export const siteConfig = {
       href: '/',
     },
     {
-      label: 'Docs',
-      href: '/docs',
+      label: 'Products',
+      href: '/products',
     },
     {
-      label: 'Pricing',
-      href: '/pricing',
+      label: 'NFT Marketplaces',
+      href: 'https://nft.moonchain.com',
     },
     {
-      label: 'Blog',
-      href: '/blog',
+      label: 'Bridge',
+      href: 'https://jannowitz.moonchain.com',
     },
     {
-      label: 'About',
-      href: '/about',
+      label: 'Mining',
+      href: 'https://miningv2.matchx.io',
+    },
+    {
+      label: 'Explorer',
+      href: 'https://explorer.moonchain.com',
     },
   ],
   links: {

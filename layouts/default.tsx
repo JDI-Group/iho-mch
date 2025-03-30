@@ -12,7 +12,7 @@ export default function DefaultLayout({ children }: PropsWithChildren) {
     >
       <Head />
       <Navbar />
-      <main className="container mx-auto max-w-7xl px-6 flex-grow pt-16">
+      <main className="container mx-auto max-w-7xl px-6 flex-grow pt-4">
         {children}
       </main>
       <Footer />

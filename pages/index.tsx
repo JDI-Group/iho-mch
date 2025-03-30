@@ -6,6 +6,7 @@ import { Accordion, AccordionItem } from '@heroui/accordion'
 import { Button } from '@heroui/button'
 import { Card, CardBody } from '@heroui/card'
 import clsx from 'clsx'
+import { useRouter } from 'next/router'
 
 const accordions = [
   {
@@ -36,6 +37,11 @@ const accordions = [
 ]
 
 export default function IndexPage() {
+  const router = useRouter()
+
+  function onNavigateProducts() {
+    router.push('/products')
+  }
   return (
     <HomeLayout>
       <section className="hidden md:block w-full h-screen">
@@ -55,7 +61,7 @@ export default function IndexPage() {
               <span>MINE</span>
             </div>
             <div className="flex gap-4 lg:gap-8">
-              <Button className="font-bold tracking-[0.1rem]" radius="full" color="primary">
+              <Button className="font-bold tracking-[0.1rem]" onPress={onNavigateProducts} radius="full" color="primary">
                 GET FREE
               </Button>
               <Button className="font-bold tracking-[0.1rem]" radius="full" variant="ghost">
@@ -93,7 +99,7 @@ export default function IndexPage() {
           <FloatProjectsUnline />
         </div>
         <div className="flex flex-col items-center gap-4">
-          <Button className="font-bold min-w-48 tracking-[0.1rem]" radius="full" color="primary">
+          <Button className="font-bold min-w-48 tracking-[0.1rem]" onPress={onNavigateProducts} radius="full" color="primary">
             GET FREE
           </Button>
           <Button className="font-bold min-w-48 tracking-[0.1rem]" radius="full" variant="ghost">

@@ -33,9 +33,8 @@ export async function getProductId(paths: Types.GetProductIdPath, config?: Reque
  * @method get
  * @tags Product
  */
-export async function getProductImage(query: Types.GetProductImageQuery, config?: RequestInit) {
-  const querystr = new URLSearchParams(Object.entries(query || {}));
-  const response = await fetch(`${baseURL}/product/image?${querystr}`, {
+export async function getProductFilesSuffix(paths: Types.GetProductFilesSuffixPath, config?: RequestInit) {
+  const response = await fetch(`${baseURL}/product/files/${paths.suffix}`, {
     ...config,
   });
   return response;

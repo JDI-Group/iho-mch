@@ -5,14 +5,48 @@
  * @version 1.0
  */
 
+export interface Attribute {
+  id: number;
+  name: string;
+  slug: string;
+  position: number;
+  visible: boolean;
+  variation: boolean;
+  options: string[];
+}
+export interface AttributeTarget {
+  id: number;
+  name: string;
+  option: string;
+}
+export interface Category {
+  id: number;
+  name: string;
+  slug: string;
+}
 export interface Dimensions {
   length: string;
   width: string;
   height: string;
 }
+export interface Image {
+  id: number;
+  date_created: string;
+  date_created_gmt: string;
+  date_modified: string;
+  date_modified_gmt: string;
+  src: string;
+  name: string;
+  alt: string;
+}
 export interface Links {
   self: string[];
   collection: string[];
+}
+export interface Metadata {
+  id: number;
+  key: string;
+  value: any;
 }
 export interface Product {
   id: number;
@@ -69,15 +103,15 @@ export interface Product {
   purchase_note: string;
   categories: string[];
   tags: string[];
-  images: string[];
-  attributes: string[];
-  default_attributes: string[];
+  images: Image[];
+  attributes: Attribute[];
+  default_attributes: AttributeTarget[];
   variations: string[];
   grouped_products: string[];
   menu_order: number;
   price_html: string;
   related_ids: string[];
-  meta_data: string[];
+  meta_data: Metadata[];
   stock_status: string;
   has_options: boolean;
   post_password: string;
@@ -190,8 +224,8 @@ export interface CustomerUpdateDto {
 export interface GetProductIdPath {
   id: number;
 }
-export interface GetProductImageQuery {
-  url: string;
+export interface GetProductFilesSuffixPath {
+  suffix: string;
 }
 export interface GetUserInspectHeader {
   token?: string;
