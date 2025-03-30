@@ -14,7 +14,6 @@ export default function Page() {
     () => getProduct(),
   )
   const router = useRouter()
-
   return (
     <DefaultLayout>
       <section>

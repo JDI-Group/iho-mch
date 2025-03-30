@@ -13,8 +13,11 @@ import {
 import { cloneDeepWith, jsonTryParse } from '@hairy/utils'
 
 function customizer(value: any) {
-  if (typeof value === 'string' && value.includes(FILE_PREFIX))
+  if (typeof value === 'string'
+    && value.startsWith(process.env.NEXT_PUBLIC_WOOCOMMERCE_URL!)
+    && value.includes(FILE_PREFIX)) {
     return `/api/files/${value.split(FILE_PREFIX)[1]}`
+  }
 }
 
 export function BootstrapProvider(props: PropsWithChildren) {
@@ -31,14 +34,10 @@ export function BootstrapProvider(props: PropsWithChildren) {
     const data = jsonTryParse(text)
     if (data?.statusCode)
       throw data
-    if (response.url.endsWith('/product')) {
-      return new Response(cloneDeepWith(data, customizer), {
-        status: response.status,
-        statusText: response.statusText,
-        headers: response.headers,
-      })
-    }
-    return response
+    if (!data)
+      return response
+    const value = JSON.stringify(cloneDeepWith(data, customizer))
+    return new Response(value, response)
   })
 
   useWhenever(authentication.token, fetchUser, { immediate: true })
