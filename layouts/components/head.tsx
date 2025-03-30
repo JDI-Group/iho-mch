@@ -1,8 +1,6 @@
 import { siteConfig } from '@/config/site'
 import NextHead from 'next/head'
 
-import React from 'react'
-
 export function Head() {
   return (
     <NextHead>

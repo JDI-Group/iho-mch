@@ -1,9 +1,7 @@
-import type { PropsWithChildren } from 'react'
 import { FILE_PREFIX } from '@/config/constants'
 
 import { useStoreUser } from '@/hooks/use-store-user'
 
-import store from '@/store'
 import {
   useFetchRequestIntercept,
   useFetchResponseIntercept,
@@ -20,7 +18,7 @@ function customizer(value: any) {
   }
 }
 
-export function BootstrapProvider(props: PropsWithChildren) {
+export function BootstrapProvider(props: React.PropsWithChildren) {
   const authentication = useStore(store.authentication)
   const fetchUser = useStoreUser()[1]
 

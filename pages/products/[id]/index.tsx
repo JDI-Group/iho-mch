@@ -1,7 +1,6 @@
 import { getProductId } from '@/api'
 import { useAsyncState, useWhenever } from '@hairy/react-lib'
 import { whenever } from '@hairy/utils'
-import { useRouter } from 'next/router'
 
 function Page() {
   const router = useRouter()
@@ -14,8 +13,9 @@ function Page() {
   useWhenever(router.query.id, fetch)
 
   return (
-    <div className="container mx-auto">
-    </div>
+    <layouts.default>
+
+    </layouts.default>
   )
 }
 

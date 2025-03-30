@@ -1,12 +1,9 @@
-import { title } from '@/components/primitives'
-import HomeLayout from '@/layouts/home'
 import { FloatProjects } from '@/ui/home/float-projects'
 import { FloatProjectsUnline } from '@/ui/home/float-projects-unline'
 import { Accordion, AccordionItem } from '@heroui/accordion'
 import { Button } from '@heroui/button'
 import { Card, CardBody } from '@heroui/card'
 import clsx from 'clsx'
-import { useRouter } from 'next/router'
 
 const accordions = [
   {
@@ -43,7 +40,7 @@ export default function IndexPage() {
     router.push('/products')
   }
   return (
-    <HomeLayout>
+    <layouts.home>
       <section className="hidden md:block w-full h-screen">
         <div className=" flex h-full justify-center gap-[100px] items-center">
           <div className="flex-1 flex flex-col items-center relative z-10 gap-8 text-center">
@@ -144,6 +141,6 @@ export default function IndexPage() {
         </Accordion>
       </section>
 
-    </HomeLayout>
+    </layouts.home>
   )
 }

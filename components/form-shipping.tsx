@@ -1,5 +1,4 @@
 import type { FormInstance, FormProps, InputProps } from 'antd'
-import type { ChangeEvent } from 'react'
 import { putUser } from '@/api'
 import { regions } from '@/config/regions'
 import { useStoreUser } from '@/hooks/use-store-user'
@@ -7,7 +6,6 @@ import { useAsyncCallback, useWhenever } from '@hairy/react-lib'
 import { isEqual } from '@hairy/utils'
 import { Button } from '@heroui/button'
 import { Form, Input, Select, Spin } from 'antd'
-import { useMemo } from 'react'
 import { findMobilePrefix, parsePhone } from './form-shipping.utils'
 
 export interface FieldType {
@@ -173,7 +171,7 @@ export interface InputPhoneNumberProps extends InputProps {
 export function InputPhoneNumber(props: InputPhoneNumberProps) {
   const { parsed, onChange } = props
 
-  function onTriggerChange(e: ChangeEvent<HTMLInputElement>) {
+  function onTriggerChange(e: React.ChangeEvent<HTMLInputElement>) {
     onChange?.(e)
   }
   return <Input {...props} onChange={onTriggerChange} value={parsed?.show} />

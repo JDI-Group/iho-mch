@@ -1,12 +1,6 @@
 import type {
   NavbarProps,
 } from '@heroui/navbar'
-import { ConnectButton } from '@/components/connect-button'
-import {
-  SettingIcon,
-} from '@/components/icons'
-import { SettingsDialog } from '@/components/settings-dialog'
-import { ThemeSwitch } from '@/components/theme-switch'
 import { siteConfig } from '@/config/site'
 import { If } from '@hairy/react-lib'
 import { Button } from '@heroui/button'

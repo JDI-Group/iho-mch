@@ -1,6 +1,4 @@
-import type { PropsWithChildren } from 'react'
 import { wagmiConfig } from '@/config/wagmi'
-import store from '@/store'
 import { Injector, useStore, useWatch } from '@hairy/react-lib'
 
 import { HeroUIProvider } from '@heroui/system'
@@ -17,8 +15,6 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { theme as antdTheme, ConfigProvider as AntdUIProvider } from 'antd'
 
 import { useTheme } from 'next-themes'
-import { useRouter } from 'next/router'
-import React, { useState } from 'react'
 import { WagmiProvider } from 'wagmi'
 
 const themes = {
@@ -40,7 +36,7 @@ const themes = {
 
 const adapter = createAuthenticationAdapter(store.authentication.$actions)
 
-export function InjectsProvider(props: PropsWithChildren) {
+export function InjectsProvider(props: React.PropsWithChildren) {
   const authentication = useStore(store.authentication)
   const client = new QueryClient()
   const router = useRouter()

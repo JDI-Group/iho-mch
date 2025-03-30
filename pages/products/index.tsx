@@ -1,12 +1,9 @@
 import { getProduct } from '@/api'
-import { subtitle } from '@/components/primitives'
-import DefaultLayout from '@/layouts/default'
 import { Else, If, Then } from '@hairy/react-lib'
 import { Card, CardBody, CardHeader } from '@heroui/card'
 import { Image } from '@heroui/image'
 import { Spinner } from '@heroui/spinner'
-import { AnimatePresence, motion } from 'framer-motion'
-import { useRouter } from 'next/router'
+import { AnimatePresence } from 'framer-motion'
 import { useAsync } from 'react-use'
 
 export default function Page() {
@@ -15,7 +12,7 @@ export default function Page() {
   )
   const router = useRouter()
   return (
-    <DefaultLayout>
+    <layouts.default>
       <section>
         <div className="h-14 md:h-8 mb-6">
           <AnimatePresence initial={false}>
@@ -81,6 +78,6 @@ export default function Page() {
           </Else>
         </If>
       </section>
-    </DefaultLayout>
+    </layouts.default>
   )
 }
