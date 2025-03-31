@@ -1,5 +1,4 @@
 import type { PropsWithDetailedHTML } from '@hairy/react-lib'
-import clsx from 'clsx'
 
 export function FloatProjectsUnline(props: PropsWithDetailedHTML) {
   return (

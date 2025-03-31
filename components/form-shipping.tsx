@@ -1,14 +1,12 @@
 import type { FormInstance, FormProps, InputProps } from 'antd'
-import { putUser } from '@/api'
 import { regions } from '@/config/regions'
-import { useStoreUser } from '@/hooks/use-store-user'
 import { useAsyncCallback, useWhenever } from '@hairy/react-lib'
 import { isEqual } from '@hairy/utils'
 import { Button } from '@heroui/button'
 import { Form, Input, Select, Spin } from 'antd'
 import { findMobilePrefix, parsePhone } from './form-shipping.utils'
 
-export interface FieldType {
+export interface FormShippingFields {
   firstName?: string
   lastName?: string
   address?: string
@@ -19,7 +17,7 @@ export interface FieldType {
 
 export function FormShipping() {
   const [{ value: user, loading },, resetUser] = useStoreUser()
-  const [loadFinish, onFinish] = useAsyncCallback(async (_values: Required<FieldType>) => {
+  const [loadFinish, onFinish] = useAsyncCallback(async (_values: Required<FormShippingFields>) => {
     const values = { ..._values }
 
     const address = {
@@ -61,14 +59,14 @@ export function FormShipping() {
     })
   })
 
-  const [form] = Form.useForm<FieldType>()
+  const [form] = Form.useForm<FormShippingFields>()
   const phone = Form.useWatch('phone', form)
   const region = Form.useWatch('region', form)
   const data = useWatches(form)
   const prefix = useMemo(() => findMobilePrefix(region), [region])
   const parsed = useMemo(() => parsePhone(phone, region, prefix), [phone, region])
   const equal = useMemo(() => isEqual(user, data), [user, data])
-  const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = (errorInfo) => {
+  const onFinishFailed: FormProps<FormShippingFields>['onFinishFailed'] = (errorInfo) => {
     // eslint-disable-next-line no-console
     console.log('Failed:', errorInfo)
   }
@@ -87,7 +85,7 @@ export function FormShipping() {
         layout="vertical"
       >
         <div className="flex gap-2">
-          <Form.Item<FieldType>
+          <Form.Item<FormShippingFields>
             label="firstName"
             className="flex-1"
             name="firstName"
@@ -95,7 +93,7 @@ export function FormShipping() {
           >
             <Input placeholder="Please input your first name" />
           </Form.Item>
-          <Form.Item<FieldType>
+          <Form.Item<FormShippingFields>
             label="LastName"
             className="flex-1"
             name="lastName"
@@ -104,7 +102,7 @@ export function FormShipping() {
             <Input placeholder="Please input your last name" />
           </Form.Item>
         </div>
-        <Form.Item<FieldType>
+        <Form.Item<FormShippingFields>
           label="Email"
           name="email"
           rules={[
@@ -115,7 +113,7 @@ export function FormShipping() {
           <Input placeholder="Please input your email" />
         </Form.Item>
         <div className="flex gap-2">
-          <Form.Item<FieldType>
+          <Form.Item<FormShippingFields>
             className="w-150px"
             label="Country/Region"
             name="region"
@@ -128,7 +126,7 @@ export function FormShipping() {
               options={regions.map(n => ({ label: n.name, value: n.countryCode }))}
             />
           </Form.Item>
-          <Form.Item<FieldType>
+          <Form.Item<FormShippingFields>
             label="Phone No"
             name="phone"
             className="flex-1"
@@ -147,7 +145,7 @@ export function FormShipping() {
             <InputPhoneNumber prefix={prefix} parsed={parsed} placeholder="Phone No" />
           </Form.Item>
         </div>
-        <Form.Item<FieldType>
+        <Form.Item<FormShippingFields>
           label="Receiving address"
           name="address"
           className="flex-1"
@@ -177,7 +175,7 @@ export function InputPhoneNumber(props: InputPhoneNumberProps) {
   return <Input {...props} onChange={onTriggerChange} value={parsed?.show} />
 }
 
-function useWatches(form: FormInstance<FieldType>) {
+function useWatches(form: FormInstance<FormShippingFields>) {
   const phone = Form.useWatch('phone', form)
   const region = Form.useWatch('region', form)
   const firstName = Form.useWatch('firstName', form)

@@ -1,6 +1,5 @@
 import type { PropsWithDetailedHTML } from '@hairy/react-lib'
 import { Link } from '@heroui/link'
-import clsx from 'clsx'
 
 export function Footer(props: PropsWithDetailedHTML) {
   return (

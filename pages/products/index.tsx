@@ -1,4 +1,3 @@
-import { getProduct } from '@/api'
 import { Else, If, Then } from '@hairy/react-lib'
 import { Card, CardBody, CardHeader } from '@heroui/card'
 import { Image } from '@heroui/image'

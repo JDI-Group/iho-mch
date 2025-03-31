@@ -1,4 +1,3 @@
-import clsx from 'clsx'
 import { Footer } from './components/footer'
 import { Head } from './components/head'
 import { Navbar } from './components/navbar'

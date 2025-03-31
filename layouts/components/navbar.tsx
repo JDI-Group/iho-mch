@@ -19,7 +19,6 @@ import { link as linkStyles } from '@heroui/theme'
 import { useOverlayInject } from '@overlastic/react'
 import { ConnectButton as RainbowConnectButton } from '@rainbow-me/rainbowkit'
 
-import clsx from 'clsx'
 import NextLink from 'next/link'
 import { useAccount } from 'wagmi'
 

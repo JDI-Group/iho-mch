@@ -1,6 +1,4 @@
 import { fonts } from '@/config/fonts'
-import clsx from 'clsx'
-
 import { Head, Html, Main, NextScript } from 'next/document'
 import React from 'react'
 

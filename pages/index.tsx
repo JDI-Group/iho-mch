@@ -3,7 +3,6 @@ import { FloatProjectsUnline } from '@/ui/home/float-projects-unline'
 import { Accordion, AccordionItem } from '@heroui/accordion'
 import { Button } from '@heroui/button'
 import { Card, CardBody } from '@heroui/card'
-import clsx from 'clsx'
 
 const accordions = [
   {

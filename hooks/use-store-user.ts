@@ -1,4 +1,3 @@
-import { getUser } from '@/api'
 import { defineAsyncStorePlain } from '@hairy/react-lib'
 
 export const useStoreUser = defineAsyncStorePlain(

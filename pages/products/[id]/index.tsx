@@ -1,4 +1,3 @@
-import { getProductId } from '@/api'
 import { useAsyncState, useWhenever } from '@hairy/react-lib'
 import { whenever } from '@hairy/utils'
 

@@ -24,14 +24,27 @@ declare global {
   const SunFilledIcon: typeof import('../components/icons')['SunFilledIcon']
   const ThemeSwitch: typeof import('../components/theme-switch')['ThemeSwitch']
   const TwitterIcon: typeof import('../components/icons')['TwitterIcon']
+  const baseURL: typeof import('../api/index')['baseURL']
+  const clsx: typeof import('clsx')['default']
   const createRef: typeof import('react')['createRef']
   const findMobilePrefix: typeof import('../components/form-shipping.utils')['findMobilePrefix']
   const forwardRef: typeof import('react')['forwardRef']
+  const getOrder: typeof import('../api/index')['getOrder']
+  const getProduct: typeof import('../api/index')['getProduct']
+  const getProductFilesSuffix: typeof import('../api/index')['getProductFilesSuffix']
+  const getProductId: typeof import('../api/index')['getProductId']
+  const getUser: typeof import('../api/index')['getUser']
+  const getUserInspect: typeof import('../api/index')['getUserInspect']
+  const getUserLogout: typeof import('../api/index')['getUserLogout']
+  const getUserNonce: typeof import('../api/index')['getUserNonce']
   const layouts: typeof import('../layouts/index')['layouts']
   const lazy: typeof import('react')['lazy']
   const memo: typeof import('react')['memo']
   const motion: typeof import('framer-motion')['motion']
   const parsePhone: typeof import('../components/form-shipping.utils')['parsePhone']
+  const postOrder: typeof import('../api/index')['postOrder']
+  const postUserVerify: typeof import('../api/index')['postUserVerify']
+  const putUser: typeof import('../api/index')['putUser']
   const startTransition: typeof import('react')['startTransition']
   const store: typeof import('../store/index')['default']
   const subtitle: typeof import('../components/primitives')['subtitle']
@@ -60,7 +73,7 @@ declare global {
   export type { ConnectButtonProps } from '../components/connect-button'
   import('../components/connect-button')
   // @ts-ignore
-  export type { FieldType, InputPhoneNumberProps } from '../components/form-shipping'
+  export type { FormShippingFields, InputPhoneNumberProps } from '../components/form-shipping'
   import('../components/form-shipping')
   // @ts-ignore
   export type { SettingsDialogProps } from '../components/settings-dialog'

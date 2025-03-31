@@ -1,4 +1,3 @@
-import { getUserNonce, postUserVerify } from '@/api'
 import { defineStore } from '@hairy/react-lib'
 import { createSiweMessage } from 'viem/siwe'
 

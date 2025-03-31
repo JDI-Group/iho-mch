@@ -20,6 +20,12 @@ const nextConfig: NextConfig = {
               'motion',
             ],
           },
+          {
+            from: 'clsx',
+            imports: [
+              ['default', 'clsx'],
+            ],
+          },
         ],
         dts: './types/auto-imports.d.ts',
         dirs: [
@@ -27,6 +33,7 @@ const nextConfig: NextConfig = {
           'store/index.ts',
           'components/**',
           'hooks/**',
+          'api/index.ts',
         ],
       }),
     )

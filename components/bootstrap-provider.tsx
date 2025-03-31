@@ -1,7 +1,4 @@
 import { FILE_PREFIX } from '@/config/constants'
-
-import { useStoreUser } from '@/hooks/use-store-user'
-
 import {
   useFetchRequestIntercept,
   useFetchResponseIntercept,
