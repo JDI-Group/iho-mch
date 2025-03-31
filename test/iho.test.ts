@@ -22,6 +22,7 @@ function signMessage(params: any) {
   )
   return signer.signMessage(toBeArray(messageHash))
 }
+
 const params = {
   pid: 19859,
   oid: 0,
@@ -36,6 +37,7 @@ describe('iho contract unit test', () => {
     const blockNumber = await provider.getBlockNumber()
     expect(blockNumber).toBeTypeOf('number')
   })
+
   it('deployed iho contract', async () => {
     const iho = contracts.IHO.resolve('signer')
     const address = await iho.getAddress()
@@ -43,6 +45,7 @@ describe('iho contract unit test', () => {
     expect(await signer.getAddress()).toBe(await iho.getVerifier())
     expect(await signer.getAddress()).toBe(await iho.owner())
   })
+
   it('iho function create call', async () => {
     const iho = contracts.IHO.resolve('signer')
     const messageByte = await signMessage(params)

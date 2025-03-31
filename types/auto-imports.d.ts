@@ -7,6 +7,7 @@
 export {}
 declare global {
   const BootstrapProvider: typeof import('../components/bootstrap-provider')['BootstrapProvider']
+  const CarIcon: typeof import('../components/icons')['CarIcon']
   const ConnectButton: typeof import('../components/connect-button')['ConnectButton']
   const DiscordIcon: typeof import('../components/icons')['DiscordIcon']
   const FormShipping: typeof import('../components/form-shipping')['FormShipping']
@@ -15,9 +16,14 @@ declare global {
   const InjectsProvider: typeof import('../components/injects-provider')['InjectsProvider']
   const InputPhoneNumber: typeof import('../components/form-shipping')['InputPhoneNumber']
   const Logo: typeof import('../components/icons')['Logo']
+  const LsiconScreenFullFilled: typeof import('../components/icons')['LsiconScreenFullFilled']
+  const MaterialSymbolsContactSupport: typeof import('../components/icons')['MaterialSymbolsContactSupport']
   const MenuIcon: typeof import('../components/icons')['MenuIcon']
   const MoonFilledIcon: typeof import('../components/icons')['MoonFilledIcon']
   const OrdersPreview: typeof import('../components/orders-preview')['OrdersPreview']
+  const ProductDetailDialog: typeof import('../components/product-detail-dialog')['ProductDetailDialog']
+  const QuestionIcon: typeof import('../components/icons')['QuestionIcon']
+  const ScreenFullIcon: typeof import('../components/icons')['ScreenFullIcon']
   const SearchIcon: typeof import('../components/icons')['SearchIcon']
   const SettingIcon: typeof import('../components/icons')['SettingIcon']
   const SettingsDialog: typeof import('../components/settings-dialog')['SettingsDialog']
@@ -26,6 +32,7 @@ declare global {
   const TwitterIcon: typeof import('../components/icons')['TwitterIcon']
   const baseURL: typeof import('../api/index')['baseURL']
   const clsx: typeof import('clsx')['default']
+  const container: typeof import('../components/primitives')['container']
   const createRef: typeof import('react')['createRef']
   const findMobilePrefix: typeof import('../components/form-shipping.utils')['findMobilePrefix']
   const forwardRef: typeof import('react')['forwardRef']
@@ -75,6 +82,9 @@ declare global {
   // @ts-ignore
   export type { FormShippingFields, InputPhoneNumberProps } from '../components/form-shipping'
   import('../components/form-shipping')
+  // @ts-ignore
+  export type { ProductDetailDialogProps } from '../components/product-detail-dialog'
+  import('../components/product-detail-dialog')
   // @ts-ignore
   export type { SettingsDialogProps } from '../components/settings-dialog'
   import('../components/settings-dialog')
