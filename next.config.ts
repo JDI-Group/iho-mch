@@ -3,6 +3,9 @@ import AutoImport from 'unplugin-auto-import/webpack'
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  typescript: {
+    tsconfigPath: './tsconfig.app.json',
+  },
   webpack(config) {
     config.plugins.push(
       AutoImport({
