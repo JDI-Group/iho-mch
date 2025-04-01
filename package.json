@@ -11,15 +11,15 @@
     "lint": "eslint .",
 
     "deploy:hardhat": "lnv vault -- harsta deploy --verify --network hardhat",
-    "deploy:testnet": "lnv vault -- harsta deploy --verify --network geneva",
+    "deploy:testnet": "lnv vault -- harsta deploy --verify --network moonchain_geneva",
     "deploy:mainnet": "lnv vault -- harsta deploy --verify --network moonchain",
 
-    "verify:testnet": "lnv vault -- harsta verify --network geneva --target",
+    "verify:testnet": "lnv vault -- harsta verify --network moonchain_geneva --target",
     "verify:mainnet": "lnv vault -- harsta verify --network moonchain --target",
 
     "test:hardhat": "lnv vault -- harsta test --network hardhat",
 
-    "test:fork:testnet": "lnv vault -- harsta test --network hardhat --fork geneva",
+    "test:fork:testnet": "lnv vault -- harsta test --network hardhat --fork moonchain_geneva",
     "test:fork:mainnet": "lnv vault -- harsta test --network hardhat --fork moonchain",
 
     "postinstall": "harsta compile --clean",

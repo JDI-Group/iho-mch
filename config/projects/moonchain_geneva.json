@@ -1,7 +1,9 @@
-{
-  "19859": {
+[
+  {
+    "name": "BlueBerry AI - WearFI",
     "description": "Unlock wellness at your fingertips. Get your Blueberry Ring now and start your journey to better health.",
-    "price": 520,
-    "quantity": 3000
+    "target": 3000,
+    "product": 19859,
+    "price": 520
   }
-}
+]

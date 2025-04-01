@@ -19,7 +19,7 @@ const config = defineConfig({
     version: '0.8.24',
   },
   networks: {
-    geneva: {
+    moonchain_geneva: {
       name: 'Moonchain Testnet',
       rpc: 'https://geneva-rpc.moonchain.com',
       testnet: true,
