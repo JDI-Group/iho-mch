@@ -4,11 +4,24 @@
   "private": true,
   "packageManager": "pnpm@10.6.5",
   "scripts": {
-    "dev": "lnv -- next dev",
-    "build": "lnv -- next build",
-    "start": "lnv -- next start",
-    "genapi": "lnv -d -- genapi",
+    "dev": "lnv vault -- next dev",
+    "build": "lnv vault -- next build",
+    "start": "lnv vault -- next start",
+    "genapi": "lnv vault -- genapi",
     "lint": "eslint .",
+
+    "deploy:hardhat": "lnv vault -- harsta deploy --verify --network hardhat",
+    "deploy:testnet": "lnv vault -- harsta deploy --verify --network geneva",
+    "deploy:mainnet": "lnv vault -- harsta deploy --verify --network moonchain",
+
+    "verify:testnet": "lnv vault -- harsta verify --network geneva --target",
+    "verify:mainnet": "lnv vault -- harsta verify --network moonchain --target",
+
+    "test:hardhat": "lnv vault -- harsta test --network hardhat",
+
+    "test:fork:testnet": "lnv vault -- harsta test --network hardhat --fork geneva",
+    "test:fork:mainnet": "lnv vault -- harsta test --network hardhat --fork moonchain",
+
     "postinstall": "harsta compile --clean",
     "prepare": "simple-git-hooks"
   },
