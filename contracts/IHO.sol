@@ -12,49 +12,114 @@ contract IHO is VerifiableUpgradeable, BidirectionalTransfer, UUPSUpgradeable, O
   constructor() { _disableInitializers(); }
   function _authorizeUpgrade(address) internal override onlyOwner {}
 
+  mapping(uint256 => Project) public projects;
+  mapping(uint256 => mapping(uint256 => Stake)) public stakes;
+
   function initialize(address owner_, address verifier_) public initializer {
     __Ownable_init(owner_);
     __Verifie_init(verifier_);
     __UUPSUpgradeable_init();
   }
 
-  struct Price {
-    address token;
-    uint256 amount;
+  struct Project {
+    uint256 target;
+    uint256 quantity;
+    bool confirmed;
   }
 
-  event Confirmed(
+  struct Stake {
+    Coin[] coins;
+    uint expire;
+    uint timestamp;
+    bool claimed;
+  }
+
+  event StakeConfirmed(
     address indexed from,
     uint256 indexed pid,
     uint256 indexed oid,
-    Price[] prices,
-    uint256 expire,
-    string memo
+    Stake stake,
+    int256 blockHeight,
+    uint256 timestamp
   );
 
-  function create(
+  event ProjectCreated(
+    uint256 indexed pid,
+    uint256 target,
+    uint256 quantity,
+    int256 blockHeight,
+    uint256 timestamp
+  );
+
+  event ProjectConfirmed(
+    uint256 indexed pid,
+    int256 blockHeight,
+    uint256 timestamp
+  );
+
+  function release(uint256 pid, uint256 target, uint256 quantity) external onlyOwner {
+    require(projects[pid].target == 0, "Project already exists");
+    require(target > 0, "Target must be greater than 0");
+
+    projects[pid].target = target;
+    projects[pid].quantity = quantity;
+    projects[pid].confirmed = false;
+    emit ProjectCreated(pid, target, quantity, int(block.number), block.timestamp);
+  }
+
+  function stake(
     uint256 pid,
     uint256 oid,
-    Price[] memory prices,
+    Coin[] memory coins,
     uint256 expire,
     string memory memo,
     bytes memory signature
   ) external payable {
-    bytes32 pricesHash = keccak256(abi.encode(prices));
-    verify(abi.encodePacked(pid, oid, pricesHash, expire, memo), signature);
-    for (uint256 i = 0; i < prices.length; i++) {
-      if (prices[i].amount > 0)
-        transfer(
-          msg.sender,
-          address(this),
-          prices[i].token, 
-          prices[i].amount
-        );
+    bytes32 coinsHash = keccak256(abi.encode(coins));
+    verify(abi.encodePacked(pid, oid, coinsHash, expire, memo), signature);
+
+    require(projects[pid].target != 0, "Project not found");
+    require(!projects[pid].confirmed, "Project already confirmed");
+
+    uint256 expireTime = block.timestamp + expire;
+
+    transfers(msg.sender, address(this), coins);
+
+    projects[pid].quantity += 1;
+
+    for (uint256 i = 0; i < coins.length; i++) {
+      stakes[pid][oid].coins.push(coins[i]);
     }
-    emit Confirmed(msg.sender, pid, oid, prices, expire, memo);
+    stakes[pid][oid].expire = expireTime;
+    stakes[pid][oid].timestamp = block.timestamp;
+    stakes[pid][oid].claimed = false;
+
+    emit StakeConfirmed(msg.sender, pid, oid, stakes[pid][oid], int(block.number), block.timestamp);
+
+    if (projects[pid].quantity >= projects[pid].target) {
+      projects[pid].confirmed = true;
+      emit ProjectConfirmed(pid, int(block.number), block.timestamp);
+    }
   }
 
-  function withdraw(address token , uint256 amount) public onlyOwner {
+  function getStake(uint256 pid, uint256 oid) external view returns (Stake memory) {
+    return stakes[pid][oid];
+  }
+
+  function getProject(uint256 pid) external view returns (Project memory) {
+    return projects[pid];
+  }
+
+  function claim(uint256 pid, uint256 oid) external {
+    require(stakes[pid][oid].expire < block.timestamp, "Stake not expired");
+    require(!stakes[pid][oid].claimed, "Stake already claimed");
+
+    transfers(address(this), msg.sender, stakes[pid][oid].coins);
+
+    stakes[pid][oid].claimed = true;
+  }
+
+  function withdraw(address token , uint256 amount) external onlyOwner {
     transfer(address(this), msg.sender, token, amount);
   }
 }

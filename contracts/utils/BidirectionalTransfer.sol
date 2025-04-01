@@ -5,6 +5,11 @@ contract BidirectionalTransfer {
   error TransferFailed();
   error TransferUnauthorized();
 
+  struct Coin {
+    address token;
+    uint256 amount;
+  }
+
   receive() external payable {}
 
   function erc20Transfer(address from, address to, address token, uint256 amount) internal {
@@ -39,5 +44,12 @@ contract BidirectionalTransfer {
       erc20Transfer(from, to, token, amount);
     else
       etherTransfer(from, to, amount);
+  }
+
+  function transfers(address from, address to, Coin[] memory coins) internal {
+    for (uint256 i = 0; i < coins.length; i++) {
+      Coin memory coin = coins[i];
+      transfer(from, to, coin.token, coin.amount);
+    }
   }
 }

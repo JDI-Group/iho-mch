@@ -31,6 +31,15 @@ const config = defineConfig({
     },
   },
   deployments: {
+    IHO_Legacy: {
+      kind: 'uups',
+      async args({ getNamedAccount, getUnnamedAccount }) {
+        return [
+          await getNamedAccount('owner') || await getUnnamedAccount(),
+          await getNamedAccount('verifier') || await getUnnamedAccount(),
+        ]
+      },
+    },
     IHO: {
       kind: 'uups',
       async args({ getNamedAccount, getUnnamedAccount }) {
