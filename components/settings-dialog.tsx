@@ -15,6 +15,7 @@ export function SettingsDialog() {
   return (
     <Modal
       isKeyboardDismissDisabled={true}
+      isDismissable={false}
       isOpen={visible}
       onOpenChange={resolve}
       size="lg"

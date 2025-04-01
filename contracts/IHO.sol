@@ -14,6 +14,7 @@ contract IHO is VerifiableUpgradeable, BidirectionalTransfer, UUPSUpgradeable, O
 
   mapping(uint256 => Project) public projects;
   mapping(uint256 => mapping(uint256 => Stake)) public stakes;
+  mapping(address => mapping(unit256 => uint256)) public limits;
 
   function initialize(address owner_, address verifier_) public initializer {
     __Ownable_init(owner_);
