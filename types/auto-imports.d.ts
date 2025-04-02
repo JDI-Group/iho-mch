@@ -13,6 +13,8 @@ declare global {
   const FormShipping: typeof import('../components/form-shipping')['FormShipping']
   const GithubIcon: typeof import('../components/icons')['GithubIcon']
   const HeartFilledIcon: typeof import('../components/icons')['HeartFilledIcon']
+  const HomeFloatProjects: typeof import('../ui/home-float-projects')['HomeFloatProjects']
+  const HomeFloatProjectsUnline: typeof import('../ui/home-float-projects-unline')['HomeFloatProjectsUnline']
   const InjectsProvider: typeof import('../components/injects-provider')['InjectsProvider']
   const InputPhoneNumber: typeof import('../components/form-shipping')['InputPhoneNumber']
   const Logo: typeof import('../components/icons')['Logo']
@@ -21,7 +23,11 @@ declare global {
   const MenuIcon: typeof import('../components/icons')['MenuIcon']
   const MoonFilledIcon: typeof import('../components/icons')['MoonFilledIcon']
   const OrdersPreview: typeof import('../components/orders-preview')['OrdersPreview']
+  const ProductDescription: typeof import('../ui/product-description')['ProductDescription']
   const ProductDetailDialog: typeof import('../components/product-detail-dialog')['ProductDetailDialog']
+  const ProductForm: typeof import('../ui/product-form')['ProductForm']
+  const ProductHeader: typeof import('../ui/product-header')['ProductHeader']
+  const ProductImages: typeof import('../ui/product-images')['ProductImages']
   const QuestionIcon: typeof import('../components/icons')['QuestionIcon']
   const ScreenFullIcon: typeof import('../components/icons')['ScreenFullIcon']
   const SearchIcon: typeof import('../components/icons')['SearchIcon']
@@ -40,6 +46,8 @@ declare global {
   const getProduct: typeof import('../api/index')['getProduct']
   const getProductFilesSuffix: typeof import('../api/index')['getProductFilesSuffix']
   const getProductId: typeof import('../api/index')['getProductId']
+  const getProductIdVariations: typeof import('../api/index')['getProductIdVariations']
+  const getProductIdVariationsVariation: typeof import('../api/index')['getProductIdVariationsVariation']
   const getUser: typeof import('../api/index')['getUser']
   const getUserInspect: typeof import('../api/index')['getUserInspect']
   const getUserLogout: typeof import('../api/index')['getUserLogout']
@@ -91,4 +99,13 @@ declare global {
   // @ts-ignore
   export type { ThemeSwitchProps } from '../components/theme-switch'
   import('../components/theme-switch')
+  // @ts-ignore
+  export type { ProductDescriptionProps } from '../ui/product-description'
+  import('../ui/product-description')
+  // @ts-ignore
+  export type { ProductFormProps } from '../ui/product-form'
+  import('../ui/product-form')
+  // @ts-ignore
+  export type { ProductImagesProps } from '../ui/product-images'
+  import('../ui/product-images')
 }

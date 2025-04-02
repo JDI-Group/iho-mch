@@ -18,6 +18,7 @@ export interface AttributeTarget {
   id: number;
   name: string;
   option: string;
+  slug: string;
 }
 export interface Category {
   id: number;
@@ -65,6 +66,9 @@ export interface Product {
   short_description: string;
   sku: string;
   price: string;
+  priceMXC: string;
+  target: number;
+  limit: number;
   regular_price: string;
   sale_price: string;
   date_on_sale_from: any;
@@ -117,6 +121,54 @@ export interface Product {
   post_password: string;
   global_unique_id: string;
   brands: string[];
+  _links: Links;
+}
+export interface Variation {
+  id: number;
+  priceMXC: string;
+  type: string;
+  date_created: string;
+  date_created_gmt: string;
+  date_modified: string;
+  date_modified_gmt: string;
+  description: string;
+  permalink: string;
+  sku: string;
+  global_unique_id: string;
+  price: string;
+  regular_price: string;
+  sale_price: string;
+  date_on_sale_from: any;
+  date_on_sale_from_gmt: any;
+  date_on_sale_to: any;
+  date_on_sale_to_gmt: any;
+  on_sale: boolean;
+  status: string;
+  purchasable: boolean;
+  virtual: boolean;
+  downloadable: boolean;
+  downloads: string[];
+  download_limit: number;
+  download_expiry: number;
+  tax_status: string;
+  tax_class: string;
+  manage_stock: boolean;
+  stock_quantity: any;
+  stock_status: string;
+  backorders: string;
+  backorders_allowed: boolean;
+  backordered: boolean;
+  low_stock_amount: any;
+  weight: string;
+  dimensions: Dimensions;
+  shipping_class: string;
+  shipping_class_id: number;
+  image: Image;
+  attributes: AttributeTarget[];
+  menu_order: number;
+  meta_data: Metadata[];
+  name: string;
+  parent_id: number;
   _links: Links;
 }
 export interface Address {
@@ -182,6 +234,22 @@ export interface Order {
   currency_symbol: string;
   _links: Links;
 }
+export interface OrderCreateDto {
+  product: number;
+  attributes: any;
+}
+export interface Coin {
+  token: string;
+  amount: string;
+}
+export interface OrderDataDto {
+  signature: string;
+  product: number;
+  expire: number;
+  order: number;
+  coins: Coin[];
+  value: string;
+}
 export interface VerifyDto {
   message: string;
   signature: string;
@@ -224,8 +292,16 @@ export interface CustomerUpdateDto {
 export interface GetProductIdPath {
   id: number;
 }
-export interface GetProductFilesSuffixPath {
-  suffix: string;
+export interface GetProductIdVariationsPath {
+  id: number;
+}
+export interface GetProductIdVariationsVariationPath {
+  id: number;
+  variation: number;
+}
+export interface PostOrderHeader {
+  token?: string;
+  [key: string]: any;
 }
 export interface GetUserInspectHeader {
   token?: string;

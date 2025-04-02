@@ -1,5 +1,3 @@
-import { FloatProjects } from '@/ui/home/float-projects'
-import { FloatProjectsUnline } from '@/ui/home/float-projects-unline'
 import { Accordion, AccordionItem } from '@heroui/accordion'
 import { Button } from '@heroui/button'
 import { Card, CardBody } from '@heroui/card'
@@ -72,7 +70,7 @@ export default function IndexPage() {
             'lg:opacity-100 lg:blur-0 dark:lg:opacity-100',
           ])}
           >
-            <FloatProjects />
+            <HomeFloatProjects />
           </div>
         </div>
       </section>
@@ -92,7 +90,7 @@ export default function IndexPage() {
           </div>
         </div>
         <div className="-mt-[24px] mb-4">
-          <FloatProjectsUnline />
+          <HomeFloatProjectsUnline />
         </div>
         <div className="flex flex-col items-center gap-4">
           <Button className="font-bold min-w-48 tracking-[0.1rem]" onPress={onNavigateProducts} radius="full" color="primary">

@@ -1,4 +1,4 @@
-export function FloatProjects() {
+export function HomeFloatProjects() {
   return (
     <div className="h-full w-full relative">
       <div className="w-full h-full flex justify-center items-center absolute">

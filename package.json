@@ -9,19 +9,14 @@
     "start": "lnv vault -- next start",
     "genapi": "lnv vault -- genapi",
     "lint": "eslint .",
-
     "deploy:hardhat": "lnv vault -- harsta deploy --verify --network hardhat",
     "deploy:testnet": "lnv vault -- harsta deploy --verify --network moonchain_geneva",
     "deploy:mainnet": "lnv vault -- harsta deploy --verify --network moonchain",
-
     "verify:testnet": "lnv vault -- harsta verify --network moonchain_geneva --target",
     "verify:mainnet": "lnv vault -- harsta verify --network moonchain --target",
-
     "test:hardhat": "lnv vault -- harsta test --network hardhat",
-
     "test:fork:testnet": "lnv vault -- harsta test --network hardhat --fork moonchain_geneva",
     "test:fork:mainnet": "lnv vault -- harsta test --network hardhat --fork moonchain",
-
     "postinstall": "harsta compile --clean",
     "prepare": "simple-git-hooks"
   },
@@ -35,6 +30,7 @@
     "@heroui/card": "^2.2.15",
     "@heroui/code": "2.2.12",
     "@heroui/dropdown": "^2.3.16",
+    "@heroui/form": "^2.1.15",
     "@heroui/image": "^2.2.10",
     "@heroui/input": "2.4.16",
     "@heroui/kbd": "2.2.12",

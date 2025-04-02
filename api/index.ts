@@ -33,11 +33,21 @@ export async function getProductId(paths: Types.GetProductIdPath, config?: Reque
  * @method get
  * @tags Product
  */
-export async function getProductFilesSuffix(paths: Types.GetProductFilesSuffixPath, config?: RequestInit) {
-  const response = await fetch(`${baseURL}/product/files/${paths.suffix}`, {
+export async function getProductIdVariations(paths: Types.GetProductIdVariationsPath, config?: RequestInit) {
+  const response = await fetch(`${baseURL}/product/${paths.id}/variations`, {
     ...config,
   });
-  return response;
+  return response.json() as Promise<Types.Variation[]>;
+}
+/**
+ * @method get
+ * @tags Product
+ */
+export async function getProductIdVariationsVariation(paths: Types.GetProductIdVariationsVariationPath, config?: RequestInit) {
+  const response = await fetch(`${baseURL}/product/${paths.id}/variations/${paths.variation}`, {
+    ...config,
+  });
+  return response.json() as Promise<Types.Variation>;
 }
 /**
  * @method get
@@ -53,11 +63,14 @@ export async function getOrder(config?: RequestInit) {
  * @method post
  * @tags Order
  */
-export async function postOrder(config?: RequestInit) {
-  await fetch(`${baseURL}/order`, {
+export async function postOrder(body: Types.OrderCreateDto, headers?: Types.PostOrderHeader, config?: RequestInit) {
+  const response = await fetch(`${baseURL}/order`, {
+    headers: { "Content-Type": "application/json", ...headers },
     method: "post",
+    body: JSON.stringify(body),
     ...config,
   });
+  return response.json() as Promise<Types.OrderDataDto>;
 }
 /**
  * @method get

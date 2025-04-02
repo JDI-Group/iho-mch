@@ -35,6 +35,7 @@ const nextConfig: NextConfig = {
           'layouts/index.ts',
           'store/index.ts',
           'components/**',
+          'ui/**',
           'hooks/**',
           'api/index.ts',
         ],

@@ -1,18 +1,18 @@
-import type { Product } from '@/api/index.type'
 import { removeInnerHTMLAttributes } from '@/utils'
 import { Button } from '@heroui/button'
 import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@heroui/modal'
 import { useExtendOverlay } from '@overlastic/react'
 
 export interface ProductDetailDialogProps {
-  detail: Product
+  name?: string
+  description?: string
 }
 
 export function ProductDetailDialog(props: ProductDetailDialogProps) {
   const { visible, resolve } = useExtendOverlay({
     duration: 500,
   })
-  const html = removeInnerHTMLAttributes(props.detail.short_description || '', 'class')
+  const html = removeInnerHTMLAttributes(props.description || '', 'class')
   return (
     <Modal
       isKeyboardDismissDisabled={true}
@@ -22,7 +22,7 @@ export function ProductDetailDialog(props: ProductDetailDialogProps) {
     >
       <ModalContent>
         <ModalHeader className="flex flex-col gap-1">
-          {props.detail.name}
+          {props.name}
           {' '}
           Detail
         </ModalHeader>

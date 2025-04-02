@@ -1,6 +1,6 @@
 import type { PropsWithDetailedHTML } from '@hairy/react-lib'
 
-export function FloatProjectsUnline(props: PropsWithDetailedHTML) {
+export function HomeFloatProjectsUnline(props: PropsWithDetailedHTML) {
   return (
     <div className={clsx('relative', props.className)} {...props}>
       <div className="w-full h-full flex justify-center items-center absolute">
