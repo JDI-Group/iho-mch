@@ -30,15 +30,16 @@ function Page() {
             </div>
             <div className="flex flex-1 flex-col">
               <ProductDescription
+                limit={detail?.limit}
                 description={detail?.short_description}
-                price={price || detail?.priceMXC}
+                price={price || detail?.ether}
                 name={detail?.name}
               />
               <ProductForm
                 id={detail?.id}
                 attributes={detail?.attributes}
                 variations={variations}
-                onChange={variation => setPrice(variation?.priceMXC)}
+                onChange={variation => setPrice(variation?.ether)}
               />
             </div>
           </div>

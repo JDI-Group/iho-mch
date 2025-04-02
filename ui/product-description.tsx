@@ -4,9 +4,10 @@ import { Progress } from '@heroui/progress'
 import { useOverlayInject } from '@overlastic/react'
 
 export interface ProductDescriptionProps {
-  name?: string
   description?: string
+  name?: string
   price?: string
+  limit?: number
 }
 export function ProductDescription(props: ProductDescriptionProps) {
   const openProductDetailDialog = useOverlayInject(ProductDetailDialog)
@@ -59,7 +60,7 @@ export function ProductDescription(props: ProductDescriptionProps) {
         89 more orders needed for dispatch
       </div>
       <div className="mb-8 text-default-500 text-sm">
-        *Limit: 1 item per wallet
+        *Limit: {props.limit} item per wallet
       </div>
     </>
   )

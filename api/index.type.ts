@@ -66,7 +66,7 @@ export interface Product {
   short_description: string;
   sku: string;
   price: string;
-  priceMXC: string;
+  ether: string;
   target: number;
   limit: number;
   regular_price: string;
@@ -125,7 +125,7 @@ export interface Product {
 }
 export interface Variation {
   id: number;
-  priceMXC: string;
+  ether: string;
   type: string;
   date_created: string;
   date_created_gmt: string;

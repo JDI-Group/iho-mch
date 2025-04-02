@@ -7,15 +7,20 @@ export interface ProductImagesProps extends PropsWithDetailedHTML {
   images?: ImageType[]
 }
 
-export function ProductImages({ name, images = [], className }: ProductImagesProps) {
+export function ProductImages({ name, images, className }: ProductImagesProps) {
   return (
     <>
       <h1 className={title({ size: 'sm', className: ['md:hidden mb-4', className] })}>
         {name}
       </h1>
-      <Image className="border border-default-50" src={images[0]?.src} />
+      <Image
+        className="aspect-square border border-default-50 object-cover"
+        width="100%"
+        height="100%"
+        src={images?.[0]?.src}
+      />
       <div className="flex gap-2">
-        {images.map(image => (
+        {images?.map(image => (
           <Image
             key={image.id}
             className="p-0"
