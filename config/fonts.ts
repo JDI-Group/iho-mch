@@ -1,6 +1,5 @@
 import {
   Barlow_Semi_Condensed as Barlow,
-  Merriweather,
   Fira_Code as Mono,
   Inter as Sans,
 
@@ -16,12 +15,6 @@ const mono = Mono({
   variable: '--font-mono',
 })
 
-const merriweather = Merriweather({
-  subsets: ['latin'],
-  variable: '--font-merriweather',
-  weight: ['300', '400', '700', '900'],
-})
-
 const barlow = Barlow({
   subsets: ['latin'],
   variable: '--font-barlow',
@@ -31,6 +24,5 @@ const barlow = Barlow({
 export const fonts = {
   sans,
   mono,
-  merriweather,
   barlow,
 }

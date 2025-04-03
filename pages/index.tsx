@@ -173,7 +173,7 @@ export default function IndexPage() {
           />
 
         </motion.div>
-        <video style={{ maskImage: 'linear-gradient(to bottom, transparent, black 50%, transparent)' }} className="absolute top-0 left-0 w-full h-full object-cover opacity-80" autoPlay loop muted preload="auto" playsInline>
+        <video style={{ maskImage: 'linear-gradient(to bottom, transparent, black 50%, transparent)' }} className="hidden dark:block absolute top-0 left-0 w-full h-full object-cover opacity-80" autoPlay loop muted preload="auto" playsInline>
           <source src="https://thegraph.com/_next/static/media/footer.04cca2ee.mp4" type="video/mp4" />
           <source src="/_next/static/media/footer.1c85069a.webm" type="video/webm"></source>
         </video>
