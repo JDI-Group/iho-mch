@@ -1,8 +1,11 @@
 import { variants } from '@/config/variants'
+import { If } from '@hairy/react-lib'
 import { Accordion, AccordionItem } from '@heroui/accordion'
 import { Button } from '@heroui/button'
 import { Link } from '@heroui/link'
 import { Steps } from 'antd'
+import { AnimatePresence } from 'framer-motion'
+import { useWindowScroll } from 'react-use'
 
 const accordions = [
   {
@@ -34,6 +37,7 @@ const accordions = [
 
 export default function IndexPage() {
   const router = useRouter()
+  const scroll = useWindowScroll()
 
   function onNavigateProducts() {
     router.push('/products')
@@ -47,7 +51,13 @@ export default function IndexPage() {
   }
   return (
     <layouts.home>
-      <motion.section variants={variants.fadeOpacity} initial="hidden" whileInView="visible" className="hidden md:block w-full h-screen relative">
+      <motion.section
+        className={container({ className: 'hidden md:block w-full h-screen relative' })}
+        variants={variants.fadeOpacity}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
         <div className=" flex h-full justify-center gap-[100px] items-center">
           <div className="flex-1 flex flex-col items-center relative z-10 gap-8 text-center">
             <div className="text-3xl lg:text-5xl font-bold">
@@ -64,7 +74,7 @@ export default function IndexPage() {
               <span>MINE</span>
             </div>
             <div className="flex gap-4 lg:gap-8">
-              <Button className="font-bold tracking-[0.1rem]" disabled onPress={onNavigateProducts} radius="full" color="primary">
+              <Button style={{ opacity: '0.5' }} className="font-bold tracking-[0.1rem]" disabled onPress={onNavigateProducts} radius="full" color="primary">
                 {/* GET FREE */}
                 COMING SOON
               </Button>
@@ -84,15 +94,29 @@ export default function IndexPage() {
             <HomeFloatProjects />
           </div>
         </div>
-        <div className="absolute w-full flex justify-center bottom-6">
-          <Link onPress={onExploreIHO} className="cursor-pointer text-default-500" color="foreground">
-            <span className="mr-2">Explore Moonchain IHO</span>
-            <MaterialSymbolsArrowCoolDownRounded />
-          </Link>
-        </div>
+        <If cond={scroll.y < 50} tag={AnimatePresence}>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+            className="absolute w-full flex justify-center bottom-6"
+          >
+            <Link onPress={onExploreIHO} className="cursor-pointer text-default-500" color="foreground">
+              <span className="mr-2">Explore Moonchain IHO</span>
+              <MaterialSymbolsArrowCoolDownRounded />
+            </Link>
+          </motion.div>
+        </If>
       </motion.section>
 
-      <motion.section variants={variants.fadeOpacity} initial="hidden" whileInView="visible" className="md:hidden min-h-screen flex flex-col">
+      <motion.section
+        variants={variants.fadeOpacity}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        className={container({ className: 'md:hidden min-h-screen flex flex-col' })}
+      >
         <div className="pt-16 relative z-30 mt-6 text-center flex flex-col gap-4 mb-12">
           <div className="flex flex-col justify-center items-center text-3xl font-bold">
             INITIAL HARDWARE OFFERING (IHO)
@@ -110,7 +134,7 @@ export default function IndexPage() {
           <HomeFloatProjectsUnline />
         </div>
         <div className="flex flex-col items-center gap-4">
-          <Button className="font-bold min-w-48 tracking-[0.1rem]" disabled onPress={onNavigateProducts} radius="full" color="primary">
+          <Button className="font-bold min-w-48 tracking-[0.1rem]" style={{ opacity: '0.5' }} disabled onPress={onNavigateProducts} radius="full" color="primary">
             {/* GET FREE */}
             COMING SOON
           </Button>
@@ -120,8 +144,14 @@ export default function IndexPage() {
         </div>
       </motion.section>
 
-      <section className="flex w-full justify-center lg:justify-between flex-col lg:flex-row items-center gap-8 lg:gap-12 py-12 h-[60vh] lg:h-[80vh] font-bold">
-        <motion.div className="w-full" variants={variants.fadeOpacity} initial="hidden" whileInView="visible">
+      <section className="flex w-full justify-center lg:justify-between flex-col lg:flex-row items-center gap-8 lg:gap-12 py-12 h-[60vh] lg:h-[80vh] font-bold relative">
+        <motion.div
+          className={container({ className: 'relative z-10' })}
+          variants={variants.fadeOpacity}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
           <Steps
             direction="horizontal"
             current={3}
@@ -141,15 +171,21 @@ export default function IndexPage() {
               },
             ]}
           />
+
         </motion.div>
+        <video style={{ maskImage: 'linear-gradient(to bottom, transparent, black 50%, transparent)' }} className="absolute top-0 left-0 w-full h-full object-cover opacity-80" autoPlay loop muted preload="auto" playsInline>
+          <source src="https://thegraph.com/_next/static/media/footer.04cca2ee.mp4" type="video/mp4" />
+          <source src="/_next/static/media/footer.1c85069a.webm" type="video/webm"></source>
+        </video>
       </section>
-      <section className="relative z-10 pb-[20vh]">
-        <motion.div variants={variants.fadeOpacity} initial="hidden" whileInView="visible" className="mb-8">
+
+      <section className={container({ className: 'relative z-10 pb-[20vh]' })}>
+        <motion.div variants={variants.fadeOpacity} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-8">
           <div className={title({ size: 'sm' })}>
             FAQs
           </div>
         </motion.div>
-        <motion.div variants={variants.fadeOpacity} initial="hidden" whileInView="visible">
+        <motion.div variants={variants.fadeOpacity} initial="hidden" whileInView="visible" viewport={{ once: true }}>
           <Accordion>
             {accordions.map(item => (
               <AccordionItem key={item.value} aria-label={item.value} title={item.question}>

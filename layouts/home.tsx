@@ -13,7 +13,7 @@ export default function HomeLayout({ children, className }: PropsWithDetailedHTM
       {/* TODO transition with linear-gradient */}
       <div className="relative">
         <div className="bg-light dark:bg-dark h-[100vh] w-full absolute top-0" />
-        <main className="container mx-auto max-w-7xl px-6">
+        <main>
           {children}
         </main>
         <Footer />

@@ -9,7 +9,7 @@ export default function DefaultLayout({ children }: React.PropsWithChildren) {
     >
       <Head />
       <Navbar />
-      <main className="container mx-auto max-w-7xl px-6 flex-grow pt-4">
+      <main className={container({ className: 'pt-4' })}>
         {children}
       </main>
       <Footer />

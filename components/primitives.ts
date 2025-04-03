@@ -13,6 +13,7 @@ export const title = tv({
       pink: 'from-[#FF72E1] to-[#F54C7A]',
     },
     size: {
+      xs: 'text-2xl lg:text-3xl',
       sm: 'text-3xl lg:text-4xl',
       md: 'text-[2.3rem] lg:text-5xl leading-9',
       lg: 'text-4xl lg:text-6xl',
@@ -50,4 +51,8 @@ export const subtitle = tv({
   defaultVariants: {
     fullWidth: true,
   },
+})
+
+export const container = tv({
+  base: 'container mx-auto max-w-7xl px-6 flex-grow',
 })
