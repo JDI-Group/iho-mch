@@ -53,8 +53,9 @@ export async function getProductIdVariationsVariation(paths: Types.GetProductIdV
  * @method get
  * @tags Order
  */
-export async function getOrder(config?: RequestInit) {
-  const response = await fetch(`${baseURL}/order`, {
+export async function getOrder(query?: Types.GetOrderQuery, config?: RequestInit) {
+  const querystr = new URLSearchParams(Object.entries(query || {}));
+  const response = await fetch(`${baseURL}/order?${querystr}`, {
     ...config,
   });
   return response.json() as Promise<Types.Order[]>;
@@ -63,14 +64,41 @@ export async function getOrder(config?: RequestInit) {
  * @method post
  * @tags Order
  */
-export async function postOrder(body: Types.OrderCreateDto, headers?: Types.PostOrderHeader, config?: RequestInit) {
-  const response = await fetch(`${baseURL}/order`, {
+export async function postOrder(body: Types.OrderCreateDto, query?: Types.PostOrderQuery, headers?: Types.PostOrderHeader, config?: RequestInit) {
+  const querystr = new URLSearchParams(Object.entries(query || {}));
+  const response = await fetch(`${baseURL}/order?${querystr}`, {
     headers: { "Content-Type": "application/json", ...headers },
     method: "post",
     body: JSON.stringify(body),
     ...config,
   });
   return response.json() as Promise<Types.OrderDataDto>;
+}
+/**
+ * @method put
+ * @tags Order
+ */
+export async function putOrderPay(body: Types.OrderPutDto, config?: RequestInit) {
+  const response = await fetch(`${baseURL}/order/pay`, {
+    headers: { "Content-Type": "application/json" },
+    method: "put",
+    body: JSON.stringify(body),
+    ...config,
+  });
+  return response.json() as Promise<Types.OrderDataDto>;
+}
+/**
+ * @method put
+ * @tags Order
+ */
+export async function putOrderCancel(body: Types.OrderPutDto, config?: RequestInit) {
+  const response = await fetch(`${baseURL}/order/cancel`, {
+    headers: { "Content-Type": "application/json" },
+    method: "put",
+    body: JSON.stringify(body),
+    ...config,
+  });
+  return response;
 }
 /**
  * @method get

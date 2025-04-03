@@ -51,8 +51,10 @@ export interface Metadata {
 }
 export interface Product {
   id: number;
+  ether: string;
   orders: number;
   target: number;
+  limit: number;
   name: string;
   slug: string;
   permalink: string;
@@ -68,8 +70,6 @@ export interface Product {
   short_description: string;
   sku: string;
   price: string;
-  ether: string;
-  limit: number;
   regular_price: string;
   sale_price: string;
   date_on_sale_from: any;
@@ -250,6 +250,10 @@ export interface OrderDataDto {
   order: number;
   coins: Coin[];
   value: string;
+  memo: string;
+}
+export interface OrderPutDto {
+  order: number;
 }
 export interface VerifyDto {
   message: string;
@@ -299,6 +303,19 @@ export interface GetProductIdVariationsPath {
 export interface GetProductIdVariationsVariationPath {
   id: number;
   variation: number;
+}
+export interface GetOrderQuery {
+  page?: number;
+  offset?: number;
+  limit?: number;
+  status?: string[];
+
+}
+export interface PostOrderQuery {
+  page?: number;
+  offset?: number;
+  limit?: number;
+  status?: string[];
 }
 export interface PostOrderHeader {
   token?: string;

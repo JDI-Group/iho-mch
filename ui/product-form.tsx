@@ -1,9 +1,12 @@
 import type { Attribute, Variation } from '@/api/index.type'
 import type { FormEvent } from 'react'
+import { stake } from '@/services/stake'
 import { If, useWatch } from '@hairy/react-lib'
 import { Button } from '@heroui/button'
 import { Form } from '@heroui/form'
 import { Select, SelectItem } from '@heroui/select'
+import { addToast } from '@heroui/toast'
+import { useOverlayInject } from '@overlastic/react'
 
 export interface ProductFormProps {
   id?: number
@@ -13,6 +16,7 @@ export interface ProductFormProps {
 }
 
 export function ProductForm(props: ProductFormProps) {
+  const openSettingsDialog = useOverlayInject(SettingsDialog)
   const [data, setData] = useState<Record<string, any>>({})
   const attributes = useMemo(
     () => {
@@ -38,11 +42,23 @@ export function ProductForm(props: ProductFormProps) {
 
   useWatch(variation, value => props.onChange?.(value))
 
-  function onSubmit(event: FormEvent<HTMLFormElement>) {
-    // Prevent default browser page refresh.
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    // Get form data as an object.
-    Object.fromEntries(new FormData(event.currentTarget))
+
+    await stake({ product: props.id!, variation: variation!.id })
+    addToast({
+      title: 'Success',
+      description: 'Staked successfully',
+      color: 'success',
+      endContent: (
+        <Button
+          color="primary"
+          onPress={() => openSettingsDialog({ target: 'orders' })}
+        >
+          View
+        </Button>
+      ),
+    })
   }
 
   return (

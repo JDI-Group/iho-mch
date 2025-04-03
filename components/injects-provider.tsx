@@ -1,9 +1,10 @@
 import { wagmiConfig } from '@/config/wagmi'
 import { Injector, useStore, useWatch } from '@hairy/react-lib'
 
+import { SubscribeWagmiConfig } from '@harsta/client/wagmi'
 import { HeroUIProvider } from '@heroui/system'
+import { ToastProvider } from '@heroui/toast'
 import { OverlaysProvider } from '@overlastic/react'
-
 import {
   createAuthenticationAdapter,
   darkTheme as rainbowDarkTheme,
@@ -13,7 +14,6 @@ import {
 } from '@rainbow-me/rainbowkit'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { theme as antdTheme, ConfigProvider as AntdUIProvider } from 'antd'
-
 import { useTheme } from 'next-themes'
 import { WagmiProvider } from 'wagmi'
 
@@ -62,6 +62,8 @@ export function InjectsProvider(props: React.PropsWithChildren) {
         { component: OverlaysProvider },
       ]}
     >
+      <ToastProvider placement="top-center" />
+      <SubscribeWagmiConfig />
       {props.children}
     </Injector>
   )
