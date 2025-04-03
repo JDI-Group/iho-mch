@@ -12,6 +12,10 @@ export const variants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1 },
   },
+  fadeOpacity: <Variants>{
+    hidden: { opacity: 0, y: 10 },
+    visible: { opacity: 1, y: 0, transition: { delay: 0.2, duration: 1, ease: 'linear' } },
+  },
   randoms: {
     float: (y?: [number, number], delay?: [number, number]): Variants => {
       delay = delay || [0, 1]

@@ -1,6 +1,7 @@
+import type { ThemeConfig } from 'antd'
 import { wagmiConfig } from '@/config/wagmi'
-import { Injector, useStore, useWatch } from '@hairy/react-lib'
 
+import { Injector, useStore, useWatch } from '@hairy/react-lib'
 import { SubscribeWagmiConfig } from '@harsta/client/wagmi'
 import { HeroUIProvider } from '@heroui/system'
 import { ToastProvider } from '@heroui/toast'
@@ -22,11 +23,29 @@ const themes = {
     dark: {
       algorithm: antdTheme.darkAlgorithm,
       token: { colorPrimary: '#234F9B' },
-    },
+      components: {
+        Steps: {
+          descriptionMaxWidth: 280,
+          navArrowColor: '#234F9B',
+          dotSize: 10,
+          fontSize: 16,
+          colorPrimary: 'rgba(255, 255, 255, 0.6)',
+        },
+      },
+    } as ThemeConfig,
     light: {
       algorithm: antdTheme.defaultAlgorithm,
       token: { colorPrimary: '#234F9B' },
-    },
+      components: {
+        Steps: {
+          descriptionMaxWidth: 280,
+          navArrowColor: '#234F9B',
+          dotSize: 10,
+          fontSize: 16,
+          colorPrimary: 'rgba(0, 0, 0, 0.6)',
+        },
+      },
+    } as ThemeConfig,
   },
   rainbow: {
     dark: rainbowDarkTheme({ accentColor: '#006fee' }),
@@ -42,12 +61,15 @@ export function InjectsProvider(props: React.PropsWithChildren) {
   const router = useRouter()
   const { theme } = useTheme()
   const [rainbowTheme, setRainbowTheme] = useState(themes.rainbow.dark)
-
+  const [antdTheme, setAntdTheme] = useState(themes.antd.dark)
   // fix rainbow theme based on the current theme
   useWatch(theme, () => {
     theme === 'dark'
       ? setRainbowTheme(themes.rainbow.dark)
       : setRainbowTheme(themes.rainbow.light)
+    theme === 'dark'
+      ? setAntdTheme(themes.antd.dark)
+      : setAntdTheme(themes.antd.light)
   }, { immediate: true })
 
   return (
@@ -57,7 +79,7 @@ export function InjectsProvider(props: React.PropsWithChildren) {
         { component: QueryClientProvider, props: { client } },
         { component: RainbowKitAuthenticationProvider, props: { adapter, status: authentication.status } },
         { component: RainbowKitProvider, props: { theme: rainbowTheme } },
-        { component: AntdUIProvider, props: { theme: theme === 'dark' ? themes.antd.dark : themes.antd.light } },
+        { component: AntdUIProvider, props: { theme: antdTheme } },
         { component: HeroUIProvider, props: { navigate: router.push } },
         { component: OverlaysProvider },
       ]}

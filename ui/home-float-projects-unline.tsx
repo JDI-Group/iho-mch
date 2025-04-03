@@ -17,12 +17,12 @@ export function HomeFloatProjectsUnline(props: PropsWithDetailedHTML) {
         />
       </div>
       <svg className="relative z-19" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="100%" viewBox="0 0 700 830" fill="none">
-        <rect x="111.674" y="59" width="490.000" height="690" fill="url(#pattern0_4582_147581)"></rect>
-        <rect x="555.674" y="120" width="176.000" height="176" fill="url(#pattern1_4582_147581)" transform="rotate(-45 445.674 280.451)"></rect>
-        <rect x="93.674" y="78" width="209.000" height="209" fill="url(#pattern2_4582_147581)"></rect>
-        <rect x="514.674" y="409" width="236.304" height="236.304" transform="rotate(-40 424.674 589.894)" fill="url(#pattern3_4582_147581)"></rect>
-        <rect x="329.674" y="615" width="211.000" height="211" fill="url(#pattern4_4582_14751)"></rect>
-        <rect x="78.696" y="414" width="175.693" height="175.693" transform="rotate(11 128.696 594.499)" fill="url(#pattern5_4582_147581)"></rect>
+        <rect className="animate-[levitate_12s_ease_infinite_1s]" x="111.674" y="59" width="490.000" height="690" fill="url(#pattern0_4582_147581)" />
+        <rect className="animate-[levitate_10s_ease_infinite]" x="450" y="50" width="176.000" height="176" fill="url(#pattern1_4582_147581)" />
+        <rect className="animate-[levitate_13s_ease_infinite_1s_reverse]" x="93.674" y="78" width="209.000" height="209" fill="url(#pattern2_4582_147581)" />
+        <rect className="animate-[levitate_16s_ease_infinite]" x="400" y="350" width="236.304" height="236.304" fill="url(#pattern3_4582_147581)" />
+        <rect className="animate-[levitate_17s_ease_infinite_1s]" x="329.674" y="615" width="211.000" height="211" fill="url(#pattern4_4582_14751)" />
+        <rect className="animate-[levitate_16s_ease_infinite]" x="78.696" y="414" width="175.693" height="175.693" fill="url(#pattern5_4582_147581)" />
         <defs>
           <pattern id="pattern0_4582_147581" patternContentUnits="objectBoundingBox" width="1" height="1"><use xlinkHref="#image0_4582_147581" transform="matrix(0.00253807 0 0 0.0018018 -0.763959 0)"></use></pattern>
           <pattern id="pattern1_4582_147581" patternContentUnits="objectBoundingBox" width="1" height="1"><use xlinkHref="#image1_4582_147581" transform="scale(0.00277778)"></use></pattern>

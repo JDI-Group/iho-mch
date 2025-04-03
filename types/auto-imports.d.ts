@@ -19,6 +19,7 @@ declare global {
   const InputPhoneNumber: typeof import('../components/form-shipping')['InputPhoneNumber']
   const Logo: typeof import('../components/icons')['Logo']
   const LsiconScreenFullFilled: typeof import('../components/icons')['LsiconScreenFullFilled']
+  const MaterialSymbolsArrowCoolDownRounded: typeof import('../components/icons')['MaterialSymbolsArrowCoolDownRounded']
   const MaterialSymbolsArrowForwardIosRounded: typeof import('../components/icons')['MaterialSymbolsArrowForwardIosRounded']
   const MaterialSymbolsContactSupport: typeof import('../components/icons')['MaterialSymbolsContactSupport']
   const MenuIcon: typeof import('../components/icons')['MenuIcon']
@@ -64,6 +65,8 @@ declare global {
   const postOrder: typeof import('../api/index')['postOrder']
   const postOrderPaid: typeof import('../api/index')['postOrderPaid']
   const postUserVerify: typeof import('../api/index')['postUserVerify']
+  const putOrderCancel: typeof import('../api/index')['putOrderCancel']
+  const putOrderPay: typeof import('../api/index')['putOrderPay']
   const putUser: typeof import('../api/index')['putUser']
   const startTransition: typeof import('react')['startTransition']
   const store: typeof import('../store/index')['default']
@@ -95,6 +98,12 @@ declare global {
   // @ts-ignore
   export type { FormShippingFields, InputPhoneNumberProps } from '../components/form-shipping'
   import('../components/form-shipping')
+  // @ts-ignore
+  export type { OrderDetailProps } from '../components/order-detal'
+  import('../components/order-detal')
+  // @ts-ignore
+  export type { OrderTableProps } from '../components/order-table'
+  import('../components/order-table')
   // @ts-ignore
   export type { ProductDetailDialogProps } from '../components/product-detail-dialog'
   import('../components/product-detail-dialog')

@@ -5,10 +5,10 @@ export const siteConfig = {
   description: 'The mining revolution begins with Moonchain’s Initial Hardware Offering (IHO), delivering the world’s first free, cutting-edge physical hardware miners to holders of Moonchain tokens via an Ethereum-based smart contract.',
   favicon: 'https://explorer.moonchain.com/assets/favicon/favicon.ico',
   navItems: [
-    {
-      label: 'Products',
-      href: '/products',
-    },
+    // {
+    //   label: 'Products',
+    //   href: '/products',
+    // },
     {
       label: 'NFT Marketplaces',
       href: 'https://nft.moonchain.com',
@@ -27,14 +27,10 @@ export const siteConfig = {
     },
   ],
   navMenuItems: [
-    {
-      label: 'Home',
-      href: '/',
-    },
-    {
-      label: 'Products',
-      href: '/products',
-    },
+    // {
+    //   label: 'Products',
+    //   href: '/products',
+    // },
     {
       label: 'NFT Marketplaces',
       href: 'https://nft.moonchain.com',

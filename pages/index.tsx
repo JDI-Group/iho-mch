@@ -1,6 +1,8 @@
+import { variants } from '@/config/variants'
 import { Accordion, AccordionItem } from '@heroui/accordion'
 import { Button } from '@heroui/button'
-import { Card, CardBody } from '@heroui/card'
+import { Link } from '@heroui/link'
+import { Steps } from 'antd'
 
 const accordions = [
   {
@@ -36,9 +38,16 @@ export default function IndexPage() {
   function onNavigateProducts() {
     router.push('/products')
   }
+
+  function onExploreIHO() {
+    window.scrollTo({
+      top: document.body.clientHeight,
+      behavior: 'smooth',
+    })
+  }
   return (
     <layouts.home>
-      <section className="hidden md:block w-full h-screen">
+      <motion.section variants={variants.fadeOpacity} initial="hidden" whileInView="visible" className="hidden md:block w-full h-screen relative">
         <div className=" flex h-full justify-center gap-[100px] items-center">
           <div className="flex-1 flex flex-col items-center relative z-10 gap-8 text-center">
             <div className="text-3xl lg:text-5xl font-bold">
@@ -55,10 +64,12 @@ export default function IndexPage() {
               <span>MINE</span>
             </div>
             <div className="flex gap-4 lg:gap-8">
-              <Button className="font-bold tracking-[0.1rem]" onPress={onNavigateProducts} radius="full" color="primary">
-                GET FREE
+              <Button className="font-bold tracking-[0.1rem]" disabled onPress={onNavigateProducts} radius="full" color="primary">
+                {/* GET FREE */}
+                COMING SOON
               </Button>
-              <Button className="font-bold tracking-[0.1rem]" radius="full" variant="ghost">
+
+              <Button className="font-bold tracking-[0.1rem]" onPress={onExploreIHO} radius="full" variant="ghost">
                 LEARN MORE
               </Button>
             </div>
@@ -73,9 +84,15 @@ export default function IndexPage() {
             <HomeFloatProjects />
           </div>
         </div>
-      </section>
+        <div className="absolute w-full flex justify-center bottom-6">
+          <Link onPress={onExploreIHO} className="cursor-pointer text-default-500" color="foreground">
+            <span className="mr-2">Explore Moonchain IHO</span>
+            <MaterialSymbolsArrowCoolDownRounded />
+          </Link>
+        </div>
+      </motion.section>
 
-      <section className="md:hidden min-h-screen flex flex-col">
+      <motion.section variants={variants.fadeOpacity} initial="hidden" whileInView="visible" className="md:hidden min-h-screen flex flex-col">
         <div className="pt-16 relative z-30 mt-6 text-center flex flex-col gap-4 mb-12">
           <div className="flex flex-col justify-center items-center text-3xl font-bold">
             INITIAL HARDWARE OFFERING (IHO)
@@ -93,49 +110,54 @@ export default function IndexPage() {
           <HomeFloatProjectsUnline />
         </div>
         <div className="flex flex-col items-center gap-4">
-          <Button className="font-bold min-w-48 tracking-[0.1rem]" onPress={onNavigateProducts} radius="full" color="primary">
-            GET FREE
+          <Button className="font-bold min-w-48 tracking-[0.1rem]" disabled onPress={onNavigateProducts} radius="full" color="primary">
+            {/* GET FREE */}
+            COMING SOON
           </Button>
-          <Button className="font-bold min-w-48 tracking-[0.1rem]" radius="full" variant="ghost">
+          <Button className="font-bold min-w-48 tracking-[0.1rem]" onPress={onExploreIHO} radius="full" variant="ghost">
             LEARN MORE
           </Button>
         </div>
-      </section>
+      </motion.section>
 
-      <section className="flex w-full justify-center lg:justify-between flex-col lg:flex-row items-center gap-8 lg:gap-12 py-12 lg:h-screen font-bold">
-        <Card className="w-full lg:flex-1 lg:h-[200px] h-[180px]">
-          <CardBody className="h-full px-6 flex flex-col items-center justify-center gap-4 text-center">
-            <div className="text-2xl">SELECT</div>
-            <div>Select the mining hardware you want for free</div>
-          </CardBody>
-        </Card>
-        <Card className="w-full lg:flex-1 lg:h-[200px] h-[180px]">
-          <CardBody className="h-full px-6 flex flex-col items-center justify-center gap-4 text-center">
-            <div className="text-2xl">STAKE</div>
-            <div>Stake your Moonchain on your own wallet</div>
-          </CardBody>
-        </Card>
-        <Card className="w-full lg:flex-1 lg:h-[200px] h-[180px]">
-          <CardBody className="h-full px-6 flex flex-col items-center justify-center gap-4 text-center">
-            <div className="text-2xl">MINE</div>
-            <div>Your mining hardware is delivered FREE, connect & start mining!</div>
-          </CardBody>
-        </Card>
+      <section className="flex w-full justify-center lg:justify-between flex-col lg:flex-row items-center gap-8 lg:gap-12 py-12 h-[60vh] lg:h-[80vh] font-bold">
+        <motion.div className="w-full" variants={variants.fadeOpacity} initial="hidden" whileInView="visible">
+          <Steps
+            direction="horizontal"
+            current={3}
+            progressDot
+            items={[
+              {
+                title: 'SELECT',
+                description: 'Select the mining hardware you want for free',
+              },
+              {
+                title: 'STAKE',
+                description: 'Stake your Moonchain on your own wallet',
+              },
+              {
+                title: 'MINE',
+                description: 'Your mining hardware is delivered FREE, connect & start mining!',
+              },
+            ]}
+          />
+        </motion.div>
       </section>
-
-      <section className="relative z-10">
-        <div className="mb-8">
+      <section className="relative z-10 pb-[20vh]">
+        <motion.div variants={variants.fadeOpacity} initial="hidden" whileInView="visible" className="mb-8">
           <div className={title({ size: 'sm' })}>
             FAQs
           </div>
-        </div>
-        <Accordion>
-          {accordions.map(item => (
-            <AccordionItem key={item.value} aria-label={item.value} title={item.question}>
-              <div className="text-sm" dangerouslySetInnerHTML={{ __html: item.answer }} />
-            </AccordionItem>
-          ))}
-        </Accordion>
+        </motion.div>
+        <motion.div variants={variants.fadeOpacity} initial="hidden" whileInView="visible">
+          <Accordion>
+            {accordions.map(item => (
+              <AccordionItem key={item.value} aria-label={item.value} title={item.question}>
+                <div className="text-sm" dangerouslySetInnerHTML={{ __html: item.answer }} />
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </motion.div>
       </section>
 
     </layouts.home>

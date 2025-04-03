@@ -13,3 +13,21 @@
   font-style: normal;
   font-display: swap;
 }
+
+html,
+body {
+  scroll-behavior: smooth;
+}
+
+.ant-steps-item-title {
+  font-size: 24px !important;
+}
+.ant-steps-item-active .ant-steps-item-tail::after {
+  background-color: rgba(253, 253, 253, 0.12) !important;
+}
+
+.ant-steps-item-description {
+  font-size: 18px !important;
+  font-weight: 400 !important;
+  @apply text-default-900 !important;
+}

@@ -77,7 +77,6 @@ export function FormShipping() {
       <Form
         name="basic"
         wrapperCol={{ span: 24 }}
-        style={{ maxWidth: 600 }}
         onFinish={onFinish as any}
         onFinishFailed={onFinishFailed}
         autoComplete="off"

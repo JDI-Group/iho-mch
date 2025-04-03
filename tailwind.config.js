@@ -23,6 +23,25 @@ const config = {
         light: 'linear-gradient(0deg, rgba(255, 255, 255, 0.40) 0%, rgba(255, 255, 255, 0.40) 100%), linear-gradient(180deg, #a6a6a6 0%, #fff 100%)',
         tag: 'linear-gradient(90deg, #0079D0 0%, #9E52D8 15%, #DA365C 50%, #D04901 100%)',
       },
+      keyframes: {
+        levitate: {
+          '0%': {
+            transform: 'translateY(0)',
+          },
+          '30%': {
+            transform: 'translateY(-10px)',
+          },
+          '50%': {
+            transform: 'translateY(4px)',
+          },
+          '70%': {
+            transform: 'translateY(-15px)',
+          },
+          '100%': {
+            transform: 'translateY(0)',
+          },
+        },
+      },
     },
   },
   darkMode: ['selector', '[data-theme="dark"]'],
