@@ -1,6 +1,6 @@
 export function OrdersPreview() {
   return (
-    <div>
+    <div className="min-h-72">
 
     </div>
   )

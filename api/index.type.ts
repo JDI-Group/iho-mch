@@ -51,6 +51,8 @@ export interface Metadata {
 }
 export interface Product {
   id: number;
+  orders: number;
+  target: number;
   name: string;
   slug: string;
   permalink: string;
@@ -67,7 +69,6 @@ export interface Product {
   sku: string;
   price: string;
   ether: string;
-  target: number;
   limit: number;
   regular_price: string;
   sale_price: string;
@@ -236,7 +237,7 @@ export interface Order {
 }
 export interface OrderCreateDto {
   product: number;
-  attributes: any;
+  variation: number;
 }
 export interface Coin {
   token: string;

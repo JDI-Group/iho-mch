@@ -5,14 +5,16 @@ import { useOverlayInject } from '@overlastic/react'
 
 export interface ProductDescriptionProps {
   description?: string
-  name?: string
+  orders?: number
+  target?: number
   price?: string
   limit?: number
+  name?: string
 }
 export function ProductDescription(props: ProductDescriptionProps) {
   const openProductDetailDialog = useOverlayInject(ProductDetailDialog)
   const html = removeInnerHTMLAttributes(props.description || '', 'class')
-
+  const { orders = 0, target = 0 } = props
   return (
     <>
       <h1 className={title({ size: 'sm', className: 'hidden md:inline-block mb-4' })}>
@@ -52,12 +54,12 @@ export function ProductDescription(props: ProductDescriptionProps) {
 
       <div>Delivery Progress</div>
       <div className="flex items-center gap-2">
-        <Progress className="flex-1" value={60} />
+        <Progress className="flex-1" maxValue={target} value={orders} />
         <CarIcon size={32} />
       </div>
 
       <div className="-mt-2 mb-8 text-default-500 text-sm">
-        89 more orders needed for dispatch
+        {target - orders} more orders needed for dispatch
       </div>
       <div className="mb-8 text-default-500 text-sm">
         *Limit: {props.limit} item per wallet

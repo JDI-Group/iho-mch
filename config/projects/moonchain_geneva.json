@@ -5,7 +5,6 @@
     "target": 3000,
     "expire": 31536000,
     "limit": 1,
-    "product": 22291,
-    "price": 520
+    "product": 22291
   }
 ]

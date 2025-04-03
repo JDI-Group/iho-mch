@@ -4,13 +4,14 @@ import { Tab, Tabs } from '@heroui/tabs'
 import { useExtendOverlay } from '@overlastic/react'
 
 export interface SettingsDialogProps {
-  target?: typeof settings[number]['title']
+  target?: typeof settings[number]['key']
 }
 
-export function SettingsDialog() {
+export function SettingsDialog(props: SettingsDialogProps) {
   const { visible, resolve } = useExtendOverlay({
     duration: 500,
   })
+  const [current, setCurrent] = useState<typeof settings[number]>()
 
   return (
     <Modal
@@ -18,23 +19,27 @@ export function SettingsDialog() {
       isDismissable={false}
       isOpen={visible}
       onOpenChange={resolve}
-      size="lg"
+      size={current?.width || 'lg'}
     >
       <ModalContent>
         <ModalHeader className="flex flex-col gap-1">
           Settings
         </ModalHeader>
         <ModalBody>
-          <Tabs aria-label="Options" variant="underlined">
+          <Tabs
+            onSelectionChange={key => setCurrent(settings.find(item => item.key === key))}
+            selectedKey={props.target}
+            aria-label="Options"
+            variant="underlined"
+          >
             {settings.map(item => (
-              <Tab key={item.title} title={item.title}>
+              <Tab key={item.key} title={item.title}>
                 {item.child()}
               </Tab>
             ))}
           </Tabs>
         </ModalBody>
       </ModalContent>
-
     </Modal>
   )
 }

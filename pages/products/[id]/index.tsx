@@ -34,6 +34,8 @@ function Page() {
                 description={detail?.short_description}
                 price={price || detail?.ether}
                 name={detail?.name}
+                orders={detail?.orders}
+                target={detail?.target}
               />
               <ProductForm
                 id={detail?.id}
