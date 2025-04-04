@@ -14,20 +14,17 @@ export function ConnectButton({ status = true }: ConnectButtonProps) {
   return (
     <>
       <If cond={isConnected}>
-        <Then cond={status && authentication.token}>
-          <div className="rainbow-wrapper">
-            <RainbowConnectButton chainStatus={{ smallScreen: 'none' }} />
-          </div>
+        <Then tag="div" className="rainbow-wrapper" cond={status && authentication.token}>
+          <RainbowConnectButton chainStatus={{ smallScreen: 'none' }} />
         </Then>
-        <Else>
-          <Button
-            onPress={openConnectModal}
-            className="w-full dark:bg-gray-200 dark:text-black"
-            color="primary"
-            isLoading={isConnecting || connectModalOpen}
-          >
-            Login
-          </Button>
+        <Else
+          tag={Button}
+          onPress={openConnectModal}
+          className="w-full dark:bg-gray-200 dark:text-black"
+          color="primary"
+          isLoading={isConnecting || connectModalOpen}
+        >
+          Login
         </Else>
       </If>
     </>
