@@ -9,7 +9,7 @@ import '@rainbow-me/rainbowkit/styles.css'
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <Injector install={[
-      NextThemesProvider,
+      { component: NextThemesProvider, props: { defaultTheme: 'dark' } },
       InjectsProvider,
       BootstrapProvider,
     ]}

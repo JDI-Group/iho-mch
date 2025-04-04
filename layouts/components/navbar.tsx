@@ -60,9 +60,9 @@ export function Navbar(props: NavbarProps) {
         className="hidden sm:flex basis-1/5 sm:basis-full"
         justify="end"
       >
-        <NavbarItem className="hidden sm:flex">
+        {/* <NavbarItem className="hidden sm:flex">
           <ConnectButton />
-        </NavbarItem>
+        </NavbarItem> */}
         {/* <NavbarItem className="hidden sm:flex">
           <div className="cursor-pointer" onClick={() => openSettingsDialog()}>
             <SettingIcon className="text-default-600" size={22} />
