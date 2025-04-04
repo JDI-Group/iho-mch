@@ -1,4 +1,4 @@
-import { Else, If, Then } from '@hairy/react-lib'
+import { Else, If, Then, useStore } from '@hairy/react-lib'
 import { Button } from '@heroui/button'
 import { ConnectButton as RainbowConnectButton, useConnectModal } from '@rainbow-me/rainbowkit'
 import { useAccount } from 'wagmi'
@@ -10,15 +10,14 @@ export interface ConnectButtonProps {
 export function ConnectButton({ status = true }: ConnectButtonProps) {
   const { openConnectModal, connectModalOpen } = useConnectModal()
   const { isConnecting, isConnected } = useAccount()
+  const authentication = useStore(store.authentication)
   return (
     <>
       <If cond={isConnected}>
-        <Then>
-          <If cond={status}>
-            <div className="rainbow-wrapper">
-              <RainbowConnectButton chainStatus={{ smallScreen: 'none' }} />
-            </div>
-          </If>
+        <Then cond={status && authentication.token}>
+          <div className="rainbow-wrapper">
+            <RainbowConnectButton chainStatus={{ smallScreen: 'none' }} />
+          </div>
         </Then>
         <Else>
           <Button
