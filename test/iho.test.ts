@@ -1,6 +1,6 @@
 import { integer } from '@hairy/utils'
 import { AbiCoder, isAddress, keccak256, solidityPackedKeccak256, toBeArray, ZeroAddress } from 'ethers'
-import { contracts, provider, signer } from 'harsta/runtime'
+import { contracts, getNamedSigner, provider, signer } from 'harsta/runtime'
 import { fixture, initial, wait } from 'harsta/tests'
 
 await initial()
@@ -8,6 +8,7 @@ await fixture(['IHO'])
 
 const StakeNotExpiredError = `VM Exception while processing transaction: reverted with reason string 'Stake not expired'`
 const ProjectAlreadyConfirmedError = `VM Exception while processing transaction: reverted with reason string 'Project already confirmed'`
+const StakeAlreadyConfirmedError = `VM Exception while processing transaction: reverted with reason string 'Stake already exists'`
 
 const abiCoder = AbiCoder.defaultAbiCoder()
 const params = {
@@ -25,7 +26,8 @@ interface Project {
 }
 
 async function release(extendsProject?: Partial<Project>) {
-  const iho = contracts.IHO.resolve('signer')
+  const deployer = await getNamedSigner('deployer')
+  const iho = contracts.IHO.resolve(deployer)
   const project: Project = {
     pid: +integer(random([1, 100000])),
     target: 1,
@@ -42,6 +44,7 @@ async function release(extendsProject?: Partial<Project>) {
 }
 
 async function sign(pid: number, extendsParams?: Partial<typeof params>) {
+  const verifier = await getNamedSigner('verifier')
   const _params = { ...params, ...extendsParams }
   const encoded = abiCoder.encode(
     ['tuple(address token, uint256 amount)[]'],
@@ -52,7 +55,7 @@ async function sign(pid: number, extendsParams?: Partial<typeof params>) {
     ['uint256', 'uint256', 'bytes32', 'uint256', 'string'],
     [pid, _params.oid, encodedHash, _params.expire, _params.memo],
   )
-  return signer.signMessage(toBeArray(messageHash))
+  return verifier.signMessage(toBeArray(messageHash))
 }
 
 function random(range: [number, number]) {
@@ -68,9 +71,12 @@ describe('iho-project contract unit test', () => {
   it('deployed contract', async () => {
     const iho = contracts.IHO.resolve('signer')
     const address = await iho.getAddress()
+    const verifier = await getNamedSigner('verifier')
+    const deployer = await getNamedSigner('deployer')
+
     expect(isAddress(address)).toBeTruthy()
-    expect(await signer.getAddress()).toBe(await iho.getVerifier())
-    expect(await signer.getAddress()).toBe(await iho.owner())
+    expect(await verifier.getAddress()).toBe(await iho.getVerifier())
+    expect(await deployer.getAddress()).toBe(await iho.owner())
   })
 
   it('release project', async () => {
@@ -191,6 +197,35 @@ describe('iho-project contract unit test', () => {
     }
     catch (error: any) {
       expect(error.error.message).toBe(ProjectAlreadyConfirmedError)
+    }
+  })
+
+  it('repeat stake error', async () => {
+    const iho = contracts.IHO.resolve('signer')
+    const project = await release({ target: 20 })
+
+    await wait(await iho.stake(
+      project.params.pid,
+      params.oid,
+      params.coins,
+      params.expire,
+      params.memo,
+      await sign(project.params.pid),
+      { value: params.value },
+    ))
+    try {
+      await wait(await iho.stake(
+        project.params.pid,
+        params.oid,
+        params.coins,
+        params.expire,
+        params.memo,
+        await sign(project.params.pid),
+        { value: params.value },
+      ))
+    }
+    catch (error: any) {
+      expect(error.error.message).toBe(StakeAlreadyConfirmedError)
     }
   })
 })

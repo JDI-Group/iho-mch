@@ -80,6 +80,11 @@
   },
   {
     "inputs": [],
+    "name": "TransferInsufficient",
+    "type": "error"
+  },
+  {
+    "inputs": [],
     "name": "TransferUnauthorized",
     "type": "error"
   },

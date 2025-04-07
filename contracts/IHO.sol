@@ -80,12 +80,14 @@ contract IHO is VerifiableUpgradeable, BidirectionalTransfer, UUPSUpgradeable, O
 
     require(projects[pid].target != 0, "Project not found");
     require(!projects[pid].confirmed, "Project already confirmed");
+    require(stakes[pid][oid].timestamp == 0, "Stake already exists");
 
     uint256 expireTime = block.timestamp + expire;
 
     transfers(msg.sender, address(this), coins);
 
     projects[pid].quantity += 1;
+
 
     for (uint256 i = 0; i < coins.length; i++) {
       stakes[pid][oid].coins.push(coins[i]);

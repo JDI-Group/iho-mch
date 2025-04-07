@@ -4,6 +4,7 @@ pragma solidity ^0.8.24;
 contract BidirectionalTransfer {
   error TransferFailed();
   error TransferUnauthorized();
+  error TransferInsufficient();
 
   struct Coin {
     address token;
