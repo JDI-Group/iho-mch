@@ -1,5 +1,5 @@
 import type { OrderDataDto } from '@/api/index.type'
-import { wait } from '@/utils/wait'
+import { wait } from '@hairy/ether-lib'
 import { contracts } from '@harsta/client'
 import { addToast } from '@heroui/toast'
 
@@ -11,11 +11,14 @@ export async function helperStake(params: { order: number } | { product: number,
   let detail: OrderDataDto | null = null
   if (product && variation)
     detail = await postOrder({ variation, product })
-  if (order)
+
+  if (order) {
     detail = await postOrderPay({ order })
+    await verifyInsufficientFunds(detail.value)
+  }
 
   if (!detail) {
-    addToast({ title: 'Error', description: 'Invalid order or product', color: 'danger' })
+    addToast({ description: 'Invalid order or product', color: 'danger' })
     return
   }
 

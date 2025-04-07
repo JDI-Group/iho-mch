@@ -1,15 +1,13 @@
-import type { Deferred } from '@/utils'
 import { FILE_PREFIX } from '@/config/constants'
-import { createDeferred } from '@/utils'
-import { subscribeForTransaction } from '@/utils/wait'
-import { Errors, idprefix } from '@hairy/ether-lib'
+import { Errors, idprefix, wait } from '@hairy/ether-lib'
 import {
   useFetchRequestIntercept,
   useFetchResponseIntercept,
   useStore,
   useWhenever,
 } from '@hairy/react-lib'
-import { cloneDeepWith, jsonTryParse, riposte } from '@hairy/utils'
+
+import { cloneDeepWith, Deferred, jsonTryParse, riposte } from '@hairy/utils'
 import { addToast, closeAll } from '@heroui/toast'
 import { useMount } from 'react-use'
 
@@ -68,21 +66,20 @@ export function BootstrapProvider(props: React.PropsWithChildren) {
       [idprefix('InvalidAccount()')]: ('Insufficient account'),
     }
 
-    subscribeForTransaction('before', () => {
-      deferred = createDeferred()
+    wait.subscribe('before', () => {
+      deferred = new Deferred()
+      deferred.finally(closeAll)
       addToast({
         promise: deferred,
         description: 'Waiting for transaction confirmation',
         hideCloseButton: true,
       })
     })
-    subscribeForTransaction('after', () => {
+    wait.subscribe('after', () => {
       deferred?.resolve(undefined)
-      closeAll()
+      deferred = undefined
     })
-    subscribeForTransaction('error', (error: any) => {
-      deferred?.reject()
-      closeAll()
+    wait.subscribe('error', (error: any) => {
       const description = riposte(
         [!!errors[error?.data], errors[error?.data]],
         [!!messages[error.code], messages[error.code]],

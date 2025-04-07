@@ -9,14 +9,14 @@ importers:
   .:
     dependencies:
       '@hairy/ether-lib':
-        specifier: ^1.11.0
-        version: 1.11.0(ethers@6.13.5(bufferutil@4.0.9)(utf-8-validate@5.0.10))
+        specifier: ^1.12.0
+        version: 1.12.0(ethers@6.13.5(bufferutil@4.0.9)(utf-8-validate@5.0.10))
       '@hairy/react-lib':
-        specifier: ^1.11.0
-        version: 1.11.0(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react-i18next@14.1.3(i18next@24.2.3(typescript@5.6.3))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
+        specifier: ^1.12.0
+        version: 1.12.0(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react-i18next@14.1.3(i18next@24.2.3(typescript@5.6.3))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
       '@hairy/utils':
-        specifier: ^1.11.0
-        version: 1.11.0
+        specifier: ^1.12.0
+        version: 1.12.0
       '@harsta/client':
         specifier: ^0.10.6
         version: 0.10.6(bufferutil@4.0.9)(react@18.3.1)(utf-8-validate@5.0.10)(viem@2.24.1(bufferutil@4.0.9)(typescript@5.6.3)(utf-8-validate@5.0.10))(wagmi@2.14.15(@tanstack/query-core@5.69.0)(@tanstack/react-query@5.69.0(react@18.3.1))(@types/react@18.3.3)(bufferutil@4.0.9)(react@18.3.1)(typescript@5.6.3)(utf-8-validate@5.0.10)(viem@2.24.1(bufferutil@4.0.9)(typescript@5.6.3)(utf-8-validate@5.0.10)))
@@ -919,8 +919,8 @@ packages:
   '@genapi/transform@3.3.0':
     resolution: {integrity: sha512-ZxhpKa77mjEVZr3VLMKO2bA8QgjwfhY/Nc4eZck1Q8PUpsPEVUrX5FdorogpsttCHn0VSBENacQNSarb0y/z6w==}
 
-  '@hairy/ether-lib@1.11.0':
-    resolution: {integrity: sha512-/1RHEDRtAFZsDN277RidNlGu4OZ6IjsUQcHTTK3F4lmnmdCd5ds4/EfnDy8RzDXcXekh/JvMKc2/JQQnkTEp8w==}
+  '@hairy/ether-lib@1.12.0':
+    resolution: {integrity: sha512-DNaYj2pNAq6xSuqEvipjh9x3hSOCdMR7MmRQEy6jfVerjN+IUnIkPV2FJCVdV7OdrKXtfdLsLTTYCxJrmS93Qw==}
     peerDependencies:
       ethers: '>=6'
 
@@ -928,15 +928,15 @@ packages:
     resolution: {integrity: sha512-W32vEGBz0/+EWcWwodt0b3LI5K7F5Co9L6qY6EDkXMAeFTh6pE8PFts14FL9uKnl/WOKMGceeJgfsiYf0OHeSA==}
     hasBin: true
 
-  '@hairy/react-lib@1.11.0':
-    resolution: {integrity: sha512-mblkXLDac/T+pvOKRQ6i8ufV+k9lyHNyzZfHn51QL/A+DCzuyFWhAfHosU33SEE77DGjeVTGxeAf96Uox7hqMg==}
+  '@hairy/react-lib@1.12.0':
+    resolution: {integrity: sha512-1JUu7UsqVeb/3ruF6gZsirb3dQiLdHPmwXLSALOagVIjHN8wgK6dX773y/l1RoDp78jM81gIh31ne/bEpkpDbQ==}
     peerDependencies:
       react: ^18.2.0
       react-dom: ^18.2.0
       react-i18next: ^14.1.2
 
-  '@hairy/utils@1.11.0':
-    resolution: {integrity: sha512-Jmf/7mHNJsztRkhn3tcTTMlkzSr4VUnhIxCHGYPpNUmGT0kRdShdpNbps5C3JQ7Z3PhLCReNE1JmeeGJbemdGQ==}
+  '@hairy/utils@1.12.0':
+    resolution: {integrity: sha512-as3zPQoOaN/tIsNoQO8jL4m+QU07obu3PfnzUhY+d4IR7DOz5QlMJxIo3i5yS2d3nsR0DxBaj0nnklY9e6bCAQ==}
 
   '@harsta/client@0.10.6':
     resolution: {integrity: sha512-CyB8rfElDr3kpq1S+O1aVcGRfX9C/OWlp/07/ywUAPGVLjm3PLzio7hccq+0xvEnSo6W0hvBilMyTh/IrBg4sg==}
@@ -8681,7 +8681,7 @@ snapshots:
   '@genapi/core@3.3.0':
     dependencies:
       '@genapi/shared': 3.3.0
-      '@hairy/utils': 1.11.0
+      '@hairy/utils': 1.12.0
       cac: 6.7.14
       chalk: 5.4.1
       fs-extra: 11.3.0
@@ -8693,7 +8693,7 @@ snapshots:
     dependencies:
       '@genapi/shared': 3.3.0
       '@genapi/transform': 3.3.0
-      '@hairy/utils': 1.11.0
+      '@hairy/utils': 1.12.0
       pascal-case: 3.1.2
       transliteration: 2.3.5
 
@@ -8722,9 +8722,9 @@ snapshots:
 
   '@genapi/transform@3.3.0': {}
 
-  '@hairy/ether-lib@1.11.0(ethers@6.13.5(bufferutil@4.0.9)(utf-8-validate@5.0.10))':
+  '@hairy/ether-lib@1.12.0(ethers@6.13.5(bufferutil@4.0.9)(utf-8-validate@5.0.10))':
     dependencies:
-      '@hairy/utils': 1.11.0
+      '@hairy/utils': 1.12.0
       ethers: 6.13.5(bufferutil@4.0.9)(utf-8-validate@5.0.10)
       mitt: 3.0.1
 
@@ -8735,7 +8735,7 @@ snapshots:
       nano-spawn: 0.2.0
       yargs: 17.7.2
 
-  '@hairy/react-lib@1.11.0(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react-i18next@14.1.3(i18next@24.2.3(typescript@5.6.3))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)':
+  '@hairy/react-lib@1.12.0(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react-i18next@14.1.3(i18next@24.2.3(typescript@5.6.3))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)':
     dependencies:
       html-parse-stringify: 3.0.1
       mitt: 3.0.1
@@ -8746,7 +8746,7 @@ snapshots:
     transitivePeerDependencies:
       - '@types/react'
 
-  '@hairy/utils@1.11.0':
+  '@hairy/utils@1.12.0':
     dependencies:
       '@types/lodash-es': 4.17.12
       bignumber.js: 9.1.2

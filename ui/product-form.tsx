@@ -11,6 +11,7 @@ import { useOverlayInject } from '@overlastic/react'
 export interface ProductFormProps {
   id?: number
   attributes?: Attribute[]
+  price?: string
   variations?: Variation[]
   onChange?: (variation?: Variation) => void
 }

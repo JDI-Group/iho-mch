@@ -40,6 +40,7 @@ function Page() {
               <ProductForm
                 id={detail?.id}
                 attributes={detail?.attributes}
+                price={price || detail?.ether}
                 variations={variations}
                 onChange={variation => setPrice(variation?.ether)}
               />

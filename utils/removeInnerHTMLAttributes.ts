@@ -6,5 +6,3 @@ export function removeInnerHTMLAttributes(html: string, attribute: string | stri
     html,
   )
 }
-
-export * from './deferred'

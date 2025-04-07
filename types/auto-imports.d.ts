@@ -62,6 +62,7 @@ declare global {
   const postUserVerify: typeof import('../api/index')['postUserVerify']
   const putOrderCancel: typeof import('../api/index')['putOrderCancel']
   const putUser: typeof import('../api/index')['putUser']
+  const removeInnerHTMLAttributes: typeof import('../utils/removeInnerHTMLAttributes')['removeInnerHTMLAttributes']
   const startTransition: typeof import('react')['startTransition']
   const store: typeof import('../store/index')['default']
   const subtitle: typeof import('../components/primitives')['subtitle']
@@ -84,6 +85,7 @@ declare global {
   const useStoreUser: typeof import('../hooks/use-store-user')['useStoreUser']
   const useSyncExternalStore: typeof import('react')['useSyncExternalStore']
   const useTransition: typeof import('react')['useTransition']
+  const verifyInsufficientFunds: typeof import('../utils/verifyInsufficientFunds')['verifyInsufficientFunds']
 }
 // for type re-export
 declare global {

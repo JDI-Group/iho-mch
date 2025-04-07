@@ -1,4 +1,3 @@
-import { removeInnerHTMLAttributes } from '@/utils'
 import { formatEther } from '@hairy/ether-lib'
 import { Progress } from '@heroui/progress'
 import { useOverlayInject } from '@overlastic/react'
