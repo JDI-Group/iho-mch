@@ -1,7 +1,7 @@
 import type { Attribute, Variation } from '@/api/index.type'
 import type { FormEvent } from 'react'
-import { stake } from '@/services/stake'
-import { If, useWatch } from '@hairy/react-lib'
+import { helperStake } from '@/services/stake'
+import { If, useAsyncCallback, useWatch } from '@hairy/react-lib'
 import { Button } from '@heroui/button'
 import { Form } from '@heroui/form'
 import { Select, SelectItem } from '@heroui/select'
@@ -42,10 +42,11 @@ export function ProductForm(props: ProductFormProps) {
 
   useWatch(variation, value => props.onChange?.(value))
 
-  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+  const [loading, onSubmit] = useAsyncCallback(async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
-    await stake({ product: props.id!, variation: variation!.id })
+    await helperStake({ product: props.id!, variation: variation!.id })
+
     addToast({
       title: 'Success',
       description: 'Staked successfully',
@@ -59,7 +60,7 @@ export function ProductForm(props: ProductFormProps) {
         </Button>
       ),
     })
-  }
+  })
 
   return (
     <>
@@ -84,7 +85,7 @@ export function ProductForm(props: ProductFormProps) {
             </Select>
           ))}
         </If>
-        <Button type="submit" className="w-full" color="primary" size="lg">
+        <Button isLoading={loading} type="submit" className="w-full" color="primary" size="lg">
           STAKE NOW
         </Button>
       </Form>

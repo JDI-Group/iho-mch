@@ -75,13 +75,13 @@ export async function postOrder(body: Types.OrderCreateDto, query?: Types.PostOr
   return response.json() as Promise<Types.OrderDataDto>;
 }
 /**
- * @method put
+ * @method post
  * @tags Order
  */
-export async function putOrderPay(body: Types.OrderPutDto, config?: RequestInit) {
+export async function postOrderPay(body: Types.OrderPutDto, config?: RequestInit) {
   const response = await fetch(`${baseURL}/order/pay`, {
     headers: { "Content-Type": "application/json" },
-    method: "put",
+    method: "post",
     body: JSON.stringify(body),
     ...config,
   });

@@ -45,6 +45,7 @@ export const authentication = defineStore(
       async signOut() {
         this.status = 'unauthenticated'
         this.address = ''
+        this.token = ''
       },
     },
   },

@@ -1,13 +1,16 @@
+import type { Deferred } from '@/utils'
 import { FILE_PREFIX } from '@/config/constants'
-import { Errors, subscribeForTransaction } from '@hairy/ether-lib'
+import { createDeferred } from '@/utils'
+import { subscribeForTransaction } from '@/utils/wait'
+import { Errors, idprefix } from '@hairy/ether-lib'
 import {
   useFetchRequestIntercept,
   useFetchResponseIntercept,
   useStore,
   useWhenever,
 } from '@hairy/react-lib'
-import { cloneDeepWith, Deferred, jsonTryParse, riposte } from '@hairy/utils'
-import { addToast } from '@heroui/toast'
+import { cloneDeepWith, jsonTryParse, riposte } from '@hairy/utils'
+import { addToast, closeAll } from '@heroui/toast'
 import { useMount } from 'react-use'
 
 function customizer(value: any) {
@@ -23,8 +26,13 @@ export function BootstrapProvider(props: React.PropsWithChildren) {
   const fetchUser = useStoreUser()[1]
 
   useFetchRequestIntercept((fetch, input, init) => {
-    const headers = Object.assign({ token: authentication.token }, init?.headers)
-    return fetch(input, { ...init, headers })
+    if (typeof input === 'string' && input?.startsWith(process.env.NEXT_PUBLIC_SERVER_URL!)) {
+      const headers = Object.assign({ token: authentication.token }, init?.headers)
+      return fetch(input, { ...init, headers })
+    }
+    else {
+      return fetch(input, init)
+    }
   })
 
   useFetchResponseIntercept(async (response) => {
@@ -44,6 +52,7 @@ export function BootstrapProvider(props: React.PropsWithChildren) {
   useMount(() => {
     let deferred: Deferred<any> | undefined
     const messages: Record<string, string> = {
+      Canceled: 'You have rejected the action Please approve it to proceed',
       [Errors.ACTION_REJECTED]: ('You have rejected the action Please approve it to proceed'),
       [Errors.NUMERIC_FAULT]: ('A numeric operation caused an overflow or underflow'),
       [Errors.CALL_EXCEPTION]: ('The contract encountered an exception'),
@@ -51,21 +60,39 @@ export function BootstrapProvider(props: React.PropsWithChildren) {
       [Errors.NONCE_EXPIRED]: ('A transaction with the same nonce but a higher gas price was sent making this one obsolete'),
       [Errors.REPLACEMENT_UNDERPRICED]: ('This transaction was replaced by another one'),
     }
+
+    const errors: Record<string, string> = {
+      [idprefix('InvalidSignature()')]: ('Invalid signature'),
+      [idprefix('TransferFailed()')]: ('Insufficient Claim Pool'),
+      [idprefix('TransferUnauthorized()')]: ('Unauthorized Transfer'),
+      [idprefix('InvalidAccount()')]: ('Insufficient account'),
+    }
+
     subscribeForTransaction('before', () => {
-      deferred = new Deferred()
-      addToast({ promise: deferred, hideCloseButton: true })
+      deferred = createDeferred()
+      addToast({
+        promise: deferred,
+        description: 'Waiting for transaction confirmation',
+        hideCloseButton: true,
+      })
     })
-    subscribeForTransaction('after', () => deferred?.resolve(undefined))
+    subscribeForTransaction('after', () => {
+      deferred?.resolve(undefined)
+      closeAll()
+    })
     subscribeForTransaction('error', (error: any) => {
+      deferred?.reject()
+      closeAll()
       const description = riposte(
-        [!messages[error.code], messages[error.code]],
+        [!!errors[error?.data], errors[error?.data]],
+        [!!messages[error.code], messages[error.code]],
         [true, `An unknown error occurred`],
       )
       addToast({ title: 'Transaction Error', description, color: 'danger' })
     })
   })
+
   useWhenever(authentication.token, fetchUser, { immediate: true })
-  return (
-    props.children
-  )
+
+  return props.children
 }

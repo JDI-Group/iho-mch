@@ -74,9 +74,8 @@ export default function IndexPage() {
               <span>MINE</span>
             </div>
             <div className="flex gap-4 lg:gap-8">
-              <Button style={{ opacity: '0.5' }} className="font-bold tracking-[0.1rem]" disabled onPress={onNavigateProducts} radius="full" color="primary">
-                {/* GET FREE */}
-                COMING SOON
+              <Button className="font-bold tracking-[0.1rem]" onPress={onNavigateProducts} radius="full" color="primary">
+                GET FREE
               </Button>
 
               <Button className="font-bold tracking-[0.1rem]" onPress={onExploreIHO} radius="full" variant="ghost">
@@ -134,9 +133,8 @@ export default function IndexPage() {
           <HomeFloatProjectsUnline />
         </div>
         <div className="flex flex-col items-center gap-4">
-          <Button className="font-bold min-w-48 tracking-[0.1rem]" style={{ opacity: '0.5' }} disabled onPress={onNavigateProducts} radius="full" color="primary">
-            {/* GET FREE */}
-            COMING SOON
+          <Button className="font-bold min-w-48 tracking-[0.1rem]" onPress={onNavigateProducts} radius="full" color="primary">
+            GET FREE
           </Button>
           <Button className="font-bold min-w-48 tracking-[0.1rem]" onPress={onExploreIHO} radius="full" variant="ghost">
             LEARN MORE

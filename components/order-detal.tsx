@@ -1,6 +1,7 @@
 import type { Order } from '@/api/index.type'
-import { stake } from '@/services/stake'
-import { Case, Switch, useAsyncCallback } from '@hairy/react-lib'
+import { useAsyncCallbacks } from '@/hooks/use-async-callbacks'
+import { helperStake } from '@/services/stake'
+import { Case, Switch } from '@hairy/react-lib'
 import { Button } from '@heroui/button'
 import { Card, CardBody, CardFooter, CardHeader } from '@heroui/card'
 import { Divider } from '@heroui/divider'
@@ -13,9 +14,17 @@ export interface OrderDetailProps {
 }
 
 export function OrderDetail(props: OrderDetailProps) {
-  const [loading, stakeInOrder] = useAsyncCallback(
-    () => stake({ order: props.detail!.id }),
-  )
+  const [status, actions] = useAsyncCallbacks({
+    stake: async () => {
+      await helperStake({ order: props.detail!.id })
+      props.onChange?.('processing')
+    },
+    cancel: async () => {
+      await putOrderCancel({ order: props.detail!.id })
+      props.onChange?.('cancelled')
+    },
+  })
+
   return (
     <Card shadow="none">
       <CardHeader className="w-full pt-0 flex justify-between">
@@ -61,14 +70,13 @@ export function OrderDetail(props: OrderDetailProps) {
           <div>${props.detail?.total}</div>
         </div>
       </CardBody>
-      <CardFooter className="flex justify-end">
+      <CardFooter className="flex gap-3 justify-end">
         <Switch value={props.detail?.status}>
           <Case cond="pending">
-            <Button
-              isLoading={loading}
-              color="primary"
-              onPress={stakeInOrder}
-            >
+            <Button disabled={status.loading} isLoading={status.loadings.cancel} onPress={actions.cancel}>
+              Cancel
+            </Button>
+            <Button disabled={status.loading} isLoading={status.loadings.stake} color="primary" onPress={actions.stake}>
               Stake
             </Button>
           </Case>

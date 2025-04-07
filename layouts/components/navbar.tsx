@@ -23,7 +23,6 @@ import NextLink from 'next/link'
 import { useAccount } from 'wagmi'
 
 export function Navbar(props: NavbarProps) {
-  // eslint-disable-next-line unused-imports/no-unused-vars
   const openSettingsDialog = useOverlayInject(SettingsDialog)
   const { isConnected } = useAccount()
 
@@ -60,14 +59,14 @@ export function Navbar(props: NavbarProps) {
         className="hidden sm:flex basis-1/5 sm:basis-full"
         justify="end"
       >
-        {/* <NavbarItem className="hidden sm:flex">
+        <NavbarItem className="hidden sm:flex">
           <ConnectButton />
-        </NavbarItem> */}
-        {/* <NavbarItem className="hidden sm:flex">
+        </NavbarItem>
+        <NavbarItem className="hidden sm:flex">
           <div className="cursor-pointer" onClick={() => openSettingsDialog()}>
             <SettingIcon className="text-default-600" size={22} />
           </div>
-        </NavbarItem> */}
+        </NavbarItem>
         <NavbarItem className="hidden sm:flex gap-2">
           <ThemeSwitch />
         </NavbarItem>

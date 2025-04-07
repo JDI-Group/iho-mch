@@ -2,7 +2,7 @@ import type { NextConfig } from 'next'
 import AutoImport from 'unplugin-auto-import/webpack'
 
 const nextConfig: NextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false,
   typescript: {
     tsconfigPath: './tsconfig.app.json',
   },
