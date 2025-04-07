@@ -35,7 +35,8 @@ yarn-error.log*
 next-env.d.ts
 
 # harsta
-.harsta
+.harsta/artifacts
+.harsta/cache
 
 # common
 .env*

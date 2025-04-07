@@ -18,6 +18,14 @@ const config = defineConfig({
     settings: { evmVersion: 'shanghai' },
     version: '0.8.24',
   },
+  namedAccounts: {
+    deployer: {
+      default: 0,
+    },
+    verifier: {
+      default: 1,
+    },
+  },
   networks: {
     moonchain_geneva: {
       name: 'Moonchain Testnet',
@@ -46,14 +54,13 @@ const config = defineConfig({
     },
   },
   deployments: {
-    // IHO_Legacy: { kind: 'uups', args },
     IHO: { kind: 'uups', args },
   },
 })
 
 async function args({ getNamedAccount, getUnnamedAccount }: HarstaRuntimeEnvironment) {
   return [
-    await getNamedAccount('owner') || await getUnnamedAccount(),
+    await getNamedAccount('deployer') || await getUnnamedAccount(),
     await getNamedAccount('verifier') || await getUnnamedAccount(),
   ]
 }

@@ -1,0 +1,16 @@
+[
+  {
+    "inputs": [],
+    "name": "TransferFailed",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "TransferUnauthorized",
+    "type": "error"
+  },
+  {
+    "stateMutability": "payable",
+    "type": "receive"
+  }
+]
