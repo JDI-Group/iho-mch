@@ -96,9 +96,6 @@
     "unplugin-auto-import": "^19.1.2",
     "vitest": "^3.0.9"
   },
-  "simple-git-hooks": {
-    "pre-commit": "pnpm i --frozen-lockfile --ignore-scripts --offline && npx lint-staged"
-  },
   "lint-staged": {
     "*": "eslint --fix"
   }
