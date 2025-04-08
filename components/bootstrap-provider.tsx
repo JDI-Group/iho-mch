@@ -10,6 +10,7 @@ import {
 import { cloneDeepWith, Deferred, jsonTryParse, riposte } from '@hairy/utils'
 import { addToast, closeAll } from '@heroui/toast'
 import { useMount } from 'react-use'
+import { useDisconnect } from 'wagmi'
 
 function customizer(value: any) {
   if (typeof value === 'string'
@@ -21,11 +22,12 @@ function customizer(value: any) {
 
 export function BootstrapProvider(props: React.PropsWithChildren) {
   const authentication = useStore(store.authentication)
-  const fetchUser = useStoreUser()[1]
+  const [, fetchUser, resetUser] = useStoreUser()
+  const { disconnect } = useDisconnect()
 
   useFetchRequestIntercept((fetch, input, init) => {
     if (typeof input === 'string' && input?.startsWith(process.env.NEXT_PUBLIC_SERVER_URL!)) {
-      const headers = Object.assign({ token: authentication.token }, init?.headers)
+      const headers = Object.assign({ token: store.authentication.$state.token }, init?.headers)
       return fetch(input, { ...init, headers })
     }
     else {
@@ -90,6 +92,21 @@ export function BootstrapProvider(props: React.PropsWithChildren) {
   })
 
   useWhenever(authentication.token, fetchUser, { immediate: true })
+  useWhenever(
+    !authentication.token,
+    () => {
+      resetUser({
+        firstName: '',
+        lastName: '',
+        address: '',
+        region: undefined,
+        email: '',
+        phone: '',
+      })
+      disconnect()
+    },
+    { immediate: true },
+  )
 
   return props.children
 }

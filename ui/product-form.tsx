@@ -1,12 +1,13 @@
 import type { Attribute, Variation } from '@/api/index.type'
 import type { FormEvent } from 'react'
 import { helperStake } from '@/services/stake'
-import { If, useAsyncCallback, useWatch } from '@hairy/react-lib'
+import { If, useAsyncCallback, useStore, useWatch } from '@hairy/react-lib'
 import { Button } from '@heroui/button'
 import { Form } from '@heroui/form'
 import { Select, SelectItem } from '@heroui/select'
-import { addToast } from '@heroui/toast'
+import { addToast, closeAll } from '@heroui/toast'
 import { useOverlayInject } from '@overlastic/react'
+import { useAccount } from 'wagmi'
 
 export interface ProductFormProps {
   id?: number
@@ -19,6 +20,12 @@ export interface ProductFormProps {
 export function ProductForm(props: ProductFormProps) {
   const openSettingsDialog = useOverlayInject(SettingsDialog)
   const [data, setData] = useState<Record<string, any>>({})
+  const account = useAccount()
+  const authentication = useStore(store.authentication)
+  const isConnected = account.isConnected
+    && authentication.token
+    && authentication.status === 'authenticated'
+  const [user] = useStoreUser()
   const attributes = useMemo(
     () => {
       const attributes = props.attributes?.filter(attribute => attribute.variation) || []
@@ -45,8 +52,29 @@ export function ProductForm(props: ProductFormProps) {
 
   const [loading, onSubmit] = useAsyncCallback(async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-
-    await helperStake({ product: props.id!, variation: variation!.id })
+    if (!user.value?.address) {
+      addToast({
+        description: 'Delivery address not filled in, please complete the delivery address first',
+        endContent: (
+          <Button
+            isIconOnly
+            size="sm"
+            color="default"
+            onPress={() => {
+              openSettingsDialog({ target: 'address' })
+              closeAll()
+            }}
+          >
+            <MaterialSymbolsArrowForwardIosRounded />
+          </Button>
+        ),
+      })
+      return
+    }
+    await helperStake({
+      product: props.id!,
+      variation: variation!.id,
+    })
 
     addToast({
       title: 'Success',
@@ -86,9 +114,10 @@ export function ProductForm(props: ProductFormProps) {
             </Select>
           ))}
         </If>
-        <Button isLoading={loading} type="submit" className="w-full" color="primary" size="lg">
+        <Button disabled={!isConnected} isLoading={loading} type="submit" className={clsx('w-full', !isConnected && '!opacity-50')} color="primary" size="lg">
           STAKE NOW
         </Button>
+
       </Form>
     </>
   )

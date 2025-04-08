@@ -2,9 +2,8 @@ import type {
   NavbarProps,
 } from '@heroui/navbar'
 import { siteConfig } from '@/config/site'
-import { If } from '@hairy/react-lib'
+import { If, useStore } from '@hairy/react-lib'
 import { Button } from '@heroui/button'
-
 import { Link } from '@heroui/link'
 import {
   Navbar as HeroUINavbar,
@@ -24,8 +23,11 @@ import { useAccount } from 'wagmi'
 
 export function Navbar(props: NavbarProps) {
   const openSettingsDialog = useOverlayInject(SettingsDialog)
-  const { isConnected } = useAccount()
-
+  const account = useAccount()
+  const authentication = useStore(store.authentication)
+  const isConnected = account.isConnected
+    && authentication.token
+    && authentication.status === 'authenticated'
   return (
     <HeroUINavbar maxWidth="xl" position="sticky" {...props}>
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
@@ -44,6 +46,7 @@ export function Navbar(props: NavbarProps) {
                 className={clsx(
                   linkStyles({ color: 'foreground' }),
                   'data-[active=true]:text-primary data-[active=true]:font-medium',
+                  'flex gap-1 items-center',
                 )}
                 color="foreground"
                 href={item.href}
@@ -62,18 +65,19 @@ export function Navbar(props: NavbarProps) {
         <NavbarItem className="hidden sm:flex">
           <ConnectButton />
         </NavbarItem>
-        <NavbarItem className="hidden sm:flex">
-          <div className="cursor-pointer" onClick={() => openSettingsDialog()}>
-            <SettingIcon className="text-default-600" size={22} />
-          </div>
-        </NavbarItem>
+        <If cond={isConnected}>
+          <NavbarItem className="hidden sm:flex">
+            <div className="cursor-pointer" onClick={() => openSettingsDialog()}>
+              <SettingIcon className="text-default-600" size={22} />
+            </div>
+          </NavbarItem>
+        </If>
         <NavbarItem className="hidden sm:flex gap-2">
           <ThemeSwitch />
         </NavbarItem>
       </NavbarContent>
 
       <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
-        <ThemeSwitch />
         <If cond={isConnected}>
           <NavbarItem>
             <div className="rainbow-wrapper">
@@ -84,6 +88,7 @@ export function Navbar(props: NavbarProps) {
             </div>
           </NavbarItem>
         </If>
+        <ThemeSwitch />
         <NavbarMenuToggle />
       </NavbarContent>
 
@@ -92,11 +97,11 @@ export function Navbar(props: NavbarProps) {
           <NavbarMenuItem>
             <ConnectButton status={false} />
           </NavbarMenuItem>
-          <NavbarMenuItem>
-            <Button className="w-full">
-              Contact Us
+          <If cond={isConnected} tag={NavbarMenuItem} className="w-full">
+            <Button className="w-full" onPress={() => openSettingsDialog()}>
+              Settings
             </Button>
-          </NavbarMenuItem>
+          </If>
           {siteConfig.navMenuItems.map((item, index) => (
             <NavbarMenuItem key={`${item}-${index}`}>
               <Link

@@ -15,11 +15,16 @@ declare global {
   const HeartFilledIcon: typeof import('../components/icons')['HeartFilledIcon']
   const HomeFloatProjects: typeof import('../ui/home-float-projects')['HomeFloatProjects']
   const HomeFloatProjectsUnline: typeof import('../ui/home-float-projects-unline')['HomeFloatProjectsUnline']
+  const HugeiconsLinkSquare02: typeof import('../components/icons')['HugeiconsLinkSquare02']
+  const IconoirShoppingBag: typeof import('../components/icons')['IconoirShoppingBag']
   const InjectsProvider: typeof import('../components/injects-provider')['InjectsProvider']
   const InputPhoneNumber: typeof import('../components/form-shipping')['InputPhoneNumber']
+  const Lens: typeof import('../components/lens')['Lens']
   const Logo: typeof import('../components/icons')['Logo']
+  const LsiconUnlinkFilled: typeof import('../components/icons')['LsiconUnlinkFilled']
   const MaterialSymbolsArrowCoolDownRounded: typeof import('../components/icons')['MaterialSymbolsArrowCoolDownRounded']
   const MaterialSymbolsArrowForwardIosRounded: typeof import('../components/icons')['MaterialSymbolsArrowForwardIosRounded']
+  const MaterialSymbolsLightEyeTrackingRounded: typeof import('../components/icons')['MaterialSymbolsLightEyeTrackingRounded']
   const MenuIcon: typeof import('../components/icons')['MenuIcon']
   const MoonFilledIcon: typeof import('../components/icons')['MoonFilledIcon']
   const OrderDetail: typeof import('../components/order-detal')['OrderDetail']
@@ -35,6 +40,7 @@ declare global {
   const SettingIcon: typeof import('../components/icons')['SettingIcon']
   const SettingsDialog: typeof import('../components/settings-dialog')['SettingsDialog']
   const SunFilledIcon: typeof import('../components/icons')['SunFilledIcon']
+  const TablerExternalLink: typeof import('../components/icons')['TablerExternalLink']
   const ThemeSwitch: typeof import('../components/theme-switch')['ThemeSwitch']
   const TwitterIcon: typeof import('../components/icons')['TwitterIcon']
   const baseURL: typeof import('../api/index')['baseURL']
@@ -95,6 +101,9 @@ declare global {
   // @ts-ignore
   export type { FormShippingFields, InputPhoneNumberProps } from '../components/form-shipping'
   import('../components/form-shipping')
+  // @ts-ignore
+  export type { LensProps } from '../components/lens'
+  import('../components/lens')
   // @ts-ignore
   export type { OrderDetailProps } from '../components/order-detal'
   import('../components/order-detal')

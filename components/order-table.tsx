@@ -10,7 +10,6 @@ export interface OrderTableProps {
   next?: () => void
   more?: boolean
   data?: Order[]
-
 }
 
 export function OrderTable(props: OrderTableProps) {
@@ -32,42 +31,45 @@ export function OrderTable(props: OrderTableProps) {
   }
 
   return (
-    <Table
-      topContentPlacement="outside"
-      bottomContentPlacement="outside"
-      removeWrapper
-      className="min-h-72"
-      bottomContent={
-        more && !loading && (
-          <div className="flex w-full justify-center">
-            <Button isDisabled={loading} variant="flat" onPress={next}>
-              {loading && <Spinner color="white" size="sm" />}
-              Load More
-            </Button>
-          </div>
-        )
-      }
-      aria-label="Example static collection table"
-    >
-      <TableHeader>
-        <TableColumn key="id">ORDER</TableColumn>
-        <TableColumn key="date_modified">DATE</TableColumn>
-        <TableColumn key="status">STATUS</TableColumn>
-        <TableColumn key="total">TOTAL</TableColumn>
-        <TableColumn key="tracking">TRACKING</TableColumn>
-        <TableColumn key="actions">ACTIONS</TableColumn>
-      </TableHeader>
-      <TableBody
-        isLoading={loading}
-        items={data}
-        loadingContent={<Spinner label="Loading..." />}
+    <div className="w-full overflow-x-auto">
+      <Table
+        topContentPlacement="outside"
+        bottomContentPlacement="outside"
+        removeWrapper
+        className="min-h-72"
+        bottomContent={
+          more && !loading && (
+            <div className="flex w-full justify-center">
+              <Button isDisabled={loading} variant="flat" onPress={next}>
+                {loading && <Spinner color="white" size="sm" />}
+                Load More
+              </Button>
+            </div>
+          )
+        }
+        aria-label="Example static collection table"
       >
-        {item => (
-          <TableRow key={item.id}>
-            {key => <TableCell>{renderCell(key, item)}</TableCell>}
-          </TableRow>
-        )}
-      </TableBody>
-    </Table>
+        <TableHeader>
+          <TableColumn key="id">ORDER</TableColumn>
+          <TableColumn minWidth={180} key="date_modified">DATE</TableColumn>
+          <TableColumn key="status">STATUS</TableColumn>
+          <TableColumn key="total">TOTAL</TableColumn>
+          <TableColumn key="tracking">TRACKING</TableColumn>
+          <TableColumn key="actions">ACTIONS</TableColumn>
+        </TableHeader>
+        <TableBody
+          isLoading={loading}
+          items={data}
+          loadingContent={<Spinner label="Loading..." />}
+          emptyContent="No rows to display."
+        >
+          {item => (
+            <TableRow key={item.id}>
+              {key => <TableCell>{renderCell(key, item)}</TableCell>}
+            </TableRow>
+          )}
+        </TableBody>
+      </Table>
+    </div>
   )
 }
