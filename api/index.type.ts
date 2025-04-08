@@ -309,16 +309,8 @@ export interface GetOrderQuery {
   offset?: number;
   limit?: number;
   status?: string[];
-  page?: number;
-  offset?: number;
-  limit?: number;
-  status?: string[];
 }
 export interface PostOrderQuery {
-  page?: number;
-  offset?: number;
-  limit?: number;
-  status?: string[];
   page?: number;
   offset?: number;
   limit?: number;
