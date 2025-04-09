@@ -1,4 +1,4 @@
-import type { Order } from '@/apis/index.typee'
+import type { Order } from '@/apis/index.type'
 import { useAsyncCallbacks } from '@/hooks/use-async-callbacks'
 import { helperStake } from '@/services/stake'
 import { Case, Switch } from '@hairy/react-lib'

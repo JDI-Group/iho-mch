@@ -1,4 +1,4 @@
-import type { Order } from '@/apis/index.typee'
+import type { Order } from '@/apis/index.type'
 import { getOrder } from '@/apis'
 import { Else, If, Then, useAsyncCallback } from '@hairy/react-lib'
 import { useMount } from 'react-use'
