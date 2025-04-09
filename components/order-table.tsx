@@ -1,4 +1,4 @@
-import type { Order } from '@/api/index.type'
+import type { Order } from '@/apis/index.typee'
 import { Button } from '@heroui/button'
 import { Link } from '@heroui/link'
 import { Spinner } from '@heroui/spinner'

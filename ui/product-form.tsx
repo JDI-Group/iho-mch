@@ -1,4 +1,4 @@
-import type { Attribute, Variation } from '@/api/index.type'
+import type { Attribute, Variation } from '@/apis/index.typee'
 import type { FormEvent } from 'react'
 import { helperStake } from '@/services/stake'
 import { If, useAsyncCallback, useStore, useWatch } from '@hairy/react-lib'

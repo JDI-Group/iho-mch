@@ -5,7 +5,7 @@ export default defineConfig({
   pipeline: 'swag-fetch-ts',
   baseURL: 'process.env.NEXT_PUBLIC_SERVER_URL',
   output: {
-    main: 'api/index.ts',
-    type: 'api/index.type.ts',
+    main: 'apis/index.ts',
+    type: 'apis/index.type.ts',
   },
 })

@@ -1,4 +1,4 @@
-import type { OrderDataDto } from '@/api/index.type'
+import type { OrderDataDto } from '@/apis/index.typee'
 import { wait } from '@hairy/ether-lib'
 import { contracts } from '@harsta/client'
 import { addToast } from '@heroui/toast'

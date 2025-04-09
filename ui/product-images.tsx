@@ -1,4 +1,4 @@
-import type { Image as ImageType } from '@/api/index.type'
+import type { Image as ImageType } from '@/apis/index.typee'
 import type { PropsWithDetailedHTML } from '@hairy/react-lib'
 import { Image } from '@heroui/image'
 import { Image as AntImage } from 'antd'
