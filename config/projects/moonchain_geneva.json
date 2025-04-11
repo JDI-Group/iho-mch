@@ -1,10 +1,10 @@
 [
   {
-    "name": "BlueBerry AI - WearFI",
+    "name": "BlueBerry AI - WearFI（Test）",
     "description": "Unlock wellness at your fingertips. Get your Blueberry Ring now and start your journey to better health.",
-    "target": 10,
     "expire": 31536000,
-    "limit": 1,
+    "target": 10,
+    "limit": 10,
     "product": 22291
   }
 ]
