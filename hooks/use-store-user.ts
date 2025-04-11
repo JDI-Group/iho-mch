@@ -12,5 +12,14 @@ export const useStoreUser = defineAsyncStorePlain(
       phone: customer.billing?.phone,
     }
   },
-  {},
+  {
+    initial: {
+      firstName: '',
+      lastName: '',
+      address: '',
+      region: undefined,
+      email: '',
+      phone: '',
+    },
+  },
 )
