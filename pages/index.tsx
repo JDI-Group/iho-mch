@@ -58,7 +58,7 @@ export default function IndexPage() {
         whileInView="visible"
         viewport={{ once: true }}
       >
-        <div className=" flex h-full justify-center gap-[100px] items-center">
+        <div className="container flex h-full justify-center gap-[100px] items-center">
           <div className="flex-1 flex flex-col items-center relative z-10 gap-8 text-center">
             <div className="text-3xl lg:text-5xl font-bold">
               INITIAL HARDWARE OFFERING (IHO)
