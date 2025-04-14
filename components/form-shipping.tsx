@@ -1,6 +1,6 @@
 import type { FormInstance, FormProps, InputProps } from 'antd'
 import { regions } from '@/config/regions'
-import { useAsyncCallback, useWhenever } from '@hairy/react-lib'
+import { useAsyncCallback, useStore, useWhenever } from '@hairy/react-lib'
 import { isEqual } from '@hairy/utils'
 import { Button } from '@heroui/button'
 import { Form, Input, Select, Spin } from 'antd'
@@ -16,7 +16,7 @@ export interface FormShippingFields {
 }
 
 export function FormShipping() {
-  const [{ value: user, loading },, resetUser] = useStoreUser()
+  const { value: user, loading } = useStore(store.user)
   const [loadFinish, onFinish] = useAsyncCallback(async (_values: Required<FormShippingFields>) => {
     const values = { ..._values }
 
@@ -49,7 +49,7 @@ export function FormShipping() {
       billing: address,
     })
     const customer = await response.json()
-    resetUser({
+    store.user.refresh({
       firstName: customer.first_name,
       lastName: customer.last_name,
       address: customer.billing?.address_1,

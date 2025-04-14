@@ -1,6 +1,6 @@
-import { defineAsyncStorePlain } from '@hairy/react-lib'
+import { defineAsyncStore } from '@hairy/react-lib'
 
-export const useStoreUser = defineAsyncStorePlain(
+export const user = defineAsyncStore(
   async () => {
     const customer = await getUser()
     return {

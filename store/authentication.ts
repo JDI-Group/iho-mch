@@ -49,5 +49,5 @@ export const authentication = defineStore(
       },
     },
   },
-  { persistant: 'authentication' },
+  { persist: 'authentication' },
 )

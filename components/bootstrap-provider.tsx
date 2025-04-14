@@ -22,7 +22,7 @@ function customizer(value: any) {
 
 export function BootstrapProvider(props: React.PropsWithChildren) {
   const authentication = useStore(store.authentication)
-  const [, fetchUser, disconnectUser] = useStoreUser()
+
   const { disconnect } = useDisconnect()
 
   useFetchRequestIntercept((fetch, input, init) => {
@@ -91,11 +91,11 @@ export function BootstrapProvider(props: React.PropsWithChildren) {
     })
   })
 
-  useWhenever(authentication.token, fetchUser, { immediate: true })
+  useWhenever(authentication.token, store.user.fetch, { immediate: true })
   useWhenever(
     !authentication.token,
     () => {
-      disconnectUser()
+      store.user.refresh()
       disconnect()
     },
     { immediate: true },

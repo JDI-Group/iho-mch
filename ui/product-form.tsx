@@ -25,7 +25,7 @@ export function ProductForm(props: ProductFormProps) {
   const isConnected = account.isConnected
     && authentication.token
     && authentication.status === 'authenticated'
-  const [user] = useStoreUser()
+  const { value: user } = useStore(store.user)
   const attributes = useMemo(
     () => {
       const attributes = props.attributes?.filter(attribute => attribute.variation) || []
@@ -52,7 +52,7 @@ export function ProductForm(props: ProductFormProps) {
 
   const [loading, onSubmit] = useAsyncCallback(async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    if (!user.value?.address) {
+    if (!user?.address) {
       addToast({
         description: 'Delivery address not filled in, please complete the delivery address first',
         endContent: (
