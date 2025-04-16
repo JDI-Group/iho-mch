@@ -23,6 +23,8 @@ export function OrderTable(props: OrderTableProps) {
             View
           </Link>
         )
+      case 'date_modified':
+        return formatDate(value)
       case 'total':
         return <span>${value}</span>
       default:

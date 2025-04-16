@@ -48,6 +48,8 @@ declare global {
   const container: typeof import('../components/primitives')['container']
   const createRef: typeof import('react')['createRef']
   const findMobilePrefix: typeof import('../components/form-shipping.utils')['findMobilePrefix']
+  const format: typeof import('../utils/formatDate')['format']
+  const formatDate: typeof import('../utils/formatDate')['formatDate']
   const forwardRef: typeof import('react')['forwardRef']
   const getOrder: typeof import('../apis/index')['getOrder']
   const getProduct: typeof import('../apis/index')['getProduct']
