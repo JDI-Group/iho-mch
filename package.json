@@ -21,9 +21,9 @@
     "prepare": "simple-git-hooks"
   },
   "dependencies": {
-    "@hairy/ether-lib": "^1.22.0",
-    "@hairy/react-lib": "^1.22.0",
-    "@hairy/utils": "^1.22.0",
+    "@hairy/ether-lib": "^1.23.0",
+    "@hairy/react-lib": "^1.23.0",
+    "@hairy/utils": "^1.23.0",
     "@harsta/client": "^0.10.6",
     "@heroui/accordion": "^2.2.13",
     "@heroui/button": "2.2.16",
