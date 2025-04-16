@@ -33,6 +33,11 @@ const accordions = [
     question: 'How do the locks work on my wallet?',
     answer: 'Moonchain locks are securely stored in your wallet, ensuring peace of mind. We leverage Ethereum smart contracts, which are fully auditable and transparent. We invite everyone to review the contracts themselves—rest assured, they do exactly what they promise. At Moonchain, transparency is our foundation, and we stand by it fully. Don\'t miss the opportunity to be part of a fully transparent ecosystem.',
   },
+  {
+    value: 'item-6',
+    question: 'What is the lock-in period if I lock Moonchain to receive free hardware, and can I withdraw my tokens during this time?',
+    answer: 'When you lock your Moonchain tokens to receive free mining hardware, your tokens are subject to a 1-year lock-in period. During this 1-year period, you cannot withdraw or transfer your locked tokens for any reason. This lock is required as part of the agreement for receiving the free hardware. After the 1-year period ends, your tokens will become available for withdrawal or transfer as usual.',
+  },
 ]
 
 export default function IndexPage() {
