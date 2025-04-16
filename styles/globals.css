@@ -33,3 +33,7 @@ body {
   font-weight: 400 !important;
   @apply text-default-900 !important;
 }
+
+:root {
+  --rk-fonts-body: inherit !important;
+}

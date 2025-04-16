@@ -16,7 +16,6 @@ import {
 } from '@heroui/navbar'
 import { link as linkStyles } from '@heroui/theme'
 import { useOverlayInject } from '@overlastic/react'
-import { ConnectButton as RainbowConnectButton } from '@rainbow-me/rainbowkit'
 
 import NextLink from 'next/link'
 import { useAccount } from 'wagmi'
@@ -34,7 +33,7 @@ export function Navbar(props: NavbarProps) {
         <NavbarBrand className="gap-3 max-w-fit">
           <NextLink className="flex justify-start items-center gap-1" href="/">
             {/* <Logo /> */}
-            <span className="font-spacex mt-1">
+            <span className="font-spacex mt-1 text-xs sm:text-base">
               MOONCHAIN
             </span>
           </NextLink>
@@ -80,12 +79,7 @@ export function Navbar(props: NavbarProps) {
       <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
         <If cond={isConnected}>
           <NavbarItem>
-            <div className="rainbow-wrapper">
-              <RainbowConnectButton
-                chainStatus={{ smallScreen: 'none' }}
-                accountStatus={{ smallScreen: 'avatar' }}
-              />
-            </div>
+            <ConnectButton />
           </NavbarItem>
         </If>
         <ThemeSwitch />
