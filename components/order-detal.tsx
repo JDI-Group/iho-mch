@@ -35,7 +35,7 @@ export function OrderDetail(props: OrderDetailProps) {
           </span>
           <span> was placed on </span>
           <span className="text-warning">
-            {props.detail?.date_created}
+            {formatDate(props.detail?.date_created)}
           </span>
           <span> and is currently </span>
           <span className="text-warning">
