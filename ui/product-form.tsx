@@ -71,24 +71,46 @@ export function ProductForm(props: ProductFormProps) {
       })
       return
     }
-    await helperStake({
-      product: props.id!,
-      variation: variation!.id,
-    })
-
-    addToast({
-      title: 'Success',
-      description: 'Staked successfully',
-      color: 'success',
-      endContent: (
-        <Button
-          color="primary"
-          onPress={() => openSettingsDialog({ target: 'orders' })}
-        >
-          View
-        </Button>
-      ),
-    })
+    try {
+      await helperStake({
+        product: props.id!,
+        variation: variation!.id,
+      })
+      addToast({
+        title: 'Success',
+        description: 'Staked successfully',
+        color: 'success',
+        endContent: (
+          <Button
+            color="primary"
+            onPress={() => openSettingsDialog({ target: 'orders' })}
+          >
+            View
+          </Button>
+        ),
+      })
+    }
+    catch (error: any) {
+      if (error.code === 'ACTION_REJECTED') {
+        addToast({
+          description: 'Created an order but did not proceed to the next step. Please redo the operation on the order page',
+          color: 'warning',
+          endContent: (
+            <Button
+              isIconOnly
+              size="sm"
+              color="warning"
+              onPress={() => {
+                openSettingsDialog({ target: 'orders' })
+                closeAll()
+              }}
+            >
+              <MaterialSymbolsArrowForwardIosRounded />
+            </Button>
+          ),
+        })
+      }
+    }
   })
 
   return (

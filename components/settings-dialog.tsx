@@ -1,4 +1,5 @@
 import { settings } from '@/config/settings'
+import { Else, If, Then } from '@hairy/react-lib'
 import { Modal, ModalBody, ModalContent, ModalHeader } from '@heroui/modal'
 import { Tab, Tabs } from '@heroui/tabs'
 import { useExtendOverlay } from '@overlastic/react'
@@ -11,7 +12,7 @@ export function SettingsDialog(props: SettingsDialogProps) {
   const { visible, resolve } = useExtendOverlay({
     duration: 500,
   })
-  const [current, setCurrent] = useState<typeof settings[number]>()
+  const current = settings.find(item => item.key === props.target)
 
   return (
     <Modal
@@ -19,25 +20,32 @@ export function SettingsDialog(props: SettingsDialogProps) {
       isDismissable={false}
       isOpen={visible}
       onOpenChange={resolve}
-      size={current?.width || 'lg'}
+      size="5xl"
     >
       <ModalContent>
         <ModalHeader className="flex flex-col gap-1">
-          Settings
+          {current ? current.title : 'Settings'}
         </ModalHeader>
         <ModalBody>
-          <Tabs
-            onSelectionChange={key => setCurrent(settings.find(item => item.key === key))}
-            selectedKey={props.target}
-            aria-label="Options"
-            variant="underlined"
-          >
-            {settings.map(item => (
-              <Tab key={item.key} title={item.title}>
-                {item.child()}
-              </Tab>
-            ))}
-          </Tabs>
+          <If cond={!current}>
+            <Then>
+              <Tabs
+                selectedKey={props.target}
+                aria-label="Options"
+                variant="underlined"
+              >
+                {settings.map(item => (
+                  <Tab key={item.key} title={item.title}>
+                    {item.child()}
+                  </Tab>
+                ))}
+              </Tabs>
+            </Then>
+            <Else>
+              {current?.child()}
+            </Else>
+          </If>
+
         </ModalBody>
       </ModalContent>
     </Modal>
