@@ -26,6 +26,7 @@ declare global {
   const MaterialSymbolsArrowForwardIosRounded: typeof import('../components/icons')['MaterialSymbolsArrowForwardIosRounded']
   const MaterialSymbolsLightEyeTrackingRounded: typeof import('../components/icons')['MaterialSymbolsLightEyeTrackingRounded']
   const MenuIcon: typeof import('../components/icons')['MenuIcon']
+  const MingcuteWarningFill: typeof import('../components/icons')['MingcuteWarningFill']
   const MoonFilledIcon: typeof import('../components/icons')['MoonFilledIcon']
   const OrderDetail: typeof import('../components/order-detal')['OrderDetail']
   const OrderPreview: typeof import('../components/order-preview')['OrderPreview']
