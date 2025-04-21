@@ -53,6 +53,7 @@ export function ProductForm(props: ProductFormProps) {
   const [loading, onSubmit] = useAsyncCallback(async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     if (!user?.address) {
+      closeAll()
       addToast({
         description: 'Delivery address not filled in, please complete the delivery address first',
         endContent: (
