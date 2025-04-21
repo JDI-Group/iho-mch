@@ -217,7 +217,7 @@ export interface Order {
   cart_hash: string
   number: string
   meta_data: string[]
-  line_items: string[]
+  line_items: any[]
   tax_lines: string[]
   shipping_lines: string[]
   fee_lines: string[]
