@@ -71,6 +71,9 @@ export function ProductForm(props: ProductFormProps) {
       })
       return
     }
+
+    await verifyInsufficientFunds(props.price!)
+
     try {
       await helperStake({
         product: props.id!,
