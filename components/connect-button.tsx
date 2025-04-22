@@ -23,15 +23,15 @@ export function ConnectButton({ status = true }: ConnectButtonProps) {
         // Note: If your app doesn't use authentication, you
         // can remove all 'authenticationStatus' checks
           const ready = mounted && authenticationStatus !== 'loading'
-          const connected = ready && account && chain && (!authenticationStatus
-            || authenticationStatus === 'authenticated')
+          const connected = ready && account && chain && (!authenticationStatus || authenticationStatus === 'authenticated')
+          const connecting = isConnecting || connectModalOpen || authenticationStatus === 'loading'
           if (!connected) {
             return (
               <Button
                 onPress={openConnectModal}
                 className="w-full dark:bg-gray-200 dark:text-black"
                 color="primary"
-                isLoading={isConnecting || connectModalOpen}
+                isLoading={connecting}
               >
                 Login
               </Button>
