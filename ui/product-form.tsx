@@ -83,25 +83,8 @@ export function ProductForm(props: ProductFormProps) {
       })
     }
     catch (error: any) {
-      if (error.code === 'ACTION_REJECTED') {
-        addToast({
-          description: 'Created an order but did not proceed to the next step. Please redo the operation on the order page',
-          color: 'warning',
-          endContent: (
-            <Button
-              isIconOnly
-              size="sm"
-              color="warning"
-              onPress={() => {
-                openSettingsDialog({ target: 'orders' })
-                closeAll()
-              }}
-            >
-              <MaterialSymbolsArrowForwardIosRounded />
-            </Button>
-          ),
-        })
-      }
+      if (error.code === 'ACTION_REJECTED')
+        catchActionRejection()
     }
   })
 
@@ -132,6 +115,26 @@ export function ProductForm(props: ProductFormProps) {
       openConnectModal?.()
       throw new Error('Please connect your wallet first')
     }
+  }
+
+  async function catchActionRejection() {
+    addToast({
+      description: 'Created an order but did not proceed to the next step. Please redo the operation on the order page',
+      color: 'warning',
+      endContent: (
+        <Button
+          isIconOnly
+          size="sm"
+          color="warning"
+          onPress={() => {
+            openSettingsDialog({ target: 'orders' })
+            closeAll()
+          }}
+        >
+          <MaterialSymbolsArrowForwardIosRounded />
+        </Button>
+      ),
+    })
   }
 
   return (
