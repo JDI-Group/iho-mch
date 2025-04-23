@@ -53,17 +53,24 @@ export function OrderDetail(props: OrderDetailProps) {
         <div className="flex justify-between">
           <div className="font-bold">Receiving address:</div>
           <span>
-            test test
-            test
-            test
-            test, WY 80132
-            6565656
-            jickey0505@hotmail.com
+            {[
+              props.detail?.shipping.address_1,
+              props.detail?.shipping.address_2,
+              props.detail?.shipping.first_name,
+              props.detail?.shipping.last_name,
+              props.detail?.shipping.phone,
+              props.detail?.shipping.email,
+              props.detail?.shipping.postcode,
+            ].join(' ')}
           </span>
         </div>
         <div className="flex justify-between">
           <div className="font-bold">Products</div>
-          <div className="ml-2">BlueBerry AI - WearFI (IHO) - 10</div>
+          <div className="ml-2">
+            {props.detail?.line_items.map(item => (
+              <div key={item.id}>{item.name}</div>
+            ))}
+          </div>
         </div>
         <div className="flex justify-between">
           <div className="font-bold">Total</div>
