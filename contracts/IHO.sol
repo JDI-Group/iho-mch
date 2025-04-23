@@ -84,7 +84,6 @@ contract IHO is VerifiableUpgradeable, BidirectionalTransfer, UUPSUpgradeable, O
 
     uint256 expireTime = block.timestamp + expire;
 
-    transfers(msg.sender, address(this), coins);
 
     projects[pid].quantity += 1;
 
@@ -98,10 +97,12 @@ contract IHO is VerifiableUpgradeable, BidirectionalTransfer, UUPSUpgradeable, O
 
     emit StakeConfirmed(msg.sender, pid, oid, stakes[pid][oid], int(block.number), block.timestamp);
 
-    if (projects[pid].quantity >= projects[pid].target) {
+    if (!projects[pid].confirmed && projects[pid].quantity >= projects[pid].target) {
       projects[pid].confirmed = true;
       emit ProjectConfirmed(pid, int(block.number), block.timestamp);
     }
+
+    transfers(msg.sender, address(this), coins);
   }
 
   function getStake(uint256 pid, uint256 oid) external view returns (Stake memory) {
@@ -116,9 +117,9 @@ contract IHO is VerifiableUpgradeable, BidirectionalTransfer, UUPSUpgradeable, O
     require(stakes[pid][oid].expire < block.timestamp, "Stake not expired");
     require(!stakes[pid][oid].claimed, "Stake already claimed");
 
-    transfers(address(this), msg.sender, stakes[pid][oid].coins);
-
     stakes[pid][oid].claimed = true;
+
+    transfers(address(this), msg.sender, stakes[pid][oid].coins);
   }
 
   function withdraw(address token , uint256 amount) external onlyOwner {
