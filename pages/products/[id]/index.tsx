@@ -30,12 +30,13 @@ function Page() {
             </div>
             <div className="flex flex-1 flex-col">
               <ProductDescription
-                limit={detail?.limit}
                 description={detail?.short_description}
-                price={price || detail?.ether}
-                name={detail?.name}
                 orders={detail?.orders}
                 target={detail?.target}
+                limit={detail?.limit}
+                price={price || detail?.ether}
+                ready={detail?.ready}
+                name={detail?.name}
               />
               <ProductForm
                 id={detail?.id}

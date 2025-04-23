@@ -24,6 +24,7 @@ declare global {
   const LsiconUnlinkFilled: typeof import('../components/icons')['LsiconUnlinkFilled']
   const MaterialSymbolsArrowCoolDownRounded: typeof import('../components/icons')['MaterialSymbolsArrowCoolDownRounded']
   const MaterialSymbolsArrowForwardIosRounded: typeof import('../components/icons')['MaterialSymbolsArrowForwardIosRounded']
+  const MaterialSymbolsLightCheckCircleRounded: typeof import('../components/icons')['MaterialSymbolsLightCheckCircleRounded']
   const MaterialSymbolsLightEyeTrackingRounded: typeof import('../components/icons')['MaterialSymbolsLightEyeTrackingRounded']
   const MenuIcon: typeof import('../components/icons')['MenuIcon']
   const MingcuteWarningFill: typeof import('../components/icons')['MingcuteWarningFill']

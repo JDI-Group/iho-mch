@@ -52,6 +52,7 @@ export interface Metadata {
 export interface Product {
   id: number
   ether: string
+  ready: boolean
   orders: number
   target: number
   limit: number
@@ -185,6 +186,24 @@ export interface Address {
   email: string
   phone: string
 }
+export interface Lineitem {
+  id: number
+  name: string
+  product_id: number
+  variation_id: number
+  quantity: number
+  tax_class: string
+  subtotal: string
+  subtotal_tax: string
+  total: string
+  total_tax: string
+  taxes: string[]
+  meta_data: Metadata[]
+  sku: string
+  price: number
+  image: Image
+  parent_name: string
+}
 export interface Order {
   id: number
   parent_id: number
@@ -217,7 +236,7 @@ export interface Order {
   cart_hash: string
   number: string
   meta_data: string[]
-  line_items: string[]
+  line_items: Lineitem[]
   tax_lines: string[]
   shipping_lines: string[]
   fee_lines: string[]
