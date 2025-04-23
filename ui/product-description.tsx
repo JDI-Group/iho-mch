@@ -1,4 +1,5 @@
 import { formatEther } from '@hairy/ether-lib'
+import { If, Then } from '@hairy/react-lib'
 import { Progress } from '@heroui/progress'
 import { useOverlayInject } from '@overlastic/react'
 
@@ -7,6 +8,7 @@ export interface ProductDescriptionProps {
   orders?: number
   target?: number
   price?: string
+  ready?: boolean
   limit?: number
   name?: string
 }
@@ -22,6 +24,11 @@ export function ProductDescription(props: ProductDescriptionProps) {
       <p className="mb-2 bg-tag bg-clip-text text-transparent uppercase font-bold">
         Virtual Reality Reimagined
       </p>
+      <If cond={props.ready}>
+        <Then tag="p" className="mb-2 text-default-500 text-sm">
+          <span className="text-green-500">Immediate Delivery</span>
+        </Then>
+      </If>
       <p className="mb-4">
         <span>Get it</span>
         <span className="font-bold"> FREE </span>
