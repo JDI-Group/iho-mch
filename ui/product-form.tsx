@@ -7,6 +7,7 @@ import { Form } from '@heroui/form'
 import { Select, SelectItem } from '@heroui/select'
 import { addToast, closeAll } from '@heroui/toast'
 import { useOverlayInject } from '@overlastic/react'
+import { useConnectModal } from '@rainbow-me/rainbowkit'
 import { useAccount } from 'wagmi'
 
 export interface ProductFormProps {
@@ -19,13 +20,18 @@ export interface ProductFormProps {
 
 export function ProductForm(props: ProductFormProps) {
   const openSettingsDialog = useOverlayInject(SettingsDialog)
+  const { openConnectModal } = useConnectModal()
   const [data, setData] = useState<Record<string, any>>({})
   const account = useAccount()
   const authentication = useStore(store.authentication)
+  const { isConnecting } = useAccount()
+  const { value: user } = useStore(store.user)
+
   const isConnected = account.isConnected
     && authentication.token
     && authentication.status === 'authenticated'
-  const { value: user } = useStore(store.user)
+    && !isConnecting
+
   const attributes = useMemo(
     () => {
       const attributes = props.attributes?.filter(attribute => attribute.variation) || []
@@ -52,25 +58,11 @@ export function ProductForm(props: ProductFormProps) {
 
   const [loading, onSubmit] = useAsyncCallback(async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    if (!user?.address) {
-      addToast({
-        description: 'Delivery address not filled in, please complete the delivery address first',
-        endContent: (
-          <Button
-            isIconOnly
-            size="sm"
-            color="default"
-            onPress={() => {
-              openSettingsDialog({ target: 'address' })
-              closeAll()
-            }}
-          >
-            <MaterialSymbolsArrowForwardIosRounded />
-          </Button>
-        ),
-      })
-      return
-    }
+
+    await verifyAccountConnect()
+    await verifyShippingAddress(user?.address)
+    await verifyInsufficientFunds(props.price!)
+
     try {
       await helperStake({
         product: props.id!,
@@ -91,27 +83,59 @@ export function ProductForm(props: ProductFormProps) {
       })
     }
     catch (error: any) {
-      if (error.code === 'ACTION_REJECTED') {
-        addToast({
-          description: 'Created an order but did not proceed to the next step. Please redo the operation on the order page',
-          color: 'warning',
-          endContent: (
-            <Button
-              isIconOnly
-              size="sm"
-              color="warning"
-              onPress={() => {
-                openSettingsDialog({ target: 'orders' })
-                closeAll()
-              }}
-            >
-              <MaterialSymbolsArrowForwardIosRounded />
-            </Button>
-          ),
-        })
-      }
+      if (error.code === 'ACTION_REJECTED')
+        catchActionRejection()
     }
   })
+
+  async function verifyShippingAddress(address?: string) {
+    if (!address) {
+      addToast({
+        description: 'Delivery address not filled in, please complete the delivery address first',
+        endContent: (
+          <Button
+            isIconOnly
+            size="sm"
+            color="default"
+            onPress={() => {
+              openSettingsDialog({ target: 'address' })
+              closeAll()
+            }}
+          >
+            <MaterialSymbolsArrowForwardIosRounded />
+          </Button>
+        ),
+      })
+      throw new Error('Delivery address not filled in')
+    }
+  }
+
+  async function verifyAccountConnect() {
+    if (!isConnected) {
+      openConnectModal?.()
+      throw new Error('Please connect your wallet first')
+    }
+  }
+
+  async function catchActionRejection() {
+    addToast({
+      description: 'Created an order but did not proceed to the next step. Please redo the operation on the order page',
+      color: 'warning',
+      endContent: (
+        <Button
+          isIconOnly
+          size="sm"
+          color="warning"
+          onPress={() => {
+            openSettingsDialog({ target: 'orders' })
+            closeAll()
+          }}
+        >
+          <MaterialSymbolsArrowForwardIosRounded />
+        </Button>
+      ),
+    })
+  }
 
   return (
     <>
@@ -136,7 +160,13 @@ export function ProductForm(props: ProductFormProps) {
             </Select>
           ))}
         </If>
-        <Button disabled={!isConnected} isLoading={loading} type="submit" className={clsx('w-full', !isConnected && '!opacity-50')} color="primary" size="lg">
+        <Button
+          isLoading={loading}
+          type="submit"
+          className="w-full"
+          color="primary"
+          size="lg"
+        >
           STAKE NOW
         </Button>
 
