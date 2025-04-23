@@ -63,7 +63,7 @@ export default function IndexPage() {
         whileInView="visible"
         viewport={{ once: true }}
       >
-        <div className="container flex h-full justify-center gap-[100px] items-center">
+        <div className="mx-auto container flex h-full justify-center gap-[100px] items-center">
           <div className="flex-1 flex flex-col items-center relative z-10 gap-8 text-center">
             <div className="text-3xl lg:text-5xl font-bold">
               INITIAL HARDWARE OFFERING (IHO)
@@ -149,7 +149,7 @@ export default function IndexPage() {
 
       <section className="flex w-full justify-center lg:justify-between flex-col lg:flex-row items-center gap-8 lg:gap-12 py-12 h-[60vh] lg:h-[80vh] font-bold relative">
         <motion.div
-          className={container({ className: 'relative z-10' })}
+          className={container({ className: 'relative z-10 w-full overflow-hidden' })}
           variants={variants.fadeOpacity}
           initial="hidden"
           whileInView="visible"
@@ -174,7 +174,6 @@ export default function IndexPage() {
               },
             ]}
           />
-
         </motion.div>
         <video style={{ maskImage: 'linear-gradient(to bottom, transparent, black 50%, transparent)' }} className="hidden dark:block absolute top-0 left-0 w-full h-full object-cover opacity-80" autoPlay loop muted preload="auto" playsInline>
           <source src="https://thegraph.com/_next/static/media/footer.04cca2ee.mp4" type="video/mp4" />
