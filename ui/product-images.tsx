@@ -2,7 +2,6 @@ import type { Image as ImageType } from '@/apis/index.type'
 import type { PropsWithDetailedHTML } from '@hairy/react-lib'
 import { Image } from '@heroui/image'
 import { Image as AntImage } from 'antd'
-import { AnimatePresence } from 'framer-motion'
 
 export interface ProductImagesProps extends PropsWithDetailedHTML {
   name?: string
@@ -18,33 +17,27 @@ export function ProductImages({ name, images, className }: ProductImagesProps) {
         {name}
       </h1>
       <AntImage.PreviewGroup
-        items={images?.map(image => image.src)}
+        items={[current?.src as string]}
         preview={{
-          visible,
-          src: current?.src,
           onVisibleChange: value => setVisible(value),
+          src: current?.src,
+          visible,
         }}
       />
       <Lens>
         <div className="relative aspect-square w-full h-full overflow-hidden">
-          <AnimatePresence>
-            <motion.div
-              className="w-full h-full border border-default-50"
-              initial={{ x: 300, opacity: 0 }}
-              animate={{ x: 0, opacity: 1, transition: { delay: 0.5 } }}
-              exit={{ x: -300, opacity: 0 }}
-              key={current?.src}
-              onClick={() => setVisible(true)}
-            >
-              <Image
-                classNames={{ wrapper: 'h-full' }}
-                className="w-full h-full object-cover z-0 cursor-none"
-                width="100%"
-                height="100%"
-                src={current?.src}
-              />
-            </motion.div>
-          </AnimatePresence>
+          <div
+            className="w-full h-full border border-default-50"
+            onClick={() => setVisible(true)}
+          >
+            <Image
+              classNames={{ wrapper: 'h-full' }}
+              className="w-full h-full object-cover z-0 cursor-none"
+              width="100%"
+              height="100%"
+              src={current?.src}
+            />
+          </div>
         </div>
       </Lens>
 
