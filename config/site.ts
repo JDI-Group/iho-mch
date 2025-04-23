@@ -48,11 +48,26 @@ export const siteConfig = {
       href: 'https://explorer.moonchain.com',
     },
   ],
-  links: {
-    github: 'https://github.com/heroui-inc/heroui',
-    twitter: 'https://twitter.com/hero_ui',
-    docs: 'https://heroui.com',
-    discord: 'https://discord.gg/9b6yyZKmH4',
-    sponsor: 'https://patreon.com/jrgarciadev',
-  },
+  links: [
+    {
+      label: 'Privacy Policy',
+      href: '/privacy-policy',
+    },
+    {
+      label: 'Terms of Use',
+      href: '/terms-of-use',
+    },
+    {
+      label: 'Sales and Refunds',
+      href: '/sales-and-refunds',
+    },
+    {
+      label: 'Legal',
+      href: '/legal',
+    },
+    {
+      label: 'Site Map',
+      href: '/site-map',
+    },
+  ],
 }

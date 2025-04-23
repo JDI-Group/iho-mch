@@ -11,7 +11,7 @@ export default function DefaultLayout({ children }: React.PropsWithChildren) {
       <main className={container({ className: 'pt-4' })}>
         {children}
       </main>
-      <Footer />
+      <Footer className="container mx-auto max-w-7xl px-6" />
     </div>
   )
 }

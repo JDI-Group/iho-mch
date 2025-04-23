@@ -15,7 +15,7 @@ export default function HomeLayout({ children, className }: PropsWithDetailedHTM
         <main>
           {children}
         </main>
-        <Footer />
+        <Footer className={container()} />
       </div>
     </div>
   )
