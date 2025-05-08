@@ -157,11 +157,11 @@ importers:
         specifier: ^1.28.0
         version: 1.38.2(eslint@9.23.0(jiti@2.4.2))(ts-api-utils@2.1.0(typescript@5.6.3))(typescript@5.6.3)
       '@genapi/core':
-        specifier: ^3.3.0
-        version: 3.3.0
+        specifier: ^3.5.0
+        version: 3.5.0
       '@genapi/presets':
-        specifier: ^3.3.0
-        version: 3.3.0(@swc/helpers@0.5.15)
+        specifier: ^3.5.0
+        version: 3.5.0(@swc/helpers@0.5.15)
       '@hairy/lnv':
         specifier: ^6.1.0
         version: 6.1.0
@@ -903,24 +903,24 @@ packages:
   '@formatjs/intl-localematcher@0.6.1':
     resolution: {integrity: sha512-ePEgLgVCqi2BBFnTMWPfIghu6FkbZnnBVhO2sSxvLfrdFw7wCHAHiDoM2h4NRgjbaY7+B7HgOLZGkK187pZTZg==}
 
-  '@genapi/core@3.3.0':
-    resolution: {integrity: sha512-OBseNi12R+vq4Z88ohazaEIBHxSooh9ThpCtgI04TaO0j5Vshe786J0A6MlV0mR5z4h1fnDd0Cll4lFSp6bF5Q==}
+  '@genapi/core@3.5.0':
+    resolution: {integrity: sha512-//5aS1ymKJS+ENUJLRW9liVVnLl31BeaWWLaZM9/dHf1gG/0HbX3FTL/QoGmBsc0uF0QTAcdBX+bXzfziWwReQ==}
     hasBin: true
 
-  '@genapi/parser@3.3.0':
-    resolution: {integrity: sha512-mSjPrFK2tgphZCH4QF76nxgQ+eVuhRDzh//xuSlsQbE8UxSXWtQ8eoDq5u52VvvSA+XT4HtU2x+2RXmykq89yA==}
+  '@genapi/parser@3.5.0':
+    resolution: {integrity: sha512-XEBZOqMheKAGaWZDz9cNOSHPscE9sKir5Flqej5ZwuvXl0PY8bv0XPD2tToQzr6GpRUSSLT1E9+w5mCN/9TJPg==}
 
-  '@genapi/pipeline@3.3.0':
-    resolution: {integrity: sha512-vvK06b7WzQAzGuPj5uUN0EMMkrE2RbB7ct8YWxZxOGdd/0GGsk2SnBK5jJkBxhrche4LrfCjDyTjUkROdYMjQA==}
+  '@genapi/pipeline@3.5.0':
+    resolution: {integrity: sha512-BiCclz7CsIEWOtL7S27uHSrBWNbnVMPHQlTDv/T/vsV1AqtyRRminvQsxqlzrvmLgzmZsWsRTznn3h4xogHS1A==}
 
-  '@genapi/presets@3.3.0':
-    resolution: {integrity: sha512-hrqouKPaMP8BJ676/2HdmFaKB/6IgvlYZ+W9rjZuE5UMdXyiGhGilMDKQ/D90dL12UDKrGl5CavO/zA+lVFWaQ==}
+  '@genapi/presets@3.5.0':
+    resolution: {integrity: sha512-h/6q3dsMV5fTd/a37HTFzBjiQugwsLgMVmR13r0dm9XAq/5TdrGvJBgueP74XkSjHJK3gpkOAFStn6JowSYE2Q==}
 
-  '@genapi/shared@3.3.0':
-    resolution: {integrity: sha512-TCy03EkHAiyYYjOWeMNW1XcDkjLecsXFi1IjAShirhS8DIggKIYUpDOZFncDKKIX0zQ7BsRnB7cHJ+2zlE0/rQ==}
+  '@genapi/shared@3.5.0':
+    resolution: {integrity: sha512-7t4GFKo9QXgmJHzBlsgNx9p5W06v77/oDeNMrYel9JugRNCaLKFhZtrvz3/BAyW0Rq+gjzxT11uBluzFMRoB1w==}
 
-  '@genapi/transform@3.3.0':
-    resolution: {integrity: sha512-ZxhpKa77mjEVZr3VLMKO2bA8QgjwfhY/Nc4eZck1Q8PUpsPEVUrX5FdorogpsttCHn0VSBENacQNSarb0y/z6w==}
+  '@genapi/transform@3.5.0':
+    resolution: {integrity: sha512-3h4JcDRckLqiteKBxqxSQ3FTmjk0MlenQbD+CSzU+Ow5KMPNKq4Xr8kOZkNxTaNQNs8Lv48hlDxjGpv7XX+VUw==}
 
   '@hairy/ether-lib@1.23.0':
     resolution: {integrity: sha512-0rSdF3TuwRvwnC8xvPzPUV6TShrwlPTEy0ldRGeu8VzpjTWaHchFQcFcWN09nJcM2aOGORwuemFNShxxQ2OQBg==}
@@ -8681,9 +8681,9 @@ snapshots:
     dependencies:
       tslib: 2.8.1
 
-  '@genapi/core@3.3.0':
+  '@genapi/core@3.5.0':
     dependencies:
-      '@genapi/shared': 3.3.0
+      '@genapi/shared': 3.5.0
       '@hairy/utils': 1.23.0
       cac: 6.7.14
       chalk: 5.4.1
@@ -8692,17 +8692,17 @@ snapshots:
       ora: 5.4.1
       unconfig: 0.3.13
 
-  '@genapi/parser@3.3.0':
+  '@genapi/parser@3.5.0':
     dependencies:
-      '@genapi/shared': 3.3.0
-      '@genapi/transform': 3.3.0
+      '@genapi/shared': 3.5.0
+      '@genapi/transform': 3.5.0
       '@hairy/utils': 1.23.0
       pascal-case: 3.1.2
       transliteration: 2.3.5
 
-  '@genapi/pipeline@3.3.0(@swc/helpers@0.5.15)':
+  '@genapi/pipeline@3.5.0(@swc/helpers@0.5.15)':
     dependencies:
-      '@genapi/shared': 3.3.0
+      '@genapi/shared': 3.5.0
       fs-extra: 11.3.0
       got: 11.8.6
       p-pipe: 3.1.0
@@ -8712,18 +8712,20 @@ snapshots:
     transitivePeerDependencies:
       - '@swc/helpers'
 
-  '@genapi/presets@3.3.0(@swc/helpers@0.5.15)':
+  '@genapi/presets@3.5.0(@swc/helpers@0.5.15)':
     dependencies:
-      '@genapi/parser': 3.3.0
-      '@genapi/pipeline': 3.3.0(@swc/helpers@0.5.15)
-      '@genapi/shared': 3.3.0
+      '@genapi/parser': 3.5.0
+      '@genapi/pipeline': 3.5.0(@swc/helpers@0.5.15)
+      '@genapi/shared': 3.5.0
       openapi-specification-types: 0.0.3
     transitivePeerDependencies:
       - '@swc/helpers'
 
-  '@genapi/shared@3.3.0': {}
+  '@genapi/shared@3.5.0':
+    dependencies:
+      got: 11.8.6
 
-  '@genapi/transform@3.3.0': {}
+  '@genapi/transform@3.5.0': {}
 
   '@hairy/ether-lib@1.23.0(ethers@6.13.5(bufferutil@4.0.9)(utf-8-validate@5.0.10))':
     dependencies:

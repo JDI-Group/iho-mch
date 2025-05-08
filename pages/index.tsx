@@ -38,6 +38,16 @@ const accordions = [
     question: 'What is the lock-in period if I lock Moonchain to receive free hardware, and can I withdraw my tokens during this time?',
     answer: 'When you lock your Moonchain tokens to receive free mining hardware, your tokens are subject to a 1-year lock-in period. During this 1-year period, you cannot withdraw or transfer your locked tokens for any reason. This lock is required as part of the agreement for receiving the free hardware. After the 1-year period ends, your tokens will become available for withdrawal or transfer as usual.',
   },
+  {
+    value: 'item-7',
+    question: 'How can Moonchain give away free mining hardware? How is this sustainable?',
+    answer: 'Our goal is to rapidly expand the global reach  of the Moonchain network. We do this by making it easy for anyone, anywhere, to participate as a node operator. By giving away free Web3 hardware, we help spread nodes quickly across the globe, making our network more decentralized, secure, and robust. This strategy welcomes both Web2 and Web3 users, demonstrating the value of Blockchain to the world via everyday devices. Moonchain IHO significantly increases network transactions and activity, whilst helping create a vibrant and proactive Moonchain community.\n\nAdditionally, our venture capital (VC) partners are investing directly in these 3rd party hardware companies that manufacture this new-age Web3 Hardware. This creates a closed-loop business model—as the network grows and demand for hardware increases, our partners and ecosystem benefit together. This approach aligns incentives, sustains growth, and ensures the long-term success of both the Moonchain network and its supporting infrastructure.',
+  },
+  {
+    value: 'item-8',
+    question: 'Where is my stake stored when I stake my Moonchain for free hardware?',
+    answer: 'Your staked Moonchain tokens are always stored in your own wallet and secured by a verifiable Ethereum smart contract. This smart contract manages the stake and unstaking processes, ensuring your tokens remain safe, tamper-proof and always on your wallet! Moonchain believes in transparency, therefore everything is fully on-chain and transparent, so you can verify the contract and your stake at any time you wish. You always keep control of your wallet and your tokens are never held by a third party, that\'s the Moonchain commitment to you!',
+  },
 ]
 
 export default function IndexPage() {
