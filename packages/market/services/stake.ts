@@ -7,7 +7,7 @@ export async function helperStake(params: { order: number }): Promise<OrderDataD
 export async function helperStake(params: { product: number, variation: number }): Promise<OrderDataDto>
 export async function helperStake(params: { order: number } | { product: number, variation: number }) {
   const { order, product, variation } = params as { order?: number, product?: number, variation?: number }
-  const iho = contracts.IHO.resolve('signer')
+  const iho = contracts.IHOMarket.resolve('signer')
   let detail: OrderDataDto | null = null
   if (product && variation)
     detail = await postOrder({ variation, product })
