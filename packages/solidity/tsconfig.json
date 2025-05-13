@@ -1,19 +1,23 @@
 {
   "compilerOptions": {
     "incremental": true,
-    "target": "ESNext",
+    "target": "ES2017",
     "jsx": "preserve",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "module": "esnext",
-    "moduleResolution": "node",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "paths": {
+      "@/*": ["./*"]
+    },
     "resolveJsonModule": true,
+    "types": ["vitest/globals"],
     "allowJs": true,
     "strict": true,
-    "noImplicitAny": false,
     "noEmit": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
+    "skipDefaultLibCheck": true,
     "skipLibCheck": true
   },
   "include": ["**/*.ts", "**/*.tsx"],

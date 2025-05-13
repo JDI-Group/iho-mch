@@ -10,6 +10,7 @@ export default antfu({
     'node/prefer-global/process': 'off',
     'react-hooks-extra/no-direct-set-state-in-use-effect': 'off',
     'react/no-array-index-key': 'off',
+    'antfu/no-top-level-await': 'off',
     'style/jsx-one-expression-per-line': 'off',
     'react-dom/no-dangerously-set-innerhtml': 'off',
     'react-dom/no-missing-button-type': 'off',
