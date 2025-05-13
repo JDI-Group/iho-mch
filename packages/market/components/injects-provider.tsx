@@ -2,7 +2,6 @@ import { themes } from '@/config/themes'
 
 import { wagmiConfig } from '@/config/wagmi'
 import { Injector, useStore, useWatch } from '@hairy/react-lib'
-import { SubscribeWagmiConfig } from '@harsta/client/wagmi'
 import { HeroUIProvider } from '@heroui/system'
 import { ToastProvider } from '@heroui/toast'
 import { OverlaysProvider } from '@overlastic/react'
@@ -48,7 +47,6 @@ export function InjectsProvider(props: React.PropsWithChildren) {
       ]}
     >
       <ToastProvider placement="top-center" />
-      <SubscribeWagmiConfig />
       {props.children}
     </Injector>
   )
