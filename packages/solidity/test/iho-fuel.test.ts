@@ -2,8 +2,8 @@ import { isAddress, ZeroAddress } from 'ethers'
 import { contracts, getNamedSigner, provider, signer } from 'harsta/runtime'
 import { fixture, initial, wait } from 'harsta/tests'
 
-// const LocktimeNotExpiredError = `VM Exception while processing transaction: reverted with reason string 'Locktime not expired'`
-// const NoAmountToClaimError = `VM Exception while processing transaction: reverted with reason string 'No amount to claim'`
+const LocktimeNotExpiredError = `VM Exception while processing transaction: reverted with reason string 'Locktime not expired'`
+const NoAmountToClaimError = `VM Exception while processing transaction: reverted with reason string 'No amount to claim'`
 const AmountMustBeGreaterThanZeroError = `VM Exception while processing transaction: reverted with reason string 'Amount must be greater than 0'`
 await initial()
 
@@ -96,8 +96,7 @@ describe('iho-fuel contract unit test', () => {
 
     // Check balance is reduced
     const balance = await ihoFuel.balanceOf(await signer.getAddress(), token)
-    // bug: Global context leads to data caching
-    expect(balance).toBe(BigInt(100))
+    expect(balance).toBe(BigInt(0))
 
     // Check unlock coins
     const unlockCoins = await ihoFuel.getUnlockCoins(await signer.getAddress())
@@ -113,113 +112,95 @@ describe('iho-fuel contract unit test', () => {
     expect(cancelEvents[0].args[3]).toBe(BigInt(amount))
   })
 
-  // it('claim before locktime expires should fail', async () => {
-  //   const ihoFuel = contracts.IHOFuel.resolve('signer')
-  //   const token = ZeroAddress
-  //   const amount = 100
+  it('claim before locktime expires should fail', async () => {
+    const ihoFuel = contracts.IHOFuel.resolve('signer')
+    const token = ZeroAddress
+    const amount = 100
 
-  //   // First send ETH to contract
-  //   await wait(await signer.sendTransaction({
-  //     to: await ihoFuel.getAddress(),
-  //     value: amount,
-  //   }))
+    // Then deposit
+    await wait(await ihoFuel.deposit(token, amount, { value: amount }))
 
-  //   // Then deposit
-  //   await wait(await ihoFuel.deposit(token, amount))
+    // Then cancel
+    await wait(await ihoFuel.cancel(token, amount))
 
-  //   // Then cancel
-  //   await wait(await ihoFuel.cancel(token, amount))
+    // Try to claim immediately
+    try {
+      await ihoFuel.claim(0)
+    }
+    catch (error: any) {
+      expect(error.error.message).toBe(LocktimeNotExpiredError)
+    }
+  })
 
-  //   // Try to claim immediately
-  //   try {
-  //     await ihoFuel.claim(0)
-  //   }
-  //   catch (error: any) {
-  //     expect(error.error.message).toBe(LocktimeNotExpiredError)
-  //   }
-  // })
+  it('claim after locktime expires', async () => {
+    const deployer = await getNamedSigner('deployer')
+    const ihoFuel = contracts.IHOFuel.resolve(deployer)
 
-  // it('claim after locktime expires', async () => {
-  //   const deployer = await getNamedSigner('deployer')
-  //   const ihoFuel = contracts.IHOFuel.resolve(deployer)
+    // Set locktime to 1 second for testing
+    await wait(await ihoFuel.setLocktime(1))
 
-  //   // Set locktime to 1 second for testing
-  //   await wait(await ihoFuel.setLocktime(1))
+    const userFuel = contracts.IHOFuel.resolve('signer')
+    const token = ZeroAddress
+    const amount = 100
 
-  //   const userFuel = contracts.IHOFuel.resolve('signer')
-  //   const token = ZeroAddress
-  //   const amount = 100
+    // Then deposit
+    await wait(await userFuel.deposit(token, amount, { value: amount }))
 
-  //   // First send ETH to contract
-  //   await wait(await signer.sendTransaction({
-  //     to: await userFuel.getAddress(),
-  //     value: amount,
-  //   }))
+    // Then cancel
+    await wait(await userFuel.cancel(token, amount))
 
-  //   // Then deposit
-  //   await wait(await userFuel.deposit(token, amount))
+    // Wait for locktime to expire
+    await new Promise(resolve => setTimeout(resolve, 1500))
 
-  //   // Then cancel
-  //   await wait(await userFuel.cancel(token, amount))
+    // Now claim
+    const transaction = await userFuel.claim(0)
+    const receipt = await wait(transaction)
 
-  //   // Wait for locktime to expire
-  //   await new Promise(resolve => setTimeout(resolve, 1500))
+    // Check event
+    const claimFilter = userFuel.filters.Claimed(
+      await signer.getAddress(),
+    )
+    const claimEvents = await userFuel.queryFilter(claimFilter)
+    expect(receipt?.blockNumber).toBe(claimEvents[0].blockNumber)
+    expect(claimEvents[0].args[2]).toBe(token)
+    expect(claimEvents[0].args[3]).toBe(BigInt(amount))
 
-  //   // Now claim
-  //   const transaction = await userFuel.claim(0)
-  //   const receipt = await wait(transaction)
+    // Reset locktime
+    await wait(await ihoFuel.setLocktime(30 * 86400))
+  })
 
-  //   // Check event
-  //   const claimFilter = userFuel.filters.Claimed(
-  //     await signer.getAddress(),
-  //   )
-  //   const claimEvents = await userFuel.queryFilter(claimFilter)
-  //   expect(receipt?.blockNumber).toBe(claimEvents[0].blockNumber)
-  //   expect(claimEvents[0].args[2]).toBe(token)
-  //   expect(claimEvents[0].args[3]).toBe(BigInt(amount))
+  it('claim already claimed tokens should fail', async () => {
+    const deployer = await getNamedSigner('deployer')
+    const ihoFuel = contracts.IHOFuel.resolve(deployer)
 
-  //   // Reset locktime
-  //   await wait(await ihoFuel.setLocktime(30 * 86400))
-  // })
+    // Set locktime to 1 second for testing
+    await wait(await ihoFuel.setLocktime(1))
 
-  // it('claim already claimed tokens should fail', async () => {
-  //   const deployer = await getNamedSigner('deployer')
-  //   const ihoFuel = contracts.IHOFuel.resolve(deployer)
+    const userFuel = contracts.IHOFuel.resolve('signer')
+    const token = ZeroAddress
+    const amount = 100
 
-  //   // Set locktime to 1 second for testing
-  //   await wait(await ihoFuel.setLocktime(1))
+    // Then deposit
+    await wait(await userFuel.deposit(token, amount, { value: amount }))
 
-  //   const userFuel = contracts.IHOFuel.resolve('signer')
-  //   const token = ZeroAddress
-  //   const amount = 100
+    // Then cancel
+    await wait(await userFuel.cancel(token, amount))
 
-  //   // First send ETH to contract
-  //   await wait(await signer.sendTransaction({
-  //     to: await userFuel.getAddress(),
-  //     value: amount,
-  //   }))
+    // Wait for locktime to expire
+    await new Promise(resolve => setTimeout(resolve, 1500))
 
-  //   // Then deposit
-  //   await wait(await userFuel.deposit(token, amount))
+    // Claim
+    await wait(await userFuel.claim(0))
 
-  //   // Then cancel
-  //   await wait(await userFuel.cancel(token, amount))
+    // Try to claim again
+    try {
+      await userFuel.claim(0)
+    }
+    catch (error: any) {
+      expect(error.error.message).toBe(NoAmountToClaimError)
+    }
 
-  //   // Wait for locktime to expire
-  //   await new Promise(resolve => setTimeout(resolve, 1500))
-
-  //   // Claim
-  //   await wait(await userFuel.claim(0))
-
-  //   // Try to claim again
-  //   try {
-  //     await userFuel.claim(0)
-  //   }
-  //   catch (error: any) {
-  //     expect(error.error.message).toBe(NoAmountToClaimError)
-  //   }
-
-  //   // Reset locktime
-  //   await wait(await ihoFuel.setLocktime(30 * 86400))
-  // })
+    // Reset locktime
+    await wait(await ihoFuel.setLocktime(30 * 86400))
+  })
 })

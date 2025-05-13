@@ -44,6 +44,7 @@
     "deploy:mainnet": "lnv -o --vlt -- harsta deploy --verify --network moonchain",
     "verify:testnet": "lnv -o --vlt -- harsta verify --network moonchain_geneva --target",
     "verify:mainnet": "lnv -o --vlt -- harsta verify --network moonchain --target",
+    "test": "lnv -o --vlt -- harsta test --network hardhat",
     "test:hardhat": "lnv -o --vlt -- harsta test --network hardhat",
     "test:fork:testnet": "lnv -o --vlt -- harsta test --network hardhat --fork moonchain_geneva",
     "test:fork:mainnet": "lnv -o --vlt -- harsta test --network hardhat --fork moonchain",
@@ -61,7 +62,7 @@
   },
   "devDependencies": {
     "@hairy/utils": "^1.29.0",
-    "harsta": "^0.10.6",
+    "harsta": "^0.14.0",
     "vitest": "^3.1.3"
   }
 }

@@ -184,4 +184,21 @@ contract IHOMining is
       block.timestamp
     );
   }
+
+  function getTokenInDevice(string memory device) public view returns (TokenMapping memory) {
+    return DeviceMapToken[device];
+  }
+
+  function getDeviceInToken(address token, uint256 tokenId) public view returns (DeviceMapping memory) {
+    return TokenMapDevice[token][tokenId];
+  }
+
+  function getPoolInToken(address token, uint256 tokenId) public view returns (uint256) {
+    return TokenMapPool[token][tokenId];
+  }
+
+  function getPoolInDevice(string memory device) public view returns (uint256) {
+    TokenMapping memory tm = DeviceMapToken[device];
+    return TokenMapPool[tm.token][tm.tokenId];
+  }
 }
