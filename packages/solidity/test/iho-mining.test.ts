@@ -10,8 +10,8 @@ await fixture(['IHOMining'])
 
 const DeviceEmptyError = `VM Exception while processing transaction: reverted with custom error 'DeviceEmpty()'`
 const DeviceRegisteredError = `VM Exception while processing transaction: reverted with custom error 'DeviceRegistered()'`
-// const DeviceUnregisteredError = `VM Exception while processing transaction: reverted with custom error 'DeviceUnregistered()'`
-// const ReceiveInvalidError = `VM Exception while processing transaction: reverted with custom error 'ReceiveInvalid()'`
+const DeviceUnregisteredError = `VM Exception while processing transaction: reverted with custom error 'DeviceUnregistered()'`
+const ReceiveInvalidError = `VM Exception while processing transaction: reverted with custom error 'ReceiveInvalid()'`
 
 async function sign(data: BigNumberish) {
   const verifier = await getNamedSigner('verifier')
@@ -99,7 +99,6 @@ describe('iho-mining contract unit test', () => {
     // Register device first
     await wait(await ihoMining.register(deviceId))
 
-    const token = await ihoMining.getTokenInDevice(deviceId)
     // Prepare reward receive parameters
     const rewardId = generateRewardId()
     const amount = 100
@@ -115,8 +114,6 @@ describe('iho-mining contract unit test', () => {
     // Receive reward
     const transaction = await ihoMining.rewardReceive(
       rewardId,
-      await ihoMining.getAddress(),
-      token.tokenId,
       deviceId,
       amount,
       signature,
@@ -144,12 +141,9 @@ describe('iho-mining contract unit test', () => {
     )
     // Sign the message
     const signature = await sign(messageHash)
-
     try {
       await ihoMining.rewardReceive(
         rewardId,
-        await ihoMining.getAddress(),
-        0,
         '',
         amount,
         signature,
@@ -161,169 +155,154 @@ describe('iho-mining contract unit test', () => {
     }
   })
 
-  // it('reward receive with duplicate id should fail', async () => {
-  //   const ihoMining = contracts.IHOMining.resolve('signer')
-  //   const deviceId = generateDeviceId()
+  it('reward receive with duplicate id should fail', async () => {
+    const ihoMining = contracts.IHOMining.resolve('signer')
+    const deviceId = generateDeviceId()
 
-  //   // Register device first
-  //   await wait(await ihoMining.register(deviceId))
+    // Register device first
+    await wait(await ihoMining.register(deviceId))
 
-  //   // Prepare reward receive parameters
-  //   const rewardId = `reward-${Math.floor(random([1000, 9999]))}`
-  //   const amount = 100
+    // Prepare reward receive parameters
+    const rewardId = `reward-${Math.floor(randomNumer(1000, 9999))}`
+    const amount = 100
 
-  //   // Sign the message
-  //   const message = await sign(
-  //     solidityPackedKeccak256(
-  //       ['string', 'address', 'string', 'uint256'],
-  //       [rewardId, await signer.getAddress(), deviceId, amount],
-  //     ),
-  //   )
+    // Sign the message
+    const message = await sign(
+      solidityPackedKeccak256(
+        ['string', 'address', 'string', 'uint256'],
+        [rewardId, await signer.getAddress(), deviceId, amount],
+      ),
+    )
 
-  //   // Receive reward first time
-  //   await wait(await ihoMining.rewardReceive(
-  //     rewardId,
-  //     await ihoMining.getAddress(),
-  //     0,
-  //     deviceId,
-  //     amount,
-  //     message,
-  //     '{}',
-  //   ))
+    // Receive reward first time
+    await wait(await ihoMining.rewardReceive(
+      rewardId,
+      deviceId,
+      amount,
+      message,
+      '{}',
+    ))
 
-  //   // Try to receive with same id again
-  //   try {
-  //     await ihoMining.rewardReceive(
-  //       rewardId,
-  //       await ihoMining.getAddress(),
-  //       0,
-  //       deviceId,
-  //       amount,
-  //       message,
-  //       '{}',
-  //     )
-  //   }
-  //   catch (error: any) {
-  //     expect(error.error.message).toBe(ReceiveInvalidError)
-  //   }
-  // })
+    // Try to receive with same id again
+    try {
+      await ihoMining.rewardReceive(
+        rewardId,
+        deviceId,
+        amount,
+        message,
+        '{}',
+      )
+    }
+    catch (error: any) {
+      expect(error.error.message).toBe(ReceiveInvalidError)
+    }
+  })
 
-  // it('reward claim', async () => {
-  //   const ihoMining = contracts.IHOMining.resolve('signer')
-  //   const deviceId = generateDeviceId()
+  it('reward claim', async () => {
+    const ihoMining = contracts.IHOMining.resolve('signer')
+    const deviceId = generateDeviceId()
 
-  //   // Register device first
-  //   await wait(await ihoMining.register(deviceId))
+    // Register device first
+    await wait(await ihoMining.register(deviceId))
 
-  //   // Prepare reward receive parameters
-  //   const rewardId = `reward-${Math.floor(random([1000, 9999]))}`
-  //   const amount = 100
+    // Prepare reward receive parameters
+    const rewardId = `reward-${Math.floor(randomNumer(1000, 9999))}`
+    const amount = 100
 
-  //   // Sign the receive message
-  //   const receiveMessage = await sign(
-  //     solidityPackedKeccak256(
-  //       ['string', 'address', 'string', 'uint256'],
-  //       [rewardId, await signer.getAddress(), deviceId, amount],
-  //     ),
-  //   )
+    // Sign the receive message
+    const receiveMessage = await sign(
+      solidityPackedKeccak256(
+        ['string', 'address', 'string', 'uint256'],
+        [rewardId, await signer.getAddress(), deviceId, amount],
+      ),
+    )
 
-  //   // Receive reward
-  //   await wait(await ihoMining.rewardReceive(
-  //     rewardId,
-  //     await ihoMining.getAddress(),
-  //     0,
-  //     deviceId,
-  //     amount,
-  //     receiveMessage,
-  //     '{}',
-  //   ))
+    // First send ETH to contract
+    await signer.sendTransaction({ to: await ihoMining.getAddress(), value: amount }).then(tx => tx.wait())
 
-  //   // Sign the claim message
-  //   const claimMessage = await sign(
-  //     solidityPackedKeccak256(
-  //       ['address', 'string', 'uint256'],
-  //       [await signer.getAddress(), deviceId, amount],
-  //     ),
-  //   )
+    // Receive reward
+    await wait(await ihoMining.rewardReceive(
+      rewardId,
+      deviceId,
+      amount,
+      receiveMessage,
+      '{}',
+    ))
 
-  //   // First send ETH to contract
-  //   await wait(await signer.sendTransaction({
-  //     to: await ihoMining.getAddress(),
-  //     value: amount,
-  //   }))
+    // Sign the claim message
+    const claimMessage = await sign(
+      solidityPackedKeccak256(
+        ['address', 'string', 'uint256'],
+        [await signer.getAddress(), deviceId, amount],
+      ),
+    )
 
-  //   // Claim reward
-  //   const transaction = await ihoMining.rewardClaim(
-  //     await ihoMining.getAddress(),
-  //     0,
-  //     deviceId,
-  //     amount,
-  //     claimMessage,
-  //   )
-  //   const receipt = await wait(transaction)
+    // Claim reward
+    const transaction = await ihoMining.rewardClaim(
+      deviceId,
+      amount,
+      claimMessage,
+    )
+    const receipt = await wait(transaction)
 
-  //   // Check event
-  //   const claimFilter = ihoMining.filters.Claimed(
-  //     undefined,
-  //     undefined,
-  //     deviceId,
-  //   )
-  //   const claimEvents = await ihoMining.queryFilter(claimFilter)
-  //   expect(receipt?.blockNumber).toBe(claimEvents[0].blockNumber)
-  //   expect(claimEvents[0].args[3]).toBe(await signer.getAddress())
-  //   expect(claimEvents[0].args[4]).toBe(BigInt(amount))
-  // })
+    const tm = await ihoMining.getTokenInDevice(deviceId)
+    // Check event
+    const claimFilter = ihoMining.filters.Claimed(
+      tm.token,
+      tm.tokenId,
+    )
+    const claimEvents = await ihoMining.queryFilter(claimFilter)
+    expect(receipt?.blockNumber).toBe(claimEvents[0].blockNumber)
+    expect(claimEvents[0].args[3]).toBe(await signer.getAddress())
+    expect(claimEvents[0].args[4]).toBe(BigInt(amount))
+  })
 
-  // it('reward claim with empty device id should fail', async () => {
-  //   const ihoMining = contracts.IHOMining.resolve('signer')
-  //   const amount = 100
+  it('reward claim with empty device id should fail', async () => {
+    const ihoMining = contracts.IHOMining.resolve('signer')
+    const amount = 100
 
-  //   // Sign the claim message
-  //   const claimMessage = await sign(
-  //     solidityPackedKeccak256(
-  //       ['address', 'string', 'uint256'],
-  //       [await signer.getAddress(), '', amount],
-  //     ),
-  //   )
+    // Sign the claim message
+    const claimMessage = await sign(
+      solidityPackedKeccak256(
+        ['address', 'string', 'uint256'],
+        [await signer.getAddress(), '', amount],
+      ),
+    )
 
-  //   try {
-  //     await ihoMining.rewardClaim(
-  //       await ihoMining.getAddress(),
-  //       0,
-  //       '',
-  //       amount,
-  //       claimMessage,
-  //     )
-  //   }
-  //   catch (error: any) {
-  //     expect(error.error.message).toBe(DeviceEmptyError)
-  //   }
-  // })
+    try {
+      await ihoMining.rewardClaim(
+        '',
+        amount,
+        claimMessage,
+      )
+    }
+    catch (error: any) {
+      expect(error.error.message).toBe(DeviceEmptyError)
+    }
+  })
 
-  // it('reward claim with unregistered device should fail', async () => {
-  //   const ihoMining = contracts.IHOMining.resolve('signer')
-  //   const deviceId = `unregistered-${Math.floor(random([1000, 9999]))}`
-  //   const amount = 100
+  it('reward claim with unregistered device should fail', async () => {
+    const ihoMining = contracts.IHOMining.resolve('signer')
+    const deviceId = `unregistered-${Math.floor(randomNumer(1000, 9999))}`
+    const amount = 100
 
-  //   // Sign the claim message
-  //   const claimMessage = await sign(
-  //     solidityPackedKeccak256(
-  //       ['address', 'string', 'uint256'],
-  //       [await signer.getAddress(), deviceId, amount],
-  //     ),
-  //   )
+    // Sign the claim message
+    const claimMessage = await sign(
+      solidityPackedKeccak256(
+        ['address', 'string', 'uint256'],
+        [await signer.getAddress(), deviceId, amount],
+      ),
+    )
 
-  //   try {
-  //     await ihoMining.rewardClaim(
-  //       ZeroAddress, // This will trigger DeviceUnregistered error
-  //       0,
-  //       deviceId,
-  //       amount,
-  //       claimMessage,
-  //     )
-  //   }
-  //   catch (error: any) {
-  //     expect(error.error.message).toBe(DeviceUnregisteredError)
-  //   }
-  // })
+    try {
+      await ihoMining.rewardClaim(
+        deviceId,
+        amount,
+        claimMessage,
+      )
+    }
+    catch (error: any) {
+      expect(error.error.message).toBe(DeviceUnregisteredError)
+    }
+  })
 })

@@ -114,30 +114,29 @@ contract IHOMining is
 
   function rewardReceive(
     string memory id,
-    address token,
-    uint256 tokenId,
     string memory device,
     uint256 amount,
     bytes memory signature,
     string memory memo
   ) public {
     TokenMapping memory tm = DeviceMapToken[device];
-    address owner = IERC721(tm.token).ownerOf(tm.tokenId);
 
-    if (token == address(0))
-      revert DeviceUnregistered();
-    if (owner != msg.sender)
-      revert ERC721IncorrectOwner(msg.sender, tm.tokenId, owner);
     if (bytes(device).length == 0)
       revert DeviceEmpty();
+    if (tm.token == address(0))
+      revert DeviceUnregistered();
+
+    address owner = IERC721(tm.token).ownerOf(tm.tokenId);
+
+    if (owner != msg.sender)
+      revert ERC721IncorrectOwner(msg.sender, tm.tokenId, owner);
     if (ReceivedIDs[id])
       revert ReceiveInvalid();
-
     verify(abi.encodePacked(id, msg.sender, device, amount), signature);
     
     ReceivedIDs[id] = true;
 
-    TokenMapPool[token][tokenId] += amount;
+    TokenMapPool[tm.token][tm.tokenId] += amount;
 
     emit Received(
       tm.token,
@@ -152,27 +151,21 @@ contract IHOMining is
     );
   }
 
-  function rewardClaim(
-    address token,
-    uint256 tokenId,
-    string memory device,
-    uint256 amount,
-    bytes memory signature
-  ) public {
+  function rewardClaim(string memory device, uint256 amount, bytes memory signature) public {
     TokenMapping memory tm = DeviceMapToken[device];
-    address owner = IERC721(tm.token).ownerOf(tm.tokenId);
 
-    if (token == address(0))
-      revert DeviceUnregistered();
-    if (owner != msg.sender)
-      revert ERC721IncorrectOwner(msg.sender, tm.tokenId, owner);
     if (bytes(device).length == 0)
       revert DeviceEmpty();
+    if (tm.token == address(0))
+      revert DeviceUnregistered();
+    address owner = IERC721(tm.token).ownerOf(tm.tokenId);
+    if (owner != msg.sender)
+      revert ERC721IncorrectOwner(msg.sender, tm.tokenId, owner);
 
     verify(abi.encodePacked(msg.sender, device, amount), signature);
     transfer(address(this), msg.sender, address(0), amount);
 
-    TokenMapPool[token][tokenId] -= amount;
+    TokenMapPool[tm.token][tm.tokenId] -= amount;
 
     emit Claimed(
       tm.token,
