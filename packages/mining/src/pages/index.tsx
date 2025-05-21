@@ -1,6 +1,4 @@
-import { wait } from '@hairy/ether-lib'
 import { If } from '@hairy/react-lib'
-import { contracts, provider, signer } from '@harsta/client'
 import { Button } from '@heroui/react'
 import { ConnectButton } from '@rainbow-me/rainbowkit'
 import { useAccount } from 'wagmi'
@@ -9,13 +7,15 @@ function Page() {
   const { isConnected } = useAccount()
 
   async function sign() {
-    const number = await provider.getBlockNumber()
-    signer.signMessage(`Hello World! \n Now block number is ${number}`)
+    const number = await client.getBlockNumber()
+    wallet.signMessage({
+      message: `Hello World! \n Now block number is ${number}`,
+    })
   }
 
   async function transfer() {
-    const erc20 = contracts.ERC20.resolve('signer')
-    await wait(erc20.transfer('[your address]', 1))
+    await writeErc20Transfer({ args: ['0x13', 100n] })
+    await readErc20BalanceOf({ args: ['0x13'] })
   }
 
   return (

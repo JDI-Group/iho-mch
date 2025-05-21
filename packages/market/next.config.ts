@@ -31,6 +31,7 @@ const nextConfig: NextConfig = {
         dirs: [
           'layouts/index.ts',
           'store/index.ts',
+          'generated/index.ts',
           'components/**',
           'ui/**',
           'hooks/**',

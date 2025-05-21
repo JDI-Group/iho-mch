@@ -37,6 +37,7 @@ const nextConfig: NextConfig = {
           'src/hooks/**',
           'src/utils/**',
           'src/apis/index.ts',
+          'src/generated/index.ts',
         ],
       }),
     )

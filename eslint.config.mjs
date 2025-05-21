@@ -12,6 +12,7 @@ export default antfu({
     'react/no-array-index-key': 'off',
     'antfu/no-top-level-await': 'off',
     'style/jsx-one-expression-per-line': 'off',
+    'eslint-comments/no-unlimited-disable': 'off',
     'react-dom/no-dangerously-set-innerhtml': 'off',
     'react-dom/no-missing-button-type': 'off',
     'react/prefer-destructuring-assignment': 'off',
@@ -19,6 +20,7 @@ export default antfu({
   ignores: [
     '.next',
     'public/*',
+    'artifacts/*',
     'build',
     'dist',
     'api',

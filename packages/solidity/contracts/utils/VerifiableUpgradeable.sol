@@ -3,11 +3,28 @@ pragma solidity ^0.8.24;
 
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 
+/**
+ * @title VerifiableUpgradeable
+ * @dev Base upgradeable contract that provides signature verification functionality
+ *
+ * This contract allows verification of messages signed by a designated verifier.
+ * Primarily used for off-chain signature verification, such as validating authorization in claim operations.
+ */
 abstract contract VerifiableUpgradeable is Initializable {
-  address internal verifier;
+  /// @notice The verifier address responsible for signing messages
+  address public verifier;
 
-  error InvalidSignature();
+  /// @notice Error thrown when signature verification fails
+  /// @param recover The address recovered from the signature
+  /// @param verifier The expected verifier address
+  error InvalidSignature(address recover, address verifier);
 
+  /**
+   * @dev Recovers the signer's address from a signature
+   * @param message The hashed message
+   * @param signature The signature data (65 bytes)
+   * @return The signer's address
+   */
   function recover(bytes32 message, bytes memory signature) internal pure returns (address) {
     require(signature.length == 65, "invalid signature length");
     bytes32 digest = keccak256(abi.encodePacked("\x19Ethereum Signed Message:\n32", message));
@@ -23,21 +40,36 @@ abstract contract VerifiableUpgradeable is Initializable {
     return ecrecover(digest, v, r, s);
   }
 
+  /**
+   * @dev Verifies a message signature
+   * @param message The original message (not hashed)
+   * @param signature The signature data
+   *
+   * Note: This function hashes the message with keccak256 before verifying the signature.
+   * When signing on the client side, the same message should be hashed before signing.
+   */
   function verify(bytes memory message, bytes memory signature) internal view virtual {
-    if (recover(keccak256(message), signature) != verifier) {
-      revert InvalidSignature();
+    address recoveredAddress = recover(keccak256(message), signature);
+    if (recoveredAddress != verifier) {
+      revert InvalidSignature(recoveredAddress, verifier);
     }
   }
 
-  function getVerifier() public view returns (address) {
-    return verifier;
-  }
-
-  function setVerifier(address newVerifier) public virtual {
+  /**
+   * @dev Transfers verifier authority
+   * @param newVerifier The new verifier address
+   *
+   * Only the current verifier can call this function
+   */
+  function transferVerifier(address newVerifier) public virtual {
     require(msg.sender == verifier, "Not Verifier Account");
     verifier = newVerifier;
   }
 
+  /**
+   * @dev Initialization function
+   * @param initialVerifier The initial verifier address
+   */
   function __Verifie_init(address initialVerifier) internal onlyInitializing {
     verifier = initialVerifier;
   }

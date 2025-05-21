@@ -8,7 +8,6 @@ import {
 } from '@hairy/react-lib'
 
 import { cloneDeepWith, Deferred, jsonTryParse, riposte } from '@hairy/utils'
-import { chain, chains, updateProvider, updateSigner } from '@harsta/client'
 import { addToast, closeAll } from '@heroui/toast'
 import { BrowserProvider, JsonRpcProvider, JsonRpcSigner, Network } from 'ethers'
 import { useMount } from 'react-use'
@@ -107,12 +106,12 @@ export function BootstrapProvider(props: React.PropsWithChildren) {
   useEffect(
     () => {
       if (!account.address) {
-        updateSigner(void 0)
+        wallet.proxy.update(void 0)
         return
       }
       const provider = new BrowserProvider(window.ethereum)
       const singer = new JsonRpcSigner(provider, account.address)
-      updateSigner(singer)
+      wallet.proxy.update(singer)
     },
     [account.address],
   )
@@ -120,15 +119,11 @@ export function BootstrapProvider(props: React.PropsWithChildren) {
     () => {
       const find = Object.values(chains).find(chain => chain.id === chainId)
       const target = find || chain
-      if (!target) {
-        console.warn(`Chain with id ${chainId} not found config`)
-        return
-      }
       const rpc = target.rpcUrls.default.http[0]
       const network = new Network(target.name, target.id)
       const provider = new JsonRpcProvider(rpc, network)
       Reflect.set(provider, 'chainId', target.id)
-      updateProvider(provider)
+      client.proxy.update(provider)
     },
     [chainId],
   )

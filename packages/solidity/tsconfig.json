@@ -1,25 +1,13 @@
+/* Based on https://github.com/tsconfig/bases/blob/501da2bcd640cf95c95805783e1012b992338f28/bases/node22.json */
 {
   "compilerOptions": {
-    "incremental": true,
-    "target": "ES2017",
-    "jsx": "preserve",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "module": "ESNext",
+    "target": "es2022",
+    "lib": ["es2023"],
+    "module": "Preserve",
     "moduleResolution": "bundler",
-    "paths": {
-      "@/*": ["./*"]
-    },
-    "resolveJsonModule": true,
-    "types": ["vitest/globals"],
-    "allowJs": true,
     "strict": true,
-    "noEmit": true,
+    "outDir": "dist",
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "isolatedModules": true,
-    "skipDefaultLibCheck": true,
     "skipLibCheck": true
-  },
-  "include": ["**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+  }
 }

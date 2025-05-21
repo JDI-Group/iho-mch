@@ -16,6 +16,7 @@ node_modules
 # production
 /build
 
+
 # misc
 .DS_Store
 *.pem
@@ -45,3 +46,6 @@ next-env.d.ts
 .flaskenv*
 !.env.project
 !.env.vault
+
+# etherlib-generator
+generated

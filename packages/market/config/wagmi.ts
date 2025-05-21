@@ -1,5 +1,4 @@
 /* eslint-disable ts/ban-ts-comment */
-import { chains } from '@harsta/client'
 import { connectorsForWallets, getDefaultWallets } from '@rainbow-me/rainbowkit'
 import { createConfig } from 'wagmi'
 import { metaMaskWallet, moonBaseWallet } from './wagmi.wallets'
@@ -21,7 +20,7 @@ export const connectors = connectorsForWallets(
 )
 // @ts-expect-error
 export const wagmiConfig = createConfig({
-  chains: process.env.NEXT_PUBLIC_NETWORK === 'moonchain_geneva' ? [chains.moonchain_geneva] : [chains.moonchain],
+  chains: process.env.NEXT_PUBLIC_NETWORK === 'moonchain_geneva' ? [chains.moonchainGeneva] : [chains.moonchain],
   connectors,
   ssr: true,
 })

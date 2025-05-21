@@ -1,10 +1,9 @@
 import { formatEther } from '@hairy/ether-lib'
-import { provider, signer } from '@harsta/client'
 import { addToast, closeAll } from '@heroui/toast'
 
 export async function verifyInsufficientFunds(value: string) {
-  const address = await signer.getAddress()
-  const balance = await provider.getBalance(address)
+  const address = await wallet.getAddress()
+  const balance = await client.getBalance(address)
   if (BigInt(value) > balance) {
     closeAll()
     addToast({
