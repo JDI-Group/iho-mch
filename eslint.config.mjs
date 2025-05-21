@@ -18,9 +18,10 @@ export default antfu({
     'react/prefer-destructuring-assignment': 'off',
   },
   ignores: [
+    'packages/solidity/cache',
+    'packages/solidity/artifacts',
     '.next',
     'public/*',
-    'artifacts/*',
     'build',
     'dist',
     'api',
