@@ -15,8 +15,8 @@ contract IHOMarket is VerifiableUpgradeable, BidirectionalTransfer, UUPSUpgradea
   mapping(uint256 => Project) public projects;
   mapping(uint256 => mapping(uint256 => Stake)) public stakes;
 
-  function initialize(address owner_, address verifier_) public initializer {
-    __Ownable_init(owner_);
+  function initialize(address verifier_) public initializer {
+    __Ownable_init(msg.sender);
     __Verifie_init(verifier_);
     __UUPSUpgradeable_init();
   }

@@ -6,55 +6,55 @@
 // biome-ignore lint: disable
 export {}
 declare global {
-  const BootstrapProvider: typeof import('../components/bootstrap-provider')['BootstrapProvider']
-  const CarIcon: typeof import('../components/icons')['CarIcon']
-  const ConnectButton: typeof import('../components/connect-button')['ConnectButton']
-  const DiscordIcon: typeof import('../components/icons')['DiscordIcon']
-  const FormShipping: typeof import('../components/form-shipping')['FormShipping']
-  const GithubIcon: typeof import('../components/icons')['GithubIcon']
-  const HeartFilledIcon: typeof import('../components/icons')['HeartFilledIcon']
-  const HomeFloatProjects: typeof import('../ui/home-float-projects')['HomeFloatProjects']
-  const HomeFloatProjectsUnline: typeof import('../ui/home-float-projects-unline')['HomeFloatProjectsUnline']
-  const HugeiconsLinkSquare02: typeof import('../components/icons')['HugeiconsLinkSquare02']
-  const IconoirShoppingBag: typeof import('../components/icons')['IconoirShoppingBag']
-  const InjectsProvider: typeof import('../components/injects-provider')['InjectsProvider']
-  const InputPhoneNumber: typeof import('../components/form-shipping')['InputPhoneNumber']
-  const Lens: typeof import('../components/lens')['Lens']
-  const Logo: typeof import('../components/icons')['Logo']
-  const LsiconUnlinkFilled: typeof import('../components/icons')['LsiconUnlinkFilled']
-  const MaterialSymbolsArrowCoolDownRounded: typeof import('../components/icons')['MaterialSymbolsArrowCoolDownRounded']
-  const MaterialSymbolsArrowForwardIosRounded: typeof import('../components/icons')['MaterialSymbolsArrowForwardIosRounded']
-  const MaterialSymbolsLightCheckCircleRounded: typeof import('../components/icons')['MaterialSymbolsLightCheckCircleRounded']
-  const MaterialSymbolsLightEyeTrackingRounded: typeof import('../components/icons')['MaterialSymbolsLightEyeTrackingRounded']
-  const MenuIcon: typeof import('../components/icons')['MenuIcon']
-  const MingcuteWarningFill: typeof import('../components/icons')['MingcuteWarningFill']
-  const MoonFilledIcon: typeof import('../components/icons')['MoonFilledIcon']
-  const OrderDetail: typeof import('../components/order-detal')['OrderDetail']
-  const OrderPreview: typeof import('../components/order-preview')['OrderPreview']
-  const OrderTable: typeof import('../components/order-table')['OrderTable']
-  const ProductDescription: typeof import('../ui/product-description')['ProductDescription']
-  const ProductDetailDialog: typeof import('../components/product-detail-dialog')['ProductDetailDialog']
-  const ProductForm: typeof import('../ui/product-form')['ProductForm']
-  const ProductImages: typeof import('../ui/product-images')['ProductImages']
-  const QuestionIcon: typeof import('../components/icons')['QuestionIcon']
-  const ScreenFullIcon: typeof import('../components/icons')['ScreenFullIcon']
-  const SearchIcon: typeof import('../components/icons')['SearchIcon']
-  const SettingIcon: typeof import('../components/icons')['SettingIcon']
-  const SettingsDialog: typeof import('../components/settings-dialog')['SettingsDialog']
+  const BootstrapProvider: typeof import('../src/components/bootstrap-provider')['BootstrapProvider']
+  const CarIcon: typeof import('../src/components/icons')['CarIcon']
+  const ConnectButton: typeof import('../src/components/connect-button')['ConnectButton']
+  const DiscordIcon: typeof import('../src/components/icons')['DiscordIcon']
+  const FormShipping: typeof import('../src/components/form-shipping')['FormShipping']
+  const GithubIcon: typeof import('../src/components/icons')['GithubIcon']
+  const HeartFilledIcon: typeof import('../src/components/icons')['HeartFilledIcon']
+  const HomeFloatProjects: typeof import('../src/ui/home-float-projects')['HomeFloatProjects']
+  const HomeFloatProjectsUnline: typeof import('../src/ui/home-float-projects-unline')['HomeFloatProjectsUnline']
+  const HugeiconsLinkSquare02: typeof import('../src/components/icons')['HugeiconsLinkSquare02']
+  const IconoirShoppingBag: typeof import('../src/components/icons')['IconoirShoppingBag']
+  const InjectsProvider: typeof import('../src/components/injects-provider')['InjectsProvider']
+  const InputPhoneNumber: typeof import('../src/components/form-shipping')['InputPhoneNumber']
+  const Lens: typeof import('../src/components/lens')['Lens']
+  const Logo: typeof import('../src/components/icons')['Logo']
+  const LsiconUnlinkFilled: typeof import('../src/components/icons')['LsiconUnlinkFilled']
+  const MaterialSymbolsArrowCoolDownRounded: typeof import('../src/components/icons')['MaterialSymbolsArrowCoolDownRounded']
+  const MaterialSymbolsArrowForwardIosRounded: typeof import('../src/components/icons')['MaterialSymbolsArrowForwardIosRounded']
+  const MaterialSymbolsLightCheckCircleRounded: typeof import('../src/components/icons')['MaterialSymbolsLightCheckCircleRounded']
+  const MaterialSymbolsLightEyeTrackingRounded: typeof import('../src/components/icons')['MaterialSymbolsLightEyeTrackingRounded']
+  const MenuIcon: typeof import('../src/components/icons')['MenuIcon']
+  const MingcuteWarningFill: typeof import('../src/components/icons')['MingcuteWarningFill']
+  const MoonFilledIcon: typeof import('../src/components/icons')['MoonFilledIcon']
+  const OrderDetail: typeof import('../src/components/order-detal')['OrderDetail']
+  const OrderPreview: typeof import('../src/components/order-preview')['OrderPreview']
+  const OrderTable: typeof import('../src/components/order-table')['OrderTable']
+  const ProductDescription: typeof import('../src/ui/product-description')['ProductDescription']
+  const ProductDetailDialog: typeof import('../src/components/product-detail-dialog')['ProductDetailDialog']
+  const ProductForm: typeof import('../src/ui/product-form')['ProductForm']
+  const ProductImages: typeof import('../src/ui/product-images')['ProductImages']
+  const QuestionIcon: typeof import('../src/components/icons')['QuestionIcon']
+  const ScreenFullIcon: typeof import('../src/components/icons')['ScreenFullIcon']
+  const SearchIcon: typeof import('../src/components/icons')['SearchIcon']
+  const SettingIcon: typeof import('../src/components/icons')['SettingIcon']
+  const SettingsDialog: typeof import('../src/components/settings-dialog')['SettingsDialog']
   const SubscribeWagmiConfig: typeof import('../generated/index')['SubscribeWagmiConfig']
-  const SunFilledIcon: typeof import('../components/icons')['SunFilledIcon']
-  const TablerExternalLink: typeof import('../components/icons')['TablerExternalLink']
-  const ThemeSwitch: typeof import('../components/theme-switch')['ThemeSwitch']
-  const TwitterIcon: typeof import('../components/icons')['TwitterIcon']
+  const SunFilledIcon: typeof import('../src/components/icons')['SunFilledIcon']
+  const TablerExternalLink: typeof import('../src/components/icons')['TablerExternalLink']
+  const ThemeSwitch: typeof import('../src/components/theme-switch')['ThemeSwitch']
+  const TwitterIcon: typeof import('../src/components/icons')['TwitterIcon']
   const addresses: typeof import('../generated/index')['addresses']
-  const baseURL: typeof import('../apis/index')['baseURL']
+  const baseURL: typeof import('../src/apis/index')['baseURL']
   const bidirectionalTransferAbi: typeof import('../generated/index')['bidirectionalTransferAbi']
   const bidirectionalTransferAddress: typeof import('../generated/index')['bidirectionalTransferAddress']
   const chain: typeof import('../generated/index')['chain']
   const chains: typeof import('../generated/index')['chains']
   const client: typeof import('../generated/index')['client']
   const clsx: typeof import('clsx')['default']
-  const container: typeof import('../components/primitives')['container']
+  const container: typeof import('../src/components/primitives')['container']
   const createRef: typeof import('react')['createRef']
   const erc1967ProxyAbi: typeof import('../generated/index')['erc1967ProxyAbi']
   const erc1967ProxyAddress: typeof import('../generated/index')['erc1967ProxyAddress']
@@ -68,9 +68,9 @@ declare global {
   const erc6551BytecodeLibraryAddress: typeof import('../generated/index')['erc6551BytecodeLibraryAddress']
   const erc6551RegistryAbi: typeof import('../generated/index')['erc6551RegistryAbi']
   const erc6551RegistryAddress: typeof import('../generated/index')['erc6551RegistryAddress']
-  const findMobilePrefix: typeof import('../components/form-shipping.utils')['findMobilePrefix']
-  const format: typeof import('../utils/formatDate')['format']
-  const formatDate: typeof import('../utils/formatDate')['formatDate']
+  const findMobilePrefix: typeof import('../src/components/form-shipping.utils')['findMobilePrefix']
+  const format: typeof import('../src/utils/formatDate')['format']
+  const formatDate: typeof import('../src/utils/formatDate')['formatDate']
   const forwardRef: typeof import('react')['forwardRef']
   const getBidirectionalTransfer: typeof import('../generated/index')['getBidirectionalTransfer']
   const getContract: typeof import('../generated/index')['getContract']
@@ -87,15 +87,15 @@ declare global {
   const getIhoMarket: typeof import('../generated/index')['getIhoMarket']
   const getIhoMining: typeof import('../generated/index')['getIhoMining']
   const getIihoFuel: typeof import('../generated/index')['getIihoFuel']
-  const getOrder: typeof import('../apis/index')['getOrder']
-  const getProduct: typeof import('../apis/index')['getProduct']
-  const getProductId: typeof import('../apis/index')['getProductId']
-  const getProductIdVariations: typeof import('../apis/index')['getProductIdVariations']
-  const getProductIdVariationsVariation: typeof import('../apis/index')['getProductIdVariationsVariation']
-  const getUser: typeof import('../apis/index')['getUser']
-  const getUserInspect: typeof import('../apis/index')['getUserInspect']
-  const getUserLogout: typeof import('../apis/index')['getUserLogout']
-  const getUserNonce: typeof import('../apis/index')['getUserNonce']
+  const getOrder: typeof import('../src/apis/index')['getOrder']
+  const getProduct: typeof import('../src/apis/index')['getProduct']
+  const getProductId: typeof import('../src/apis/index')['getProductId']
+  const getProductIdVariations: typeof import('../src/apis/index')['getProductIdVariations']
+  const getProductIdVariationsVariation: typeof import('../src/apis/index')['getProductIdVariationsVariation']
+  const getUser: typeof import('../src/apis/index')['getUser']
+  const getUserInspect: typeof import('../src/apis/index')['getUserInspect']
+  const getUserLogout: typeof import('../src/apis/index')['getUserLogout']
+  const getUserNonce: typeof import('../src/apis/index')['getUserNonce']
   const getVerifiableUpgradeable: typeof import('../generated/index')['getVerifiableUpgradeable']
   const ierc6551AccountAbi: typeof import('../generated/index')['ierc6551AccountAbi']
   const ierc6551AccountAddress: typeof import('../generated/index')['ierc6551AccountAddress']
@@ -110,16 +110,16 @@ declare global {
   const ihoMiningAddress: typeof import('../generated/index')['ihoMiningAddress']
   const iihoFuelAbi: typeof import('../generated/index')['iihoFuelAbi']
   const iihoFuelAddress: typeof import('../generated/index')['iihoFuelAddress']
-  const layouts: typeof import('../layouts/index')['layouts']
+  const layouts: typeof import('../src/layouts/index')['layouts']
   const lazy: typeof import('react')['lazy']
   const memo: typeof import('react')['memo']
   const motion: typeof import('framer-motion')['motion']
-  const parsePhone: typeof import('../components/form-shipping.utils')['parsePhone']
-  const postOrder: typeof import('../apis/index')['postOrder']
-  const postOrderPay: typeof import('../apis/index')['postOrderPay']
-  const postUserVerify: typeof import('../apis/index')['postUserVerify']
-  const putOrderCancel: typeof import('../apis/index')['putOrderCancel']
-  const putUser: typeof import('../apis/index')['putUser']
+  const parsePhone: typeof import('../src/components/form-shipping.utils')['parsePhone']
+  const postOrder: typeof import('../src/apis/index')['postOrder']
+  const postOrderPay: typeof import('../src/apis/index')['postOrderPay']
+  const postUserVerify: typeof import('../src/apis/index')['postUserVerify']
+  const putOrderCancel: typeof import('../src/apis/index')['putOrderCancel']
+  const putUser: typeof import('../src/apis/index')['putUser']
   const readBidirectionalTransfer: typeof import('../generated/index')['readBidirectionalTransfer']
   const readErc1967Proxy: typeof import('../generated/index')['readErc1967Proxy']
   const readErc20: typeof import('../generated/index')['readErc20']
@@ -180,7 +180,7 @@ declare global {
   const readIihoFuel: typeof import('../generated/index')['readIihoFuel']
   const readVerifiableUpgradeable: typeof import('../generated/index')['readVerifiableUpgradeable']
   const readVerifiableUpgradeableVerifier: typeof import('../generated/index')['readVerifiableUpgradeableVerifier']
-  const removeInnerHTMLAttributes: typeof import('../utils/removeInnerHTMLAttributes')['removeInnerHTMLAttributes']
+  const removeInnerHTMLAttributes: typeof import('../src/utils/removeInnerHTMLAttributes')['removeInnerHTMLAttributes']
   const simulateBidirectionalTransfer: typeof import('../generated/index')['simulateBidirectionalTransfer']
   const simulateErc1967Proxy: typeof import('../generated/index')['simulateErc1967Proxy']
   const simulateErc20: typeof import('../generated/index')['simulateErc20']
@@ -227,10 +227,10 @@ declare global {
   const simulateVerifiableUpgradeable: typeof import('../generated/index')['simulateVerifiableUpgradeable']
   const simulateVerifiableUpgradeableTransferVerifier: typeof import('../generated/index')['simulateVerifiableUpgradeableTransferVerifier']
   const startTransition: typeof import('react')['startTransition']
-  const store: typeof import('../store/index')['default']
-  const subtitle: typeof import('../components/primitives')['subtitle']
-  const title: typeof import('../components/primitives')['title']
-  const useAsyncCallbacks: typeof import('../hooks/use-async-callbacks')['useAsyncCallbacks']
+  const store: typeof import('../src/store/index')['default']
+  const subtitle: typeof import('../src/components/primitives')['subtitle']
+  const title: typeof import('../src/components/primitives')['title']
+  const useAsyncCallbacks: typeof import('../src/hooks/use-async-callbacks')['useAsyncCallbacks']
   const useBidirectionalTransfer: typeof import('../generated/index')['useBidirectionalTransfer']
   const useCallback: typeof import('react')['useCallback']
   const useContext: typeof import('react')['useContext']
@@ -364,7 +364,7 @@ declare global {
   const useSimulateVerifiableUpgradeable: typeof import('../generated/index')['useSimulateVerifiableUpgradeable']
   const useSimulateVerifiableUpgradeableTransferVerifier: typeof import('../generated/index')['useSimulateVerifiableUpgradeableTransferVerifier']
   const useState: typeof import('react')['useState']
-  const useStoreUser: typeof import('../hooks/use-store-user')['useStoreUser']
+  const useStoreUser: typeof import('../src/hooks/use-store-user')['useStoreUser']
   const useSyncExternalStore: typeof import('react')['useSyncExternalStore']
   const useTransition: typeof import('react')['useTransition']
   const useVerifiableUpgradeable: typeof import('../generated/index')['useVerifiableUpgradeable']
@@ -429,7 +429,7 @@ declare global {
   const useWriteVerifiableUpgradeableTransferVerifier: typeof import('../generated/index')['useWriteVerifiableUpgradeableTransferVerifier']
   const verifiableUpgradeableAbi: typeof import('../generated/index')['verifiableUpgradeableAbi']
   const verifiableUpgradeableAddress: typeof import('../generated/index')['verifiableUpgradeableAddress']
-  const verifyInsufficientFunds: typeof import('../utils/verifyInsufficientFunds')['verifyInsufficientFunds']
+  const verifyInsufficientFunds: typeof import('../src/utils/verifyInsufficientFunds')['verifyInsufficientFunds']
   const wallet: typeof import('../generated/index')['wallet']
   const watchBidirectionalTransferEvent: typeof import('../generated/index')['watchBidirectionalTransferEvent']
   const watchErc1967ProxyEvent: typeof import('../generated/index')['watchErc1967ProxyEvent']
@@ -519,36 +519,36 @@ declare global {
 // for type re-export
 declare global {
   // @ts-ignore
-  export type { ConnectButtonProps } from '../components/connect-button'
-  import('../components/connect-button')
+  export type { ConnectButtonProps } from '../src/components/connect-button'
+  import('../src/components/connect-button')
   // @ts-ignore
-  export type { FormShippingFields, InputPhoneNumberProps } from '../components/form-shipping'
-  import('../components/form-shipping')
+  export type { FormShippingFields, InputPhoneNumberProps } from '../src/components/form-shipping'
+  import('../src/components/form-shipping')
   // @ts-ignore
-  export type { LensProps } from '../components/lens'
-  import('../components/lens')
+  export type { LensProps } from '../src/components/lens'
+  import('../src/components/lens')
   // @ts-ignore
-  export type { OrderDetailProps } from '../components/order-detal'
-  import('../components/order-detal')
+  export type { OrderDetailProps } from '../src/components/order-detal'
+  import('../src/components/order-detal')
   // @ts-ignore
-  export type { OrderTableProps } from '../components/order-table'
-  import('../components/order-table')
+  export type { OrderTableProps } from '../src/components/order-table'
+  import('../src/components/order-table')
   // @ts-ignore
-  export type { ProductDetailDialogProps } from '../components/product-detail-dialog'
-  import('../components/product-detail-dialog')
+  export type { ProductDetailDialogProps } from '../src/components/product-detail-dialog'
+  import('../src/components/product-detail-dialog')
   // @ts-ignore
-  export type { SettingsDialogProps } from '../components/settings-dialog'
-  import('../components/settings-dialog')
+  export type { SettingsDialogProps } from '../src/components/settings-dialog'
+  import('../src/components/settings-dialog')
   // @ts-ignore
-  export type { ThemeSwitchProps } from '../components/theme-switch'
-  import('../components/theme-switch')
+  export type { ThemeSwitchProps } from '../src/components/theme-switch'
+  import('../src/components/theme-switch')
   // @ts-ignore
-  export type { ProductDescriptionProps } from '../ui/product-description'
-  import('../ui/product-description')
+  export type { ProductDescriptionProps } from '../src/ui/product-description'
+  import('../src/ui/product-description')
   // @ts-ignore
-  export type { ProductFormProps } from '../ui/product-form'
-  import('../ui/product-form')
+  export type { ProductFormProps } from '../src/ui/product-form'
+  import('../src/ui/product-form')
   // @ts-ignore
-  export type { ProductImagesProps } from '../ui/product-images'
-  import('../ui/product-images')
+  export type { ProductImagesProps } from '../src/ui/product-images'
+  import('../src/ui/product-images')
 }

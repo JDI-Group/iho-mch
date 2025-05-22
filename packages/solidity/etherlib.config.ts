@@ -13,7 +13,7 @@ const config = defineConfig([
     ],
   },
   {
-    output: '../market/generated',
+    output: '../market/src/generated',
     fragments: { ERC20: erc20Abi },
     plugins: [
       hardhat(),
