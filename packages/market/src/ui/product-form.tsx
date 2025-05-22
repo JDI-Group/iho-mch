@@ -1,6 +1,6 @@
 import type { Attribute, Variation } from '@/apis/index.type'
 import type { FormEvent } from 'react'
-import { helperStake } from '@/src/services/stake'
+import { helperStake } from '@/services/stake'
 import { If, useAsyncCallback, useStore, useWatch } from '@hairy/react-lib'
 import { Button } from '@heroui/button'
 import { Form } from '@heroui/form'

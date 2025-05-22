@@ -1,4 +1,4 @@
-import { ProductDescription } from '@/src/ui/product-description'
+import { ProductDescription } from '@/ui/product-description'
 import { Else, If, Then } from '@hairy/react-lib'
 
 import { whenever } from '@hairy/utils'
