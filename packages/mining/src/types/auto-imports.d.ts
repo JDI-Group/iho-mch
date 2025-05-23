@@ -7,9 +7,14 @@
 export {}
 declare global {
   const ConnectWidget: typeof import('../components/connect-widget')['ConnectWidget']
+  const Dicebear: typeof import('../components/dicebear')['Dicebear']
+  const HomeMiningIncrease: typeof import('../ui/home-mining-increase')['HomeMiningIncrease']
+  const HomeMiningItem: typeof import('../ui/home-mining-item')['HomeMiningItem']
   const MaterialSymbolsArrowDownwardAltRounded: typeof import('../components/rainbowkit-widget')['MaterialSymbolsArrowDownwardAltRounded']
   const RainbowkitWidget: typeof import('../components/rainbowkit-widget')['RainbowkitWidget']
   const SubscribeWagmiConfig: typeof import('../generated/index')['SubscribeWagmiConfig']
+  const TrendCard: typeof import('../components/trend-card')['TrendCard']
+  const TrendCardS: typeof import('../components/trend-card')['TrendCardS']
   const addresses: typeof import('../generated/index')['addresses']
   const bidirectionalTransferAbi: typeof import('../generated/index')['bidirectionalTransferAbi']
   const bidirectionalTransferAddress: typeof import('../generated/index')['bidirectionalTransferAddress']
@@ -525,6 +530,12 @@ declare global {
 // for type re-export
 declare global {
   // @ts-ignore
+  export type { DicebearProps } from '../components/dicebear'
+  import('../components/dicebear')
+  // @ts-ignore
   export type { RainbowkitWidgetProps } from '../components/rainbowkit-widget'
   import('../components/rainbowkit-widget')
+  // @ts-ignore
+  export type { HomeMiningItemProps } from '../ui/home-mining-item'
+  import('../ui/home-mining-item')
 }

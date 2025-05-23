@@ -11,10 +11,9 @@ export function Header() {
         <NavbarBrand className="gap-3 max-w-fit">
           IHO Mining
         </NavbarBrand>
-
       </NavbarContent>
       <NavbarContent justify="end">
-        <RainbowkitWidget />
+        <RainbowkitWidget chain={false} />
       </NavbarContent>
     </HeroUINavbar>
   )
