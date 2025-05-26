@@ -15,8 +15,9 @@ export function HomeMiningItem({
   status = 'active',
   ...props
 }: HomeMiningItemProps) {
+  const router = useRouter()
   return (
-    <div className={clsx('flex flex-col gap-2', props.className)}>
+    <div className={clsx('flex flex-col gap-2', props.className)} onClick={() => { router.push('/detail') }}>
       <Card isFooterBlurred className="border-none" radius="lg">
         <Image
           alt="Woman listing to music"

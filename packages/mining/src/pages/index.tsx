@@ -65,20 +65,20 @@ function Page() {
         </div>
         <div className="grid grid-cols-[repeat(auto-fill,100px)] gap-4">
           <HomeMiningItem
+            src="https://heroui.com/images/hero-card.jpeg"
+            name="Headset Plus"
             id="0xcdef"
-            name="Headset Plus"
-            src="https://heroui.com/images/hero-card.jpeg"
           />
           <HomeMiningItem
-            id="0xdef0"
-            name="Game Console"
             src="https://heroui.com/images/album-cover.png"
+            name="Game Console"
             status="inactive"
+            id="0xdef0"
           />
           <HomeMiningItem
-            id="0xdef0"
-            name="Headset Plus"
             src="https://heroui.com/images/hero-card.jpeg"
+            name="Headset Plus"
+            id="0xdef0"
           />
           <HomeMiningIncrease />
         </div>

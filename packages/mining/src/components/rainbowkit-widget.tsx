@@ -73,37 +73,39 @@ export function RainbowkitWidget({
 
         return (
           <div className="flex gap-2">
-            <If
-              cond={showChain}
-              tag={Button}
-              onPress={openChainModal}
-              style={{ display: 'flex', alignItems: 'center' }}
-              variant="light"
-              className="flex-shrink-0 px-2 gap-0"
-              radius="full"
-              size={size}
-            >
-              <If
-                cond={chain.hasIcon}
-                style={{ background: chain.iconBackground }}
-                className="mr-2 w-6 h-6 rounded-full flex-shrink-0"
-                tag="div"
+            <If cond={showChain}>
+              <Button
+                onPress={openChainModal}
+                style={{ display: 'flex', alignItems: 'center' }}
+                variant="light"
+                className="flex-shrink-0 px-2 gap-0"
+                radius="full"
+                size={size}
               >
                 <If
-                  cond={chain.iconUrl}
-                  tag="img"
-                  alt={chain.name ?? 'Chain icon'}
-                  src={chain.iconUrl}
-                  style={{ width: 24, height: 24 }}
-                />
-              </If>
-              <span className="mr-1 max-sm:hidden">{chain.name}</span>
-              <Icon fontSize="16" icon="solar:alt-arrow-down-bold-duotone" />
+                  cond={chain.hasIcon}
+                  style={{ background: chain.iconBackground }}
+                  className="mr-2 w-6 h-6 rounded-full flex-shrink-0"
+                  tag="div"
+                >
+                  <If
+                    cond={chain.iconUrl}
+                    tag="img"
+                    alt={chain.name ?? 'Chain icon'}
+                    src={chain.iconUrl}
+                    style={{ width: 24, height: 24 }}
+                  />
+                </If>
+                <span className="mr-1 max-sm:hidden">{chain.name}</span>
+                <Icon fontSize="16" icon="solar:alt-arrow-down-bold-duotone" />
+              </Button>
             </If>
-            <If cond={showAccount} tag={Button} className="flex-shrink-0 px-2 gap-0" radius="full" size={size} onPress={openAccountModal} variant="light">
-              <Dicebear className="w-[24px] h-[24px] rounded-full mr-2" style={shapes} seed={account.address} />
-              <span className="mr-1 max-xs:hidden">{account.displayName}</span>
-              <Icon fontSize="16" icon="solar:alt-arrow-down-bold-duotone" />
+            <If cond={showAccount}>
+              <Button className="flex-shrink-0 px-2 gap-0" radius="full" size={size} onPress={openAccountModal} variant="light">
+                <Dicebear className="w-[24px] h-[24px] rounded-full mr-2" style={shapes} seed={account.address} />
+                <span className="mr-1 max-xs:hidden">{account.displayName}</span>
+                <Icon fontSize="16" icon="solar:alt-arrow-down-bold-duotone" />
+              </Button>
             </If>
           </div>
         )

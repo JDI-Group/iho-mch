@@ -137,12 +137,6 @@ importers:
       '@heroui/toast':
         specifier: ^2.0.6
         version: 2.0.9(@heroui/system@2.4.12(@heroui/theme@2.4.12(tailwindcss@3.4.16))(framer-motion@11.13.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@heroui/theme@2.4.12(tailwindcss@3.4.16))(framer-motion@11.13.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@openzeppelin/contracts':
-        specifier: ^5.2.0
-        version: 5.3.0
-      '@openzeppelin/contracts-upgradeable':
-        specifier: ^5.2.0
-        version: 5.3.0(@openzeppelin/contracts@5.3.0)
       '@overlastic/react':
         specifier: ^0.8.1
         version: 0.8.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -264,12 +258,6 @@ importers:
       '@iconify/react':
         specifier: ^6.0.0
         version: 6.0.0(react@19.1.0)
-      '@openzeppelin/contracts':
-        specifier: ^5.2.0
-        version: 5.3.0
-      '@openzeppelin/contracts-upgradeable':
-        specifier: ^5.2.0
-        version: 5.3.0(@openzeppelin/contracts@5.3.0)
       '@rainbow-me/rainbowkit':
         specifier: ^2.2.4
         version: 2.2.4(@tanstack/react-query@5.76.0(react@19.1.0))(@types/react@19.1.4)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(viem@2.30.0(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.24.4))(wagmi@2.15.3(@tanstack/query-core@5.76.0)(@tanstack/react-query@5.76.0(react@19.1.0))(@types/react@19.1.4)(bufferutil@4.0.9)(immer@10.0.2)(react@19.1.0)(typescript@5.8.3)(utf-8-validate@5.0.10)(viem@2.30.0(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.24.4))(zod@3.24.4))
