@@ -1,4 +1,3 @@
-/* eslint-disable test/no-import-node-test */
 import type { Address, Hash } from 'viem'
 import assert from 'node:assert/strict'
 import { describe, it } from 'node:test'
@@ -7,7 +6,6 @@ import { nanoid } from 'nanoid'
 import { encodeAbiParameters, encodeFunctionData, getAddress, keccak256, zeroAddress } from 'viem'
 import { generatePrivateKey, privateKeyToAccount } from 'viem/accounts'
 import IHOMiningModule from '../ignition/modules/IHOMining'
-
 /**
  * Load test environment
  * Returns deployed contracts and test accounts
@@ -73,6 +71,26 @@ function solidityPackedClaimSignatureKeccak256(
   return keccak256(encoded)
 }
 
+/**
+ * Calculate keccak256 hash for device registration signature
+ * @param owner Owner's address
+ * @param device Device identifier
+ * @returns Hash for registration signature verification
+ */
+function solidityPackedRegisterSignatureKeccak256(
+  owner: Address,
+  device: string,
+) {
+  const encoded = encodeAbiParameters(
+    [
+      { type: 'address', name: 'owner' },
+      { type: 'string', name: 'device' },
+    ],
+    [owner, device],
+  )
+  return keccak256(encoded)
+}
+
 describe('iHOMining', async () => {
   // Test contract deployment and initialization
   it('should be able to deploy iho mining module', async () => {
@@ -86,9 +104,15 @@ describe('iHOMining', async () => {
   it('should be able register and get info', async () => {
     const REGISTER_DEVICE_ID = nanoid(8)
 
-    const { mining, owner } = await loadFixture()
+    const { mining, owner, verifier } = await loadFixture()
 
-    await mining.write.register([REGISTER_DEVICE_ID])
+    const registerMessageByte = solidityPackedRegisterSignatureKeccak256(
+      owner.account.address,
+      REGISTER_DEVICE_ID,
+    )
+    const registerSignature = await verifier.signMessage({ message: { raw: registerMessageByte } })
+
+    await mining.write.register([REGISTER_DEVICE_ID, registerSignature])
 
     const { token, tokenId } = await mining.read.tokenOf([REGISTER_DEVICE_ID])
 
@@ -103,9 +127,14 @@ describe('iHOMining', async () => {
   // Test sending ETH to ERC6551 account and executing transactions
   it('should be able to send erc6551 account ETH', async () => {
     const REGISTER_DEVICE_ID = nanoid(8)
-    const { mining, viem, client, owner } = await loadFixture()
+    const { mining, viem, client, owner, verifier } = await loadFixture()
 
-    await mining.write.register([REGISTER_DEVICE_ID])
+    const registerMessageByte = solidityPackedRegisterSignatureKeccak256(
+      owner.account.address,
+      REGISTER_DEVICE_ID,
+    )
+    const registerSignature = await verifier.signMessage({ message: { raw: registerMessageByte } })
+    await mining.write.register([REGISTER_DEVICE_ID, registerSignature])
 
     const address = await mining.read.accountOf([REGISTER_DEVICE_ID])
     const account = await viem.getContractAt('ERC6551Account', address)
@@ -134,7 +163,12 @@ describe('iHOMining', async () => {
     const rewards = [{ amount: AMOUNT, token: zeroAddress }]
     const { mining, viem, client, owner, verifier } = await loadFixture()
 
-    await mining.write.register([DEVICE_ID])
+    const registerMessageByte = solidityPackedRegisterSignatureKeccak256(
+      owner.account.address,
+      DEVICE_ID,
+    )
+    const registerSignature = await verifier.signMessage({ message: { raw: registerMessageByte } })
+    await mining.write.register([DEVICE_ID, registerSignature])
     await owner.sendTransaction({ to: mining.address, value: AMOUNT })
 
     const address = await mining.read.accountOf([DEVICE_ID])
@@ -172,10 +206,9 @@ describe('iHOMining', async () => {
   it('should be able to register multiple devices', async () => {
     const DEVICE_ID_1 = nanoid(8)
     const DEVICE_ID_2 = nanoid(8)
-    const { mining, owner } = await loadFixture()
-
-    await mining.write.register([DEVICE_ID_1])
-    await mining.write.register([DEVICE_ID_2])
+    const { mining, owner, verifier } = await loadFixture()
+    await mining.write.register([DEVICE_ID_1, await verifier.signMessage({ message: { raw: solidityPackedRegisterSignatureKeccak256(owner.account.address, DEVICE_ID_1) } })])
+    await mining.write.register([DEVICE_ID_2, await verifier.signMessage({ message: { raw: solidityPackedRegisterSignatureKeccak256(owner.account.address, DEVICE_ID_2) } })])
 
     const tm1 = await mining.read.tokenOf([DEVICE_ID_1])
     const tm2 = await mining.read.tokenOf([DEVICE_ID_2])
@@ -195,7 +228,12 @@ describe('iHOMining', async () => {
 
     assert.equal(await mining.read.fuel(), fuel.address)
 
-    await mining.write.register([DEVICE_ID])
+    const registerMessageByte = solidityPackedRegisterSignatureKeccak256(
+      owner.account.address,
+      DEVICE_ID,
+    )
+    const registerSignature = await verifier.signMessage({ message: { raw: registerMessageByte } })
+    await mining.write.register([DEVICE_ID, registerSignature])
     await owner.sendTransaction({ to: mining.address, value: AMOUNT })
 
     const address = await mining.read.accountOf([DEVICE_ID])

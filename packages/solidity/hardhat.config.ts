@@ -3,9 +3,9 @@
 import type { HardhatUserConfig } from 'hardhat/config'
 import hardhatIgnitionViewPlugin from '@nomicfoundation/hardhat-ignition-viem'
 import hardhatToolboxViemPlugin from '@nomicfoundation/hardhat-toolbox-viem'
+import { generatePrivateKey } from 'viem/accounts'
 
 const config: HardhatUserConfig = {
-
   plugins: [
     hardhatIgnitionViewPlugin,
     hardhatToolboxViemPlugin,
@@ -14,15 +14,19 @@ const config: HardhatUserConfig = {
     profiles: {
       default: { version: '0.8.28' },
       production: {
-        settings: { optimizer: { enabled: true, runs: 200 } },
+        settings: {
+          evmVersion: 'shanghai',
+          optimizer: {
+            enabled: true,
+            runs: 200,
+          },
+        },
         version: '0.8.28',
       },
     },
     remappings: ['forge-std/=npm/forge-std@1.9.4/src/'],
   },
   networks: {
-    hardhatMainnet: { type: 'edr', chainType: 'l1' },
-    hardhatOptimism: { type: 'edr', chainType: 'optimism' },
     moonchainGeneva: {
       name: 'Moonchain Geneva',
       currency: { decimals: 18, name: 'MXC Token', symbol: 'MXC' },
@@ -33,6 +37,10 @@ const config: HardhatUserConfig = {
       type: 'http',
       chainType: 'l1',
       testnet: true,
+      accounts: [
+        process.env.DEPLOYER_PRIVATE_KEY || generatePrivateKey(),
+        process.env.VERIFIER_PRIVATE_KEY || generatePrivateKey(),
+      ],
     },
     moonchain: {
       name: 'Moonchain',
@@ -43,8 +51,13 @@ const config: HardhatUserConfig = {
       type: 'http',
       chainId: 18686,
       chainType: 'l1',
+      accounts: [
+        process.env.DEPLOYER_PRIVATE_KEY || generatePrivateKey(),
+        process.env.VERIFIER_PRIVATE_KEY || generatePrivateKey(),
+      ],
     },
   },
+
 }
 
 export default config

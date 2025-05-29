@@ -162,11 +162,13 @@ contract IHOMining is
    *
    * Creates a new ERC721 token and associates it with an ERC6551 account
    */
-  function register(string memory device) public {
+  function register(string memory device, bytes memory signature) public {
     if (bytes(device).length == 0)
       revert DeviceEmpty();
     if (DeviceMapToken[device].token != address(0))
       revert DeviceRegistered();
+
+    verify(abi.encode(msg.sender, device), signature);
 
     uint256 _tokenID = _mint(msg.sender);
     address _account = _mintAccount(address(this), _tokenID);

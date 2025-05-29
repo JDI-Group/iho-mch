@@ -5,7 +5,7 @@ import IHOFuelModule from './IHOFuel'
 const IHOMiningModule = buildModule('IHOMining', (m) => {
   const { accountImplement, accountRegistry } = m.useModule(erc6551Module)
   const { fuel } = m.useModule(IHOFuelModule)
-  const implement = m.contract('IHOMining')
+  const implement = m.contract('IHOMining', [], { id: 'IHOMMiningImplement' })
 
   const data = m.encodeFunctionCall(implement, 'initialize', [
     fuel,
@@ -14,8 +14,8 @@ const IHOMiningModule = buildModule('IHOMining', (m) => {
     m.getAccount(1),
   ])
 
-  const proxy = m.contract('ERC1967Proxy', [implement, data])
-  const mining = m.contractAt('IHOMining', proxy, { id: 'IHOMiningProxy' })
+  const proxy = m.contract('ERC1967Proxy', [implement, data], { id: 'IHOMiningProxy' })
+  const mining = m.contractAt('IHOMining', proxy, { id: 'IHOMining' })
   return { mining, accountRegistry, accountImplement, fuel }
 })
 
