@@ -1,2 +1,4 @@
 packages:
   - packages/**
+patchedDependencies:
+  '@nomicfoundation/hardhat-ignition': patches/@nomicfoundation__hardhat-ignition.patch

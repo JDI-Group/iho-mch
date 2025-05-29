@@ -15,6 +15,7 @@ export default antfu({
     'eslint-comments/no-unlimited-disable': 'off',
     'react-dom/no-dangerously-set-innerhtml': 'off',
     'react-dom/no-missing-button-type': 'off',
+    'test/no-import-node-test': 'off',
     'react/prefer-destructuring-assignment': 'off',
   },
   ignores: [

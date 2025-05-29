@@ -1,0 +1,30 @@
+diff --git a/dist/src/internal/tasks/deploy.js b/dist/src/internal/tasks/deploy.js
+index 0da9bb1a448d119c9a158db63cd614719a8025fd..2b233cd0435b3fbedc4434833849b7da66102c2d 100644
+--- a/dist/src/internal/tasks/deploy.js
++++ b/dist/src/internal/tasks/deploy.js
+@@ -117,6 +117,25 @@ const taskDeploy = async ({ modulePath, parameters: parametersInput, deploymentI
+     const artifactResolver = new HardhatArtifactResolver(hre.artifacts);
+     const executionEventListener = new PrettyEventHandler();
+     const strategyConfig = hre.config.ignition.strategyConfig?.[strategyName];
++    
++    // Modify the provider to handle "pending state is not available" error
++    const originalRequest = connection.provider.request;
++    connection.provider.request = async function (args) {
++        try {
++            return await originalRequest.call(this, args);
++        } catch (error) {
++            if (error && typeof error.message === 'string' && error.message.includes('pending state is not available')) {
++                console.log(chalk.yellow("Warning: 'pending state is not available' - using latest state instead"));
++                // If request in pending status, change it to requesting latest status
++                if (args?.params?.[1] === 'pending') {
++                    args.params[1] = 'latest';
++                    return await originalRequest.call(this, args);
++                }
++            }
++            throw error;
++        }
++    };
++    
+     const result = await deploy({
+         config: hre.config.ignition,
+         provider: connection.provider,
