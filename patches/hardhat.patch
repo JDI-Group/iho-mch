@@ -1,0 +1,16 @@
+diff --git a/dist/src/internal/builtin-plugins/network-manager/http-provider.js b/dist/src/internal/builtin-plugins/network-manager/http-provider.js
+index 6186da2ea3b0eb91a3a1d3bb2a5aedcff1321ce4..176832b5c21867652bd42f2b4cd17b66fb3c970c 100644
+--- a/dist/src/internal/builtin-plugins/network-manager/http-provider.js
++++ b/dist/src/internal/builtin-plugins/network-manager/http-provider.js
+@@ -59,6 +59,11 @@ export class HttpProvider extends BaseProvider {
+             jsonRpcResponse = await this.#fetchJsonRpcResponse(jsonRpcRequest);
+         }
+         if (isFailedJsonRpcResponse(jsonRpcResponse)) {
++            if (jsonRpcResponse.error.message.includes('pending state is not available')) {
++              console.warn("Warning: 'pending state is not available' - using latest state instead");
++              params[1] = "latest";
++              return this.request({ method, params })
++            }
+             const error = new ProviderError(jsonRpcResponse.error.message, jsonRpcResponse.error.code);
+             error.data = jsonRpcResponse.error.data;
+             // eslint-disable-next-line no-restricted-syntax -- allow throwing ProviderError

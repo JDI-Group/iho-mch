@@ -36,10 +36,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# harsta
-.harsta/artifacts
-.harsta/cache
-
 # common
 .env*
 .env
