@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "lnv -o --vlt -- next dev",
     "build": "lnv -o --vlt -- next build",
-    "start": "lnv -o --vlt -- next start"
+    "start": "lnv -o --vlt -- next start",
+    "genapi": "lnv -o --vlt -- genapi"
   },
   "dependencies": {
     "@dicebear/collection": "^9.2.2",
