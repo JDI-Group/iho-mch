@@ -18,6 +18,7 @@ declare global {
   const TrendCard: typeof import('../components/trend-card')['TrendCard']
   const TrendCardS: typeof import('../components/trend-card')['TrendCardS']
   const addresses: typeof import('../generated/index')['addresses']
+  const baseURL: typeof import('../apis/index')['baseURL']
   const bidirectionalTransferAbi: typeof import('../generated/index')['bidirectionalTransferAbi']
   const bidirectionalTransferAddress: typeof import('../generated/index')['bidirectionalTransferAddress']
   const chain: typeof import('../generated/index')['chain']
@@ -72,6 +73,7 @@ declare global {
   const lazy: typeof import('react')['lazy']
   const memo: typeof import('react')['memo']
   const motion: typeof import('framer-motion')['motion']
+  const postSignRegister: typeof import('../apis/index')['postSignRegister']
   const readBidirectionalTransfer: typeof import('../generated/index')['readBidirectionalTransfer']
   const readErc1967Proxy: typeof import('../generated/index')['readErc1967Proxy']
   const readErc20: typeof import('../generated/index')['readErc20']
@@ -182,6 +184,7 @@ declare global {
   const simulateIhoMining: typeof import('../generated/index')['simulateIhoMining']
   const simulateIhoMiningApprove: typeof import('../generated/index')['simulateIhoMiningApprove']
   const simulateIhoMiningClaim: typeof import('../generated/index')['simulateIhoMiningClaim']
+  const simulateIhoMiningClaims: typeof import('../generated/index')['simulateIhoMiningClaims']
   const simulateIhoMiningInitialize: typeof import('../generated/index')['simulateIhoMiningInitialize']
   const simulateIhoMiningRegister: typeof import('../generated/index')['simulateIhoMiningRegister']
   const simulateIhoMiningRenounceOwnership: typeof import('../generated/index')['simulateIhoMiningRenounceOwnership']
@@ -336,6 +339,7 @@ declare global {
   const useSimulateIhoMining: typeof import('../generated/index')['useSimulateIhoMining']
   const useSimulateIhoMiningApprove: typeof import('../generated/index')['useSimulateIhoMiningApprove']
   const useSimulateIhoMiningClaim: typeof import('../generated/index')['useSimulateIhoMiningClaim']
+  const useSimulateIhoMiningClaims: typeof import('../generated/index')['useSimulateIhoMiningClaims']
   const useSimulateIhoMiningInitialize: typeof import('../generated/index')['useSimulateIhoMiningInitialize']
   const useSimulateIhoMiningRegister: typeof import('../generated/index')['useSimulateIhoMiningRegister']
   const useSimulateIhoMiningRenounceOwnership: typeof import('../generated/index')['useSimulateIhoMiningRenounceOwnership']
@@ -410,6 +414,7 @@ declare global {
   const useWriteIhoMining: typeof import('../generated/index')['useWriteIhoMining']
   const useWriteIhoMiningApprove: typeof import('../generated/index')['useWriteIhoMiningApprove']
   const useWriteIhoMiningClaim: typeof import('../generated/index')['useWriteIhoMiningClaim']
+  const useWriteIhoMiningClaims: typeof import('../generated/index')['useWriteIhoMiningClaims']
   const useWriteIhoMiningInitialize: typeof import('../generated/index')['useWriteIhoMiningInitialize']
   const useWriteIhoMiningRegister: typeof import('../generated/index')['useWriteIhoMiningRegister']
   const useWriteIhoMiningRenounceOwnership: typeof import('../generated/index')['useWriteIhoMiningRenounceOwnership']
@@ -514,6 +519,7 @@ declare global {
   const writeIhoMining: typeof import('../generated/index')['writeIhoMining']
   const writeIhoMiningApprove: typeof import('../generated/index')['writeIhoMiningApprove']
   const writeIhoMiningClaim: typeof import('../generated/index')['writeIhoMiningClaim']
+  const writeIhoMiningClaims: typeof import('../generated/index')['writeIhoMiningClaims']
   const writeIhoMiningInitialize: typeof import('../generated/index')['writeIhoMiningInitialize']
   const writeIhoMiningRegister: typeof import('../generated/index')['writeIhoMiningRegister']
   const writeIhoMiningRenounceOwnership: typeof import('../generated/index')['writeIhoMiningRenounceOwnership']
@@ -537,6 +543,9 @@ declare global {
   // @ts-ignore
   export type { RainbowkitWidgetProps } from '../components/rainbowkit-widget'
   import('../components/rainbowkit-widget')
+  // @ts-ignore
+  export type { HomeMiningIncreaseProps } from '../ui/home-mining-increase'
+  import('../ui/home-mining-increase')
   // @ts-ignore
   export type { HomeMiningItemProps } from '../ui/home-mining-item'
   import('../ui/home-mining-item')

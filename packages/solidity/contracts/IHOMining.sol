@@ -72,6 +72,14 @@ contract IHOMining is
     uint256 tokenId;
   }
 
+  struct Reward {
+    string claimId;
+    string device;
+    Coin[] rewards;
+    bool fuelling;
+    string memo;
+  }
+
   /// @notice Mapping from device identifier to token information
   mapping(string device => TokenMapping) private DeviceMapToken;
   
@@ -168,7 +176,7 @@ contract IHOMining is
     if (DeviceMapToken[device].token != address(0))
       revert DeviceRegistered();
 
-    verify(abi.encode(msg.sender, device), signature);
+    verify(abi.encodePacked(msg.sender, device), signature);
 
     uint256 _tokenID = _mint(msg.sender);
     address _account = _mintAccount(address(this), _tokenID);
@@ -214,8 +222,10 @@ contract IHOMining is
     if (rewards.length == 0)
       revert EmptyRewards();
   
-    bytes32 rewardsHash = keccak256(abi.encode(rewards));
-    verify(abi.encode(claimId, device, rewardsHash), signature);
+    if (msg.sender != owner()) {
+      bytes32 rewardsHash = keccak256(abi.encode(rewards));
+      verify(abi.encodePacked(claimId, device, rewardsHash), signature);
+    }
     
     // Mark claim as used
     ClaimedIDs[claimId] = true;
@@ -238,6 +248,19 @@ contract IHOMining is
       int(block.number),
       block.timestamp
     );
+  }
+
+  function claims(Reward[] memory rewards) public payable onlyOwner {
+    for (uint256 i = 0; i < rewards.length; i++) {
+      claim(
+        rewards[i].claimId,
+        rewards[i].device,
+        rewards[i].rewards,
+        new bytes(0),
+        rewards[i].fuelling,
+        rewards[i].memo
+      );
+    }
   }
 
   /**

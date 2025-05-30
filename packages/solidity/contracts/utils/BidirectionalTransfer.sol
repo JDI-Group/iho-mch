@@ -24,6 +24,11 @@ contract BidirectionalTransfer {
     address token;
     uint256 amount;
   }
+  struct Utxo {
+    address recipient;
+    address token;
+    uint256 amount;
+  }
 
   /**
    * @dev Fallback function to receive ETH
@@ -128,9 +133,7 @@ contract BidirectionalTransfer {
    * @param coins Array of Coin structs to transfer
    */
   function transfers(address from, address to, Coin[] memory coins) internal {    
-    for (uint256 i = 0; i < coins.length; i++) {
-      Coin memory coin = coins[i];
-      transfer(from, to, coin.token, coin.amount);
-    }
+    for (uint256 i = 0; i < coins.length; i++)
+      transfer(from, to, coins[i].token, coins[i].amount);
   }
 }

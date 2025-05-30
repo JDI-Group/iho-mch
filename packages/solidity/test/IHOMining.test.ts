@@ -3,7 +3,7 @@ import assert from 'node:assert/strict'
 import { describe, it } from 'node:test'
 import { network } from 'hardhat'
 import { nanoid } from 'nanoid'
-import { encodeAbiParameters, encodeFunctionData, getAddress, keccak256, zeroAddress } from 'viem'
+import { encodeAbiParameters, encodeFunctionData, encodePacked, getAddress, keccak256, zeroAddress } from 'viem'
 import { generatePrivateKey, privateKeyToAccount } from 'viem/accounts'
 import IHOMiningModule from '../ignition/modules/IHOMining'
 /**
@@ -58,17 +58,12 @@ function solidityPackedClaimSignatureKeccak256(
   device: string,
   rewardsHash: Hash,
 ) {
-  // Encode message using abi.encode format to match contract verification method
-  const encoded = encodeAbiParameters(
-    [
-      { type: 'string', name: 'claimId' },
-      { type: 'string', name: 'device' },
-      { type: 'bytes32', name: 'rewardsHash' },
-    ],
+  const packed = encodePacked(
+    ['string', 'string', 'bytes32'],
     [claimId, device, rewardsHash],
   )
-  // Hash the encoded message
-  return keccak256(encoded)
+  // Hash the packed message
+  return keccak256(packed)
 }
 
 /**
@@ -81,14 +76,11 @@ function solidityPackedRegisterSignatureKeccak256(
   owner: Address,
   device: string,
 ) {
-  const encoded = encodeAbiParameters(
-    [
-      { type: 'address', name: 'owner' },
-      { type: 'string', name: 'device' },
-    ],
+  const packed = encodePacked(
+    ['address', 'string'],
     [owner, device],
   )
-  return keccak256(encoded)
+  return keccak256(packed)
 }
 
 describe('iHOMining', async () => {
@@ -264,5 +256,71 @@ describe('iHOMining', async () => {
 
     assert.equal(await fuel.read.balanceOf([address, zeroAddress]), AMOUNT)
     assert.equal(await client.getBalance({ address }), 0n)
+  })
+
+  // Test batch claiming rewards for multiple devices by owner
+  it('should be able to batch claim rewards for multiple devices', async () => {
+    // 设置测试参数
+    const DEVICE_ID_1 = nanoid(8)
+    const DEVICE_ID_2 = nanoid(8)
+    const CLAIM_ID_1 = nanoid(8)
+    const CLAIM_ID_2 = nanoid(8)
+    const AMOUNT_1 = 100n
+    const AMOUNT_2 = 200n
+    const MEMO_1 = 'Reward for device 1'
+    const MEMO_2 = 'Reward for device 2'
+
+    // Prepare reward data
+    const rewards1 = [{ amount: AMOUNT_1, token: zeroAddress }]
+    const rewards2 = [{ amount: AMOUNT_2, token: zeroAddress }]
+
+    const { client, mining, owner, verifier, fuel } = await loadFixture()
+
+    await mining.write.register([
+      DEVICE_ID_1,
+      await verifier.signMessage({
+        message: { raw: solidityPackedRegisterSignatureKeccak256(owner.account.address, DEVICE_ID_1) },
+      }),
+    ])
+
+    await mining.write.register([
+      DEVICE_ID_2,
+      await verifier.signMessage({
+        message: { raw: solidityPackedRegisterSignatureKeccak256(owner.account.address, DEVICE_ID_2) },
+      }),
+    ])
+
+    const address1 = await mining.read.accountOf([DEVICE_ID_1])
+    const address2 = await mining.read.accountOf([DEVICE_ID_2])
+
+    await owner.sendTransaction({ to: mining.address, value: AMOUNT_1 + AMOUNT_2 })
+
+    const batchRewards = [
+      {
+        claimId: CLAIM_ID_1,
+        device: DEVICE_ID_1,
+        rewards: rewards1,
+        fuelling: false, // Directly send to account
+        memo: MEMO_1,
+      },
+      {
+        claimId: CLAIM_ID_2,
+        device: DEVICE_ID_2,
+        rewards: rewards2,
+        fuelling: true, // Send to fuel contract
+        memo: MEMO_2,
+      },
+    ]
+
+    // Use the owner to call the claims method to collect rewards in bulk
+    await mining.write.claims([batchRewards], { value: 0n })
+
+    // Verification results
+    // Device 1 should receive ETH directly
+    assert.equal(await client.getBalance({ address: address1 }), AMOUNT_1)
+
+    // The reward for device 2 should be deposited into the fuel contract
+    assert.equal(await fuel.read.balanceOf([address2, zeroAddress]), AMOUNT_2)
+    assert.equal(await client.getBalance({ address: address2 }), 0n)
   })
 })

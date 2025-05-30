@@ -1,3 +1,8 @@
+import { Unless, useAsyncState } from '@hairy/react-lib'
+import { Spinner } from '@heroui/react'
+import { useMount } from 'react-use'
+import { useAccount } from 'wagmi'
+
 const data = [
   {
     name: 'Page A',
@@ -44,6 +49,21 @@ const data = [
 ]
 
 export function HomePage() {
+  const mining = getIhoMining({})
+  const { address } = useAccount()
+
+  const [{ value: miners = [], loading }, reloadMiners] = useAsyncState(
+    async () => {
+      const filter = await mining.createEventFilter.Registered({ owner: address })
+      const logs = await client.getFilterLogs({ filter })
+      return logs.map(log => log.args)
+    },
+    [address],
+    { immediate: true },
+  )
+
+  useMount(reloadMiners)
+
   return (
     <>
       <section className="px-4 mb-4">
@@ -63,25 +83,26 @@ export function HomePage() {
         <div className="my-4">
           Your Devices
         </div>
-        <div className="grid grid-cols-[repeat(auto-fill,100px)] gap-4">
-          <HomeMiningItem
-            src="https://heroui.com/images/hero-card.jpeg"
-            name="Headset Plus"
-            id="0xcdef"
-          />
-          <HomeMiningItem
-            src="https://heroui.com/images/album-cover.png"
-            name="Game Console"
-            status="inactive"
-            id="0xdef0"
-          />
-          <HomeMiningItem
-            src="https://heroui.com/images/hero-card.jpeg"
-            name="Headset Plus"
-            id="0xdef0"
-          />
-          <HomeMiningIncrease />
-        </div>
+        <Unless
+          cond={loading}
+          else={(
+            <div className="h-20 flex items-center justify-center">
+              <Spinner classNames={{ label: 'text-foreground mt-4' }} variant="wave" />
+            </div>
+          )}
+        >
+          <div className="grid grid-cols-[repeat(auto-fill,100px)] gap-4">
+            {miners.map(miner => (
+              <HomeMiningItem
+                key={miner.account}
+                src="https://heroui.com/images/hero-card.jpeg"
+                name="Headset Plus"
+                id="0xdef0"
+              />
+            ))}
+            <HomeMiningIncrease />
+          </div>
+        </Unless>
       </section>
     </>
   )

@@ -1,11 +1,11 @@
 /// <reference types="etherlib-generator/hardhat-network" />
 
-import type { HardhatUserConfig } from 'hardhat/config'
 import hardhatIgnitionViewPlugin from '@nomicfoundation/hardhat-ignition-viem'
 import hardhatToolboxViemPlugin from '@nomicfoundation/hardhat-toolbox-viem'
+import { HardhatUserConfig } from 'hardhat/types/config'
 import { generatePrivateKey } from 'viem/accounts'
 
-const config: HardhatUserConfig = {
+const config = {
   plugins: [
     hardhatIgnitionViewPlugin,
     hardhatToolboxViemPlugin,
@@ -57,7 +57,6 @@ const config: HardhatUserConfig = {
       ],
     },
   },
-
-}
+} as const satisfies HardhatUserConfig
 
 export default config

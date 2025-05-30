@@ -9,5 +9,4 @@ function Page() {
     </layouts.default>
   )
 }
-
 export default Page
