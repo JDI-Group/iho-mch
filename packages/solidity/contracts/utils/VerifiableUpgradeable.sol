@@ -49,6 +49,8 @@ abstract contract VerifiableUpgradeable is Initializable {
    * When signing on the client side, the same message should be hashed before signing.
    */
   function verify(bytes memory message, bytes memory signature) internal view virtual {
+    // 注意：这里不需要修改，因为无论输入是abi.encode还是abi.encodePacked，
+    // 这个函数都会对message进行keccak256哈希
     address recoveredAddress = recover(keccak256(message), signature);
     if (recoveredAddress != verifier) {
       revert InvalidSignature(recoveredAddress, verifier);

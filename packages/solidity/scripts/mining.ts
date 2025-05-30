@@ -16,7 +16,7 @@ const client = await viem.getPublicClient()
 
 async function main() {
   // testMoonchainGenevaMiningRegistry() // through testing
-  testMoonchainGenevaMiningRegistryByEthers() // test error
+  testMoonchainGenevaMiningRegistryByEthers() // through testing
 }
 
 main()

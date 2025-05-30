@@ -1,3 +1,5 @@
-artifacts
+artifacts/build-info
+artifacts/contracts
+artifacts/artifacts.d.ts
 cache
 dist
