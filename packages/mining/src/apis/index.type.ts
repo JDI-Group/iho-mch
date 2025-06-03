@@ -6,8 +6,9 @@
  */
 
 export interface SignatureRegisterBody {
-  address: string
-  device: string
+  owner: string
+  name: string
+  mac: string
 }
 export interface SignatureResponse {
   data: string

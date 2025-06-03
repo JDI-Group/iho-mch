@@ -4,12 +4,18 @@ import { RainbowKitProvider } from '@rainbow-me/rainbowkit'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import Head from 'next/head'
 
+import { useMount } from 'react-use'
 import { WagmiProvider } from 'wagmi'
 import '@/styles/globals.css'
 import '@rainbow-me/rainbowkit/styles.css'
 
 export default function App({ Component, pageProps }: any) {
   const client = new QueryClient()
+
+  useMount(() => {
+    if (process.env.NEXT_PUBLIC_NETWORK === 'moonchain_geneva')
+      Reflect.get(window, 'eruda')?.init()
+  })
   return (
     <>
       <Head>

@@ -1,6 +1,7 @@
 import { Unless, useAsyncState } from '@hairy/react-lib'
 import { Spinner } from '@heroui/react'
 import { useMount } from 'react-use'
+import { getAbiItem } from 'viem'
 import { useAccount } from 'wagmi'
 
 const data = [
@@ -53,14 +54,12 @@ export function HomePage() {
 
   const [{ value: miners = [], loading }, reloadMiners] = useAsyncState(
     async () => {
-      const filter = await client.createContractEventFilter({
+      const logs = await client.getLogs({
+        event: getAbiItem({ abi: ihoMiningAbi, name: 'Registered' }),
         address: addresses.IHOMining[5167004],
-        abi: ihoMiningAbi,
-        eventName: 'Registered',
-        args: { owner: address },
+        toBlock: 'latest',
+        fromBlock: 0n,
       })
-
-      const logs = await client.getFilterLogs({ filter })
       return logs.map(log => log.args)
     },
     [address],

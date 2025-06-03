@@ -1,5 +1,5 @@
 import type { Hex } from 'viem'
-import { postSignRegister } from '@/apis'
+import { postSignRegisterDevice } from '@/apis'
 import { useAsyncCallback } from '@hairy/react-lib'
 import { Card, CardBody, Spinner } from '@heroui/react'
 import { Icon } from '@iconify/react/dist/iconify.js'
@@ -12,10 +12,12 @@ export interface HomeMiningIncreaseProps {
 export function HomeMiningIncrease(props: HomeMiningIncreaseProps) {
   const { address } = useAccount()
   const [loading, register] = useAsyncCallback(async () => {
-    const { data: signature } = await postSignRegister({ address: address!, device: 'TEST-DEVICE' })
-    const hash = await writeIhoMiningRegister({ args: ['TEST-DEVICE', signature as Hex] })
-    await client.waitForTransactionReceipt({ hash })
+    const device = await navigator.bluetooth.requestDevice()
 
+    const { data: signature } = await postSignRegisterDevice({ owner: address!, name: device.name!, mac: device.id })
+    const hash = await writeIhoMiningRegister({ args: [device.name!, device.id, signature as Hex] })
+
+    await client.waitForTransactionReceipt({ hash })
     props.onRegistered?.()
   })
 

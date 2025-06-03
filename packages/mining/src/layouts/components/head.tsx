@@ -14,6 +14,7 @@ export function Head() {
         name="viewport"
       />
       <link href={siteConfig.favicon} rel="icon" />
+      <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
     </NextHead>
   )
 }

@@ -13,8 +13,8 @@ export const baseURL = process.env.NEXT_PUBLIC_MINING_SERVICE_URL
  * @method post
  * @tags Sign
  */
-export async function postSignRegister(body: Types.SignatureRegisterBody, config?: RequestInit) {
-  const response = await fetch(`${baseURL}/sign/register`, {
+export async function postSignRegisterDevice(body: Types.SignatureRegisterBody, config?: RequestInit) {
+  const response = await fetch(`${baseURL}/sign/registerDevice`, {
     headers: { 'Content-Type': 'application/json' },
     method: 'post',
     body: JSON.stringify(body),

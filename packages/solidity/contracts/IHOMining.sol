@@ -19,18 +19,14 @@ import "./erc6551/interfaces/IERC6551Registry.sol";
  * The contract leverages ERC721 for device ownership and ERC6551 for account management.
  */
 
-/// @notice Error thrown when device identifier is empty
-error DeviceEmpty();
 /// @notice Error thrown when device is already registered
 error DeviceRegistered();
 /// @notice Error thrown when device is not registered
 error DeviceUnregistered();
-/// @notice Error thrown when receive operation is invalid
-error ReceiveInvalid();
 /// @notice Error thrown when claim ID has already been used
-error ClaimAlreadyUsed(string claimId);
-/// @notice Error thrown when rewards array is empty
-error EmptyRewards();
+error ClaimAlreadyUsed();
+/// @notice Error thrown when MAC address format is invalid
+error InvalidMacFormat();
 
 contract IHOMining is
   VerifiableUpgradeable,
@@ -67,24 +63,39 @@ contract IHOMining is
    * @param token The token contract address
    * @param tokenId The token ID
    */
-  struct TokenMapping {
-    address token;
+  struct Token {
+    address tokenContract;
     uint256 tokenId;
   }
 
+  /**
+   * @dev Structure representing a reward with token address and amount
+   * @param token The token contract address
+   * @param amount The amount of the token
+   */
   struct Reward {
-    string claimId;
-    string device;
+    string id;
+    string mac;
     Coin[] rewards;
     bool fuelling;
     string memo;
   }
 
+  /**
+   * @dev Structure representing a coin with token address and amount
+   * @param token The token contract address
+   * @param amount The amount of the token
+   */
+  struct Device {
+    string name;
+    string mac;
+  }
+
   /// @notice Mapping from device identifier to token information
-  mapping(string device => TokenMapping) private DeviceMapToken;
+  mapping(string mac => Token) private DeviceMapToken;
   
   /// @notice Mapping from token address and ID to device identifier
-  mapping(address token => mapping(uint256 tokenId => string device)) private TokenMapDevice;
+  mapping(address token => mapping(uint256 tokenId => Device)) private TokenMapDevice;
   
   /// @notice Mapping to track used claim IDs
   mapping(string => bool) private ClaimedIDs;
@@ -94,8 +105,9 @@ contract IHOMining is
    * @param owner The owner of the device
    * @param token The token contract address
    * @param tokenId The token ID
+   * @param name The device name
+   * @param mac The device MAC address
    * @param account The ERC6551 account address
-   * @param device The device identifier
    * @param blockHeight The block height at registration
    * @param timestamp The timestamp of registration
    */
@@ -103,8 +115,9 @@ contract IHOMining is
     address indexed owner,
     address indexed token,
     uint256 indexed tokenId,
+    string name,
+    string mac,
     address account,
-    string device,
     int256 blockHeight,
     uint256 timestamp
   );
@@ -115,8 +128,10 @@ contract IHOMining is
    * @param token The token contract address
    * @param tokenId The token ID
    * @param account The ERC6551 account address
-   * @param device The device identifier
+   * @param name The device name
+   * @param mac The device MAC address
    * @param rewards The array of rewards (tokens and amounts)
+   * @param memo Additional information about the claim
    * @param blockHeight The block height at claim
    * @param timestamp The timestamp of claim
    */
@@ -125,7 +140,8 @@ contract IHOMining is
     address indexed token,
     uint256 indexed tokenId,
     address account,
-    string device,
+    string name,
+    string mac,
     Coin[] rewards,
     string memo,
     int256 blockHeight,
@@ -157,7 +173,6 @@ contract IHOMining is
     fuel = _fuelAddress;
     erc6551Registry = IERC6551Registry(_registryAddress);
     erc6551AccountImplementation = _erc6551AccountImplementation;
-
     __ERC721_init("IHOMining", "IHOM");
     __Ownable_init(msg.sender);
     __Verifie_init(_verifier);
@@ -166,30 +181,33 @@ contract IHOMining is
 
   /**
    * @dev Registers a new device
-   * @param device The device identifier
+   * @param name The device name
+   * @param mac The device MAC address
+   * @param signature Verification signature from authorized verifier
    *
    * Creates a new ERC721 token and associates it with an ERC6551 account
    */
-  function register(string memory device, bytes memory signature) public {
-    if (bytes(device).length == 0)
-      revert DeviceEmpty();
-    if (DeviceMapToken[device].token != address(0))
+  function register(string memory name, string memory mac, bytes memory signature) public {
+    if (bytes(mac).length < 6)
+      revert InvalidMacFormat();
+    if (DeviceMapToken[mac].tokenContract != address(0))
       revert DeviceRegistered();
 
-    verify(abi.encodePacked(msg.sender, device), signature);
+    verify(keccak256(abi.encodePacked(msg.sender, name, mac)), signature);
 
     uint256 _tokenID = _mint(msg.sender);
     address _account = _mintAccount(address(this), _tokenID);
 
-    TokenMapDevice[address(this)][_tokenID] = device;
-    DeviceMapToken[device] = TokenMapping(address(this), _tokenID);
+    TokenMapDevice[address(this)][_tokenID] = Device(name, mac);
+    DeviceMapToken[mac] = Token(address(this), _tokenID);
 
     emit Registered(
       msg.sender,
       address(this),
       _tokenID,
+      name,
+      mac,
       _account,
-      device,
       int(block.number),
       block.timestamp
     );
@@ -197,52 +215,55 @@ contract IHOMining is
 
   /**
    * @dev Claims rewards for a registered device
-   * @param claimId Unique identifier for this claim
-   * @param device The device identifier
+   * @param id Unique identifier for this claim
+   * @param mac The device MAC address
    * @param rewards Array of rewards (tokens and amounts)
    * @param signature Verification signature from authorized verifier
    * @param fuelling Whether to deposit rewards to fuel contract or directly to account
+   * @param memo Additional information about the claim
    */
   function claim(
-    string memory claimId,
-    string memory device,
+    string memory id,
+    string memory mac,
     Coin[] memory rewards,
     bytes memory signature,
     bool fuelling,
     string memory memo
   ) public payable {
-    TokenMapping memory tm = DeviceMapToken[device];
+    Token memory tok = DeviceMapToken[mac];
   
-    if (bytes(device).length == 0)
-      revert DeviceEmpty();
-    if (tm.token == address(0))
+    if (bytes(mac).length < 6)
+      revert InvalidMacFormat();
+    if (tok.tokenContract == address(0))
       revert DeviceUnregistered();
-    if (ClaimedIDs[claimId])
-      revert ClaimAlreadyUsed(claimId);
-    if (rewards.length == 0)
-      revert EmptyRewards();
+    if (ClaimedIDs[id])
+      revert ClaimAlreadyUsed();
   
     if (msg.sender != owner()) {
       bytes32 rewardsHash = keccak256(abi.encode(rewards));
-      verify(abi.encodePacked(claimId, device, rewardsHash), signature);
+      bytes32 claimHash = keccak256(abi.encodePacked(id, mac, rewardsHash));
+      verify(claimHash, signature);
     }
     
     // Mark claim as used
-    ClaimedIDs[claimId] = true;
+    ClaimedIDs[id] = true;
     
-    address deviceAccount = accountOf(device);
+    address _account = accountOf(mac);
     
     if (fuelling)
-      _fills(deviceAccount, rewards);
+      _fills(_account, rewards);
     else
-      _gifts(deviceAccount, rewards);
-      
+      _gifts(_account, rewards);
+    
+    Device memory device = TokenMapDevice[tok.tokenContract][tok.tokenId];
+
     emit Claimed(
-      IERC721(tm.token).ownerOf(tm.tokenId),
-      tm.token,
-      tm.tokenId,
-      deviceAccount,
-      device,
+      IERC721(tok.tokenContract).ownerOf(tok.tokenId),
+      tok.tokenContract,
+      tok.tokenId,
+      _account,
+      device.name,
+      device.mac,
       rewards,
       memo,
       int(block.number),
@@ -250,11 +271,15 @@ contract IHOMining is
     );
   }
 
+  /**
+   * @dev Claims rewards for multiple devices in a single transaction
+   * @param rewards Array of Reward structures containing claim details
+   */
   function claims(Reward[] memory rewards) public payable onlyOwner {
     for (uint256 i = 0; i < rewards.length; i++) {
       claim(
-        rewards[i].claimId,
-        rewards[i].device,
+        rewards[i].id,
+        rewards[i].mac,
         rewards[i].rewards,
         new bytes(0),
         rewards[i].fuelling,
@@ -265,11 +290,11 @@ contract IHOMining is
 
   /**
    * @dev Gets the token information for a device
-   * @param device The device identifier
-   * @return TokenMapping structure with token address and ID
+   * @param mac The device MAC address
+   * @return Token structure with token address and ID
    */
-  function tokenOf(string memory device) public view returns (TokenMapping memory) {
-    return DeviceMapToken[device];
+  function tokenOf(string memory mac) public view returns (Token memory) {
+    return DeviceMapToken[mac];
   }
 
   /**
@@ -278,24 +303,24 @@ contract IHOMining is
    * @param tokenId The token ID
    * @return The device identifier
    */
-  function deviceOf(address token, uint256 tokenId) public view returns (string memory) {
+  function deviceOf(address token, uint256 tokenId) public view returns (Device memory) {
     return TokenMapDevice[token][tokenId];
   }
 
   /**
    * @dev Gets the ERC6551 account address for a device
-   * @param device The device identifier
+   * @param mac The device MAC address
    * @return The account address (or address(0) if device not registered)
    */
-  function accountOf(string memory device) public view returns (address) {
-    TokenMapping memory tm = DeviceMapToken[device];
-    if (tm.token == address(0))
+  function accountOf(string memory mac) public view returns (address) {
+    Token memory tok = DeviceMapToken[mac];
+    if (tok.tokenContract == address(0))
       return address(0);
     return erc6551Registry.account(
       erc6551AccountImplementation,
       block.chainid,
-      tm.token,
-      tm.tokenId,
+      tok.tokenContract,
+      tok.tokenId,
       0
     );
   }
@@ -364,7 +389,7 @@ contract IHOMining is
       token,
       tokenId,
       0,
-      new bytes(0)
+      ""
     );
   }
 }

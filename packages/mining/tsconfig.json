@@ -10,7 +10,10 @@
       "@/*": ["./src/*"]
     },
     "resolveJsonModule": true,
-    "types": ["vitest/globals"],
+    "types": [
+      "vitest/globals",
+      "@types/web-bluetooth"
+    ],
     "allowJs": true,
     "strict": true,
     "noEmit": true,

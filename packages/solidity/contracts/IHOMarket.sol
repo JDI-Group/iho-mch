@@ -76,7 +76,10 @@ contract IHOMarket is VerifiableUpgradeable, BidirectionalTransfer, UUPSUpgradea
     bytes memory signature
   ) external payable {
     bytes32 coinsHash = keccak256(abi.encode(coins));
-    verify(abi.encodePacked(pid, oid, coinsHash, expire, memo), signature);
+    bytes32 stakeHash = keccak256(
+      abi.encodePacked(pid, oid, coinsHash, expire, memo)
+    );
+    verify(stakeHash, signature);
 
     require(projects[pid].target != 0, "Project not found");
     require(!projects[pid].confirmed, "Project already confirmed");
@@ -84,9 +87,7 @@ contract IHOMarket is VerifiableUpgradeable, BidirectionalTransfer, UUPSUpgradea
 
     uint256 expireTime = block.timestamp + expire;
 
-
     projects[pid].quantity += 1;
-
 
     for (uint256 i = 0; i < coins.length; i++) {
       stakes[pid][oid].coins.push(coins[i]);

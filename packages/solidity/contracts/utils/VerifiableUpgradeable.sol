@@ -25,11 +25,11 @@ abstract contract VerifiableUpgradeable is Initializable {
    * @param hash The hash of the message to verify
    * @param signature The signature data
    *
-   * Note: This function hashes the message with keccak256 before verifying the signature.
-   * When signing on the client side, the same message should be hashed before signing.
+   * Note: This function checks if the signature corresponds to the expected verifier address.
+   * If the recovered address does not match the verifier, it reverts with InvalidSignature error.
    */
-  function verify(bytes memory hash, bytes memory signature) internal view virtual {
-    bytes32 keccak256SignedMessage = MessageHashUtils.toEthSignedMessageHash(keccak256(hash));
+  function verify(bytes32 hash, bytes memory signature) internal view virtual {
+    bytes32 keccak256SignedMessage = MessageHashUtils.toEthSignedMessageHash(hash);
     address recoveredAddress = ECDSA.recover(keccak256SignedMessage, signature);
     if (verifier != recoveredAddress) {
       revert InvalidSignature(recoveredAddress, verifier);
