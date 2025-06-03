@@ -49,12 +49,17 @@ const data = [
 ]
 
 export function HomePage() {
-  const mining = getIhoMining({})
   const { address } = useAccount()
 
   const [{ value: miners = [], loading }, reloadMiners] = useAsyncState(
     async () => {
-      const filter = await mining.createEventFilter.Registered({ owner: address })
+      const filter = await client.createContractEventFilter({
+        address: addresses.IHOMining[5167004],
+        abi: ihoMiningAbi,
+        eventName: 'Registered',
+        args: { owner: address },
+      })
+
       const logs = await client.getFilterLogs({ filter })
       return logs.map(log => log.args)
     },
