@@ -2,7 +2,8 @@
 pragma solidity ^0.8.24;
 
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
-
+import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
+import "@openzeppelin/contracts/utils/cryptography/MessageHashUtils.sol";
 /**
  * @title VerifiableUpgradeable
  * @dev Base upgradeable contract that provides signature verification functionality
@@ -20,27 +21,6 @@ abstract contract VerifiableUpgradeable is Initializable {
   error InvalidSignature(address recover, address verifier);
 
   /**
-   * @dev Recovers the signer's address from a signature
-   * @param message The hashed message
-   * @param signature The signature data (65 bytes)
-   * @return The signer's address
-   */
-  function recover(bytes32 message, bytes memory signature) internal pure returns (address) {
-    require(signature.length == 65, "invalid signature length");
-    bytes32 digest = keccak256(abi.encodePacked("\x19Ethereum Signed Message:\n32", message));
-    bytes32 r;
-    bytes32 s;
-    uint8 v;
-    assembly {
-      r := mload(add(signature, 0x20))
-      s := mload(add(signature, 0x40))
-      v := byte(0, mload(add(signature, 0x60)))
-    }
-    
-    return ecrecover(digest, v, r, s);
-  }
-
-  /**
    * @dev Verifies a message signature
    * @param message The original message (not hashed)
    * @param signature The signature data
@@ -49,10 +29,9 @@ abstract contract VerifiableUpgradeable is Initializable {
    * When signing on the client side, the same message should be hashed before signing.
    */
   function verify(bytes memory message, bytes memory signature) internal view virtual {
-    // 注意：这里不需要修改，因为无论输入是abi.encode还是abi.encodePacked，
-    // 这个函数都会对message进行keccak256哈希
-    address recoveredAddress = recover(keccak256(message), signature);
-    if (recoveredAddress != verifier) {
+    bytes32 keccak256SignedMessage = MessageHashUtils.toEthSignedMessageHash(keccak256(message));
+    address recoveredAddress = ECDSA.recover(keccak256SignedMessage, signature);
+    if (verifier != recoveredAddress) {
       revert InvalidSignature(recoveredAddress, verifier);
     }
   }

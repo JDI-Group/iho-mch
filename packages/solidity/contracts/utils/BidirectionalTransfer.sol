@@ -24,6 +24,7 @@ contract BidirectionalTransfer {
     address token;
     uint256 amount;
   }
+
   struct Utxo {
     address recipient;
     address token;
@@ -136,4 +137,14 @@ contract BidirectionalTransfer {
     for (uint256 i = 0; i < coins.length; i++)
       transfer(from, to, coins[i].token, coins[i].amount);
   }
+
+  /**
+   * @dev Batch transfer multiple UTXOs (coins) to a recipient
+   * @param from The address to receive the coins
+   * @param utxos Array of Utxo structs to transfer
+   */
+   function transfers(address from, Utxo[] memory utxos) internal {
+    for (uint256 i = 0; i < utxos.length; i++)
+      transfer(from, utxos[i].recipient, utxos[i].token, utxos[i].amount);
+   }
 }

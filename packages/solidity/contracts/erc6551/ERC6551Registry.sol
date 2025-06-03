@@ -40,6 +40,14 @@ contract ERC6551Registry is IERC6551Registry {
 
     _account = Create2.deploy(0, bytes32(salt), code);
 
+    // Call the initialize function on the newly created account
+    address[] memory permissions = new address[](1);
+    permissions[0] = address(this);
+
+    bytes memory encoded = abi.encodeWithSignature("initialize(address[])",  permissions);
+    (bool s, bytes memory r) = _account.call(abi.encodePacked(encoded, msg.sender));
+    if (!s) assembly { revert(add(r, 32), mload(r)) }
+
     if (data.length != 0) {
       (bool success, bytes memory result) = _account.call(
         abi.encodePacked(data, msg.sender)

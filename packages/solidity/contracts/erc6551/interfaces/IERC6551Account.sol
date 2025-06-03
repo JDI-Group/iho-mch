@@ -39,11 +39,6 @@ interface IERC6551Account {
     );
 
     /**
-     * @dev Allows the account to receive native tokens
-     */
-    receive() external payable;
-
-    /**
      * @dev Executes a transaction from this account
      * @param to The target address for the transaction
      * @param value The amount of native token to send

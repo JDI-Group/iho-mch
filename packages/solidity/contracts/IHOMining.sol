@@ -358,17 +358,13 @@ contract IHOMining is
    * @return _account The created account address
    */
   function _mintAccount(address token, uint256 tokenId) private returns (address _account) {
-    bytes memory data = abi.encodeWithSignature(
-      "initialize(address[])",
-      new address[](0)
-    );
     _account = erc6551Registry.createAccount(
       erc6551AccountImplementation,
       block.chainid,
       token,
       tokenId,
       0,
-      data
+      new bytes(0)
     );
   }
 }

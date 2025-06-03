@@ -75,6 +75,17 @@ contract ERC6551Account is IERC165, IERC1271, IERC6551Account, Initializable {
    * @param hasPermission Whether the permission is granted or revoked
    */
   event PermissionUpdated(address owner, address caller, bool hasPermission);
+  /**
+   * @notice Emitted when a transaction is executed from this account
+   * @param target The address the transaction was sent to
+   * @param value The amount of native token sent with the transaction
+   * @param data The calldata sent with the transaction
+   */
+  struct Call {
+    address target;
+    uint256 value;
+    bytes data;
+  }
 
   /**
    * @dev Modifier that restricts function access to the account owner
@@ -107,17 +118,34 @@ contract ERC6551Account is IERC165, IERC1271, IERC6551Account, Initializable {
 
   /**
    * @dev Executes a transaction from this account if caller is authorized
-   * @param to The target address for the transaction
+   * @param target The target address for the transaction
    * @param value The amount of native token to send
    * @param data The calldata to send
    * @return result The bytes returned from the transaction execution
    */
-  function execute(address to, uint256 value, bytes calldata data) external payable onlyAuthorized returns (bytes memory result) {
-    result = _call(to, value, data);
+  function execute(address target, uint256 value, bytes calldata data) public payable onlyAuthorized returns (bytes memory result) {
+    result = _call(target, value, data);
 
     ++nonce;
 
-    emit TransactionExecuted(to, value, data);
+    emit TransactionExecuted(target, value, data);
+  }
+
+  /**
+   * @dev Executes multiple transactions from this account if caller is authorized
+   * @param data Array of Call structs containing target, value, and calldata
+   * @return results Array of bytes returned from each transaction execution
+   */
+  function executeBatch(Call[] calldata data) external payable onlyAuthorized returns (bytes[] memory results) {
+    results = new bytes[](data.length);
+
+    for (uint256 i = 0; i < data.length; i++) {
+      results[i] = _call(data[i].target, data[i].value, data[i].data);
+
+      ++nonce;
+
+      emit TransactionExecuted(data[i].target, data[i].value, data[i].data);
+    }
   }
 
   /**
