@@ -100,6 +100,8 @@ describe('iHOMining', async () => {
     const DEVICE_MAC = nanoid(8)
 
     const { mining, owner, verifier } = await loadFixture()
+    const emptyAddress = await mining.read.accountOf([DEVICE_MAC])
+    assert.equal(emptyAddress, zeroAddress, 'Account should not exist before registration')
 
     const registerMessageByte = solidityPackedRegisterSignatureKeccak256(
       owner.account.address,
@@ -116,7 +118,9 @@ describe('iHOMining', async () => {
     assert.equal(await mining.read.ownerOf([tokenId]), owner.account.address)
 
     const device = await mining.read.deviceOf([tokenContract, tokenId])
+    const account = await mining.read.accountOf([DEVICE_MAC])
 
+    assert.notEqual(account, zeroAddress, 'Account should exist after registration')
     assert.equal(device.name, DEVICE_NAME)
     assert.deepEqual(device.mac, DEVICE_MAC)
   })

@@ -50,7 +50,7 @@ export function HomePage() {
                 id="0xdef0"
               />
             ))}
-            <HomeMiningIncrease />
+            <HomeMiningIncrease onRegistered={reloadMiners} />
           </div>
         </Unless>
       </section>

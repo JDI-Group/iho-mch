@@ -1,7 +1,7 @@
 import type { Hex } from 'viem'
 import { postSignRegisterDevice } from '@/apis'
 import { useAsyncCallback } from '@hairy/react-lib'
-import { Card, CardBody, Spinner } from '@heroui/react'
+import { addToast, Card, CardBody, Spinner } from '@heroui/react'
 import { Icon } from '@iconify/react/dist/iconify.js'
 import { useOverlayInject } from '@overlastic/react'
 import { useAccount } from 'wagmi'
@@ -24,6 +24,11 @@ export function HomeMiningIncrease(props: HomeMiningIncreaseProps) {
     const hash = await writeIhoMiningRegister({ args: [device.name!, device.id, signature as Hex] })
 
     await client.waitForTransactionReceipt({ hash })
+    addToast({
+      description: `Your device ${device.name} has been registered.`,
+      title: 'Device registered successfully',
+      color: 'success',
+    })
     props.onRegistered?.()
   })
 
