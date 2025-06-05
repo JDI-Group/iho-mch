@@ -7,7 +7,7 @@
 
 import type * as Types from './index.type'
 
-export const baseURL = process.env.NEXT_PUBLIC_MINING_SERVICE_URL
+export const baseURL = 'http://192.168.5.3:10010'
 
 /**
  * @method post

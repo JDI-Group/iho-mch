@@ -7,10 +7,12 @@
 export {}
 declare global {
   const ConnectWidget: typeof import('../components/connect-widget')['ConnectWidget']
+  const DeviceConfirmDialog: typeof import('../components/device-confirm-dialog')['DeviceConfirmDialog']
   const Dicebear: typeof import('../components/dicebear')['Dicebear']
   const HomeMiningIncrease: typeof import('../ui/home-mining-increase')['HomeMiningIncrease']
   const HomeMiningItem: typeof import('../ui/home-mining-item')['HomeMiningItem']
   const HomePage: typeof import('../ui/home-page')['HomePage']
+  const HomeRevenueCard: typeof import('../ui/home-revenue-card')['HomeRevenueCard']
   const MaterialSymbolsArrowDownwardAltRounded: typeof import('../components/rainbowkit-widget')['MaterialSymbolsArrowDownwardAltRounded']
   const NonNotExitsConnect: typeof import('../components/non-not-exits-connect')['NonNotExitsConnect']
   const RainbowkitWidget: typeof import('../components/rainbowkit-widget')['RainbowkitWidget']
@@ -74,6 +76,7 @@ declare global {
   const memo: typeof import('react')['memo']
   const motion: typeof import('framer-motion')['motion']
   const postSignRegister: typeof import('../apis/index')['postSignRegister']
+  const postSignRegisterDevice: typeof import('../apis/index')['postSignRegisterDevice']
   const readBidirectionalTransfer: typeof import('../generated/index')['readBidirectionalTransfer']
   const readErc1967Proxy: typeof import('../generated/index')['readErc1967Proxy']
   const readErc20: typeof import('../generated/index')['readErc20']
@@ -151,6 +154,7 @@ declare global {
   const simulateErc20TransferFrom: typeof import('../generated/index')['simulateErc20TransferFrom']
   const simulateErc6551Account: typeof import('../generated/index')['simulateErc6551Account']
   const simulateErc6551AccountExecute: typeof import('../generated/index')['simulateErc6551AccountExecute']
+  const simulateErc6551AccountExecuteBatch: typeof import('../generated/index')['simulateErc6551AccountExecuteBatch']
   const simulateErc6551AccountInitialize: typeof import('../generated/index')['simulateErc6551AccountInitialize']
   const simulateErc6551AccountLibrary: typeof import('../generated/index')['simulateErc6551AccountLibrary']
   const simulateErc6551AccountSetPermissions: typeof import('../generated/index')['simulateErc6551AccountSetPermissions']
@@ -306,6 +310,7 @@ declare global {
   const useSimulateErc20TransferFrom: typeof import('../generated/index')['useSimulateErc20TransferFrom']
   const useSimulateErc6551Account: typeof import('../generated/index')['useSimulateErc6551Account']
   const useSimulateErc6551AccountExecute: typeof import('../generated/index')['useSimulateErc6551AccountExecute']
+  const useSimulateErc6551AccountExecuteBatch: typeof import('../generated/index')['useSimulateErc6551AccountExecuteBatch']
   const useSimulateErc6551AccountInitialize: typeof import('../generated/index')['useSimulateErc6551AccountInitialize']
   const useSimulateErc6551AccountLibrary: typeof import('../generated/index')['useSimulateErc6551AccountLibrary']
   const useSimulateErc6551AccountSetPermissions: typeof import('../generated/index')['useSimulateErc6551AccountSetPermissions']
@@ -381,6 +386,7 @@ declare global {
   const useWriteErc20TransferFrom: typeof import('../generated/index')['useWriteErc20TransferFrom']
   const useWriteErc6551Account: typeof import('../generated/index')['useWriteErc6551Account']
   const useWriteErc6551AccountExecute: typeof import('../generated/index')['useWriteErc6551AccountExecute']
+  const useWriteErc6551AccountExecuteBatch: typeof import('../generated/index')['useWriteErc6551AccountExecuteBatch']
   const useWriteErc6551AccountInitialize: typeof import('../generated/index')['useWriteErc6551AccountInitialize']
   const useWriteErc6551AccountLibrary: typeof import('../generated/index')['useWriteErc6551AccountLibrary']
   const useWriteErc6551AccountSetPermissions: typeof import('../generated/index')['useWriteErc6551AccountSetPermissions']
@@ -486,6 +492,7 @@ declare global {
   const writeErc20TransferFrom: typeof import('../generated/index')['writeErc20TransferFrom']
   const writeErc6551Account: typeof import('../generated/index')['writeErc6551Account']
   const writeErc6551AccountExecute: typeof import('../generated/index')['writeErc6551AccountExecute']
+  const writeErc6551AccountExecuteBatch: typeof import('../generated/index')['writeErc6551AccountExecuteBatch']
   const writeErc6551AccountInitialize: typeof import('../generated/index')['writeErc6551AccountInitialize']
   const writeErc6551AccountLibrary: typeof import('../generated/index')['writeErc6551AccountLibrary']
   const writeErc6551AccountSetPermissions: typeof import('../generated/index')['writeErc6551AccountSetPermissions']
@@ -537,6 +544,9 @@ declare global {
 }
 // for type re-export
 declare global {
+  // @ts-ignore
+  export type { DeviceConfirmDialogProps } from '../components/device-confirm-dialog'
+  import('../components/device-confirm-dialog')
   // @ts-ignore
   export type { DicebearProps } from '../components/dicebear'
   import('../components/dicebear')

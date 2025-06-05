@@ -3,6 +3,7 @@ import { postSignRegisterDevice } from '@/apis'
 import { useAsyncCallback } from '@hairy/react-lib'
 import { Card, CardBody, Spinner } from '@heroui/react'
 import { Icon } from '@iconify/react/dist/iconify.js'
+import { useOverlayInject } from '@overlastic/react'
 import { useAccount } from 'wagmi'
 
 export interface HomeMiningIncreaseProps {
@@ -11,8 +12,13 @@ export interface HomeMiningIncreaseProps {
 
 export function HomeMiningIncrease(props: HomeMiningIncreaseProps) {
   const { address } = useAccount()
+
+  const openDeviceConfirmDialog = useOverlayInject(DeviceConfirmDialog)
+
   const [loading, register] = useAsyncCallback(async () => {
     const device = await navigator.bluetooth.requestDevice()
+
+    await openDeviceConfirmDialog({ device })
 
     const { data: signature } = await postSignRegisterDevice({ owner: address!, name: device.name!, mac: device.id })
     const hash = await writeIhoMiningRegister({ args: [device.name!, device.id, signature as Hex] })

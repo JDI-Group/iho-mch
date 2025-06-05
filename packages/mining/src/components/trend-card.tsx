@@ -3,8 +3,9 @@
 import type { CurveType } from 'recharts/types/shape/Curve'
 import { If } from '@hairy/react-lib'
 import { riposte } from '@hairy/utils'
-import { Button, Card } from '@heroui/react'
+import { Card } from '@heroui/react'
 import { Icon } from '@iconify/react'
+import clsx from 'clsx'
 import React from 'react'
 import { Area, AreaChart, ResponsiveContainer } from 'recharts'
 
@@ -18,6 +19,7 @@ interface TrendCardProps {
   areaData?: any[]
   areaType?: CurveType
   areaKey?: string
+  extra?: React.ReactNode
 }
 
 export function TrendCard({
@@ -30,6 +32,7 @@ export function TrendCard({
   areaData,
   areaType = 'natural',
   areaKey,
+  extra,
 }: TrendCardProps) {
   return (
     <Card className="border-none">
@@ -42,7 +45,15 @@ export function TrendCard({
               <div className="text-base">{symbol}</div>
             </div>
           </div>
-          <div className="mt-2 flex items-center gap-x-1 text-xs font-medium text-success-500">
+          <div className={clsx(
+            'mt-2 flex items-center gap-x-1 text-xs font-medium',
+            {
+              negative: 'text-danger',
+              neutral: 'text-warning',
+              positive: 'text-success',
+            }[changeType],
+          )}
+          >
             {riposte(
               [changeType === 'positive', <Icon key="up" height={12} icon="solar:arrow-right-up-linear" width={12} />],
               [changeType === 'neutral', <Icon key="neutral" height={12} icon="solar:arrow-right-linear" width={12} />],
@@ -73,9 +84,8 @@ export function TrendCard({
             </ResponsiveContainer>
           </If>
         </div>
-        <Button isIconOnly variant="light" size="sm" className="absolute right-2 top-2 w-auto rounded-full">
-          <Icon icon="solar:menu-dots-bold" />
-        </Button>
+        {extra}
+
       </section>
     </Card>
   )

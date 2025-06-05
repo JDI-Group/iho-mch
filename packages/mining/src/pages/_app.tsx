@@ -1,9 +1,10 @@
 import { wagmiConfig } from '@/config'
 import { Injector } from '@hairy/react-lib'
+import { OverlaysProvider } from '@overlastic/react'
 import { RainbowKitProvider } from '@rainbow-me/rainbowkit'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import Head from 'next/head'
 
+import Head from 'next/head'
 import { useMount } from 'react-use'
 import { WagmiProvider } from 'wagmi'
 import '@/styles/globals.css'
@@ -16,6 +17,7 @@ export default function App({ Component, pageProps }: any) {
     if (process.env.NEXT_PUBLIC_NETWORK === 'moonchain_geneva')
       Reflect.get(window, 'eruda')?.init()
   })
+
   return (
     <>
       <Head>
@@ -29,6 +31,7 @@ export default function App({ Component, pageProps }: any) {
           { component: WagmiProvider, props: { config: wagmiConfig } },
           { component: QueryClientProvider, props: { client } },
           { component: RainbowKitProvider },
+          { component: OverlaysProvider },
         ]}
       >
         <Component {...pageProps} />
