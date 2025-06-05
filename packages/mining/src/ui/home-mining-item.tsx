@@ -1,10 +1,12 @@
 import type { PropsWithDetailedHTML } from '@hairy/react-lib'
-import { Card, CardFooter, Image } from '@heroui/react'
+import { Image } from '@/components/image'
+import { Card, CardFooter } from '@heroui/react'
+import { Icon } from '@iconify/react/dist/iconify.js'
 
 export interface HomeMiningItemProps extends PropsWithDetailedHTML {
   status?: 'active' | 'inactive'
+  src?: string
   name: string
-  src: string
   id: string
 }
 
@@ -25,10 +27,15 @@ export function HomeMiningItem({
           height={100}
           src={src}
           width={100}
+          fallback={(
+            <div className="w-[100px] h-[100px] flex items-center justify-center bg-black bg-opacity-25">
+              <Icon fontSize="28" className="text-default-500 mb-4" icon="fluent:device-eq-16-filled" />
+            </div>
+          )}
         />
         <CardFooter className=" before:bg-white/10 border-white/20 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10 text-tiny text-white truncate px-0">
           <div className="flex justify-between items-center w-full px-2">
-            <span>ID.{id}</span>
+            <span className="w-full truncate">ID.{id}</span>
             <div className={clsx('w-2 h-2 rounded-full', status === 'active' ? 'bg-green-500' : 'bg-red-500')} />
           </div>
         </CardFooter>

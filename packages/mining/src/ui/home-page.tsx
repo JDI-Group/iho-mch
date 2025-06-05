@@ -40,14 +40,12 @@ export function HomePage() {
             </div>
           )}
         >
-
           <div className="grid grid-cols-[repeat(auto-fill,100px)] gap-4">
             {miners.map(miner => (
               <HomeMiningItem
                 key={miner.account}
-                src="https://heroui.com/images/hero-card.jpeg"
-                name="Headset Plus"
-                id="0xdef0"
+                name={miner.name || 'Unnamed Device'}
+                id={miner.mac!}
               />
             ))}
             <HomeMiningIncrease onRegistered={reloadMiners} />

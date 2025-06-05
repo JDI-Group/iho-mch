@@ -13,6 +13,7 @@ declare global {
   const HomeMiningItem: typeof import('../ui/home-mining-item')['HomeMiningItem']
   const HomePage: typeof import('../ui/home-page')['HomePage']
   const HomeRevenueCard: typeof import('../ui/home-revenue-card')['HomeRevenueCard']
+  const Image: typeof import('../components/image')['Image']
   const MaterialSymbolsArrowDownwardAltRounded: typeof import('../components/rainbowkit-widget')['MaterialSymbolsArrowDownwardAltRounded']
   const NonNotExitsConnect: typeof import('../components/non-not-exits-connect')['NonNotExitsConnect']
   const RainbowkitWidget: typeof import('../components/rainbowkit-widget')['RainbowkitWidget']
@@ -80,6 +81,7 @@ declare global {
   const ihoMiningAddress: typeof import('../generated/index')['ihoMiningAddress']
   const iihoFuelAbi: typeof import('../generated/index')['iihoFuelAbi']
   const iihoFuelAddress: typeof import('../generated/index')['iihoFuelAddress']
+  const image: typeof import('../components/image')['default']
   const layouts: typeof import('../layouts/index')['layouts']
   const lazy: typeof import('react')['lazy']
   const memo: typeof import('react')['memo']
@@ -725,6 +727,9 @@ declare global {
   // @ts-ignore
   export type { DicebearProps } from '../components/dicebear'
   import('../components/dicebear')
+  // @ts-ignore
+  export type { ImageProps } from '../components/image'
+  import('../components/image')
   // @ts-ignore
   export type { RainbowkitWidgetProps } from '../components/rainbowkit-widget'
   import('../components/rainbowkit-widget')
