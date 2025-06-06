@@ -128,7 +128,6 @@ export function HomeRevenueCard() {
     return 0n
   }, [rewards, type])
 
-  // 计算与前一时间段的对比数据
   const contrast = useMemo(() => {
     if (!rewards || rewards.length === 0)
       return 0
@@ -143,7 +142,6 @@ export function HomeRevenueCard() {
     const endOfLastWeek = now.subtract(7, 'day').endOf('day')
 
     if (type === 'today') {
-      // 今天与昨天对比
       const todayTotal = rewards
         .filter(reward => dayjs.unix(Number(reward.timestamp)).isAfter(startOfToday))
         .reduce((sum, reward) => sum + Number(formatEther(reward.amount)), 0)
@@ -161,7 +159,6 @@ export function HomeRevenueCard() {
     }
 
     if (type === 'yesterday') {
-      // 昨天与前天对比
       const yesterdayTotal = rewards
         .filter((reward) => {
           const rewardTime = dayjs.unix(Number(reward.timestamp))
@@ -182,7 +179,6 @@ export function HomeRevenueCard() {
     }
 
     if (type === 'this-week') {
-      // 本周与上周对比
       const thisWeekTotal = rewards
         .filter((reward) => {
           const startOfWeek = dayjs().subtract(7, 'day').startOf('day')

@@ -7,6 +7,7 @@
 export {}
 declare global {
   const ConnectWidget: typeof import('../components/connect-widget')['ConnectWidget']
+  const DetailRewardChart: typeof import('../ui/detail-rewards-chart')['DetailRewardChart']
   const DeviceConfirmDialog: typeof import('../components/device-confirm-dialog')['DeviceConfirmDialog']
   const Dicebear: typeof import('../components/dicebear')['Dicebear']
   const HomeMiningIncrease: typeof import('../ui/home-mining-increase')['HomeMiningIncrease']
