@@ -16,7 +16,7 @@ import "./utils/BidirectionalTransfer.sol";
  * after a specified lock period. It provides functionality for depositing, cancelling,
  * and claiming tokens with appropriate time constraints.
  */
-contract IHOFuel is
+contract IHOFueltank is
   BidirectionalTransfer,
   UUPSUpgradeable,
   OwnableUpgradeable {

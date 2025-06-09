@@ -35,7 +35,7 @@ async function testMoonchainGenevaMiningRegistry() {
   )
   const signature = await verifier.signMessage({ message: { raw: keccak256(packed) } })
   console.log(`Device: ${device}, Signature: ${signature}`)
-  const hash = await mining.write.register([device, signature])
+  const hash = await mining.write.register([device, signature, '0x'])
   await client.waitForTransactionReceipt({ hash })
   console.log(`Device ${device} registered with hash: ${hash}`)
 }

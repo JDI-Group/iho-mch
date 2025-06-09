@@ -31,9 +31,9 @@ async function loadFixture() {
   }
 }
 
-describe('IHOFuel', async () => {
+describe('IHOFueltank', async () => {
   // Test contract deployment and initialization
-  it('should be able to deploy IHOFuel module', async () => {
+  it('should be able to deploy IHOFueltank module', async () => {
     const { fuel, owner } = await loadFixture()
 
     // Verify owner is correctly set

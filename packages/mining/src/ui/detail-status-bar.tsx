@@ -1,8 +1,14 @@
+import type { Miner } from '@/apis/index.type'
 import { Image } from '@/components/image'
 import { Chip } from '@heroui/react'
 import { Icon } from '@iconify/react/dist/iconify.js'
 
-export function DetailStatusBar() {
+export interface DetailStatusBarProps {
+  miner?: Miner
+  loading?: boolean
+}
+
+export function DetailStatusBar(props: DetailStatusBarProps) {
   return (
     <>
       <div className="flex gap-2 mb-4">
@@ -11,6 +17,7 @@ export function DetailStatusBar() {
           alt="Woman listing to music"
           className="object-cover"
           height={70}
+          isLoading={props.loading}
           width={70}
         />
         <div className="flex-1 flex flex-col">

@@ -1,10 +1,10 @@
 import { buildModule } from '@nomicfoundation/hardhat-ignition/modules'
 import erc6551Module from './ERC6551'
-import IHOFuelModule from './IHOFuel'
+import IHOFueltankModule from './IHOFueltank'
 
 const IHOMiningModule = buildModule('IHOMining', (m) => {
   const { accountImplement, accountRegistry } = m.useModule(erc6551Module)
-  const { fuel } = m.useModule(IHOFuelModule)
+  const { fuel } = m.useModule(IHOFueltankModule)
   const implement = m.contract('IHOMining', [], { id: 'IHOMMiningImplement' })
 
   const data = m.encodeFunctionCall(implement, 'initialize', [

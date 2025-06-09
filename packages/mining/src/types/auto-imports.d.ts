@@ -73,6 +73,7 @@ declare global {
   const getIhoMarket: typeof import('../generated/index')['getIhoMarket']
   const getIhoMining: typeof import('../generated/index')['getIhoMining']
   const getIihoFuel: typeof import('../generated/index')['getIihoFuel']
+  const getMinerMac: typeof import('../apis/index')['getMinerMac']
   const getVerifiableUpgradeable: typeof import('../generated/index')['getVerifiableUpgradeable']
   const ierc6551AccountAbi: typeof import('../generated/index')['ierc6551AccountAbi']
   const ierc6551AccountAddress: typeof import('../generated/index')['ierc6551AccountAddress']
@@ -740,6 +741,9 @@ declare global {
   // @ts-ignore
   export type { RainbowkitWidgetProps } from '../components/rainbowkit-widget'
   import('../components/rainbowkit-widget')
+  // @ts-ignore
+  export type { DetailStatusBarProps } from '../ui/detail-status-bar'
+  import('../ui/detail-status-bar')
   // @ts-ignore
   export type { HomeMiningIncreaseProps } from '../ui/home-mining-increase'
   import('../ui/home-mining-increase')
