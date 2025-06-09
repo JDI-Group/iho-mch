@@ -1,5 +1,3 @@
-import { HomePage } from '@/ui/home-page'
-
 function Page() {
   return (
     <layouts.default>

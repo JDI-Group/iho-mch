@@ -1,30 +1,36 @@
 import { Button, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from '@heroui/react'
+import { Icon } from '@iconify/react/dist/iconify.js'
+import { DetailFueltankChart } from './detail-fueltank-chart'
 
-export function DetailRewards() {
+export function DetailFueltank() {
   return (
     <div className="flex flex-col">
       <div className="mb-2 h-40">
-        <DetailRewardChart />
+        <DetailFueltankChart />
       </div>
       <div className="mb-2 flex gap-6">
         <div className="flex flex-col">
-          <div className="text-base">Mining Balance Of</div>
+          <div className="text-base">Fuel tank Balance Of</div>
           <div className="text-sm">12345.2456 MXC</div>
         </div>
         <div className="flex flex-col">
-          <div className="text-base">Today's reward</div>
-          <div className="text-sm">214 MXC</div>
+          <div className="text-base">Fuel gain percentage</div>
+          <div className="inline-flex items-center text-sm text-success">
+            <Icon key="up" height={12} icon="solar:arrow-right-up-linear" width={12} />
+            <span>200%</span>
+          </div>
         </div>
       </div>
       <div className="mb-4 flex gap-2">
         <Button className="h-6" color="primary" size="sm">
+          Deposit
+        </Button>
+        <Button className="h-6 bg-yellow-500" color="danger" size="sm">
           Withdraw
         </Button>
       </div>
 
-      <div className="mb-2 text-base">
-        Your Withdrawals
-      </div>
+      <div className="mb-2 text-base">Your Withdraws</div>
       <Table
         aria-label="Example static collection table"
         classNames={{
@@ -38,6 +44,7 @@ export function DetailRewards() {
           <TableColumn>Time</TableColumn>
           <TableColumn>Balance</TableColumn>
           <TableColumn>Status</TableColumn>
+          <TableColumn>Actions</TableColumn>
         </TableHeader>
         <TableBody>
           <TableRow key="1">
@@ -45,9 +52,14 @@ export function DetailRewards() {
             <TableCell>01/24/25</TableCell>
             <TableCell>100 MXC</TableCell>
             <TableCell className="text-tiny">
-              <span className="text-tiny h-4 text-success-500">
-                Withdrawn
+              <span className="text-tiny h-4 text-yellow-500">
+                Unclaimed
               </span>
+            </TableCell>
+            <TableCell>
+              <Button className="h-6" color="primary" size="sm">
+                Claim
+              </Button>
             </TableCell>
           </TableRow>
           <TableRow key="2">
@@ -55,9 +67,14 @@ export function DetailRewards() {
             <TableCell>01/24/25</TableCell>
             <TableCell>100 MXC</TableCell>
             <TableCell>
-              <span className="text-tiny h-4 text-success-500">
-                Withdrawn
+              <span className="text-tiny h-4 text-slate-500">
+                Locked in
               </span>
+            </TableCell>
+            <TableCell>
+              <Button className="h-6" isDisabled size="sm">
+                48:00:21
+              </Button>
             </TableCell>
           </TableRow>
         </TableBody>

@@ -7,7 +7,13 @@
 export {}
 declare global {
   const ConnectWidget: typeof import('../components/connect-widget')['ConnectWidget']
+  const DetailFuelTank: typeof import('../ui/detail-fueltank')['DetailFuelTank']
+  const DetailFueltank: typeof import('../ui/detail-fueltank')['DetailFueltank']
+  const DetailFueltankChart: typeof import('../ui/detail-fueltank-chart')['DetailFueltankChart']
+  const DetailPage: typeof import('../ui/detail-page')['DetailPage']
   const DetailRewardChart: typeof import('../ui/detail-rewards-chart')['DetailRewardChart']
+  const DetailRewards: typeof import('../ui/detail-rewards')['DetailRewards']
+  const DetailStatusBar: typeof import('../ui/detail-status-bar')['DetailStatusBar']
   const DeviceConfirmDialog: typeof import('../components/device-confirm-dialog')['DeviceConfirmDialog']
   const Dicebear: typeof import('../components/dicebear')['Dicebear']
   const HomeMiningIncrease: typeof import('../ui/home-mining-increase')['HomeMiningIncrease']
