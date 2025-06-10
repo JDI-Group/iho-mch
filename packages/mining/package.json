@@ -14,7 +14,7 @@
     "@dicebear/core": "^9.2.2",
     "@hairy/ether-lib": "^1.29.0",
     "@hairy/react-lib": "^1.29.0",
-    "@hairy/utils": "^1.29.0",
+    "@hairy/utils": "^1.31.0",
     "@heroui/react": "^2.7.8",
     "@heroui/theme": "^2.4.15",
     "@iconify/react": "^6.0.0",

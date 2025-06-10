@@ -1,18 +1,16 @@
+import { fonts } from '@/config/fonts'
 import { Button, Chip, Image, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@heroui/react'
 import { useExtendOverlay } from '@overlastic/react'
 
-export interface DeviceConfirmDialogProps {
+export interface MinerConfirmDialogProps {
   device: BluetoothDevice
 }
 
-export function DeviceConfirmDialog(props: DeviceConfirmDialogProps) {
+export function MinerConfirmDialog(props: MinerConfirmDialogProps) {
   const overlay = useExtendOverlay({ duration: 300 })
 
   return (
-    <Modal
-      isOpen={overlay.visible}
-      onOpenChange={overlay.reject}
-    >
+    <Modal className={fonts.barlow.className} isOpen={overlay.visible} onOpenChange={overlay.reject}>
       <ModalContent>
         <ModalHeader className="flex flex-col gap-1">
           Confirm Your Device

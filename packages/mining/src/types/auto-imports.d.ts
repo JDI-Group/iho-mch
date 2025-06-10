@@ -13,6 +13,8 @@ declare global {
   const DetailPage: typeof import('../ui/detail-page')['DetailPage']
   const DetailRewardChart: typeof import('../ui/detail-rewards-chart')['DetailRewardChart']
   const DetailRewards: typeof import('../ui/detail-rewards')['DetailRewards']
+  const DetailRewardsChart: typeof import('../ui/detail-rewards-chart')['DetailRewardsChart']
+  const DetailRewardsTable: typeof import('../ui/detail-rewards-table')['DetailRewardsTable']
   const DetailStatusBar: typeof import('../ui/detail-status-bar')['DetailStatusBar']
   const DeviceConfirmDialog: typeof import('../components/device-confirm-dialog')['DeviceConfirmDialog']
   const Dicebear: typeof import('../components/dicebear')['Dicebear']
@@ -22,6 +24,8 @@ declare global {
   const HomeRevenueCard: typeof import('../ui/home-revenue-card')['HomeRevenueCard']
   const Image: typeof import('../components/image')['Image']
   const MaterialSymbolsArrowDownwardAltRounded: typeof import('../components/rainbowkit-widget')['MaterialSymbolsArrowDownwardAltRounded']
+  const MinerConfirmDialog: typeof import('../components/miner-confirm-dialog')['MinerConfirmDialog']
+  const MinerWithdrawDialog: typeof import('../components/miner-withdraw-dialog')['MinerWithdrawDialog']
   const NonNotExitsConnect: typeof import('../components/non-not-exits-connect')['NonNotExitsConnect']
   const RainbowkitWidget: typeof import('../components/rainbowkit-widget')['RainbowkitWidget']
   const SubscribeWagmiConfig: typeof import('../generated/index')['SubscribeWagmiConfig']
@@ -71,6 +75,7 @@ declare global {
   const getIerc6551AccountProxy: typeof import('../generated/index')['getIerc6551AccountProxy']
   const getIerc6551Registry: typeof import('../generated/index')['getIerc6551Registry']
   const getIhoFuel: typeof import('../generated/index')['getIhoFuel']
+  const getIhoFueltank: typeof import('../generated/index')['getIhoFueltank']
   const getIhoMarket: typeof import('../generated/index')['getIhoMarket']
   const getIhoMining: typeof import('../generated/index')['getIhoMining']
   const getIihoFuel: typeof import('../generated/index')['getIihoFuel']
@@ -84,6 +89,8 @@ declare global {
   const ierc6551RegistryAddress: typeof import('../generated/index')['ierc6551RegistryAddress']
   const ihoFuelAbi: typeof import('../generated/index')['ihoFuelAbi']
   const ihoFuelAddress: typeof import('../generated/index')['ihoFuelAddress']
+  const ihoFueltankAbi: typeof import('../generated/index')['ihoFueltankAbi']
+  const ihoFueltankAddress: typeof import('../generated/index')['ihoFueltankAddress']
   const ihoMarketAbi: typeof import('../generated/index')['ihoMarketAbi']
   const ihoMarketAddress: typeof import('../generated/index')['ihoMarketAddress']
   const ihoMiningAbi: typeof import('../generated/index')['ihoMiningAbi']
@@ -165,6 +172,13 @@ declare global {
   const readIhoFuelOwner: typeof import('../generated/index')['readIhoFuelOwner']
   const readIhoFuelProxiableUuid: typeof import('../generated/index')['readIhoFuelProxiableUuid']
   const readIhoFuelUpgradeInterfaceVersion: typeof import('../generated/index')['readIhoFuelUpgradeInterfaceVersion']
+  const readIhoFueltank: typeof import('../generated/index')['readIhoFueltank']
+  const readIhoFueltankBalanceOf: typeof import('../generated/index')['readIhoFueltankBalanceOf']
+  const readIhoFueltankGetUnlockCoins: typeof import('../generated/index')['readIhoFueltankGetUnlockCoins']
+  const readIhoFueltankLocktime: typeof import('../generated/index')['readIhoFueltankLocktime']
+  const readIhoFueltankOwner: typeof import('../generated/index')['readIhoFueltankOwner']
+  const readIhoFueltankProxiableUuid: typeof import('../generated/index')['readIhoFueltankProxiableUuid']
+  const readIhoFueltankUpgradeInterfaceVersion: typeof import('../generated/index')['readIhoFueltankUpgradeInterfaceVersion']
   const readIhoMarket: typeof import('../generated/index')['readIhoMarket']
   const readIhoMarketGetProject: typeof import('../generated/index')['readIhoMarketGetProject']
   const readIhoMarketGetStake: typeof import('../generated/index')['readIhoMarketGetStake']
@@ -244,6 +258,15 @@ declare global {
   const simulateIhoFuelSetLocktime: typeof import('../generated/index')['simulateIhoFuelSetLocktime']
   const simulateIhoFuelTransferOwnership: typeof import('../generated/index')['simulateIhoFuelTransferOwnership']
   const simulateIhoFuelUpgradeToAndCall: typeof import('../generated/index')['simulateIhoFuelUpgradeToAndCall']
+  const simulateIhoFueltank: typeof import('../generated/index')['simulateIhoFueltank']
+  const simulateIhoFueltankCancel: typeof import('../generated/index')['simulateIhoFueltankCancel']
+  const simulateIhoFueltankClaim: typeof import('../generated/index')['simulateIhoFueltankClaim']
+  const simulateIhoFueltankDeposit: typeof import('../generated/index')['simulateIhoFueltankDeposit']
+  const simulateIhoFueltankInitialize: typeof import('../generated/index')['simulateIhoFueltankInitialize']
+  const simulateIhoFueltankRenounceOwnership: typeof import('../generated/index')['simulateIhoFueltankRenounceOwnership']
+  const simulateIhoFueltankSetLocktime: typeof import('../generated/index')['simulateIhoFueltankSetLocktime']
+  const simulateIhoFueltankTransferOwnership: typeof import('../generated/index')['simulateIhoFueltankTransferOwnership']
+  const simulateIhoFueltankUpgradeToAndCall: typeof import('../generated/index')['simulateIhoFueltankUpgradeToAndCall']
   const simulateIhoMarket: typeof import('../generated/index')['simulateIhoMarket']
   const simulateIhoMarketClaim: typeof import('../generated/index')['simulateIhoMarketClaim']
   const simulateIhoMarketInitialize: typeof import('../generated/index')['simulateIhoMarketInitialize']
@@ -274,6 +297,7 @@ declare global {
   const simulateVerifiableUpgradeableTransferVerifier: typeof import('../generated/index')['simulateVerifiableUpgradeableTransferVerifier']
   const startTransition: typeof import('react')['startTransition']
   const store: typeof import('../store/index')['default']
+  const transactionConfirmedToast: typeof import('../utils/index')['transactionConfirmedToast']
   const useBidirectionalTransfer: typeof import('../generated/index')['useBidirectionalTransfer']
   const useCallback: typeof import('react')['useCallback']
   const useContext: typeof import('react')['useContext']
@@ -295,6 +319,7 @@ declare global {
   const useIerc6551AccountProxy: typeof import('../generated/index')['useIerc6551AccountProxy']
   const useIerc6551Registry: typeof import('../generated/index')['useIerc6551Registry']
   const useIhoFuel: typeof import('../generated/index')['useIhoFuel']
+  const useIhoFueltank: typeof import('../generated/index')['useIhoFueltank']
   const useIhoMarket: typeof import('../generated/index')['useIhoMarket']
   const useIhoMining: typeof import('../generated/index')['useIhoMining']
   const useIihoFuel: typeof import('../generated/index')['useIihoFuel']
@@ -302,6 +327,7 @@ declare global {
   const useInsertionEffect: typeof import('react')['useInsertionEffect']
   const useLayoutEffect: typeof import('react')['useLayoutEffect']
   const useMemo: typeof import('react')['useMemo']
+  const useOutsideClick: typeof import('../hooks/useOutsideClick')['useOutsideClick']
   const useReadBidirectionalTransfer: typeof import('../generated/index')['useReadBidirectionalTransfer']
   const useReadErc1967Proxy: typeof import('../generated/index')['useReadErc1967Proxy']
   const useReadErc20: typeof import('../generated/index')['useReadErc20']
@@ -370,6 +396,13 @@ declare global {
   const useReadIhoFuelOwner: typeof import('../generated/index')['useReadIhoFuelOwner']
   const useReadIhoFuelProxiableUuid: typeof import('../generated/index')['useReadIhoFuelProxiableUuid']
   const useReadIhoFuelUpgradeInterfaceVersion: typeof import('../generated/index')['useReadIhoFuelUpgradeInterfaceVersion']
+  const useReadIhoFueltank: typeof import('../generated/index')['useReadIhoFueltank']
+  const useReadIhoFueltankBalanceOf: typeof import('../generated/index')['useReadIhoFueltankBalanceOf']
+  const useReadIhoFueltankGetUnlockCoins: typeof import('../generated/index')['useReadIhoFueltankGetUnlockCoins']
+  const useReadIhoFueltankLocktime: typeof import('../generated/index')['useReadIhoFueltankLocktime']
+  const useReadIhoFueltankOwner: typeof import('../generated/index')['useReadIhoFueltankOwner']
+  const useReadIhoFueltankProxiableUuid: typeof import('../generated/index')['useReadIhoFueltankProxiableUuid']
+  const useReadIhoFueltankUpgradeInterfaceVersion: typeof import('../generated/index')['useReadIhoFueltankUpgradeInterfaceVersion']
   const useReadIhoMarket: typeof import('../generated/index')['useReadIhoMarket']
   const useReadIhoMarketGetProject: typeof import('../generated/index')['useReadIhoMarketGetProject']
   const useReadIhoMarketGetStake: typeof import('../generated/index')['useReadIhoMarketGetStake']
@@ -452,6 +485,15 @@ declare global {
   const useSimulateIhoFuelSetLocktime: typeof import('../generated/index')['useSimulateIhoFuelSetLocktime']
   const useSimulateIhoFuelTransferOwnership: typeof import('../generated/index')['useSimulateIhoFuelTransferOwnership']
   const useSimulateIhoFuelUpgradeToAndCall: typeof import('../generated/index')['useSimulateIhoFuelUpgradeToAndCall']
+  const useSimulateIhoFueltank: typeof import('../generated/index')['useSimulateIhoFueltank']
+  const useSimulateIhoFueltankCancel: typeof import('../generated/index')['useSimulateIhoFueltankCancel']
+  const useSimulateIhoFueltankClaim: typeof import('../generated/index')['useSimulateIhoFueltankClaim']
+  const useSimulateIhoFueltankDeposit: typeof import('../generated/index')['useSimulateIhoFueltankDeposit']
+  const useSimulateIhoFueltankInitialize: typeof import('../generated/index')['useSimulateIhoFueltankInitialize']
+  const useSimulateIhoFueltankRenounceOwnership: typeof import('../generated/index')['useSimulateIhoFueltankRenounceOwnership']
+  const useSimulateIhoFueltankSetLocktime: typeof import('../generated/index')['useSimulateIhoFueltankSetLocktime']
+  const useSimulateIhoFueltankTransferOwnership: typeof import('../generated/index')['useSimulateIhoFueltankTransferOwnership']
+  const useSimulateIhoFueltankUpgradeToAndCall: typeof import('../generated/index')['useSimulateIhoFueltankUpgradeToAndCall']
   const useSimulateIhoMarket: typeof import('../generated/index')['useSimulateIhoMarket']
   const useSimulateIhoMarketClaim: typeof import('../generated/index')['useSimulateIhoMarketClaim']
   const useSimulateIhoMarketInitialize: typeof import('../generated/index')['useSimulateIhoMarketInitialize']
@@ -498,6 +540,7 @@ declare global {
   const useWatchIerc6551AccountProxyEvent: typeof import('../generated/index')['useWatchIerc6551AccountProxyEvent']
   const useWatchIerc6551RegistryEvent: typeof import('../generated/index')['useWatchIerc6551RegistryEvent']
   const useWatchIhoFuelEvent: typeof import('../generated/index')['useWatchIhoFuelEvent']
+  const useWatchIhoFueltankEvent: typeof import('../generated/index')['useWatchIhoFueltankEvent']
   const useWatchIhoMarketEvent: typeof import('../generated/index')['useWatchIhoMarketEvent']
   const useWatchIhoMiningEvent: typeof import('../generated/index')['useWatchIhoMiningEvent']
   const useWatchIihoFuelEvent: typeof import('../generated/index')['useWatchIihoFuelEvent']
@@ -549,6 +592,15 @@ declare global {
   const useWriteIhoFuelSetLocktime: typeof import('../generated/index')['useWriteIhoFuelSetLocktime']
   const useWriteIhoFuelTransferOwnership: typeof import('../generated/index')['useWriteIhoFuelTransferOwnership']
   const useWriteIhoFuelUpgradeToAndCall: typeof import('../generated/index')['useWriteIhoFuelUpgradeToAndCall']
+  const useWriteIhoFueltank: typeof import('../generated/index')['useWriteIhoFueltank']
+  const useWriteIhoFueltankCancel: typeof import('../generated/index')['useWriteIhoFueltankCancel']
+  const useWriteIhoFueltankClaim: typeof import('../generated/index')['useWriteIhoFueltankClaim']
+  const useWriteIhoFueltankDeposit: typeof import('../generated/index')['useWriteIhoFueltankDeposit']
+  const useWriteIhoFueltankInitialize: typeof import('../generated/index')['useWriteIhoFueltankInitialize']
+  const useWriteIhoFueltankRenounceOwnership: typeof import('../generated/index')['useWriteIhoFueltankRenounceOwnership']
+  const useWriteIhoFueltankSetLocktime: typeof import('../generated/index')['useWriteIhoFueltankSetLocktime']
+  const useWriteIhoFueltankTransferOwnership: typeof import('../generated/index')['useWriteIhoFueltankTransferOwnership']
+  const useWriteIhoFueltankUpgradeToAndCall: typeof import('../generated/index')['useWriteIhoFueltankUpgradeToAndCall']
   const useWriteIhoMarket: typeof import('../generated/index')['useWriteIhoMarket']
   const useWriteIhoMarketClaim: typeof import('../generated/index')['useWriteIhoMarketClaim']
   const useWriteIhoMarketInitialize: typeof import('../generated/index')['useWriteIhoMarketInitialize']
@@ -633,6 +685,13 @@ declare global {
   const watchIhoFuelInitializedEvent: typeof import('../generated/index')['watchIhoFuelInitializedEvent']
   const watchIhoFuelOwnershipTransferredEvent: typeof import('../generated/index')['watchIhoFuelOwnershipTransferredEvent']
   const watchIhoFuelUpgradedEvent: typeof import('../generated/index')['watchIhoFuelUpgradedEvent']
+  const watchIhoFueltankCancelledEvent: typeof import('../generated/index')['watchIhoFueltankCancelledEvent']
+  const watchIhoFueltankClaimedEvent: typeof import('../generated/index')['watchIhoFueltankClaimedEvent']
+  const watchIhoFueltankDepositedEvent: typeof import('../generated/index')['watchIhoFueltankDepositedEvent']
+  const watchIhoFueltankEvent: typeof import('../generated/index')['watchIhoFueltankEvent']
+  const watchIhoFueltankInitializedEvent: typeof import('../generated/index')['watchIhoFueltankInitializedEvent']
+  const watchIhoFueltankOwnershipTransferredEvent: typeof import('../generated/index')['watchIhoFueltankOwnershipTransferredEvent']
+  const watchIhoFueltankUpgradedEvent: typeof import('../generated/index')['watchIhoFueltankUpgradedEvent']
   const watchIhoMarketEvent: typeof import('../generated/index')['watchIhoMarketEvent']
   const watchIhoMarketInitializedEvent: typeof import('../generated/index')['watchIhoMarketInitializedEvent']
   const watchIhoMarketOwnershipTransferredEvent: typeof import('../generated/index')['watchIhoMarketOwnershipTransferredEvent']
@@ -699,6 +758,15 @@ declare global {
   const writeIhoFuelSetLocktime: typeof import('../generated/index')['writeIhoFuelSetLocktime']
   const writeIhoFuelTransferOwnership: typeof import('../generated/index')['writeIhoFuelTransferOwnership']
   const writeIhoFuelUpgradeToAndCall: typeof import('../generated/index')['writeIhoFuelUpgradeToAndCall']
+  const writeIhoFueltank: typeof import('../generated/index')['writeIhoFueltank']
+  const writeIhoFueltankCancel: typeof import('../generated/index')['writeIhoFueltankCancel']
+  const writeIhoFueltankClaim: typeof import('../generated/index')['writeIhoFueltankClaim']
+  const writeIhoFueltankDeposit: typeof import('../generated/index')['writeIhoFueltankDeposit']
+  const writeIhoFueltankInitialize: typeof import('../generated/index')['writeIhoFueltankInitialize']
+  const writeIhoFueltankRenounceOwnership: typeof import('../generated/index')['writeIhoFueltankRenounceOwnership']
+  const writeIhoFueltankSetLocktime: typeof import('../generated/index')['writeIhoFueltankSetLocktime']
+  const writeIhoFueltankTransferOwnership: typeof import('../generated/index')['writeIhoFueltankTransferOwnership']
+  const writeIhoFueltankUpgradeToAndCall: typeof import('../generated/index')['writeIhoFueltankUpgradeToAndCall']
   const writeIhoMarket: typeof import('../generated/index')['writeIhoMarket']
   const writeIhoMarketClaim: typeof import('../generated/index')['writeIhoMarketClaim']
   const writeIhoMarketInitialize: typeof import('../generated/index')['writeIhoMarketInitialize']
@@ -731,17 +799,26 @@ declare global {
 // for type re-export
 declare global {
   // @ts-ignore
-  export type { DeviceConfirmDialogProps } from '../components/device-confirm-dialog'
-  import('../components/device-confirm-dialog')
-  // @ts-ignore
   export type { DicebearProps } from '../components/dicebear'
   import('../components/dicebear')
   // @ts-ignore
   export type { ImageProps } from '../components/image'
   import('../components/image')
   // @ts-ignore
+  export type { MinerConfirmDialogProps } from '../components/miner-confirm-dialog'
+  import('../components/miner-confirm-dialog')
+  // @ts-ignore
+  export type { MinerWithdrawDialogProps } from '../components/miner-withdraw-dialog'
+  import('../components/miner-withdraw-dialog')
+  // @ts-ignore
   export type { RainbowkitWidgetProps } from '../components/rainbowkit-widget'
   import('../components/rainbowkit-widget')
+  // @ts-ignore
+  export type { DetailRewardsChartData, DetailRewardsChartProps } from '../ui/detail-rewards-chart'
+  import('../ui/detail-rewards-chart')
+  // @ts-ignore
+  export type { DetailRewardsProps } from '../ui/detail-rewards'
+  import('../ui/detail-rewards')
   // @ts-ignore
   export type { DetailStatusBarProps } from '../ui/detail-status-bar'
   import('../ui/detail-status-bar')

@@ -1,41 +1,33 @@
+/* eslint-disable react/no-unstable-default-props */
+import { If } from '@hairy/react-lib'
 import { arange } from '@hairy/utils'
 import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 
-const data = [
-  {
-    name: '10/01',
-    amt: 2210,
-  },
-  {
-    name: '10/02',
-    amt: 2210,
-  },
-  {
-    name: '10/03',
-    amt: 2290,
-  },
-  {
-    name: '10/04',
-    amt: 2000,
-  },
-  {
-    name: '10/05',
-    amt: 2181,
-  },
-  {
-    name: '10/06',
-    amt: 2500,
-  },
-  {
-    name: '10/07',
-    amt: 2100,
-  },
-]
-export function DetailRewardChart() {
+export interface DetailRewardsChartData {
+  date: string
+  reward: bigint | null
+}
+
+export interface DetailRewardsChartProps {
+  data?: DetailRewardsChartData[]
+}
+
+export function DetailRewardsChart(props: DetailRewardsChartProps) {
+  const { data = [] } = props
+  const total = data.reduce((acc, item) => acc + (item.reward || 0n), 0n)
+  const formattedData = data.map(item => ({
+    date: item.date,
+    reward: Number(item.reward || 0),
+  }))
   return (
     <>
+      <If cond={total === 0n}>
+        <p className="absolute left-4 text-default-500 text-sm">
+          There is no data available
+        </p>
+      </If>
       <ResponsiveContainer width="100%" height="100%">
-        <AreaChart margin={{ left: 18, right: -20 }} data={data}>
+        <AreaChart margin={{ left: 18, right: -20 }} data={formattedData}>
           <defs>
             <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
               <stop offset="5%" stopColor="#70ADF8" stopOpacity={0.8} />
@@ -45,7 +37,7 @@ export function DetailRewardChart() {
           <XAxis
             tickLine={false}
             fontSize="12"
-            dataKey="name"
+            dataKey="date"
             axisLine={{ stroke: 'rgba(0,0,0,0.5)' }}
           />
           <YAxis
@@ -59,7 +51,7 @@ export function DetailRewardChart() {
 
           <Area
             type="natural"
-            dataKey="amt"
+            dataKey="reward"
             stroke="#70ADF8"
             fill="url(#colorUv)"
             dot={false}

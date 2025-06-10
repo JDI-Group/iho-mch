@@ -19,7 +19,7 @@ export function DetailPage() {
       <section className="px-4">
         <Tabs aria-label="Tabs variants" size="md" variant="underlined">
           <Tab key="reward" title="Reward">
-            <DetailRewards />
+            <DetailRewards loading={loading} miner={miner} />
           </Tab>
           <Tab key="fuel-tank" title="Fuel tank">
             <DetailFueltank />

@@ -13,12 +13,12 @@ export interface HomeMiningIncreaseProps {
 export function HomeMiningIncrease(props: HomeMiningIncreaseProps) {
   const { address } = useAccount()
 
-  const openDeviceConfirmDialog = useOverlayInject(DeviceConfirmDialog)
+  const openMinerConfirmDialog = useOverlayInject(MinerConfirmDialog)
 
   const [loading, register] = useAsyncCallback(async () => {
     const device = await navigator.bluetooth.requestDevice({ acceptAllDevices: true })
 
-    await openDeviceConfirmDialog({ device })
+    await openMinerConfirmDialog({ device })
 
     const { data: signature } = await postSignRegisterDevice({ owner: address!, name: device.name!, mac: device.id })
     const hash = await writeIhoMiningRegister({ args: [device.name!, device.id, signature as Hex] })
