@@ -35,7 +35,7 @@ export function DetailRewardChart() {
   return (
     <>
       <ResponsiveContainer width="100%" height="100%">
-        <AreaChart margin={{ left: 30, right: -20 }} data={data}>
+        <AreaChart margin={{ left: 18, right: -20 }} data={data}>
           <defs>
             <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
               <stop offset="5%" stopColor="#70ADF8" stopOpacity={0.8} />

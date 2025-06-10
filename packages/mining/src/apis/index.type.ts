@@ -9,11 +9,14 @@ export interface Miner {
   owner: string;
   token: string;
   tokenId: number;
+  image: string;
+  description: string;
   name: string;
   mac: string;
   account: string;
   blockHeight: number;
   timestamp: number;
+  traits: string[];
 }
 export interface SignatureRegisterBody {
   owner: string;

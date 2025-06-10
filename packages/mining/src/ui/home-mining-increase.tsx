@@ -16,7 +16,7 @@ export function HomeMiningIncrease(props: HomeMiningIncreaseProps) {
   const openDeviceConfirmDialog = useOverlayInject(DeviceConfirmDialog)
 
   const [loading, register] = useAsyncCallback(async () => {
-    const device = await navigator.bluetooth.requestDevice()
+    const device = await navigator.bluetooth.requestDevice({ acceptAllDevices: true })
 
     await openDeviceConfirmDialog({ device })
 

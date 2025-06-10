@@ -1,22 +1,20 @@
 import { useAsyncState } from '@hairy/react-lib'
 import { Tab, Tabs } from '@heroui/react'
-import { getAbiItem } from 'viem'
 
 export function DetailPage() {
   const router = useRouter()
 
-  const [{ value: device }] = useAsyncState(
+  const [{ value: miner, loading }] = useAsyncState(
     async () => {
       return getMinerMac({ mac: router.query.id as string })
     },
     [router.query.id],
     { immediate: true },
   )
-
   return (
     <>
       <section className="px-4 pb-4">
-        <DetailStatusBar />
+        <DetailStatusBar loading={loading} miner={miner} />
       </section>
       <section className="px-4">
         <Tabs aria-label="Tabs variants" size="md" variant="underlined">

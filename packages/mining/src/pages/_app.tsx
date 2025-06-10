@@ -1,9 +1,10 @@
 import { wagmiConfig } from '@/config'
 import { Injector } from '@hairy/react-lib'
+import { ToastProvider } from '@heroui/react'
 import { OverlaysProvider } from '@overlastic/react'
 import { RainbowKitProvider } from '@rainbow-me/rainbowkit'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import Head from 'next/head'
 import { useMount } from 'react-use'
 import { WagmiProvider } from 'wagmi'
@@ -34,6 +35,7 @@ export default function App({ Component, pageProps }: any) {
           { component: OverlaysProvider },
         ]}
       >
+        <ToastProvider placement="top-center" />
         <Component {...pageProps} />
         <SubscribeWagmiConfig />
       </Injector>

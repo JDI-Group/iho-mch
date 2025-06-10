@@ -34,6 +34,7 @@ declare global {
   const chain: typeof import('../generated/index')['chain']
   const chains: typeof import('../generated/index')['chains']
   const client: typeof import('../generated/index')['client']
+  const clipboardCopy: typeof import('../utils/index')['clipboardCopy']
   const clsx: typeof import('clsx')['default']
   const createRef: typeof import('react')['createRef']
   const erc1967ProxyAbi: typeof import('../generated/index')['erc1967ProxyAbi']
