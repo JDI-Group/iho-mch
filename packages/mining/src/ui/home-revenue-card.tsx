@@ -1,3 +1,4 @@
+/* eslint-disable ts/ban-ts-comment */
 import { formatEther } from '@hairy/ether-lib'
 import { useAsyncState } from '@hairy/react-lib'
 import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@heroui/react'
@@ -27,7 +28,8 @@ export function HomeRevenueCard() {
     async () => {
       const logs = await client.getLogs({
         event: getAbiItem({ abi: ihoMiningAbi, name: 'Claimed' }),
-        address: addresses.IHOMining[5167004],
+        // @ts-expect-error
+        address: chain.contracts.IHOMining.address,
         toBlock: 'latest',
         fromBlock: 0n,
         args: { owner: address },
