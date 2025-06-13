@@ -7,7 +7,7 @@ export interface QuestionTooltipProps {
 
 export function QuestionTooltip(props: QuestionTooltipProps) {
   const [openTooltip, setOpenTooltip] = useState<boolean>(false)
-  const tooltipContentRef = useRef<HTMLDivElement>(null)
+  const tooltipContentRef = useRef<any>(null)
   useOutsideClick(tooltipContentRef, () => setOpenTooltip(false))
 
   return (
