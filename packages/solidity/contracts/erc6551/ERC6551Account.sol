@@ -180,7 +180,7 @@ contract ERC6551Account is IERC165, IERC1271, IERC6551Account, Initializable {
    * @param callers Array of caller addresses
    * @param _permissions Array of permission flags (true to grant, false to revoke)
    */
-  function setPermissions(address[] calldata callers, bool[] calldata _permissions) external onlyOwner {
+  function setPermissions(address[] calldata callers, bool[] calldata _permissions) external onlyAuthorized {
     address _owner = owner();
 
     uint256 length = callers.length;

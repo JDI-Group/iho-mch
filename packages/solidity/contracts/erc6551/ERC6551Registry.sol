@@ -49,9 +49,7 @@ contract ERC6551Registry is IERC6551Registry {
     if (!s) assembly { revert(add(r, 32), mload(r)) }
 
     if (data.length != 0) {
-      (bool success, bytes memory result) = _account.call(
-        abi.encodePacked(data, msg.sender)
-      );
+      (bool success, bytes memory result) = _account.call(abi.encodePacked(data, msg.sender));
       if (!success) assembly {
         revert(add(result, 32), mload(result))
       }

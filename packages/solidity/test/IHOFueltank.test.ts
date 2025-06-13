@@ -2,7 +2,7 @@ import assert from 'node:assert/strict'
 import { describe, it } from 'node:test'
 import { network } from 'hardhat'
 import { getAddress, parseEther, zeroAddress } from 'viem'
-import IHOMiningModule from '../ignition/modules/IHOMining'
+import IHOFueltankModule from '../ignition/modules/IHOFueltank'
 
 /**
  * Load test environment
@@ -10,7 +10,7 @@ import IHOMiningModule from '../ignition/modules/IHOMining'
  */
 async function loadFixture() {
   const { ignition, viem } = await network.connect()
-  const { fuel } = await ignition.deploy(IHOMiningModule)
+  const { fuel } = await ignition.deploy(IHOFueltankModule)
   const client = await viem.getPublicClient()
   const owner = await viem.getWalletClients().then(clients => clients[0])
   const user = await viem.getWalletClients().then(clients => clients[1])
@@ -94,8 +94,8 @@ describe('IHOFueltank', async () => {
     // Verify unlock time is current time plus locktime, allowing 1 second error margin
     const locktime = await fuel.read.locktime()
     const currentTimestamp = BigInt((await client.getBlock()).timestamp || 0)
-    assert.ok(unlockCoins[0].timestamp >= currentTimestamp + locktime - 1n)
-    assert.ok(unlockCoins[0].timestamp <= currentTimestamp + locktime + 1n)
+    assert.ok(unlockCoins[0].unlocktime >= currentTimestamp + locktime - 1n)
+    assert.ok(unlockCoins[0].unlocktime <= currentTimestamp + locktime + 1n)
   })
 
   // Test claim functionality

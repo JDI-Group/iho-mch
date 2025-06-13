@@ -6,7 +6,7 @@ export function DetailPage() {
 
   const [{ value: miner, loading }] = useAsyncState(
     async () => {
-      return getMinerMac({ mac: router.query.id as string })
+      return getMinerMac({ mac: encodeURIComponent(router.query.id as string) })
     },
     [router.query.id],
     { immediate: true },
@@ -22,7 +22,7 @@ export function DetailPage() {
             <DetailRewards loading={loading} miner={miner} />
           </Tab>
           <Tab key="fuel-tank" title="Fuel tank">
-            <DetailFueltank />
+            <DetailFueltank loading={loading} miner={miner} />
           </Tab>
         </Tabs>
       </section>

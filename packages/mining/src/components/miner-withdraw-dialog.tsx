@@ -31,7 +31,7 @@ export function MinerWithdrawDialog(props: MinerWithdrawDialogProps) {
     let data: Hex
 
     if (fueltank) {
-      to = ihoFuelAddress
+      to = chain.contracts.IHOFueltank.address
       data = encodeFunctionData({
         abi: ihoFueltankAbi,
         functionName: 'deposit',
@@ -118,7 +118,7 @@ export function MinerWithdrawDialog(props: MinerWithdrawDialogProps) {
               isOpen={openTooltip}
               size="sm"
             >
-              <div className="pl-2" ref={tooltipContentRef} onClick={() => setOpenTooltip(!openTooltip)}>
+              <div className="p-1" ref={tooltipContentRef} onClick={() => setOpenTooltip(!openTooltip)}>
                 <Icon className="text-base mt-[1px]" icon="line-md:question-circle" />
               </div>
             </Tooltip>

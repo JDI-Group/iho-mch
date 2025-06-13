@@ -10,6 +10,7 @@ declare global {
   const DetailFuelTank: typeof import('../ui/detail-fueltank')['DetailFuelTank']
   const DetailFueltank: typeof import('../ui/detail-fueltank')['DetailFueltank']
   const DetailFueltankChart: typeof import('../ui/detail-fueltank-chart')['DetailFueltankChart']
+  const DetailFueltankTable: typeof import('../ui/detail-fueltank-table')['DetailFueltankTable']
   const DetailPage: typeof import('../ui/detail-page')['DetailPage']
   const DetailRewardChart: typeof import('../ui/detail-rewards-chart')['DetailRewardChart']
   const DetailRewards: typeof import('../ui/detail-rewards')['DetailRewards']
@@ -25,8 +26,10 @@ declare global {
   const Image: typeof import('../components/image')['Image']
   const MaterialSymbolsArrowDownwardAltRounded: typeof import('../components/rainbowkit-widget')['MaterialSymbolsArrowDownwardAltRounded']
   const MinerConfirmDialog: typeof import('../components/miner-confirm-dialog')['MinerConfirmDialog']
+  const MinerFueltankDialog: typeof import('../components/miner-fueltank-dialog')['MinerFueltankDialog']
   const MinerWithdrawDialog: typeof import('../components/miner-withdraw-dialog')['MinerWithdrawDialog']
   const NonNotExitsConnect: typeof import('../components/non-not-exits-connect')['NonNotExitsConnect']
+  const QuestionTooltip: typeof import('../components/question-tooltip')['QuestionTooltip']
   const RainbowkitWidget: typeof import('../components/rainbowkit-widget')['RainbowkitWidget']
   const SubscribeWagmiConfig: typeof import('../generated/index')['SubscribeWagmiConfig']
   const TrendCard: typeof import('../components/trend-card')['TrendCard']
@@ -298,6 +301,8 @@ declare global {
   const startTransition: typeof import('react')['startTransition']
   const store: typeof import('../store/index')['default']
   const transactionConfirmedToast: typeof import('../utils/index')['transactionConfirmedToast']
+  const transactionWaitingReceipt: typeof import('../utils/index')['transactionWaitingReceipt']
+  const transactionWaitingToast: typeof import('../utils/index')['transactionWaitingToast']
   const useBidirectionalTransfer: typeof import('../generated/index')['useBidirectionalTransfer']
   const useCallback: typeof import('react')['useCallback']
   const useContext: typeof import('react')['useContext']
@@ -808,11 +813,23 @@ declare global {
   export type { MinerConfirmDialogProps } from '../components/miner-confirm-dialog'
   import('../components/miner-confirm-dialog')
   // @ts-ignore
+  export type { MinerFueltankDialogProps, ContentProps } from '../components/miner-fueltank-dialog'
+  import('../components/miner-fueltank-dialog')
+  // @ts-ignore
   export type { MinerWithdrawDialogProps } from '../components/miner-withdraw-dialog'
   import('../components/miner-withdraw-dialog')
   // @ts-ignore
+  export type { QuestionTooltipProps } from '../components/question-tooltip'
+  import('../components/question-tooltip')
+  // @ts-ignore
   export type { RainbowkitWidgetProps } from '../components/rainbowkit-widget'
   import('../components/rainbowkit-widget')
+  // @ts-ignore
+  export type { DetailFueltankTableProps } from '../ui/detail-fueltank-table'
+  import('../ui/detail-fueltank-table')
+  // @ts-ignore
+  export type { DetailFueltankProps } from '../ui/detail-fueltank'
+  import('../ui/detail-fueltank')
   // @ts-ignore
   export type { DetailRewardsChartData, DetailRewardsChartProps } from '../ui/detail-rewards-chart'
   import('../ui/detail-rewards-chart')

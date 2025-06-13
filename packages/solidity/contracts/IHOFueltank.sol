@@ -49,6 +49,7 @@ contract IHOFueltank is
     address token;
     uint256 amount;
     uint256 timestamp;
+    uint256 unlocktime;
   }
 
   /// @notice The lock period in seconds (default: 30 days)
@@ -115,7 +116,7 @@ contract IHOFueltank is
     
     uint index = UnlockCoins[msg.sender].length;
     uint unlocktime = block.timestamp + locktime;
-    UnlockCoin memory coin = UnlockCoin(index, token, amount, unlocktime);
+    UnlockCoin memory coin = UnlockCoin(index, token, amount, block.timestamp, unlocktime);
     UnlockCoins[msg.sender].push(coin);
     LockedCoins[msg.sender][token].amount -= amount;
     
@@ -133,8 +134,8 @@ contract IHOFueltank is
     UnlockCoin memory coin = UnlockCoins[msg.sender][index];
     if (coin.amount == 0)
       revert InvalidIndex(index);
-    if (block.timestamp < coin.timestamp)
-      revert LocktimeNotExpired(block.timestamp, coin.timestamp);
+    if (block.timestamp < coin.unlocktime)
+      revert LocktimeNotExpired(block.timestamp, coin.unlocktime);
 
     transfer(address(this), msg.sender, coin.token, coin.amount);
 

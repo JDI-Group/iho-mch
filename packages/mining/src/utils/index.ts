@@ -1,4 +1,5 @@
-import { addToast, Link } from '@heroui/react'
+import type { Hex } from 'viem'
+import { addToast, closeAll, Link } from '@heroui/react'
 import { Icon } from '@iconify/react/dist/iconify.js'
 import { createElement } from 'react'
 
@@ -11,7 +12,38 @@ export async function clipboardCopy(name: string, value: string, description?: s
   })
 }
 
-export function transactionConfirmedToast(hash: string) {
+export async function transactionWaitingReceipt(hash: Hex) {
+  const promise = client.waitForTransactionReceipt({ hash })
+
+  addToast({
+    title: 'Waiting for Confirm Transaction',
+    description: createElement('span', { className: 'text-tiny' }, 'You can check the progress in the ', createElement(
+      Link,
+      {
+        href: `${chain.blockExplorers.default.url}/tx/${hash}`,
+        className: 'text-tiny inline-flex gap-1',
+        target: '_blank',
+      },
+      'explorer',
+      createElement(Icon, { className: 'text-xs', icon: 'solar:round-arrow-right-up-broken' }),
+    )),
+    promise,
+  })
+
+  const receipt = await promise
+
+  closeAll()
+
+  if (receipt.status !== 'success') {
+    addToast({
+      title: 'Transaction Failed',
+      description: createElement('span', { className: 'text-tiny' }, 'An unknown error has occurred, please contact the administrator.'),
+    })
+    throw new Error('Transaction failed')
+  }
+}
+
+export async function transactionConfirmedToast(hash: string) {
   addToast({
     title: 'Transaction Successful',
     description: (
