@@ -6,27 +6,27 @@
  */
 
 export interface Miner {
-  owner: string;
-  token: string;
-  tokenId: number;
-  image: string;
-  description: string;
-  name: string;
-  mac: string;
-  account: string;
-  blockHeight: number;
-  timestamp: number;
-  traits: string[];
+  owner: string
+  token: string
+  tokenId: number
+  image: string
+  description: string
+  name: string
+  mac: string
+  account: string
+  blockHeight: number
+  timestamp: number
+  traits: string[]
 }
 export interface SignatureRegisterBody {
-  owner: string;
-  name: string;
-  mac: string;
+  owner: string
+  name: string
+  mac: string
 }
 export interface SignatureResponse {
-  data: string;
+  data: string
 }
 export interface GetMinerMacPath {
   /** @description MAC address of the miner */
-  mac: string;
+  mac: string
 }

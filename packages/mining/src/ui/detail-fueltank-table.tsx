@@ -1,9 +1,9 @@
+import type { Key } from 'react'
 import type { Address } from 'viem'
-import { useAsyncState } from '@hairy/react-lib'
-import { Button, getKeyValue, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from '@heroui/react'
-import { Key } from 'react'
-import dayjs from 'dayjs'
 import { formatEther } from '@hairy/ether-lib'
+import { useAsyncState } from '@hairy/react-lib'
+import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from '@heroui/react'
+import dayjs from 'dayjs'
 
 export interface DetailFueltankTableProps {
   address: string
@@ -22,17 +22,16 @@ export function DetailFueltankTable(props: DetailFueltankTableProps) {
   function renderCell(unlock: typeof unlocks[number], key: Key) {
     const cellValue = unlock[key as keyof typeof unlock] as any
     switch (key) {
-      
-      case "timestamp":
-        return dayjs.unix(Number(cellValue)).format("MM/DD HH:mm");
+      case 'timestamp':
+        return dayjs.unix(Number(cellValue)).format('MM/DD HH:mm')
       case 'amount':
         return formatEther(cellValue)
-      case "status":
-        return dayjs.unix(Number(cellValue)).isAfter(dayjs()) ? 'Expired' : 'Active';
-      case "actions":
-        return 1;
+      case 'status':
+        return dayjs.unix(Number(cellValue)).isAfter(dayjs()) ? 'Expired' : 'Active'
+      case 'actions':
+        return 1
       default:
-        return cellValue;
+        return cellValue
     }
   }
 
@@ -55,9 +54,9 @@ export function DetailFueltankTable(props: DetailFueltankTableProps) {
           <TableColumn key="actions">Actions</TableColumn>
         </TableHeader>
         <TableBody items={unlocks}>
-          {(item) => (
+          {item => (
             <TableRow key={item.index}>
-              {(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}
+              {columnKey => <TableCell>{renderCell(item, columnKey)}</TableCell>}
             </TableRow>
           )}
         </TableBody>

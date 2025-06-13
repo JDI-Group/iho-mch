@@ -64,7 +64,7 @@ export function DetailFueltank(props: DetailFueltankProps) {
           Withdraw
         </Button>
       </div>
-        
+
       <DetailFueltankTable address={miner!.account} />
       <div className="mb-2 text-base">Your Withdraws</div>
       <Table

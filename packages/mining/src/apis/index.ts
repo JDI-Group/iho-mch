@@ -5,9 +5,9 @@
  * @version 1.0.0
  */
 
-import * as Types from "./index.type";
+import type * as Types from './index.type'
 
-export const baseURL = process.env.NEXT_PUBLIC_MINING_SERVICE_URL;
+export const baseURL = process.env.NEXT_PUBLIC_MINING_SERVICE_URL
 
 /**
  * @method get
@@ -16,8 +16,8 @@ export const baseURL = process.env.NEXT_PUBLIC_MINING_SERVICE_URL;
 export async function getMinerMac(paths: Types.GetMinerMacPath, config?: RequestInit) {
   const response = await fetch(`${baseURL}/miner/${paths.mac}`, {
     ...config,
-  });
-  return response.json() as Promise<Types.Miner>;
+  })
+  return response.json() as Promise<Types.Miner>
 }
 /**
  * @method post
@@ -25,10 +25,10 @@ export async function getMinerMac(paths: Types.GetMinerMacPath, config?: Request
  */
 export async function postSignRegisterDevice(body: Types.SignatureRegisterBody, config?: RequestInit) {
   const response = await fetch(`${baseURL}/sign/registerDevice`, {
-    headers: { "Content-Type": "application/json" },
-    method: "post",
+    headers: { 'Content-Type': 'application/json' },
+    method: 'post',
     body: JSON.stringify(body),
     ...config,
-  });
-  return response.json() as Promise<Types.SignatureResponse>;
+  })
+  return response.json() as Promise<Types.SignatureResponse>
 }
