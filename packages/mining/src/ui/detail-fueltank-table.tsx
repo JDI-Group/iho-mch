@@ -1,9 +1,10 @@
 import type { Key } from 'react'
 import type { Address } from 'viem'
 import { formatEther } from '@hairy/ether-lib'
-import { useAsyncState } from '@hairy/react-lib'
-import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from '@heroui/react'
+import { useAsyncState, useEventBus } from '@hairy/react-lib'
+import { Button, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from '@heroui/react'
 import dayjs from 'dayjs'
+import Countdown from 'react-countdown'
 
 export interface DetailFueltankTableProps {
   address: string
@@ -18,22 +19,50 @@ export function DetailFueltankTable(props: DetailFueltankTableProps) {
     },
     [address],
   )
-
   function renderCell(unlock: typeof unlocks[number], key: Key) {
     const cellValue = unlock[key as keyof typeof unlock] as any
+    const unlocktime = dayjs.unix(Number(unlock.unlocktime))
+    const locked = dayjs().isAfter(unlocktime)
     switch (key) {
-      case 'timestamp':
-        return dayjs.unix(Number(cellValue)).format('MM/DD HH:mm')
+      case 'unlocktime':
+        return unlocktime.format('MM/DD HH:mm')
       case 'amount':
-        return formatEther(cellValue)
+        return `${formatEther(cellValue)} MXC`
       case 'status':
-        return dayjs.unix(Number(cellValue)).isAfter(dayjs()) ? 'Expired' : 'Active'
+        return locked
+          ? (
+              <span className="text-tiny h-4 text-slate-500">
+                Locked in
+              </span>
+            )
+          : (
+              <span className="text-tiny h-4 text-yellow-500">
+                Unclaimed
+              </span>
+            )
       case 'actions':
-        return 1
+        return locked
+          ? (
+              <Button className="h-6" color="primary" size="sm">
+                Claim
+              </Button>
+            )
+          : (
+              <Button className="h-6" isDisabled size="sm">
+                <Countdown
+                  date={unlocktime.valueOf()}
+                  renderer={({ total }) => {
+                    return dayjs.duration(total).format('D[d] H:mm:ss')
+                  }}
+                />
+              </Button>
+            )
       default:
         return cellValue
     }
   }
+
+  useEventBus('fueltank-table:reload').on(reloadUnlocks)
 
   return (
     <>
@@ -48,7 +77,7 @@ export function DetailFueltankTable(props: DetailFueltankTableProps) {
       >
         <TableHeader>
           <TableColumn key="index">ID</TableColumn>
-          <TableColumn key="timestamp">Time</TableColumn>
+          <TableColumn key="unlocktime">Time</TableColumn>
           <TableColumn key="amount">Balance</TableColumn>
           <TableColumn key="status">Status</TableColumn>
           <TableColumn key="actions">Actions</TableColumn>
