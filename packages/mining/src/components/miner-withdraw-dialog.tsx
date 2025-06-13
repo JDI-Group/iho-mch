@@ -20,7 +20,7 @@ export function MinerWithdrawDialog(props: MinerWithdrawDialogProps) {
   const [amount, setAmount] = useState<number>()
   const [fueltank, setFueltank] = useState<boolean>(false)
   const { address } = useAccount()
-  const tooltipContentRef = useRef<HTMLDivElement>(null)
+  const tooltipContentRef = useRef<any>(null)
   const [openTooltip, setOpenTooltip] = useState<boolean>(false)
 
   const [loading, confirm] = useAsyncCallback(async () => {
