@@ -40,12 +40,14 @@ export default function Page() {
           </If>
         </div>
         <If cond={!loading}>
-          <Then tag="div" className="flex">
+          <Then tag="div" className="flex gap-4">
             {products.map(product => (
               <div key={product.id} onClick={() => router.push(`/products/${product.id}`)} className="w-full md:w-[294px]">
                 <Card className="w-full py-4 cursor-pointer">
                   <CardHeader className="pb-0 pt-0 px-4 flex-col items-start">
-                    <h4 className="font-bold text-large">{product.name}</h4>
+                    <h4 className="font-bold text-large w-full">
+                      <div className="truncate">{product.name}</div>
+                    </h4>
                     <p className="text-[8px] bg-tag bg-clip-text text-transparent uppercase font-bold">
                       Virtual Reality Reimagined
                     </p>
@@ -54,7 +56,9 @@ export default function Page() {
                         Immediate Delivery
                       </p>
                     </If>
-                    <small className="text-default-500">{product.description}</small>
+                    <div className="min-h-14">
+                      <small className="text-default-500 line-clamp-3">{product.description}</small>
+                    </div>
                   </CardHeader>
                   <CardBody className="overflow-visible py-2">
                     <Image

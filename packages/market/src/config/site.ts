@@ -51,23 +51,23 @@ export const siteConfig = {
   links: [
     {
       label: 'Privacy Policy',
-      href: '/privacy-policy',
+      href: 'https://doc.moonchain.com/docs/Resources/Moonbase-Privacy-Policy',
     },
     {
       label: 'Terms of Use',
-      href: '/terms-of-use',
+      href: 'https://doc.moonchain.com/docs/Resources/tns',
     },
-    {
-      label: 'Sales and Refunds',
-      href: '/sales-and-refunds',
-    },
-    {
-      label: 'Legal',
-      href: '/legal',
-    },
-    {
-      label: 'Site Map',
-      href: '/site-map',
-    },
+    // {
+    //   label: 'Sales and Refunds',
+    //   href: '/sales-and-refunds',
+    // },
+    // {
+    //   label: 'Legal',
+    //   href: '/legal',
+    // },
+    // {
+    //   label: 'Site Map',
+    //   href: '/site-map',
+    // },
   ],
 }
