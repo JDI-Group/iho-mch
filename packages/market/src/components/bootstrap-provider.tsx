@@ -28,7 +28,7 @@ export function BootstrapProvider(props: React.PropsWithChildren) {
   const { disconnect } = useDisconnect()
 
   useFetchRequestIntercept((fetch, input, init) => {
-    if (typeof input === 'string' && input?.startsWith(process.env.NEXT_PUBLIC_SERVER_URL!)) {
+    if (typeof input === 'string' && input?.startsWith(baseURL!)) {
       const headers = Object.assign({ token: store.authentication.$state.token }, init?.headers)
       return fetch(input, { ...init, headers })
     }

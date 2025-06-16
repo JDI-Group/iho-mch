@@ -12,3 +12,4 @@ Configuration files for the IHO project, including the following files:
 - `product`: WooCommerce product ID.
 - `target`: The target amount for the project.
 - `price`: The price of the project(usd).
+- `expire`: The effective duration of the mortgage
