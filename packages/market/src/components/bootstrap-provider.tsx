@@ -123,6 +123,7 @@ export function BootstrapProvider(props: React.PropsWithChildren) {
       const network = new Network(target.name, target.id)
       const provider = new JsonRpcProvider(rpc, network)
       Reflect.set(provider, 'chainId', target.id)
+      chain.proxy.update(target)
       client.proxy.update(provider)
     },
     [chainId],
