@@ -33,12 +33,17 @@ export function OrderTable(props: OrderTableProps) {
   }
 
   return (
-    <div className="w-full overflow-x-auto">
+    <div className="w-full">
       <Table
+        isHeaderSticky
         topContentPlacement="outside"
         bottomContentPlacement="outside"
         removeWrapper
         className="min-h-72"
+        classNames={{
+          base: 'max-h-[520px] overflow-scroll overflow-x-auto',
+          table: 'min-h-[420px]',
+        }}
         bottomContent={
           more && !loading && (
             <div className="flex w-full justify-center">

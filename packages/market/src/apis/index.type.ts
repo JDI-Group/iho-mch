@@ -45,8 +45,11 @@ export interface Links {
   collection: string[]
 }
 export interface Metadata {
+  /** @description Meta ID. */
   id: number
+  /** @description Meta key. */
   key: string
+  /** @description Meta value. */
   value: any
 }
 export interface Product {
@@ -179,19 +182,6 @@ export interface Statistics {
   activeStakes: any
   totalParticipants: any
 }
-export interface Address {
-  first_name: string
-  last_name: string
-  company: string
-  address_1: string
-  address_2: string
-  city: string
-  state: string
-  postcode: string
-  country: string
-  email: string
-  phone: string
-}
 export interface Lineitem {
   id: number
   name: string
@@ -209,6 +199,64 @@ export interface Lineitem {
   price: number
   image: Image
   parent_name: string
+}
+export interface ShippingLine {
+  /** @description Item ID. */
+  id: number
+  /** @description Shipping method name. */
+  method_title: string
+  /** @description Shipping method ID. */
+  method_id: string
+  /** @description Line total (after discounts). */
+  total: string
+  /** @description Line total tax (after discounts). */
+  total_tax: string
+  /** @description Line taxes. See Order - Tax lines properties */
+  taxes: string[]
+  /** @description Meta data. */
+  meta_data: Metadata[]
+}
+export interface TaxLine {
+  /** @description Item ID. */
+  id: number
+  /** @description Tax rate code. */
+  rate_code: string
+  /** @description Tax rate ID. */
+  rate_id: number
+  /** @description Tax rate label. */
+  label: string
+  /** @description Whether or not this is a compound tax rate. */
+  compound: boolean
+  /** @description Tax total (not including shipping taxes). */
+  tax_total: string
+  /** @description Shipping tax total. */
+  shipping_tax_total: string
+  /** @description Meta data. */
+  meta_data: Metadata[]
+}
+export interface Address {
+  /** @description First name. */
+  first_name: string
+  /** @description Last name. */
+  last_name: string
+  /** @description Company name. */
+  company: string
+  /** @description Address line 1. */
+  address_1: string
+  /** @description Address line 2. */
+  address_2: string
+  /** @description City name. */
+  city: string
+  /** @description ISO code or name of the state, province or district. */
+  state: string
+  /** @description Postcode. */
+  postcode: string
+  /** @description Country code in ISO 3166-1 alpha-2 format. */
+  country: string
+  /** @description Email address. */
+  email: string
+  /** @description Phone number. */
+  phone: string
 }
 export interface Order {
   id: number
@@ -243,8 +291,8 @@ export interface Order {
   number: string
   meta_data: string[]
   line_items: Lineitem[]
-  tax_lines: string[]
-  shipping_lines: string[]
+  tax_lines: TaxLine[]
+  shipping_lines: ShippingLine[]
   fee_lines: string[]
   coupon_lines: string[]
   refunds: string[]

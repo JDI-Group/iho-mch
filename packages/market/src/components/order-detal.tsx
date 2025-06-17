@@ -1,11 +1,12 @@
 import type { Order } from '@/apis/index.type'
 import { useAsyncCallbacks } from '@/hooks/use-async-callbacks'
 import { helperStake } from '@/services/stake'
-import { Case, Switch } from '@hairy/react-lib'
+import { Case, If, Switch } from '@hairy/react-lib'
 import { Button } from '@heroui/button'
 import { Card, CardBody, CardFooter, CardHeader } from '@heroui/card'
 import { Divider } from '@heroui/divider'
 import { Link } from '@heroui/link'
+import { Timeline } from 'antd'
 
 export interface OrderDetailProps {
   detail?: Order
@@ -76,6 +77,28 @@ export function OrderDetail(props: OrderDetailProps) {
           <div className="font-bold">Total</div>
           <div>${props.detail?.total}</div>
         </div>
+        <If cond={props.detail?.shipping_lines.length}>
+          <div className="flex justify-between">
+            <div className="font-bold">Shipping information:</div>
+            <div className="flex-1 ml-2">
+              <Timeline
+                mode="right"
+                items={props.detail?.shipping_lines.map((item) => {
+                  return {
+                    children: (
+                      <div className="flex flex-col">
+                        <span>{item.method_title}</span>
+                        <span className="text-default-500">
+                          {item.method_id}
+                        </span>
+                      </div>
+                    ),
+                  }
+                })}
+              />
+            </div>
+          </div>
+        </If>
       </CardBody>
       <CardFooter className="flex gap-3 justify-end">
         <Switch value={props.detail?.status}>
