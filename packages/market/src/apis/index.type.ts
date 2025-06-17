@@ -262,7 +262,7 @@ export interface Order {
 }
 export interface OrderCreateDto {
   product: number
-  variation: number
+  variation?: number
 }
 export interface Coin {
   token: string

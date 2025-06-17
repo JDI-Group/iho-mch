@@ -66,7 +66,7 @@ export function ProductForm(props: ProductFormProps) {
     try {
       await helperStake({
         product: props.id!,
-        variation: variation!.id,
+        variation: variation?.id,
       })
       addToast({
         title: 'Success',
