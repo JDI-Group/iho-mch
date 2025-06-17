@@ -40,7 +40,7 @@ export function ProductDescription(props: ProductDescriptionProps) {
           <span>Moonchain Tokens</span>
         </span>
       </p>
-      <div className="flex-1 min-h-40 relative mb-4 bg-default-100 bg-opacity-40 rounded-lg overflow-hidden">
+      <div className="min-h-40 relative mb-4 bg-default-100 bg-opacity-40 rounded-lg overflow-hidden">
         <div
           className={clsx(
             'absolute z-10 inset-0 opacity-0 bg-black bg-opacity-45 dark:bg-opacity-70 cursor-pointer',
@@ -54,7 +54,7 @@ export function ProductDescription(props: ProductDescriptionProps) {
         </div>
         <div className="absolute inset-0 overflow-hidden m-4">
           <div
-            className="text-sm space-y-2 flex-1 overflow-hidden"
+            className="text-sm space-y-2 flex-1 overflow-hidden line-clamp-6"
             dangerouslySetInnerHTML={{ __html: html }}
           />
         </div>

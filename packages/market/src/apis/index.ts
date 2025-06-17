@@ -7,7 +7,7 @@
 
 import type * as Types from './index.type'
 
-export const baseURL = process.env.NEXT_PUBLIC_MARKET_SERVICE_URL
+export const baseURL = process.env.NEXT_PUBLIC_MARKET_SERVICE_URL!
 
 /**
  * @method get
@@ -48,6 +48,16 @@ export async function getProductIdVariationsVariation(paths: Types.GetProductIdV
     ...config,
   })
   return response.json() as Promise<Types.Variation>
+}
+/**
+ * @method get
+ * @tags Product
+ */
+export async function getProductIdStatistics(paths: Types.GetProductIdStatisticsPath, config?: RequestInit) {
+  const response = await fetch(`${baseURL}/product/${paths.id}/statistics`, {
+    ...config,
+  })
+  return response.json() as Promise<Types.Statistics>
 }
 /**
  * @method get

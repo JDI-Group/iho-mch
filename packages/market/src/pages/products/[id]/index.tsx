@@ -1,12 +1,17 @@
 import { ProductDescription } from '@/ui/product-description'
-import { Else, If, Then } from '@hairy/react-lib'
+import { formatEther } from '@hairy/ether-lib'
 
-import { whenever } from '@hairy/utils'
+import { Else, If, Then } from '@hairy/react-lib'
+import { formatNumeric, whenever } from '@hairy/utils'
+import { Card, CardBody } from '@heroui/card'
 import { Spinner } from '@heroui/spinner'
+import { Divider } from 'antd'
 import { useAsync } from 'react-use'
 
 function Page() {
   const router = useRouter()
+  const [price, setPrice] = useState<string>()
+
   const { value: detail, loading } = useAsync(
     async () => whenever(router.query.id, id => getProductId({ id: +id })),
     [router.query.id],
@@ -15,7 +20,9 @@ function Page() {
     async () => whenever(detail?.id, id => getProductIdVariations({ id: +id })),
     [detail],
   )
-  const [price, setPrice] = useState<string>()
+  const { value: statistics } = useAsync(
+    async () => whenever(detail?.id, id => getProductIdStatistics({ id })),
+  )
 
   return (
     <layouts.default>
@@ -46,6 +53,43 @@ function Page() {
                 onChange={variation => setPrice(variation?.ether)}
               />
             </div>
+          </div>
+          <h1 className="text-2xl font-bold mt-6 mb-4">
+            Cumulative statistics
+          </h1>
+          <Card className="shadow-none mb-2 bg-gray-100 bg-opacity-50 dark:bg-content1 dark:bg-opacity-50">
+            <CardBody>
+              <div className="flex max-md:flex-wrap gap-1 justify-between">
+                <div className="flex flex-1 items-center flex-col gap-1">
+                  <p className="text-lg">$ {formatEther(statistics?.totalValueSecured, { zeromove: false })}</p>
+                  <h2 className="text-xl font-bold">Total Value Secured</h2>
+                </div>
+                <div className="max-md:hidden flex flex-col">
+                  <Divider className="flex-1 mx-0" type="vertical" />
+                </div>
+                <div className="flex flex-1 items-center flex-col gap-1">
+                  <p className="text-lg">$ {formatEther(statistics?.weeklyValueSecured, { zeromove: false })}</p>
+                  <h2 className="text-xl font-bold">Weekly Value Secured</h2>
+                </div>
+                <div className="max-md:hidden flex flex-col">
+                  <Divider className="flex-1 mx-0" type="vertical" />
+                </div>
+                <div className="flex flex-1 items-center flex-col gap-1">
+                  <p className="text-lg">{formatNumeric(statistics?.activeStakes)}</p>
+                  <h2 className="text-xl font-bold">Active Stakes</h2>
+                </div>
+                <div className="max-md:hidden flex flex-col">
+                  <Divider className="flex-1 mx-0" type="vertical" />
+                </div>
+                <div className="flex flex-1 items-center flex-col gap-1">
+                  <p className="text-lg">{formatNumeric(statistics?.totalParticipants)}</p>
+                  <h2 className="text-xl font-bold">Total Participants</h2>
+                </div>
+              </div>
+            </CardBody>
+          </Card>
+          <div className="flex justify-end">
+            <span className="text-default-500">Last updated: April 14, 2025 - 10:30 AM</span>
           </div>
         </Then>
         <Else tag="div" className="w-full h-[50vh] flex justify-center items-center">

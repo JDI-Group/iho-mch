@@ -173,6 +173,12 @@ export interface Variation {
   parent_id: number
   _links: Links
 }
+export interface Statistics {
+  totalValueSecured: any
+  weeklyValueSecured: any
+  activeStakes: any
+  totalParticipants: any
+}
 export interface Address {
   first_name: string
   last_name: string
@@ -322,6 +328,9 @@ export interface GetProductIdVariationsPath {
 export interface GetProductIdVariationsVariationPath {
   id: number
   variation: number
+}
+export interface GetProductIdStatisticsPath {
+  id: number
 }
 export interface GetOrderQuery {
   page?: number

@@ -72,6 +72,7 @@ declare global {
   const getOrder: typeof import('../src/apis/index')['getOrder']
   const getProduct: typeof import('../src/apis/index')['getProduct']
   const getProductId: typeof import('../src/apis/index')['getProductId']
+  const getProductIdStatistics: typeof import('../src/apis/index')['getProductIdStatistics']
   const getProductIdVariations: typeof import('../src/apis/index')['getProductIdVariations']
   const getProductIdVariationsVariation: typeof import('../src/apis/index')['getProductIdVariationsVariation']
   const getUser: typeof import('../src/apis/index')['getUser']
