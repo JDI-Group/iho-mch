@@ -8,11 +8,8 @@
   "license": "ISC",
   "main": "dist/index.ts",
   "scripts": {
-    "test": "hardhat test",
-    "test:node": "hardhat test node",
-    "deploy:geneva:iho-market": "lnv -o --vlt -- hardhat --build-profile production ignition deploy ignition/modules/IHOMarket.ts --network moonchainGeneva",
-    "deploy:geneva:iho-mining": "lnv -o --vlt -- hardhat --build-profile production ignition deploy ignition/modules/IHOMining.ts --network moonchainGeneva",
-    "script:mining": "lnv -o --vlt -- hardhat run ./scripts/mining.ts --build-profile production",
+    "test": "lnv test",
+    "deploy": "lnv deploy",
     "postinstall": "hardhat compile && etherlib generate"
   },
   "dependencies": {

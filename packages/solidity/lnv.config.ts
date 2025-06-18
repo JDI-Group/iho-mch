@@ -1,0 +1,68 @@
+import fs from 'node:fs/promises'
+import { defineConfig } from '@hairy/lnv'
+
+const config = defineConfig({
+  scripts: {
+    deploy: {
+      prompts: [
+        {
+          key: 'modulePath',
+          message: 'Select the module you want to deploy',
+          options: readModuleOptions,
+        },
+        {
+          key: 'network',
+          message: 'Select the network to deploy to',
+          options: [
+            {
+              value: 'hardhat',
+              label: 'Hardhat',
+              hint: 'localhost',
+            },
+            {
+              value: 'moonchainGeneva',
+              label: 'Moonchain Geneva',
+              hint: 'geneva-rpc.moonchain.com',
+            },
+            {
+              value: 'moonchain',
+              label: 'Moonchain Mainnet',
+              hint: 'rpc.moonchain.com',
+            },
+          ],
+        },
+      ],
+      command: 'hardhat --build-profile production ignition deploy $modulePath --network $network',
+    },
+    test: {
+      message: 'Please select the scope you want to test',
+      options: [
+        {
+          value: 'hardhat test',
+          label: 'Default',
+          hint: 'Solidity and TypeScript tests',
+        },
+        {
+          value: 'hardhat test node',
+          label: 'Node.js',
+          hint: 'TypesScript tests',
+        },
+        {
+          value: 'hardhat test solidity',
+          label: 'Solidity',
+          hint: 'Solidity tests',
+        },
+      ],
+    },
+  },
+})
+
+async function readModuleOptions() {
+  const files = await fs.readdir('./ignition/modules')
+  return files.map(file => ({
+    value: `./ignition/modules/${file}`,
+    label: file.replace('.ts', ''),
+  }))
+}
+
+export default config

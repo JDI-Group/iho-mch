@@ -32,8 +32,8 @@ importers:
         specifier: ^3.5.0
         version: 3.5.0(@swc/helpers@0.5.17)
       '@hairy/lnv':
-        specifier: ^6.1.0
-        version: 6.3.0
+        specifier: ^7.3.0
+        version: 7.3.0
       '@types/node':
         specifier: 20.5.7
         version: 20.5.7
@@ -209,9 +209,6 @@ importers:
       '@genapi/presets':
         specifier: ^3.5.0
         version: 3.5.0(@swc/helpers@0.5.17)
-      '@hairy/lnv':
-        specifier: ^6.1.0
-        version: 6.3.0
       '@types/google-libphonenumber':
         specifier: ^7.4.30
         version: 7.4.30
@@ -318,9 +315,6 @@ importers:
         specifier: ^2.15.2
         version: 2.15.3(@tanstack/query-core@5.76.0)(@tanstack/react-query@5.76.0(react@19.1.0))(@types/react@19.1.4)(bufferutil@4.0.9)(immer@10.0.2)(react@19.1.0)(typescript@5.8.3)(utf-8-validate@5.0.10)(viem@2.30.0(patch_hash=a81798b4482d92f8120cca6f01f06322694a76466b2548d025e0c935e7664da4)(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.24.4))(zod@3.24.4)
     devDependencies:
-      '@hairy/lnv':
-        specifier: ^6.3.0
-        version: 6.3.0
       '@types/node':
         specifier: ^22.15.16
         version: 22.15.18
@@ -550,8 +544,14 @@ packages:
   '@clack/core@0.4.2':
     resolution: {integrity: sha512-NYQfcEy8MWIxrT5Fj8nIVchfRFA26yYKJcvBS7WlUIlw2OmQOY9DhGGXMovyI5J5PpxrCPGkgUi207EBrjpBvg==}
 
+  '@clack/core@0.5.0':
+    resolution: {integrity: sha512-p3y0FIOwaYRUPRcMO7+dlmLh8PSRcrjuTndsiA0WAFbWES0mLZlrjVoBRZ9DzkPFJZG6KGkJmoEAY0ZcVWTkow==}
+
   '@clack/prompts@0.10.1':
     resolution: {integrity: sha512-Q0T02vx8ZM9XSv9/Yde0jTmmBQufZhPJfYAg2XrrrxWWaZgq1rr8nU8Hv710BQ1dhoP8rtY7YUdpGej2Qza/cw==}
+
+  '@clack/prompts@0.11.0':
+    resolution: {integrity: sha512-pMN5FcrEw9hUkZA4f+zLlzivQSeQf5dRGJjSUbvVYDLvpKCdQx5OaknvKzgbtXOizhP+SJJJjqEbOe55uKKfAw==}
 
   '@coinbase/wallet-sdk@3.9.3':
     resolution: {integrity: sha512-N/A2DRIf0Y3PHc1XAMvbBUu4zisna6qAdqABMZwBMNEfWrXpAwx16pZGkYCLGE+Rvv1edbcB2LYDRnACNcmCiw==}
@@ -1118,8 +1118,8 @@ packages:
     peerDependencies:
       ethers: '>=6'
 
-  '@hairy/lnv@6.3.0':
-    resolution: {integrity: sha512-XN45qeTiY8glign60ulRjR3ytEMwlyEvly7SlBK6LGdnGwkZ/ITs0vks2xa4uHYGKbZcaxuOeXJG/pQzDW38DQ==}
+  '@hairy/lnv@7.3.0':
+    resolution: {integrity: sha512-m2cTtWKuQDYs7PxNANfor4CgL5KNhvG7fKBD899g9gCz6Tw+deFMEeS8BUSlLDzDjhHB9yn32F7egYVKhn/f4g==}
     hasBin: true
 
   '@hairy/react-lib@1.29.0':
@@ -8532,9 +8532,20 @@ snapshots:
       picocolors: 1.1.1
       sisteransi: 1.0.5
 
+  '@clack/core@0.5.0':
+    dependencies:
+      picocolors: 1.1.1
+      sisteransi: 1.0.5
+
   '@clack/prompts@0.10.1':
     dependencies:
       '@clack/core': 0.4.2
+      picocolors: 1.1.1
+      sisteransi: 1.0.5
+
+  '@clack/prompts@0.11.0':
+    dependencies:
+      '@clack/core': 0.5.0
       picocolors: 1.1.1
       sisteransi: 1.0.5
 
@@ -9141,11 +9152,14 @@ snapshots:
       ethers: 6.14.3(bufferutil@4.0.9)(utf-8-validate@5.0.10)
       mitt: 3.0.1
 
-  '@hairy/lnv@6.3.0':
+  '@hairy/lnv@7.3.0':
     dependencies:
+      '@clack/prompts': 0.11.0
+      consola: 3.4.2
       dotenv: 16.5.0
       dotenv-expand: 12.0.2
       nano-spawn: 0.2.1
+      unconfig: 7.3.2
       yargs: 17.7.2
 
   '@hairy/react-lib@1.29.0(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react-i18next@14.1.3(i18next@25.1.2(typescript@5.6.3))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)':

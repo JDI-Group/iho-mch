@@ -4,10 +4,10 @@
   "private": true,
   "packageManager": "pnpm@10.6.5",
   "scripts": {
-    "dev": "lnv -o --vlt -- next dev",
-    "build": "lnv -o --vlt -- next build",
-    "start": "lnv -o --vlt -- next start",
-    "genapi": "lnv -o --vlt -- genapi"
+    "dev": "lnv -- next dev",
+    "build": "lnv -- next build",
+    "start": "lnv -- next start",
+    "genapi": "lnv -- genapi"
   },
   "dependencies": {
     "@hairy/ether-lib": "^1.23.0",
@@ -58,7 +58,6 @@
   "devDependencies": {
     "@genapi/core": "^3.5.0",
     "@genapi/presets": "^3.5.0",
-    "@hairy/lnv": "^6.1.0",
     "@types/google-libphonenumber": "^7.4.30",
     "@types/node": "20.5.7",
     "@types/react": "18.3.3",
