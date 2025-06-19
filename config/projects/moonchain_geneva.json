@@ -1,34 +1,45 @@
 [
+
   {
-    "name": "Moonchain Grip: The Ultimate Mobile Game Controller (Test)",
-    "description": "Introducing the Moonchain Grip — a next-generation mobile gaming controller engineered for precision, speed, and immersive gameplay. Designed for both Android and iPhone users, the Moonchain Grip redefines mobile esports with pro-level control and Web3-powered ownership.",
-    "expire": 31536000,
-    "target": 10,
-    "limit": 10,
-    "product": 22609
-  },
-  {
+    "product": 22643,
     "name": "Moonchain Drone: crypto-native drone",
     "description": "Meet the Moonchain Drone — the first-ever autonomous, crypto-native drone distributed through an Initial Hardware Offering (IHO). Engineered for performance, connectivity, and profitability, the IHO Drone isn’t just a flying machine — it’s a physical validator in your decentralized economy.",
     "expire": 31536000,
-    "target": 5,
-    "limit": 5,
-    "product": 22643
+    "target": 10,
+    "limit": 2
   },
   {
+    "product": 22649,
     "name": "Moonchain Headphones: Sound Meets On-Chain Utility",
     "description": "The Moonchain Headphones redefine what it means to listen with purpose. Delivered through our exclusive Initial Hardware Offering (IHO), these wireless headphones fuse high-fidelity audio with blockchain utility — no upfront cost, just stake-to-own.",
     "expire": 31536000,
-    "target": 5,
-    "limit": 5,
-    "product": 22649
+    "target": 10,
+    "limit": 2
   },
   {
-    "name": "BlueBerry AI - WearFI (Test)",
+    "product": 22668,
+    "name": "Moonchain DIMO: A GPS and health tracker for your car",
+    "description": "DIMO Macaron is smartest way to track and improve the health and value of your car.",
+    "expire": 31536000,
+    "target": 10,
+    "limit": 2
+  },
+  {
+    "product": 22609,
+    "name": "Moonchain Grip: The Ultimate Mobile Game Controller",
+    "description": "Introducing the Moonchain Grip — a next-generation mobile gaming controller engineered for precision, speed, and immersive gameplay. Designed for both Android and iPhone users, the Moonchain Grip redefines mobile esports with pro-level control and Web3-powered ownership.",
+    "expire": 31536000,
+    "target": 10,
+    "limit": 2,
+    "upcoming": true
+  },
+  {
+    "product": 22291,
+    "name": "BlueBerry AI - WearFI",
     "description": "Unlock wellness at your fingertips. Get your Blueberry Ring now and start your journey to better health.",
     "expire": 31536000,
     "target": 10,
-    "limit": 10,
-    "product": 22291
+    "limit": 2,
+    "upcoming": true
   }
 ]

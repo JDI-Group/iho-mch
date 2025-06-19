@@ -40,7 +40,7 @@ export default function Page() {
           </If>
         </div>
         <If cond={!loading}>
-          <Then tag="div" className="flex gap-4">
+          <Then tag="div" className="flex flex-wrap gap-4">
             {products.map(product => (
               <div key={product.id} onClick={() => router.push(`/products/${product.id}`)} className="w-full md:w-[294px]">
                 <Card className="w-full py-4 cursor-pointer">
