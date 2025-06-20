@@ -42,8 +42,23 @@ export default function Page() {
         <If cond={!loading}>
           <Then tag="div" className="flex flex-wrap gap-4">
             {products.map(product => (
-              <div key={product.id} onClick={() => router.push(`/products/${product.id}`)} className="w-full md:w-[294px]">
-                <Card className="w-full py-4 cursor-pointer">
+              <div
+                key={product.id}
+                onClick={() => !product.upcoming && router.push(`/products/${product.id}`)}
+                className="relative w-full md:w-[294px]"
+              >
+                <If cond={product.upcoming}>
+                  <div className="absolute inset-0 rounded-lg bg-black bg-opacity-25 z-50 flex justify-center items-center">
+                    <span className="text-white font-spacex blur-[0.5px]">Coming Soon</span>
+                  </div>
+                </If>
+                <Card className={
+                  clsx(
+                    'w-full py-4 cursor-pointer',
+                    product.upcoming ? 'blur-sm' : '',
+                  )
+                }
+                >
                   <CardHeader className="pb-0 pt-0 px-4 flex-col items-start">
                     <h4 className="font-bold text-large w-full">
                       <div className="truncate">{product.name}</div>
