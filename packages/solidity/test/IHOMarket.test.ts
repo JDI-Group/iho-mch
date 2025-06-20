@@ -2,14 +2,13 @@ import type { Address, Hash } from 'viem'
 import assert from 'node:assert/strict'
 import { describe, it } from 'node:test'
 import { network } from 'hardhat'
-import { nanoid } from 'nanoid'
-import { 
-  encodeAbiParameters, 
-  encodePacked, 
-  getAddress, 
-  keccak256, 
-  parseEther, 
-  zeroAddress 
+import {
+  encodeAbiParameters,
+  encodePacked,
+  getAddress,
+  keccak256,
+  parseEther,
+  zeroAddress,
 } from 'viem'
 import { generatePrivateKey, privateKeyToAccount } from 'viem/accounts'
 import IHOMarketModule from '../ignition/modules/IHOMarket'
@@ -101,8 +100,8 @@ describe('IHOMarket', async () => {
 
     // Verify owner is correctly set
     assert.equal(await market.read.owner(), owner.account.address)
-    
-    // Verify verifier is correctly set  
+
+    // Verify verifier is correctly set
     assert.equal(await market.read.verifier(), verifier.account.address)
   })
 
@@ -131,7 +130,8 @@ describe('IHOMarket', async () => {
     try {
       await market.write.release([pid, 10n, 0n], { account: user.account })
       assert.fail('Should have thrown an error')
-    } catch (error: any) {
+    }
+    catch (error: any) {
       assert.ok(error.message.includes('OwnableUnauthorizedAccount'))
     }
   })
@@ -148,7 +148,8 @@ describe('IHOMarket', async () => {
       // Try to release same project ID again
       await market.write.release([pid, 5n, 0n], { account: owner.account })
       assert.fail('Should have thrown an error')
-    } catch (error: any) {
+    }
+    catch (error: any) {
       assert.ok(error.message.includes('ProjectAlreadyExists'))
     }
   })
@@ -161,7 +162,8 @@ describe('IHOMarket', async () => {
     try {
       await market.write.release([pid, 0n, 0n], { account: owner.account })
       assert.fail('Should have thrown an error')
-    } catch (error: any) {
+    }
+    catch (error: any) {
       assert.ok(error.message.includes('InvalidTargetAmount'))
     }
   })
@@ -281,7 +283,8 @@ describe('IHOMarket', async () => {
         value: amount,
       })
       assert.fail('Should have thrown an error')
-    } catch (error: any) {
+    }
+    catch (error: any) {
       assert.ok(error.message.includes('ProjectAlreadyConfirmed'))
     }
   })
@@ -316,7 +319,8 @@ describe('IHOMarket', async () => {
         value: amount,
       })
       assert.fail('Should have thrown an error')
-    } catch (error: any) {
+    }
+    catch (error: any) {
       assert.ok(error.message.includes('StakeAlreadyExists'))
     }
   })
@@ -346,7 +350,8 @@ describe('IHOMarket', async () => {
         value: amount,
       })
       assert.fail('Should have thrown an error')
-    } catch (error: any) {
+    }
+    catch (error: any) {
       assert.ok(error.message.includes('InvalidSignature'))
     }
   })
@@ -388,7 +393,7 @@ describe('IHOMarket', async () => {
     assert.equal(stake.claimed, true)
 
     // Verify user received ETH back (balance should increase)
-    const finalBalance = await client.getBalance({ address: user.account.address }) 
+    const finalBalance = await client.getBalance({ address: user.account.address })
     assert.ok(finalBalance > initialBalance, 'User balance should increase after claim')
   })
 
@@ -418,14 +423,15 @@ describe('IHOMarket', async () => {
     try {
       await market.write.claim([pid, oid], { account: user.account })
       assert.fail('Should have thrown an error')
-    } catch (error: any) {
+    }
+    catch (error: any) {
       assert.ok(error.message.includes('StakeNotExpired'))
     }
   })
 
   // Test cannot claim twice
   it('should not allow claiming twice', async () => {
-    const { market, owner, verifier, user } = await loadFixture() 
+    const { market, owner, verifier, user } = await loadFixture()
     const pid = randomProjectId()
     const oid = 1n
     const amount = parseEther('1')
@@ -447,14 +453,15 @@ describe('IHOMarket', async () => {
 
     // Wait for expiration with longer timeout
     await new Promise(resolve => setTimeout(resolve, 3000)) // Wait 3 seconds to be safe
-    
+
     await market.write.claim([pid, oid], { account: user.account })
 
     // Try to claim again
     try {
       await market.write.claim([pid, oid], { account: user.account })
       assert.fail('Should have thrown an error')
-    } catch (error: any) {
+    }
+    catch (error: any) {
       assert.ok(error.message.includes('StakeAlreadyClaimed'))
     }
   })
@@ -495,11 +502,12 @@ describe('IHOMarket', async () => {
   // Test non-owner cannot withdraw
   it('should not allow non-owner to withdraw', async () => {
     const { market, user } = await loadFixture()
-    
+
     try {
       await market.write.withdraw([zeroAddress, parseEther('1')], { account: user.account })
       assert.fail('Should have thrown an error')
-    } catch (error: any) {
+    }
+    catch (error: any) {
       assert.ok(error.message.includes('OwnableUnauthorizedAccount'))
     }
   })
@@ -524,7 +532,8 @@ describe('IHOMarket', async () => {
         value: amount,
       })
       assert.fail('Should have thrown an error')
-    } catch (error: any) {
+    }
+    catch (error: any) {
       assert.ok(error.message.includes('ProjectNotFound'))
     }
   })
