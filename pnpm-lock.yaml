@@ -32,8 +32,8 @@ importers:
         specifier: ^3.5.0
         version: 3.5.0(@swc/helpers@0.5.17)
       '@hairy/lnv':
-        specifier: ^7.3.0
-        version: 7.3.0
+        specifier: ^7.4.0
+        version: 7.4.0
       '@types/node':
         specifier: 20.5.7
         version: 20.5.7
@@ -329,7 +329,7 @@ importers:
         version: 0.0.21
       autoprefixer:
         specifier: 10.4.19
-        version: 10.4.19(postcss@8.4.49)
+        version: 10.4.19(postcss@8.5.3)
       etherlib-generator:
         specifier: ^0.0.4
         version: 0.0.4(bufferutil@4.0.9)(hardhat@3.0.0-next.13(patch_hash=d999397812469b6cc38a733cc57eaf35bac0aadfa9902244c29d1eeb17fc6f82)(bufferutil@4.0.9)(utf-8-validate@5.0.10))(magicast@0.3.5)(typescript@5.8.3)(utf-8-validate@5.0.10)
@@ -1118,8 +1118,8 @@ packages:
     peerDependencies:
       ethers: '>=6'
 
-  '@hairy/lnv@7.3.0':
-    resolution: {integrity: sha512-m2cTtWKuQDYs7PxNANfor4CgL5KNhvG7fKBD899g9gCz6Tw+deFMEeS8BUSlLDzDjhHB9yn32F7egYVKhn/f4g==}
+  '@hairy/lnv@7.4.0':
+    resolution: {integrity: sha512-cnmoE2MYQV97g+Slo87fuOVZ0bfoVjbw97Dupze7q/5rq/C6jgZONwt8TN++/h6IoRo2TygeAsHYyhRY68QW9A==}
     hasBin: true
 
   '@hairy/react-lib@1.29.0':
@@ -4884,10 +4884,6 @@ packages:
 
   domutils@3.2.2:
     resolution: {integrity: sha512-6kZKyUajlDuqlHKVX1w7gyslj9MPIXzIFiz/rGu35uC1wMi+kMhQwGhl4lt9unC9Vb9INnY9Z3/ZA3+FhASLaw==}
-
-  dotenv-expand@12.0.2:
-    resolution: {integrity: sha512-lXpXz2ZE1cea1gL4sz2Ipj8y4PiVjytYr3Ij0SWoms1PGxIv7m2CRKuRuCRtHdVuvM/hNJPMxt5PbhboNC4dPQ==}
-    engines: {node: '>=12'}
 
   dotenv@16.5.0:
     resolution: {integrity: sha512-m/C+AwOAr9/W1UOIZUo232ejMNnJAJtYQjUbHoNTBNTJSvqzzDh7vnrei3o3r3m9blf6ZoDkvcw0VmozNRFJxg==}
@@ -9152,13 +9148,13 @@ snapshots:
       ethers: 6.14.3(bufferutil@4.0.9)(utf-8-validate@5.0.10)
       mitt: 3.0.1
 
-  '@hairy/lnv@7.3.0':
+  '@hairy/lnv@7.4.0':
     dependencies:
       '@clack/prompts': 0.11.0
       consola: 3.4.2
       dotenv: 16.5.0
-      dotenv-expand: 12.0.2
       nano-spawn: 0.2.1
+      nanospinner: 1.2.2
       unconfig: 7.3.2
       yargs: 17.7.2
 
@@ -16783,6 +16779,16 @@ snapshots:
       postcss: 8.4.49
       postcss-value-parser: 4.2.0
 
+  autoprefixer@10.4.19(postcss@8.5.3):
+    dependencies:
+      browserslist: 4.24.5
+      caniuse-lite: 1.0.30001717
+      fraction.js: 4.3.7
+      normalize-range: 0.1.2
+      picocolors: 1.1.1
+      postcss: 8.5.3
+      postcss-value-parser: 4.2.0
+
   available-typed-arrays@1.0.7:
     dependencies:
       possible-typed-array-names: 1.1.0
@@ -17345,10 +17351,6 @@ snapshots:
       dom-serializer: 2.0.0
       domelementtype: 2.3.0
       domhandler: 5.0.3
-
-  dotenv-expand@12.0.2:
-    dependencies:
-      dotenv: 16.5.0
 
   dotenv@16.5.0: {}
 
