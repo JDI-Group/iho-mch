@@ -2,11 +2,13 @@ import type { Order } from '@/apis/index.type'
 import { useAsyncCallbacks } from '@/hooks/use-async-callbacks'
 import { helperStake } from '@/services/stake'
 import { Case, If, Switch } from '@hairy/react-lib'
+import { cover } from '@hairy/utils'
 import { Button } from '@heroui/button'
 import { Card, CardBody, CardFooter, CardHeader } from '@heroui/card'
 import { Divider } from '@heroui/divider'
 import { Link } from '@heroui/link'
 import { Timeline } from 'antd'
+import dayjs from 'dayjs'
 
 export interface OrderDetailProps {
   detail?: Order
@@ -25,6 +27,18 @@ export function OrderDetail(props: OrderDetailProps) {
       props.onChange?.('cancelled')
     },
   })
+
+  const tracking = useMemo(() => {
+    return (props.detail?.line_items || [])
+      .map(item => item.meta_data.filter(meta => meta.key === '_vi_wot_order_item_tracking_data'))
+      .flat()
+      .map(meta => JSON.parse(meta.value))
+      .map(data => data.map((d: any) => ({
+        url: d.carrier_url.replace('{tracking_number}', d.tracking_number),
+        ...d,
+      })))
+      .flat()
+  }, [props.detail?.line_items])
 
   return (
     <Card shadow="none">
@@ -79,18 +93,21 @@ export function OrderDetail(props: OrderDetailProps) {
         </div>
         <If cond={props.detail?.shipping_lines.length}>
           <div className="flex justify-between">
-            <div className="font-bold">Shipping information:</div>
+            <div className="font-bold">Tracking information:</div>
             <div className="flex-1 ml-2">
               <Timeline
                 mode="right"
-                items={props.detail?.shipping_lines.map((item) => {
+                items={tracking.map((item) => {
                   return {
                     children: (
-                      <div className="flex flex-col">
-                        <span>{item.method_title}</span>
+                      <div className="inline-flex flex-col items-end" key={item.tracking_number}>
+                        <span>Carrier - {item.carrier_name}</span>
                         <span className="text-default-500">
-                          {item.method_id}
+                          {dayjs.unix(item.time).format('YYYY/MM/DD HH:mm:ss')}
                         </span>
+                        <Link className="text-sm" href={item.url} target="_blank">
+                          #{cover(item.tracking_number, [4, 4, 4])}
+                        </Link>
                       </div>
                     ),
                   }

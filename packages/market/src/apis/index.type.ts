@@ -397,6 +397,9 @@ export interface PostOrderHeader {
   token?: string
   [key: string]: any
 }
+export interface GetOrderIdPath {
+  id: number
+}
 export interface GetUserInspectHeader {
   token?: string
   [key: string]: any

@@ -85,6 +85,16 @@ export async function postOrder(body: Types.OrderCreateDto, query?: Types.PostOr
   return response.json() as Promise<Types.OrderDataDto>
 }
 /**
+ * @method get
+ * @tags Order
+ */
+export async function getOrderId(paths: Types.GetOrderIdPath, config?: RequestInit) {
+  const response = await fetch(`${baseURL}/order/${paths.id}`, {
+    ...config,
+  })
+  return response.json() as Promise<Types.Order>
+}
+/**
  * @method post
  * @tags Order
  */

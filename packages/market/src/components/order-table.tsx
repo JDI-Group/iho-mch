@@ -14,6 +14,7 @@ export interface OrderTableProps {
 
 export function OrderTable(props: OrderTableProps) {
   const { data, next, more, detail, loading } = props
+
   function renderCell(key: string | number, item: Order) {
     const value = getKeyValue(item, key)
     switch (key) {
@@ -41,7 +42,7 @@ export function OrderTable(props: OrderTableProps) {
         removeWrapper
         className="min-h-72"
         classNames={{
-          base: 'max-h-[520px] overflow-scroll overflow-x-auto',
+          base: 'max-h-[520px] pr-2 overflow-scroll overflow-x-auto',
           table: 'min-h-[420px]',
         }}
         bottomContent={

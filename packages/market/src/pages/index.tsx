@@ -64,6 +64,7 @@ export default function IndexPage() {
       behavior: 'smooth',
     })
   }
+
   return (
     <layouts.home>
       <motion.section

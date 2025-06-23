@@ -41,6 +41,8 @@ export function BootstrapProvider(props: React.PropsWithChildren) {
     const text = await response.clone().text()
     const data = jsonTryParse(text)
     if (data?.statusCode) {
+      if (data.statusCode === 401)
+        disconnect()
       data.error && addToast({ color: 'danger', description: data.error })
       throw data
     }
