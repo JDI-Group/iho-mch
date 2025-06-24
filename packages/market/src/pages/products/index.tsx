@@ -78,7 +78,6 @@ export default function Page() {
                   <CardBody className="overflow-visible py-2">
                     <Image
                       width="100%"
-                      height={177}
                       alt="Card background"
                       className="object-cover bg-black rounded-xl"
                       src={product.images[0].src}

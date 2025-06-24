@@ -153,7 +153,7 @@ export function FormShipping() {
           <Input.TextArea placeholder="Please enter your shipping address" count={{ max: 200 }} />
         </Form.Item>
         <Form.Item className="flex justify-end mb-0">
-          <Button type="submit" color="primary" disabled={equal} isLoading={loadFinish}>
+          <Button type="submit" color="primary" className={equal ? 'opacity-50' : ''} disabled={equal} isLoading={loadFinish}>
             Save
           </Button>
         </Form.Item>
