@@ -2,6 +2,9 @@ import fs from 'node:fs/promises'
 import { defineConfig } from '@hairy/lnv'
 
 const config = defineConfig({
+  injects: {
+    entries: ['vault'],
+  },
   scripts: {
     deploy: {
       prompts: [
