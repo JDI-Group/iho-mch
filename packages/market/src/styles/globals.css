@@ -32,8 +32,6 @@ body {
   @apply text-default-900 !important;
 }
 
-
-
 :root {
   --rk-fonts-body: inherit !important;
 }
