@@ -35,7 +35,7 @@ export function Navbar(props: NavbarProps) {
         <NavbarBrand className="mr-4 gap-3 max-w-fit">
           <NextLink className="flex justify-start items-center gap-1" href="/">
             {/* <Logo /> */}
-            <img className="w-10" src="https://raw.githubusercontent.com/MXCzkEVM/metadata/refs/heads/main/logo-circle.svg" />
+            <img className="w-8" src="https://raw.githubusercontent.com/MXCzkEVM/metadata/refs/heads/main/logo-circle.svg" />
             {/* <span className="font-spacex mt-1 text-xs sm:text-base">
               MOONCHAIN
             </span> */}
