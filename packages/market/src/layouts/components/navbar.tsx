@@ -27,18 +27,21 @@ export function Navbar(props: NavbarProps) {
   const isConnected = account.isConnected
     && authentication.token
     && authentication.status === 'authenticated'
+  const router = useRouter()
+
   return (
     <HeroUINavbar maxWidth="xl" position="sticky" {...props}>
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
-        <NavbarBrand className="gap-3 max-w-fit">
+        <NavbarBrand className="mr-4 gap-3 max-w-fit">
           <NextLink className="flex justify-start items-center gap-1" href="/">
             {/* <Logo /> */}
-            <span className="font-spacex mt-1 text-xs sm:text-base">
+            <img className="w-10" src="https://raw.githubusercontent.com/MXCzkEVM/metadata/refs/heads/main/logo-circle.svg" />
+            {/* <span className="font-spacex mt-1 text-xs sm:text-base">
               MOONCHAIN
-            </span>
+            </span> */}
           </NextLink>
         </NavbarBrand>
-        <div className="hidden lg:flex gap-4 justify-start ml-2">
+        <div className="hidden lg:flex gap-5 justify-start ml-2">
           {siteConfig.navItems.map(item => (
             <NavbarItem key={item.href}>
               <NextLink
@@ -46,6 +49,7 @@ export function Navbar(props: NavbarProps) {
                   linkStyles({ color: 'foreground' }),
                   'data-[active=true]:text-primary data-[active=true]:font-medium',
                   'flex gap-1 items-center',
+                  router.asPath === item.href && 'border-b',
                 )}
                 color="foreground"
                 href={item.href}
@@ -72,7 +76,7 @@ export function Navbar(props: NavbarProps) {
           </NavbarItem>
         </If>
         <NavbarItem className="hidden sm:flex gap-2">
-          <ThemeSwitch />
+          {/* <ThemeSwitch /> */}
         </NavbarItem>
       </NavbarContent>
 

@@ -1,4 +1,5 @@
 import type { FormInstance, FormProps, InputProps } from 'antd'
+import { fonts } from '@/config/fonts'
 import { regions } from '@/config/regions'
 import { useAsyncCallback, useStore, useWhenever } from '@hairy/react-lib'
 import { isEqual } from '@hairy/utils'
@@ -82,6 +83,7 @@ export function FormShipping() {
         autoComplete="off"
         form={form}
         layout="vertical"
+        className={fonts.barlow.className}
       >
         <div className="flex gap-2">
           <Form.Item<FormShippingFields>
@@ -153,8 +155,8 @@ export function FormShipping() {
           <Input.TextArea placeholder="Please enter your shipping address" count={{ max: 200 }} />
         </Form.Item>
         <Form.Item className="flex justify-end mb-0">
-          <Button type="submit" color="primary" className={equal ? 'opacity-50' : ''} disabled={equal} isLoading={loadFinish}>
-            Save
+          <Button type="submit" color="primary" className={equal ? '!opacity-50' : ''} disabled={equal} isLoading={loadFinish}>
+            {equal ? 'Saved' : 'Save'}
           </Button>
         </Form.Item>
       </Form>

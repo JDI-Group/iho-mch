@@ -15,7 +15,7 @@ const accordions = [
   },
   {
     value: 'item-2',
-    question: 'How do i lock moonchain to get my free hardware?',
+    question: 'How do I lock moonchain to get my free hardware?',
     answer: `Simply visit <a href="https://iho.moonchain.com/">iho.moonchain.com</a> choose your desired mining Hardware, lock the corresponding amount of Moonchain for the lock period and fill out the order form. Simple!`,
   },
   {
@@ -25,7 +25,7 @@ const accordions = [
   },
   {
     value: 'item-4',
-    question: 'How should i choose the right hardware for me?',
+    question: 'How should I choose the right hardware for me?',
     answer: 'Choose hardware that aligns with your needs and lifestyle. Whether you\'re looking for a wearable device to track and boost your activity levels or prefer a more stationary setup, it\'s essential to also consider mining efficiency, lock amounts, and electricity usage. Make sure your hardware is optimized for both performance and sustainability to maximize your returns. The right choice today can lead to significant rewards tomorrow—hardware is strictly limited, don’t miss out!',
   },
   {
@@ -47,6 +47,16 @@ const accordions = [
     value: 'item-8',
     question: 'Where is my stake stored when I stake my Moonchain for free hardware?',
     answer: 'Your staked Moonchain tokens are always stored in your own wallet and secured by a verifiable Ethereum smart contract. This smart contract manages the stake and unstaking processes, ensuring your tokens remain safe, tamper-proof and always on your wallet! Moonchain believes in transparency, therefore everything is fully on-chain and transparent, so you can verify the contract and your stake at any time you wish. You always keep control of your wallet and your tokens are never held by a third party, that\'s the Moonchain commitment to you!',
+  },
+  {
+    value: 'item-9',
+    question: 'How many tokens do you expect to earn by IHO mining?',
+    answer: `With IHO mining on Moonchain, you're mining zkEVM $MXC tokens. The number of tokens you can earn depends on how much $MXC you stake on your hardware. The more $MXC you stake, the more you will mine with your device. Your rewards scale with your staking amount, so maximizing your stake can increase your mining output.`,
+  },
+  {
+    value: 'item-10',
+    question: 'What are the token release rules?',
+    answer: `Since the IHO provides you with hardware for free, your $MXC tokens will be locked for 12 months. There is no option for early release—the tokens will only become available after the 12-month locking period.`,
   },
 ]
 

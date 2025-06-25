@@ -1,3 +1,4 @@
+import { fonts } from '@/config/fonts'
 import { settings } from '@/config/settings'
 import { Else, If, Then } from '@hairy/react-lib'
 import { Modal, ModalBody, ModalContent, ModalHeader } from '@heroui/modal'
@@ -20,6 +21,7 @@ export function SettingsDialog(props: SettingsDialogProps) {
       isDismissable={false}
       isOpen={visible}
       onOpenChange={resolve}
+      className={fonts.barlow.className}
       size="5xl"
     >
       <ModalContent>

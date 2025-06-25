@@ -4,13 +4,15 @@ import {
   lightTheme as rainbowLightTheme,
 } from '@rainbow-me/rainbowkit'
 import { theme as antdTheme } from 'antd'
+import { fonts } from './fonts'
 
 export const themes = {
   antd: {
     dark: <ThemeConfig>{
       algorithm: antdTheme.darkAlgorithm,
-      token: { colorPrimary: '#234F9B' },
+      token: { colorPrimary: '#234F9B', ...fonts.barlow.style },
       components: {
+        Input: { fontFamily: fonts.barlow.style.fontFamily },
         Steps: {
           descriptionMaxWidth: 280,
           navArrowColor: '#234F9B',
@@ -19,11 +21,13 @@ export const themes = {
           colorPrimary: 'rgba(255, 255, 255, 0.6)',
         },
       },
+
     },
     light: <ThemeConfig>{
       algorithm: antdTheme.defaultAlgorithm,
-      token: { colorPrimary: '#234F9B' },
+      token: { colorPrimary: '#234F9B', ...fonts.barlow.style },
       components: {
+        Input: { fontFamily: fonts.barlow.style.fontFamily },
         Steps: {
           descriptionMaxWidth: 280,
           navArrowColor: '#234F9B',

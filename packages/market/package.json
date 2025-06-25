@@ -36,6 +36,7 @@
     "@heroui/tabs": "^2.2.13",
     "@heroui/theme": "2.4.12",
     "@heroui/toast": "^2.0.6",
+    "@iconify/react": "^6.0.0",
     "@overlastic/react": "^0.8.1",
     "@rainbow-me/rainbowkit": "^2.2.4",
     "@react-aria/visually-hidden": "3.8.20",

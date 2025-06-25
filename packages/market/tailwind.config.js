@@ -23,6 +23,26 @@ const config = {
         light: 'linear-gradient(0deg, rgba(255, 255, 255, 0.40) 0%, rgba(255, 255, 255, 0.40) 100%), linear-gradient(180deg, #a6a6a6 0%, #fff 100%)',
         tag: 'linear-gradient(90deg, #0079D0 0%, #9E52D8 15%, #DA365C 50%, #D04901 100%)',
       },
+      screens: {
+        xs: { min: '0' },
+        sm: { min: '576px' },
+        md: { min: '768px' },
+        lg: { min: '992px' },
+        xl: { min: '1200px' },
+        xxl: { min: '1600px' },
+        xxxl: { min: '1920px' },
+      },
+      container: {
+        screens: {
+          xs: '100%',
+          sm: '540px',
+          md: '720px',
+          lg: '960px',
+          xl: '1140px',
+          xxl: '1320px',
+          xxxl: '1400px',
+        },
+      },
       keyframes: {
         levitate: {
           '0%': {

@@ -4,8 +4,10 @@ import { helperStake } from '@/services/stake'
 import { If, useAsyncCallback, useStore, useWatch } from '@hairy/react-lib'
 import { Button } from '@heroui/button'
 import { Form } from '@heroui/form'
+import { Link } from '@heroui/link'
 import { Select, SelectItem } from '@heroui/select'
 import { addToast, closeAll } from '@heroui/toast'
+import { Icon } from '@iconify/react/dist/iconify.js'
 import { useOverlayInject } from '@overlastic/react'
 import { useConnectModal } from '@rainbow-me/rainbowkit'
 import { useAccount } from 'wagmi'
@@ -64,21 +66,18 @@ export function ProductForm(props: ProductFormProps) {
     await verifyInsufficientFunds(props.price!)
 
     try {
-      await helperStake({
-        product: props.id!,
-        variation: variation?.id,
-      })
+      await helperStake({ product: props.id!, variation: variation?.id })
+
       addToast({
-        title: 'Success',
-        description: 'Staked successfully',
-        color: 'success',
-        endContent: (
-          <Button
-            color="primary"
-            onPress={() => openSettingsDialog({ target: 'orders' })}
-          >
-            View
-          </Button>
+        title: 'Transaction Successful',
+        description: (
+          <div className="flex flex-col gap-2">
+            <span>Your transaction has been successfully sent and confirmed.</span>
+            <Link className="text-tiny inline-flex gap-1" onPress={() => openSettingsDialog({ target: 'orders' })}>
+              <span>View Order Detail</span>
+              <Icon className="text-sm" icon="solar:round-arrow-right-up-broken" />
+            </Link>
+          </div>
         ),
       })
     }

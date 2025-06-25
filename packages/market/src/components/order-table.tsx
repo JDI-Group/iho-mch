@@ -18,6 +18,12 @@ export function OrderTable(props: OrderTableProps) {
   function renderCell(key: string | number, item: Order) {
     const value = getKeyValue(item, key)
     switch (key) {
+      case 'product':
+        return (
+          <div className="truncate max-w-44">
+            {item?.line_items.map(item => item.name).join(', ')}
+          </div>
+        )
       case 'actions':
         return (
           <Link className="cursor-pointer" onPress={() => detail?.(item)}>
@@ -28,6 +34,12 @@ export function OrderTable(props: OrderTableProps) {
         return formatDate(value)
       case 'total':
         return <span>${value}</span>
+      case 'tracking':
+        // eslint-disable-next-line no-case-declarations
+        const [tracking] = parseOrderTracking(item.line_items)
+        if (!tracking)
+          return '-'
+        return <Link href={tracking.url} target="_blank">View Tracking</Link>
       default:
         return value
     }
@@ -43,7 +55,6 @@ export function OrderTable(props: OrderTableProps) {
         className="min-h-72"
         classNames={{
           base: 'max-h-[520px] pr-2 overflow-scroll overflow-x-auto',
-          table: 'min-h-[420px]',
         }}
         bottomContent={
           more && !loading && (
@@ -59,6 +70,7 @@ export function OrderTable(props: OrderTableProps) {
       >
         <TableHeader>
           <TableColumn key="id">ORDER</TableColumn>
+          <TableColumn maxWidth={180} key="product">PRODUCT</TableColumn>
           <TableColumn minWidth={180} key="date_modified">DATE</TableColumn>
           <TableColumn key="status">STATUS</TableColumn>
           <TableColumn key="total">TOTAL</TableColumn>

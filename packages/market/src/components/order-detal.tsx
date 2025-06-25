@@ -28,17 +28,7 @@ export function OrderDetail(props: OrderDetailProps) {
     },
   })
 
-  const tracking = useMemo(() => {
-    return (props.detail?.line_items || [])
-      .map(item => item.meta_data.filter(meta => meta.key === '_vi_wot_order_item_tracking_data'))
-      .flat()
-      .map(meta => JSON.parse(meta.value))
-      .map(data => data.map((d: any) => ({
-        url: d.carrier_url.replace('{tracking_number}', d.tracking_number),
-        ...d,
-      })))
-      .flat()
-  }, [props.detail?.line_items])
+  const tracking = useMemo(() => parseOrderTracking(props.detail?.line_items), [props.detail?.line_items])
 
   return (
     <Card shadow="none">
@@ -82,16 +72,14 @@ export function OrderDetail(props: OrderDetailProps) {
         <div className="flex justify-between">
           <div className="font-bold">Products</div>
           <div className="ml-2">
-            {props.detail?.line_items.map(item => (
-              <div key={item.id}>{item.name}</div>
-            ))}
+            {props.detail?.line_items.map(item => (<div key={item.id}>{item.name}</div>))}
           </div>
         </div>
         <div className="flex justify-between">
           <div className="font-bold">Total</div>
           <div>${props.detail?.total}</div>
         </div>
-        <If cond={props.detail?.shipping_lines.length}>
+        <If cond={tracking.length}>
           <div className="flex justify-between">
             <div className="font-bold">Tracking information:</div>
             <div className="flex-1 ml-2">

@@ -14,7 +14,6 @@ export async function clipboardCopy(name: string, value: string, description?: s
 
 export async function transactionWaitingReceipt(hash: Hex) {
   const promise = client.waitForTransactionReceipt({ hash })
-
   addToast({
     title: 'Waiting for Confirm Transaction',
     description: createElement('span', { className: 'text-tiny' }, 'You can check the progress in the ', createElement(
@@ -43,7 +42,7 @@ export async function transactionWaitingReceipt(hash: Hex) {
   }
 }
 
-export async function transactionConfirmedToast(hash: string) {
+export async function transactionConfirmedToast(hash: Hex) {
   addToast({
     title: 'Transaction Successful',
     description: (
