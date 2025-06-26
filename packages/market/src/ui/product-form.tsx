@@ -66,7 +66,34 @@ export function ProductForm(props: ProductFormProps) {
     await verifyInsufficientFunds(props.price!)
 
     try {
-      await helperStake({ product: props.id!, variation: variation?.id })
+      try {
+        await helperStake({ product: props.id!, variation: variation?.id })
+      }
+      catch (error: any) {
+        if (error.message === 'Order limit reached') {
+          addToast({
+            color: 'danger',
+            classNames: { description: 'me-0' },
+            description: 'You have reached the order limit and you have an unpaid order. Please pay it to continue.',
+            endContent: (
+              <Button
+                isIconOnly
+                size="sm"
+                className="w-[24px] h-[24px]"
+                color="danger"
+                onPress={() => {
+                  openSettingsDialog({ target: 'orders' })
+                  closeAll()
+                }}
+              >
+                <MaterialSymbolsArrowForwardIosRounded />
+              </Button>
+            ),
+          })
+        }
+
+        throw error
+      }
 
       addToast({
         title: 'Transaction Successful',
@@ -90,12 +117,14 @@ export function ProductForm(props: ProductFormProps) {
   async function verifyShippingAddress(address?: string) {
     if (!address) {
       addToast({
+        classNames: { description: 'me-0' },
         description: 'Delivery address not filled in, please complete the delivery address first',
         endContent: (
           <Button
             isIconOnly
             size="sm"
             color="default"
+            className="w-[24px] h-[24px]"
             onPress={() => {
               openSettingsDialog({ target: 'address' })
               closeAll()

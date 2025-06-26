@@ -37,13 +37,14 @@ export function BootstrapProvider(props: React.PropsWithChildren) {
     }
   })
 
-  useFetchResponseIntercept(async (response) => {
+  useFetchResponseIntercept(async (response, init) => {
     const text = await response.clone().text()
     const data = jsonTryParse(text)
     if (data?.statusCode) {
       if (data.statusCode === 401)
         disconnect()
-      data.error && addToast({ color: 'danger', description: data.error })
+      if (data.error && !Reflect.get(init || {}, 'skipMessage'))
+        addToast({ color: 'danger', description: data.error })
       throw data
     }
 

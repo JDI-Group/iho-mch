@@ -46,7 +46,6 @@ export function InjectsProvider(props: React.PropsWithChildren) {
         { component: OverlaysProvider },
       ]}
     >
-      <AntdUIProvider theme={{}} />
       <ToastProvider placement="top-center" />
       {props.children}
     </Injector>

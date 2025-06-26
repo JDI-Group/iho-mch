@@ -22,6 +22,7 @@ function Page() {
   )
   const { value: statistics } = useAsync(
     async () => whenever(detail?.id, id => getProductIdStatistics({ id })),
+    [detail],
   )
 
   return (

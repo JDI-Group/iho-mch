@@ -9,7 +9,7 @@ export async function helperStake(params: { order: number } | { product: number,
   const iho = getIhoMarket({ runner: wallet })
   let detail: OrderDataDto | null = null
   if (product)
-    detail = await postOrder({ variation, product })
+    detail = await postOrder({ variation, product }, undefined, undefined, { skipMessage: true } as any)
 
   if (order) {
     detail = await postOrderPay({ order })
