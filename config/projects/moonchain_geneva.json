@@ -13,7 +13,7 @@
     "name": "Moonchain Headphones: Sound Meets On-Chain Utility",
     "description": "The Moonchain Headphones redefine what it means to listen with purpose. Delivered through our exclusive Initial Hardware Offering (IHO), these wireless headphones fuse high-fidelity audio with blockchain utility — no upfront cost, just stake-to-own.",
     "expire": 31536000,
-    "target": 10,
+    "target": 300,
     "price": 1,
     "limit": 2
   },
@@ -22,7 +22,7 @@
     "name": "Moonchain DIMO: A GPS and health tracker for your car",
     "description": "DIMO Macaron is smartest way to track and improve the health and value of your car.",
     "expire": 31536000,
-    "target": 10,
+    "target": 100,
     "price": 1,
     "limit": 2
   },
