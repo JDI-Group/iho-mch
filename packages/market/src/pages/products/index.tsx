@@ -63,9 +63,6 @@ export default function Page() {
                     <h4 className="font-bold text-large w-full">
                       <div className="truncate">{product.name}</div>
                     </h4>
-                    <p className="text-[8px] bg-tag bg-clip-text text-transparent uppercase font-bold">
-                      Virtual Reality Reimagined
-                    </p>
                     <If cond={product.ready}>
                       <p className="text-green-500 text-[10px]">
                         Immediate Delivery
