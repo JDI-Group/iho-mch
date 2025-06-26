@@ -9,6 +9,7 @@
   "main": "dist/index.ts",
   "scripts": {
     "test": "lnv test",
+    "run": "lnv -- hardhat --build-profile production --network moonchain run script/update.ts",
     "deploy": "lnv deploy",
     "postinstall": "hardhat compile && etherlib generate"
   },

@@ -7,7 +7,7 @@ const IHOMarketModule = buildModule('IHOMarket', (m) => {
 
   const proxy = m.contract('ERC1967Proxy', [implement, data], { id: 'IHOMarketProxy' })
   const market = m.contractAt('IHOMarket', proxy, { id: 'IHOMarket' })
-  return { market }
+  return { market, proxy }
 })
 
 export default IHOMarketModule
