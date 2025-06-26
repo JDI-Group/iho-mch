@@ -6,6 +6,7 @@ import { formatNumeric, whenever } from '@hairy/utils'
 import { Card, CardBody } from '@heroui/card'
 import { Spinner } from '@heroui/spinner'
 import { Divider } from 'antd'
+import dayjs from 'dayjs'
 import { useAsync } from 'react-use'
 
 function Page() {
@@ -90,7 +91,7 @@ function Page() {
             </CardBody>
           </Card>
           <div className="flex justify-end">
-            <span className="text-default-500">Last updated: April 14, 2025 - 10:30 AM</span>
+            <span className="text-default-500">Last updated: {dayjs().format('MMMM D, YYYY - h:mm A')}</span>
           </div>
         </Then>
         <Else tag="div" className="w-full h-[50vh] flex justify-center items-center">
