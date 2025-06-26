@@ -258,13 +258,6 @@ contract IHOMarketV2 is VerifiableUpgradeable, BidirectionalTransfer, UUPSUpgrad
     uint256 target,
     bool confirmed
   ) onlyOwner external {
-    if (projects[pid].target == 0)
-      revert ProjectNotFound(pid);
-    if (projects[pid].confirmed)
-      revert ProjectAlreadyConfirmed(pid);
-    if (target == 0)
-      revert InvalidTargetAmount();
-
     projects[pid].target = target;
     projects[pid].confirmed = confirmed;
   }
