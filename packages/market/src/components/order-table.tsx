@@ -1,4 +1,5 @@
 import type { Order } from '@/apis/index.type'
+import { formatEther } from '@hairy/ether-lib'
 import { Button } from '@heroui/button'
 import { Link } from '@heroui/link'
 import { Spinner } from '@heroui/spinner'
@@ -33,7 +34,7 @@ export function OrderTable(props: OrderTableProps) {
       case 'date_modified':
         return formatDate(value)
       case 'total':
-        return <span>${value}</span>
+        return (<span>{formatEther(item?.ether)} MXC</span>)
       case 'tracking':
         // eslint-disable-next-line no-case-declarations
         const [tracking] = parseOrderTracking(item.line_items)
