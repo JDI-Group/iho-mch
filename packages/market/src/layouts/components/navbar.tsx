@@ -32,7 +32,7 @@ export function Navbar(props: NavbarProps) {
   return (
     <HeroUINavbar maxWidth="xl" position="sticky" {...props}>
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
-        <NavbarBrand className="mr-4 gap-3 max-w-fit">
+        <NavbarBrand className="mr-2 gap-3 max-w-fit">
           <NextLink className="flex justify-start items-center gap-1" href="/">
             {/* <Logo /> */}
             <img className="w-8" src="https://raw.githubusercontent.com/MXCzkEVM/metadata/refs/heads/main/logo-circle.svg" />

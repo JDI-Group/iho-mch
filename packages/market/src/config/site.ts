@@ -9,22 +9,6 @@ export const siteConfig = {
       label: 'Products',
       href: '/products',
     },
-    {
-      label: 'NFT Marketplaces',
-      href: 'https://nft.moonchain.com',
-    },
-    {
-      label: 'Bridge',
-      href: 'https://jannowitz.moonchain.com',
-    },
-    {
-      label: 'Mining',
-      href: 'https://miningv2.matchx.io',
-    },
-    {
-      label: 'Explorer',
-      href: 'https://explorer.moonchain.com',
-    },
   ],
   navMenuItems: [
     {
