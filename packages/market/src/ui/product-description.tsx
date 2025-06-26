@@ -23,9 +23,9 @@ export function ProductDescription(props: ProductDescriptionProps) {
       <h1 className={title({ size: 'sm', className: 'hidden md:inline-block mb-4' })}>
         {props.name}
       </h1>
-      <p className="mb-2 bg-tag bg-clip-text text-transparent uppercase font-bold">
+      {/* <p className="mb-2 bg-tag bg-clip-text text-transparent uppercase font-bold">
         Virtual Reality Reimagined
-      </p>
+      </p> */}
       <If cond={props.ready}>
         <Then tag="p" className="mb-2 text-default-500 text-sm">
           <span className="text-green-500">Immediate Delivery</span>
