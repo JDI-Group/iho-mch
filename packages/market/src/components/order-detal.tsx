@@ -1,12 +1,14 @@
 import type { Order } from '@/apis/index.type'
 import { useAsyncCallbacks } from '@/hooks/use-async-callbacks'
 import { helperStake } from '@/services/stake'
+import { formatEther } from '@hairy/ether-lib'
 import { Case, If, Switch } from '@hairy/react-lib'
 import { cover } from '@hairy/utils'
 import { Button } from '@heroui/button'
 import { Card, CardBody, CardFooter, CardHeader } from '@heroui/card'
 import { Divider } from '@heroui/divider'
 import { Link } from '@heroui/link'
+import { useOverlayInject } from '@overlastic/react'
 import { Timeline } from 'antd'
 import dayjs from 'dayjs'
 
@@ -17,14 +19,22 @@ export interface OrderDetailProps {
 }
 
 export function OrderDetail(props: OrderDetailProps) {
+  const openCancelConfirmDialog = useOverlayInject(CancelConfirmDialog)
+  const openDeleteConfirmDialog = useOverlayInject(DeleteConfirmDialog)
   const [status, actions] = useAsyncCallbacks({
     stake: async () => {
       await helperStake({ order: props.detail!.id })
       props.onChange?.('processing')
     },
     cancel: async () => {
+      await openCancelConfirmDialog()
       await putOrderCancel({ order: props.detail!.id })
       props.onChange?.('cancelled')
+    },
+    delete: async () => {
+      await openDeleteConfirmDialog()
+      await deleteOrderId({ id: props.detail!.id })
+      props.onChange?.('deleted')
     },
   })
 
@@ -77,7 +87,11 @@ export function OrderDetail(props: OrderDetailProps) {
         </div>
         <div className="flex justify-between">
           <div className="font-bold">Total</div>
-          <div>${props.detail?.total}</div>
+          <div>
+            <span>{formatEther(props.detail?.ether)} MXC</span>
+            <span className="mx-2">/</span>
+            <span>${props.detail?.total}</span>
+          </div>
         </div>
         <If cond={tracking.length}>
           <div className="flex justify-between">
@@ -113,6 +127,11 @@ export function OrderDetail(props: OrderDetailProps) {
             </Button>
             <Button disabled={status.loading} isLoading={status.loadings.stake} color="primary" onPress={actions.stake}>
               Stake
+            </Button>
+          </Case>
+          <Case cond="cancelled">
+            <Button disabled={status.loading} isLoading={status.loadings.delete} color="warning" onPress={actions.delete}>
+              Delete
             </Button>
           </Case>
         </Switch>

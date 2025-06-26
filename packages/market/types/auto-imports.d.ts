@@ -7,8 +7,10 @@
 export {}
 declare global {
   const BootstrapProvider: typeof import('../src/components/bootstrap-provider')['BootstrapProvider']
+  const CancelConfirmDialog: typeof import('../src/components/cancel-confirm-dialog')['CancelConfirmDialog']
   const CarIcon: typeof import('../src/components/icons')['CarIcon']
   const ConnectButton: typeof import('../src/components/connect-button')['ConnectButton']
+  const DeleteConfirmDialog: typeof import('../src/components/delete-confirm-dialog')['DeleteConfirmDialog']
   const DiscordIcon: typeof import('../src/components/icons')['DiscordIcon']
   const FormShipping: typeof import('../src/components/form-shipping')['FormShipping']
   const GithubIcon: typeof import('../src/components/icons')['GithubIcon']
@@ -51,6 +53,7 @@ declare global {
   const clsx: typeof import('clsx')['default']
   const container: typeof import('../src/components/primitives')['container']
   const createRef: typeof import('react')['createRef']
+  const deleteOrderId: typeof import('../src/apis/index')['deleteOrderId']
   const detail: typeof import('../src/components/order-detail.mock')['detail']
   const erc1967ProxyAbi: typeof import('../src/generated/index')['erc1967ProxyAbi']
   const erc20Abi: typeof import('../src/generated/index')['erc20Abi']
