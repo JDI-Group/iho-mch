@@ -64,9 +64,16 @@ export default function Page() {
                       <div className="truncate">{product.name}</div>
                     </h4>
                     <If cond={product.ready}>
-                      <p className="text-green-500 text-[10px]">
-                        Immediate Delivery
-                      </p>
+                      <Then>
+                        <p className="text-green-500 text-[10px]">
+                          Immediate Delivery
+                        </p>
+                      </Then>
+                      <Else>
+                        <p className="text-[10px] text-lime-500">
+                          In progress
+                        </p>
+                      </Else>
                     </If>
                     <div className="min-h-14">
                       <small className="text-default-500 line-clamp-3">{product.description}</small>
