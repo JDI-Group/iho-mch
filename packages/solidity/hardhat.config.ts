@@ -66,7 +66,7 @@ const config = {
       currency: { decimals: 18, name: 'MXC Token', symbol: 'MXC' },
       explorer: { name: 'etherscan', url: 'https://explorer.moonchain.com' },
       icon: 'https://raw.githubusercontent.com/MXCzkEVM/metadata/main/logo-circle.svg',
-      url: 'http://207.246.101.30:8545',
+      url: 'https://rpc.moonchain.com',
       type: 'http',
       chainId: 18686,
       chainType: 'l1',
