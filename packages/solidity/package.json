@@ -11,7 +11,7 @@
     "test": "lnv test",
     "run": "lnv -- hardhat --build-profile production --network moonchain run script/update.ts",
     "deploy": "lnv deploy",
-    "postinstall": "hardhat compile && etherlib generate"
+    "postinstall": "hardhat compile --build-profile production && etherlib generate"
   },
   "dependencies": {
     "@openzeppelin/contracts": "^5.3.0",
@@ -20,16 +20,17 @@
   },
   "devDependencies": {
     "@hairy/utils": "^1.31.0",
-    "@nomicfoundation/hardhat-ignition": "^3.0.0-next.13",
-    "@nomicfoundation/hardhat-ignition-viem": "^3.0.0-next.13",
-    "@nomicfoundation/hardhat-toolbox-viem": "4.0.0-next.13",
-    "@nomicfoundation/hardhat-viem": "3.0.0-next.13",
+    "@nomicfoundation/hardhat-ignition": "^3.0.0-next.20",
+    "@nomicfoundation/hardhat-ignition-viem": "^3.0.0-next.20",
+    "@nomicfoundation/hardhat-toolbox-viem": "5.0.0-next.20",
+    "@nomicfoundation/hardhat-verify": "^3.0.0-next.20",
+    "@nomicfoundation/hardhat-viem": "3.0.0-next.20",
     "@types/node": "^22.15.18",
     "eslint": "^9.26.0",
     "etherlib-generator": "^0.0.9",
     "ethers": "^6.14.3",
     "forge-std": "github:foundry-rs/forge-std#v1.9.4",
-    "hardhat": "3.0.0-next.13",
+    "hardhat": "3.0.0-next.20",
     "nanoid": "^5.1.5",
     "typescript": "~5.5.4",
     "viem": "^2.29.2",

@@ -3,13 +3,18 @@
 import type { HardhatUserConfig } from 'hardhat/types/config'
 import hardhatIgnitionViewPlugin from '@nomicfoundation/hardhat-ignition-viem'
 import hardhatToolboxViemPlugin from '@nomicfoundation/hardhat-toolbox-viem'
+import hardhatVerifyPlugin from '@nomicfoundation/hardhat-verify'
 import { generatePrivateKey } from 'viem/accounts'
 
 const config = {
   plugins: [
     hardhatIgnitionViewPlugin,
     hardhatToolboxViemPlugin,
+    hardhatVerifyPlugin,
   ],
+  verify: {
+    blockscout: { enabled: true },
+  },
   solidity: {
     profiles: {
       default: { version: '0.8.28' },
@@ -24,7 +29,21 @@ const config = {
         version: '0.8.28',
       },
     },
-    remappings: ['forge-std/=npm/forge-std@1.9.4/src/'],
+    dependenciesToCompile: ['@openzeppelin/contracts/proxy/ERC1967/ERC1967Proxy.sol'],
+  },
+  chainDescriptors: {
+    18686: {
+      name: 'Moonchain',
+      blockExplorers: {
+        blockscout: { apiUrl: 'https://explorer-v1.moonchain.com/api', url: 'https://explorer.moonchain.com' },
+      },
+    },
+    5167004: {
+      name: 'Moonchain Geneva',
+      blockExplorers: {
+        blockscout: { apiUrl: 'https://geneva-explorer.moonchain.com/api', url: 'https://geneva-explorer.moonchain.com' },
+      },
+    },
   },
   networks: {
     moonchainGeneva: {
@@ -47,7 +66,7 @@ const config = {
       currency: { decimals: 18, name: 'MXC Token', symbol: 'MXC' },
       explorer: { name: 'etherscan', url: 'https://explorer.moonchain.com' },
       icon: 'https://raw.githubusercontent.com/MXCzkEVM/metadata/main/logo-circle.svg',
-      url: 'https://rpc.mxc.com',
+      url: 'http://207.246.101.30:8545',
       type: 'http',
       chainId: 18686,
       chainType: 'l1',
@@ -60,3 +79,7 @@ const config = {
 } as const satisfies HardhatUserConfig
 
 export default config
+
+// pnpm hardhat verify blockscout 0x3D19769221Eb1D4c749c3A9CD04702e2ce4DF2F2 --contract contracts/IHOLockVaultV1.sol:IHOLockVaultV1 --network moonchain --build-profile production
+
+// pnpm hardhat verify blockscout 0x352B0273B9e08CB169b3301f440d387F9810CA5D --contract contracts/IHOLockVaultV1.sol:IHOLockVaultV1 --network moonchain --build-profile production

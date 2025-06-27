@@ -11,7 +11,6 @@ const config = defineConfig([
     addresses: {
       IHOFueltank: { 18686: zeroAddress },
       IHOMining: { 18686: zeroAddress },
-      IHOMarket: { 18686: zeroAddress },
     },
     plugins: [
       hardhat(),

@@ -29,10 +29,13 @@ error StakeAlreadyExists(uint256 pid, uint256 oid);
 error StakeNotExpired(uint256 pid, uint256 oid);
 /// @notice Error thrown when stake has already been claimed
 error StakeAlreadyClaimed(uint256 pid, uint256 oid);
+/// @notice Error thrown when stake has finished
+error StakeFinished();
 /// @notice Error thrown when target amount is invalid
 error InvalidTargetAmount();
 
-contract IHOMarketV2 is VerifiableUpgradeable, BidirectionalTransfer, UUPSUpgradeable, OwnableUpgradeable {
+
+contract IHOLockVaultV1 is VerifiableUpgradeable, BidirectionalTransfer, UUPSUpgradeable, OwnableUpgradeable {
   /// @custom:oz-upgrades-unsafe-allow constructor
   constructor() { _disableInitializers(); }
   
@@ -47,6 +50,9 @@ contract IHOMarketV2 is VerifiableUpgradeable, BidirectionalTransfer, UUPSUpgrad
   
   /// @notice Mapping from project ID and order ID to stake information
   mapping(uint256 => mapping(uint256 => Stake)) public stakes;
+
+  /// @notice all projects completed
+  bool public finished;
 
   /**
    * @dev Initializes the contract
@@ -171,6 +177,8 @@ contract IHOMarketV2 is VerifiableUpgradeable, BidirectionalTransfer, UUPSUpgrad
     string memory memo,
     bytes memory signature
   ) external payable {
+    if (finished) revert StakeFinished();
+
     bytes32 coinsHash = keccak256(abi.encode(coins));
     bytes32 stakeHash = keccak256(
       abi.encodePacked(pid, oid, coinsHash, expire, memo)
@@ -206,25 +214,6 @@ contract IHOMarketV2 is VerifiableUpgradeable, BidirectionalTransfer, UUPSUpgrad
   }
 
   /**
-   * @dev Gets the stake information for a specific project and order
-   * @param pid The project ID
-   * @param oid The order ID within the project
-   * @return The stake information
-   */
-  function getStake(uint256 pid, uint256 oid) external view returns (Stake memory) {
-    return stakes[pid][oid];
-  }
-
-  /**
-   * @dev Gets the project information
-   * @param pid The project ID
-   * @return The project information
-   */
-  function getProject(uint256 pid) external view returns (Project memory) {
-    return projects[pid];
-  }
-
-  /**
    * @dev Claims back a stake after it has expired
    * @param pid The project ID
    * @param oid The order ID within the project
@@ -243,22 +232,35 @@ contract IHOMarketV2 is VerifiableUpgradeable, BidirectionalTransfer, UUPSUpgrad
   }
 
   /**
-   * @dev Withdraws tokens from the contract
-   * @param token The token address (address(0) for ETH)
-   * @param amount The amount to withdraw
-   *
-   * Only the contract owner can withdraw tokens
+   * @dev Gets the stake information for a specific project and order
+   * @param pid The project ID
+   * @param oid The order ID within the project
+   * @return The stake information
    */
+  function getStake(uint256 pid, uint256 oid) external view returns (Stake memory) {
+    return stakes[pid][oid];
+  }
+
+  /**
+   * @dev Gets the project information
+   * @param pid The project ID
+   * @return The project information
+   */
+  function getProject(uint256 pid) external view returns (Project memory) {
+    return projects[pid];
+  }
+
+  function setProject(uint256 pid, uint256 target, uint256 quantity) external onlyOwner {
+    projects[pid].target = target;
+    projects[pid].quantity = quantity;
+    projects[pid].confirmed = false;
+  }
+
   function withdraw(address token, uint256 amount) external onlyOwner {
     transfer(address(this), msg.sender, token, amount);
   }
 
-  function updateProject(
-    uint256 pid,
-    uint256 target,
-    bool confirmed
-  ) onlyOwner external {
-    projects[pid].target = target;
-    projects[pid].confirmed = confirmed;
+  function finish() external onlyOwner {
+    finished = true;
   }
 }
