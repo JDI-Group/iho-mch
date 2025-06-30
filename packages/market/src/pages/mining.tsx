@@ -1,8 +1,9 @@
-
-function Page() {
-  return <layouts.default>
-    
-  </layouts.default>;
+function Mining() {
+  return (
+    <layouts.default>
+      TODO
+    </layouts.default>
+  )
 }
 
-export default Page
+export default Mining

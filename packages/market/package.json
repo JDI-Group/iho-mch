@@ -10,6 +10,8 @@
     "genapi": "lnv -- genapi"
   },
   "dependencies": {
+    "@dicebear/collection": "^9.2.2",
+    "@dicebear/core": "^9.2.2",
     "@hairy/ether-lib": "^1.33.0",
     "@hairy/react-lib": "^1.33.0",
     "@hairy/utils": "^1.33.0",

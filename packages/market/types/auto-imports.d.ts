@@ -11,6 +11,7 @@ declare global {
   const CarIcon: typeof import('../src/components/icons')['CarIcon']
   const ConnectButton: typeof import('../src/components/connect-button')['ConnectButton']
   const DeleteConfirmDialog: typeof import('../src/components/delete-confirm-dialog')['DeleteConfirmDialog']
+  const Dicebear: typeof import('../src/components/dicebear')['Dicebear']
   const DiscordIcon: typeof import('../src/components/icons')['DiscordIcon']
   const FormShipping: typeof import('../src/components/form-shipping')['FormShipping']
   const GithubIcon: typeof import('../src/components/icons')['GithubIcon']
@@ -146,6 +147,9 @@ declare global {
   // @ts-ignore
   export type { ConnectButtonProps } from '../src/components/connect-button'
   import('../src/components/connect-button')
+  // @ts-ignore
+  export type { DicebearProps } from '../src/components/dicebear'
+  import('../src/components/dicebear')
   // @ts-ignore
   export type { FormShippingFields, InputPhoneNumberProps } from '../src/components/form-shipping'
   import('../src/components/form-shipping')

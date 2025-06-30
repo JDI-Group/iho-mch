@@ -47,7 +47,6 @@ export function SettingsDialog(props: SettingsDialogProps) {
               {current?.child()}
             </Else>
           </If>
-
         </ModalBody>
       </ModalContent>
     </Modal>

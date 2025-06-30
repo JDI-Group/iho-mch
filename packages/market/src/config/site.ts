@@ -13,6 +13,10 @@ export const siteConfig = {
       label: 'Products',
       href: '/products',
     },
+    {
+      label: 'Mining',
+      href: '/mining',
+    },
   ],
   navMenuItems: [
     {

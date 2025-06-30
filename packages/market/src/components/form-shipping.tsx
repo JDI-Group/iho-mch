@@ -8,6 +8,7 @@ import { Form, Input, Select, Spin } from 'antd'
 import { findMobilePrefix, parsePhone } from './form-shipping.utils'
 
 export interface FormShippingFields {
+  invitation?: string
   firstName?: string
   lastName?: string
   address?: string
@@ -18,6 +19,8 @@ export interface FormShippingFields {
 
 export function FormShipping() {
   const { value: user, loading } = useStore(store.user)
+  // const { inviter } = useStore(store.config)
+
   const [loadFinish, onFinish] = useAsyncCallback(async (_values: Required<FormShippingFields>) => {
     const values = { ..._values }
 
@@ -48,6 +51,8 @@ export function FormShipping() {
       last_name: values.lastName,
       shipping: address,
       billing: address,
+      // TODO
+      // invitation: values.invitation,
     })
     const customer = await response.json()
     store.user.refresh({
