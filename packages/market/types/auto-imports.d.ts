@@ -40,7 +40,6 @@ declare global {
   const SearchIcon: typeof import('../src/components/icons')['SearchIcon']
   const SettingIcon: typeof import('../src/components/icons')['SettingIcon']
   const SettingsDialog: typeof import('../src/components/settings-dialog')['SettingsDialog']
-  const SolarRoundArrowRightUpBroken: typeof import('../src/components/icons')['SolarRoundArrowRightUpBroken']
   const SunFilledIcon: typeof import('../src/components/icons')['SunFilledIcon']
   const ThemeSwitch: typeof import('../src/components/theme-switch')['ThemeSwitch']
   const TwitterIcon: typeof import('../src/components/icons')['TwitterIcon']
