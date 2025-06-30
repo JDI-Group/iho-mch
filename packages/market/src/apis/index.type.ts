@@ -129,7 +129,6 @@ export interface Product {
   brands: string[];
   _links: Links;
 }
-
 export interface ProductStats {
   name: string;
   description: string;
@@ -140,12 +139,11 @@ export interface ProductStats {
   activeStakes?: number;
   totalParticipants?: number;
   updateAt: number;
-  completedAt?: any;
+  completedAt?: number;
   status: string;
   orders: number;
   target: number;
 }
-
 export interface Variation {
   id: number;
   ether: string;
@@ -352,7 +350,7 @@ export interface StatsItem {
   activeStakes?: number;
   totalParticipants?: number;
   updateAt: number;
-  completedAt?: any;
+  completedAt?: number;
   status: string;
   orders: number;
   target: number;
@@ -360,6 +358,7 @@ export interface StatsItem {
 export interface StatsBatchItem {
   batch: number;
   stats: StatsItem[];
+  start: string;
 }
 export interface VerifyDto {
   message: string;

@@ -6,7 +6,7 @@ import { Card, CardBody } from '@heroui/card'
 import { Link } from '@heroui/link'
 import { Steps } from 'antd'
 import { AnimatePresence } from 'framer-motion'
-import { useWindowScroll } from 'react-use'
+import { useAsync, useWindowScroll } from 'react-use'
 
 const accordions = [
   {
@@ -64,6 +64,10 @@ const accordions = [
 export default function IndexPage() {
   const router = useRouter()
   const scroll = useWindowScroll()
+
+  const { value: [stats] = [], loading } = useAsync(
+    () => getStats()
+  )
 
   function onNavigateProducts() {
     router.push('/products')
@@ -143,17 +147,20 @@ export default function IndexPage() {
         viewport={{ once: true }}
       >
         <div className="flex justify-center text-2xl lg:text-4xl font-bold mb-2">
-          IHO Batch A1
+          IHO Batch A{stats?.batch}
         </div>
         <div className="mb-3.5">
-          Started 26/06/2025
+          Started {stats?.start}
         </div>
         <div className="flex gap-4">
-          <Card>
-            <CardBody>
-              <p>Make beautiful websites regardless of your design experience.</p>
-            </CardBody>
-          </Card>
+          {stats?.stats.map(stat => (
+            <Card className='w-[500px]' key={stat.name}>
+              <CardBody>
+                <p>{stat.description}</p>
+              </CardBody>
+            </Card>
+          ))}
+
         </div>
       </motion.section>
       <motion.section
