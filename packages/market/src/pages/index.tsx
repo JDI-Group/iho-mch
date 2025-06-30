@@ -1,13 +1,20 @@
 import { variants } from '@/config/variants'
-import { If } from '@hairy/react-lib'
+import { Case, If, Switch } from '@hairy/react-lib'
 import { Accordion, AccordionItem } from '@heroui/accordion'
 import { Button } from '@heroui/button'
-import { Card, CardBody } from '@heroui/card'
+import { Chip } from '@heroui/chip'
+import { Card, CardBody, CardHeader } from '@heroui/card'
 import { Link } from '@heroui/link'
 import { Steps } from 'antd'
 import { AnimatePresence } from 'framer-motion'
 import { useAsync, useWindowScroll } from 'react-use'
-
+import { riposte } from '@hairy/utils'
+import { Image } from '@heroui/image'
+import { Progress } from '@heroui/progress'
+import { formatEther } from '@hairy/ether-lib'
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
+dayjs.extend(relativeTime)
 const accordions = [
   {
     value: 'item-1',
@@ -140,30 +147,6 @@ export default function IndexPage() {
         </If>
       </motion.section>
       <motion.section
-        className={container({ className: 'w-full h-screen relative flex flex-col justify-center items-center' })}
-        variants={variants.fadeOpacity}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-      >
-        <div className="flex justify-center text-2xl lg:text-4xl font-bold mb-2">
-          IHO Batch A{stats?.batch}
-        </div>
-        <div className="mb-3.5">
-          Started {stats?.start}
-        </div>
-        <div className="flex gap-4">
-          {stats?.stats.map(stat => (
-            <Card className='w-[500px]' key={stat.name}>
-              <CardBody>
-                <p>{stat.description}</p>
-              </CardBody>
-            </Card>
-          ))}
-
-        </div>
-      </motion.section>
-      <motion.section
         variants={variants.fadeOpacity}
         initial="hidden"
         whileInView="visible"
@@ -193,6 +176,96 @@ export default function IndexPage() {
           <Button className="font-bold min-w-48 tracking-[0.1rem]" onPress={onExploreIHO} radius="full" variant="ghost">
             LEARN MORE
           </Button>
+        </div>
+      </motion.section>
+
+      <motion.section
+        className={container({ className: 'w-full min-h-screen py-12 md:py-4 relative flex flex-col justify-center items-center' })}
+        variants={variants.fadeOpacity}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        <div className="flex justify-center text-2xl lg:text-4xl font-bold mb-4">
+          IHO Batch A{stats?.batch}
+        </div>
+        <div className="mb-6">
+          Started {stats?.start}
+        </div>
+        <div className="w-full flex justify-center gap-4 flex-col sm:flex-row overflow-x-auto ">
+          {stats?.stats.map(stat => (
+            <Card className='w-full sm:max-w-[300px] lg:max-w-[300px] xl:max-w-[320px] xxl:max-w-[380px] flex-shrink-0 flex flex-col' key={stat.name}>
+
+              <CardHeader className="pt-4 pb-2 flex flex-col items-start">
+                <Chip
+                  className='mb-4'
+                  size="lg"
+                  variant="flat"
+                  color={riposte(
+                    [stat.status === 'starting', 'success'],
+                    [stat.status === 'ending-soon', 'warning'],
+                    [stat.status === 'completed', 'primary'],
+                  )}
+                >
+                  {stat.status}
+                </Chip>
+                <h2 className="text-2xl font-semibold">{stat.name}</h2>
+                <p className="text-lg text-default-500 line-clamp-2">{stat.description}</p>
+              </CardHeader>
+
+              <div className='flex-1' />
+              <CardBody className='flex-none'>
+                <Image
+                  alt="Card background"
+                  width="100%"
+                  className="object-cover aspect-square"
+                  src={stat.image}
+                />
+
+                <div className='flex justify-between mt-3 mb-2'>
+                  <span>Total Value Secured:</span>
+                  <span>
+                    {formatEther(stat.totalValueSecuredMXC)}
+                    MXC
+                  </span>
+                </div>
+                <div className='flex justify-between mb-2'>
+                  <span>Participants:</span>
+                  <span>
+                    {stat.orders || 0} / {stat.target}
+                  </span>
+                </div>
+                <Progress
+                  color={riposte(
+                    [stat.status === 'starting', 'success'],
+                    [stat.status === 'ending-soon', 'secondary'],
+                    [stat.status === 'completed', 'primary'],
+                  )}
+                  maxValue={stat.target}
+                  value={stat.orders}
+                />
+                <Switch value={stat.status}>
+                  <Case cond="starting">
+                    <Button className='mt-6' radius='md' color="success" variant='flat'>
+                      <u>In progress</u>
+                    </Button>
+                  </Case>
+                  <Case cond="ending-soon">
+                    <Button className='mt-6 !opacity-50' radius='md' color="warning" variant='flat' disabled>
+                      <u>Get Yours Now</u>
+                    </Button>
+                  </Case>
+                  <Case cond="completed">
+                    <Button className='mt-6 !opacity-50' radius='md' color="success" variant='flat' disabled>
+                      Ended within {dayjs(stat.completedAt).fromNow()}
+                    </Button>
+                  </Case>
+                </Switch>
+
+              </CardBody>
+            </Card>
+          ))}
+
         </div>
       </motion.section>
 

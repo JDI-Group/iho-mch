@@ -132,6 +132,7 @@ export interface Product {
 export interface ProductStats {
   name: string;
   description: string;
+  image: string;
   totalValueSecured?: string;
   totalValueSecuredMXC?: string;
   weeklyValueSecured?: string;
@@ -343,6 +344,7 @@ export interface OrderPutDto {
 export interface StatsItem {
   name: string;
   description: string;
+  image: string;
   totalValueSecured?: string;
   totalValueSecuredMXC?: string;
   weeklyValueSecured?: string;
