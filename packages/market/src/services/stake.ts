@@ -6,7 +6,14 @@ export async function helperStake(params: { order: number }): Promise<OrderDataD
 export async function helperStake(params: { product: number, variation?: number }): Promise<OrderDataDto>
 export async function helperStake(params: { order: number } | { product: number, variation?: number }) {
   const { order, product, variation } = params as { order?: number, product?: number, variation?: number }
-  const iho = getIhoMarket({ runner: wallet })
+
+  const ihoContracts = {
+    1: getIhoLockVaultV1,
+    // 2: getIhoLockVaultV2,
+  }
+
+  const iho = ihoContracts[process.env.NEXT_PUBLIC_MARKET_BATCH as '1']({ runner: wallet })
+
   let detail: OrderDataDto | null = null
   if (product)
     detail = await postOrder({ variation, product }, undefined, undefined, { skipMessage: true } as any)

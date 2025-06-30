@@ -68,6 +68,6 @@ async function readModuleOptions() {
   }))
 }
 
-// pnpm hardhat verify blockscout 0x6E9af730856954E3f7AA654591054b93c4fC9c8A --network moonchain --build-profile production --force
+// pnpm hardhat verify blockscout <address> --network moonchain --build-profile production --force
 
 export default config
