@@ -141,7 +141,8 @@ export interface ProductStats {
   activeStakes?: number;
   totalParticipants?: number;
   updateAt: number;
-  completedAt?: number;
+  createAt: number;
+  confirmAt?: number;
   status: string;
   orders: number;
   target: number;
@@ -354,7 +355,8 @@ export interface StatsItem {
   activeStakes?: number;
   totalParticipants?: number;
   updateAt: number;
-  completedAt?: number;
+  createAt: number;
+  confirmAt?: number;
   status: string;
   orders: number;
   target: number;

@@ -13,8 +13,8 @@ import { Image } from '@heroui/image'
 import { Progress } from '@heroui/progress'
 import { formatEther } from '@hairy/ether-lib'
 import dayjs from 'dayjs'
-import relativeTime from 'dayjs/plugin/relativeTime'
-dayjs.extend(relativeTime)
+import duration from 'dayjs/plugin/duration'
+dayjs.extend(duration)
 const accordions = [
   {
     value: 'item-1',
@@ -236,7 +236,7 @@ export default function IndexPage() {
                 <Progress
                   color={riposte(
                     [stat.status === 'starting', 'success'],
-                    [stat.status === 'ending-soon', 'secondary'],
+                    [stat.status === 'ending-soon', 'warning'],
                     [stat.status === 'completed', 'primary'],
                   )}
                   maxValue={stat.target}
@@ -249,17 +249,16 @@ export default function IndexPage() {
                     </Button>
                   </Case>
                   <Case cond="ending-soon">
-                    <Button onPress={() => router.push(`/products/${stat.product}`)} className='mt-6' radius='md' color="warning" variant='flat' disabled>
+                    <Button onPress={() => router.push(`/products/${stat.product}`)} className='mt-6' radius='md' color="warning" variant='flat'>
                       <u>Get Yours Now</u>
                     </Button>
                   </Case>
                   <Case cond="completed">
-                    <Button className='mt-6 !opacity-50' radius='md' color="success" variant='flat' disabled>
-                      Ended within {dayjs(stat.completedAt).fromNow()}
+                    <Button className='mt-6' radius='md' color="success" variant='flat' disabled>
+                      <u>Ended within {dayjs.duration(stat.confirmAt! - stat.createAt, 'seconds').format('HH[h] mm[m] ss[s]')}</u>
                     </Button>
                   </Case>
                 </Switch>
-
               </CardBody>
             </Card>
           ))}
