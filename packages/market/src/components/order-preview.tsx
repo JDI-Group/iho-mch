@@ -17,15 +17,17 @@ export function OrderPreview() {
     },
   )
 
-  function onChangeOrder(status: string) {
-    if (status === 'deleted') {
+  function onChangeOrder(order: Order) {
+    if (order.status === 'deleted') {
       setList(prev => prev.filter(item => item.id !== order?.id))
       setOrder(undefined)
       return
     }
+
     setList(prev => prev.map((item) => {
-      item.id === order?.id && (item.status = status)
-      return item
+      if (item.id === order?.id)
+        Object.assign(item, order)
+      return { ...item }
     }))
   }
 

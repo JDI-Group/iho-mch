@@ -26,6 +26,8 @@ function Page() {
     [detail],
   )
 
+  console.log(statistics)
+
   return (
     <layouts.default>
       <If cond={!loading} tag="section" className="flex flex-col gap-4 px-0 py-8 md:py-10">

@@ -6,6 +6,10 @@ export const siteConfig = {
   favicon: 'https://explorer.moonchain.com/assets/favicon/favicon.ico',
   navItems: [
     {
+      label: 'Home',
+      href: '/',
+    },
+    {
       label: 'Products',
       href: '/products',
     },

@@ -1,9 +1,10 @@
 import type { OrderDataDto } from '@/apis/index.type'
 import { wait } from '@hairy/ether-lib'
 import { addToast } from '@heroui/toast'
+import { TransactionReceipt } from 'ethers'
 
-export async function helperStake(params: { order: number }): Promise<OrderDataDto>
-export async function helperStake(params: { product: number, variation?: number }): Promise<OrderDataDto>
+export async function helperStake(params: { order: number }): Promise<TransactionReceipt | undefined | null>
+export async function helperStake(params: { product: number, variation?: number }): Promise<TransactionReceipt | undefined | null>
 export async function helperStake(params: { order: number } | { product: number, variation?: number }) {
   const { order, product, variation } = params as { order?: number, product?: number, variation?: number }
 
@@ -39,7 +40,5 @@ export async function helperStake(params: { order: number } | { product: number,
     { value: detail.value },
   )
 
-  await wait(transaction)
-
-  return detail
+  return await wait(transaction)
 }

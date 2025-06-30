@@ -15,7 +15,7 @@ import dayjs from 'dayjs'
 export interface OrderDetailProps {
   detail?: Order
   back?: (value?: any) => void
-  onChange?: (status: string) => void
+  onChange?: (status: Order) => void
 }
 
 export function OrderDetail(props: OrderDetailProps) {
@@ -23,18 +23,18 @@ export function OrderDetail(props: OrderDetailProps) {
   const openDeleteConfirmDialog = useOverlayInject(DeleteConfirmDialog)
   const [status, actions] = useAsyncCallbacks({
     stake: async () => {
-      await helperStake({ order: props.detail!.id })
-      props.onChange?.('processing')
+      const receipt = await helperStake({ order: props.detail!.id })
+      props.onChange?.({ ...props.detail!, hash: receipt?.hash })
     },
     cancel: async () => {
       await openCancelConfirmDialog()
       await putOrderCancel({ order: props.detail!.id })
-      props.onChange?.('cancelled')
+      props.onChange?.({ ...props.detail!, status: 'cancelled' })
     },
     delete: async () => {
       await openDeleteConfirmDialog()
       await deleteOrderId({ id: props.detail!.id })
-      props.onChange?.('deleted')
+      props.onChange?.({ ...props.detail!, status: 'deleted' })
     },
   })
 
@@ -65,6 +65,14 @@ export function OrderDetail(props: OrderDetailProps) {
       </CardHeader>
       <Divider />
       <CardBody className="flex-col gap-4">
+        <If cond={props.detail?.hash}>
+          <div className="flex justify-between">
+            <div className="font-bold">Transaction Hash:</div>
+            <Link href={`${chain.blockExplorers.default.url}/tx/${props.detail?.hash}`}>
+              {props.detail?.hash}
+            </Link>
+          </div>
+        </If>
         <div className="flex justify-between">
           <div className="font-bold">Receiving address:</div>
           <span>
@@ -122,11 +130,11 @@ export function OrderDetail(props: OrderDetailProps) {
       <CardFooter className="flex gap-3 justify-end">
         <Switch value={props.detail?.status}>
           <Case cond="pending">
-            <Button disabled={status.loading} isLoading={status.loadings.cancel} onPress={actions.cancel}>
+            <Button className={clsx({ '!opacity-50': status.loading || !!props.detail?.hash })} disabled={status.loading || !!props.detail?.hash} isLoading={status.loadings.cancel} onPress={actions.cancel}>
               Cancel
             </Button>
-            <Button disabled={status.loading} isLoading={status.loadings.stake} color="primary" onPress={actions.stake}>
-              Stake
+            <Button disabled={status.loading} isLoading={status.loadings.stake || !!props.detail?.hash} color="primary" onPress={actions.stake}>
+              {props.detail?.hash ? 'Confirming' : 'Stake'}
             </Button>
           </Case>
           <Case cond="cancelled">
