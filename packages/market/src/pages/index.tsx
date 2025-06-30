@@ -2,6 +2,7 @@ import { variants } from '@/config/variants'
 import { If } from '@hairy/react-lib'
 import { Accordion, AccordionItem } from '@heroui/accordion'
 import { Button } from '@heroui/button'
+import { Card, CardBody } from '@heroui/card'
 import { Link } from '@heroui/link'
 import { Steps } from 'antd'
 import { AnimatePresence } from 'framer-motion'
@@ -134,7 +135,27 @@ export default function IndexPage() {
           </motion.div>
         </If>
       </motion.section>
-
+      <motion.section
+        className={container({ className: 'w-full h-screen relative flex flex-col justify-center items-center' })}
+        variants={variants.fadeOpacity}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        <div className="flex justify-center text-2xl lg:text-4xl font-bold mb-2">
+          IHO Batch A1
+        </div>
+        <div className="mb-3.5">
+          Started 26/06/2025
+        </div>
+        <div className="flex gap-4">
+          <Card>
+            <CardBody>
+              <p>Make beautiful websites regardless of your design experience.</p>
+            </CardBody>
+          </Card>
+        </div>
+      </motion.section>
       <motion.section
         variants={variants.fadeOpacity}
         initial="hidden"
@@ -168,33 +189,35 @@ export default function IndexPage() {
         </div>
       </motion.section>
 
-      <section className="flex w-full justify-center lg:justify-between flex-col lg:flex-row items-center gap-8 lg:gap-12 py-12 h-[60vh] lg:h-[80vh] font-bold relative">
+      <section className="flex w-full justify-center items-center lg:flex-row lg:justify-between flex-col gap-8 lg:gap-12 py-12 min-h-[30vh] lg:h-[80vh] font-bold relative">
         <motion.div
-          className={container({ className: 'relative z-10 w-full overflow-hidden' })}
+          className={container({ className: 'relative z-10 w-full flex justify-center items-center py-4' })}
           variants={variants.fadeOpacity}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
         >
-          <Steps
-            direction="horizontal"
-            current={3}
-            progressDot
-            items={[
-              {
-                title: 'SELECT',
-                description: 'Select the mining hardware you want for free',
-              },
-              {
-                title: 'STAKE',
-                description: 'Stake your Moonchain on your own wallet',
-              },
-              {
-                title: 'MINE',
-                description: 'Your mining hardware is delivered FREE, connect & start mining!',
-              },
-            ]}
-          />
+          <div className="overflow-x-auto pb-2">
+            <Steps
+              direction="horizontal"
+              current={3}
+              progressDot
+              items={[
+                {
+                  title: 'SELECT',
+                  description: 'Select the mining hardware you want for free',
+                },
+                {
+                  title: 'STAKE',
+                  description: 'Stake your Moonchain on your own wallet',
+                },
+                {
+                  title: 'MINE',
+                  description: 'Your mining hardware is delivered FREE, connect & start mining!',
+                },
+              ]}
+            />
+          </div>
         </motion.div>
         <video style={{ maskImage: 'linear-gradient(to bottom, transparent, black 50%, transparent)' }} className="hidden dark:block absolute top-0 left-0 w-full h-full object-cover opacity-80" autoPlay loop muted preload="auto" playsInline>
           <source src="https://thegraph.com/_next/static/media/footer.04cca2ee.mp4" type="video/mp4" />

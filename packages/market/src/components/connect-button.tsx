@@ -1,4 +1,6 @@
+import { shapes } from '@dicebear/collection'
 import { Button } from '@heroui/button'
+import { Icon } from '@iconify/react/dist/iconify.js'
 import { ConnectButton as RainbowConnectButton } from '@rainbow-me/rainbowkit'
 import { useAccount } from 'wagmi'
 
@@ -12,12 +14,13 @@ export function ConnectButton({ status = true }: ConnectButtonProps) {
     <>
       <RainbowConnectButton.Custom>
         {({
+          authenticationStatus,
           account,
           chain,
-          connectModalOpen,
           openChainModal,
           openConnectModal,
-          authenticationStatus,
+          openAccountModal,
+          connectModalOpen,
           mounted,
         }) => {
         // Note: If your app doesn't use authentication, you
@@ -40,26 +43,24 @@ export function ConnectButton({ status = true }: ConnectButtonProps) {
           if (chain?.unsupported) {
             return (
               <>
-                <div className="hidden sm:block">
-                  <Button onPress={openChainModal} className="bg-[#FF494A] text-white font-bold">
-                    <span>Wrong network</span>
-                    <MaterialSymbolsArrowForwardIosRounded />
-                  </Button>
-                </div>
-                <div className="sm:hidden">
-                  <Button size="sm" onPress={openChainModal} className="bg-[#FF494A] text-white font-bold">
-                    <span>Network</span>
-                    <MingcuteWarningFill width={18} height={18} />
-                  </Button>
-                </div>
+                <Button
+                  onPress={openChainModal}
+                  color="warning"
+                  className="bg-[#FF494A] text-white text-sm font-bold gap-1 h-10"
+                >
+                  <span>Wrong network</span>
+                  <Icon icon="solar:alt-arrow-down-bold" />
+                </Button>
               </>
             )
           }
           if (status) {
             return (
-              <div className="rainbow-wrapper">
-                <RainbowConnectButton accountStatus={{ smallScreen: 'avatar', largeScreen: 'full' }} />
-              </div>
+              <Button className="flex-shrink-0 px-2 gap-0" radius="full" onPress={openAccountModal} variant="light">
+                <Dicebear className="w-[24px] h-[24px] rounded-full mr-2" style={shapes} seed={account.address} />
+                <span className="mr-1 max-xs:hidden">{account.displayName}</span>
+                <Icon fontSize="16" icon="solar:alt-arrow-down-bold-duotone" />
+              </Button>
             )
           }
         }}

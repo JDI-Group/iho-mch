@@ -11,6 +11,7 @@ declare global {
   const CarIcon: typeof import('../src/components/icons')['CarIcon']
   const ConnectButton: typeof import('../src/components/connect-button')['ConnectButton']
   const DeleteConfirmDialog: typeof import('../src/components/delete-confirm-dialog')['DeleteConfirmDialog']
+  const Dicebear: typeof import('../src/components/dicebear')['Dicebear']
   const DiscordIcon: typeof import('../src/components/icons')['DiscordIcon']
   const FormShipping: typeof import('../src/components/form-shipping')['FormShipping']
   const GithubIcon: typeof import('../src/components/icons')['GithubIcon']
@@ -72,6 +73,7 @@ declare global {
   const getIerc6551AccountProxy: typeof import('../src/generated/index')['getIerc6551AccountProxy']
   const getIerc6551Registry: typeof import('../src/generated/index')['getIerc6551Registry']
   const getIhoFueltank: typeof import('../src/generated/index')['getIhoFueltank']
+  const getIhoLockVaultV1: typeof import('../src/generated/index')['getIhoLockVaultV1']
   const getIhoMarket: typeof import('../src/generated/index')['getIhoMarket']
   const getIhoMining: typeof import('../src/generated/index')['getIhoMining']
   const getIihoFuel: typeof import('../src/generated/index')['getIihoFuel']
@@ -91,6 +93,7 @@ declare global {
   const ierc6551AccountProxyAbi: typeof import('../src/generated/index')['ierc6551AccountProxyAbi']
   const ierc6551RegistryAbi: typeof import('../src/generated/index')['ierc6551RegistryAbi']
   const ihoFueltankAbi: typeof import('../src/generated/index')['ihoFueltankAbi']
+  const ihoLockVaultV1Abi: typeof import('../src/generated/index')['ihoLockVaultV1Abi']
   const ihoMarketAbi: typeof import('../src/generated/index')['ihoMarketAbi']
   const ihoMiningAbi: typeof import('../src/generated/index')['ihoMiningAbi']
   const iihoFuelAbi: typeof import('../src/generated/index')['iihoFuelAbi']
@@ -139,6 +142,9 @@ declare global {
   // @ts-ignore
   export type { ConnectButtonProps } from '../src/components/connect-button'
   import('../src/components/connect-button')
+  // @ts-ignore
+  export type { DicebearProps } from '../src/components/dicebear'
+  import('../src/components/dicebear')
   // @ts-ignore
   export type { FormShippingFields, InputPhoneNumberProps } from '../src/components/form-shipping'
   import('../src/components/form-shipping')
