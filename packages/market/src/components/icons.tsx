@@ -11,7 +11,7 @@ export const Logo: React.FC<IconSvgProps> = ({
     height={size || height}
     viewBox="0 0 32 32"
     width={size || height}
-    {...props}
+    {...props as any}
   >
     <path
       clipRule="evenodd"
@@ -33,7 +33,7 @@ export const DiscordIcon: React.FC<IconSvgProps> = ({
       height={size || height}
       viewBox="0 0 24 24"
       width={size || width}
-      {...props}
+      {...props as any}
     >
       <path
         d="M14.82 4.26a10.14 10.14 0 0 0-.53 1.1 14.66 14.66 0 0 0-4.58 0 10.14 10.14 0 0 0-.53-1.1 16 16 0 0 0-4.13 1.3 17.33 17.33 0 0 0-3 11.59 16.6 16.6 0 0 0 5.07 2.59A12.89 12.89 0 0 0 8.23 18a9.65 9.65 0 0 1-1.71-.83 3.39 3.39 0 0 0 .42-.33 11.66 11.66 0 0 0 10.12 0q.21.18.42.33a10.84 10.84 0 0 1-1.71.84 12.41 12.41 0 0 0 1.08 1.78 16.44 16.44 0 0 0 5.06-2.59 17.22 17.22 0 0 0-3-11.59 16.09 16.09 0 0 0-4.09-1.35zM8.68 14.81a1.94 1.94 0 0 1-1.8-2 1.93 1.93 0 0 1 1.8-2 1.93 1.93 0 0 1 1.8 2 1.93 1.93 0 0 1-1.8 2zm6.64 0a1.94 1.94 0 0 1-1.8-2 1.93 1.93 0 0 1 1.8-2 1.92 1.92 0 0 1 1.8 2 1.92 1.92 0 0 1-1.8 2z"
@@ -54,7 +54,7 @@ export const TwitterIcon: React.FC<IconSvgProps> = ({
       height={size || height}
       viewBox="0 0 24 24"
       width={size || width}
-      {...props}
+      {...props as any}
     >
       <path
         d="M19.633 7.997c.013.175.013.349.013.523 0 5.325-4.053 11.461-11.46 11.461-2.282 0-4.402-.661-6.186-1.809.324.037.636.05.973.05a8.07 8.07 0 0 0 5.001-1.721 4.036 4.036 0 0 1-3.767-2.793c.249.037.499.062.761.062.361 0 .724-.05 1.061-.137a4.027 4.027 0 0 1-3.23-3.953v-.05c.537.299 1.16.486 1.82.511a4.022 4.022 0 0 1-1.796-3.354c0-.748.199-1.434.548-2.032a11.457 11.457 0 0 0 8.306 4.215c-.062-.3-.1-.611-.1-.923a4.026 4.026 0 0 1 4.028-4.028c1.16 0 2.207.486 2.943 1.272a7.957 7.957 0 0 0 2.556-.973 4.02 4.02 0 0 1-1.771 2.22 8.073 8.073 0 0 0 2.319-.624 8.645 8.645 0 0 1-2.019 2.083z"
@@ -75,7 +75,7 @@ export const GithubIcon: React.FC<IconSvgProps> = ({
       height={size || height}
       viewBox="0 0 24 24"
       width={size || width}
-      {...props}
+      {...props as any}
     >
       <path
         clipRule="evenodd"
@@ -101,7 +101,7 @@ export function MoonFilledIcon({
       role="presentation"
       viewBox="0 0 24 24"
       width={size || width}
-      {...props}
+      {...props as any}
     >
       <path
         d="M21.53 15.93c-.16-.27-.61-.69-1.73-.49a8.46 8.46 0 01-1.88.13 8.409 8.409 0 01-5.91-2.82 8.068 8.068 0 01-1.44-8.66c.44-1.01.13-1.54-.09-1.76s-.77-.55-1.83-.11a10.318 10.318 0 00-6.32 10.21 10.475 10.475 0 007.04 8.99 10 10 0 002.89.55c.16.01.32.02.48.02a10.5 10.5 0 008.47-4.27c.67-.93.49-1.519.32-1.79z"
@@ -125,7 +125,7 @@ export function SunFilledIcon({
       role="presentation"
       viewBox="0 0 24 24"
       width={size || width}
-      {...props}
+      {...props as any}
     >
       <g fill="currentColor">
         <path d="M19 12a7 7 0 11-7-7 7 7 0 017 7z" />
@@ -149,7 +149,7 @@ export function HeartFilledIcon({
       role="presentation"
       viewBox="0 0 24 24"
       width={size || width}
-      {...props}
+      {...props as any}
     >
       <path
         d="M12.62 20.81c-.34.12-.9.12-1.24 0C8.48 19.82 2 15.69 2 8.69 2 5.6 4.49 3.1 7.56 3.1c1.82 0 3.43.88 4.44 2.24a5.53 5.53 0 0 1 4.44-2.24C19.51 3.1 22 5.6 22 8.69c0 7-6.48 11.13-9.38 12.12Z"
@@ -172,7 +172,7 @@ export function SearchIcon(props: IconSvgProps) {
       role="presentation"
       viewBox="0 0 24 24"
       width="1em"
-      {...props}
+      {...props as any}
     >
       <path
         d="M11.5 21C16.7467 21 21 16.7467 21 11.5C21 6.25329 16.7467 2 11.5 2C6.25329 2 2 6.25329 2 11.5C2 16.7467 6.25329 21 11.5 21Z"
@@ -194,7 +194,7 @@ export function SearchIcon(props: IconSvgProps) {
 
 export function SettingIcon({ size, ...props }: IconSvgProps) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" {...props}>
+    <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" {...props as any}>
       <g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2">
         <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2" />
         <circle cx="12" cy="12" r="3" />
@@ -205,13 +205,13 @@ export function SettingIcon({ size, ...props }: IconSvgProps) {
 
 export function MenuIcon({ size, ...props }: IconSvgProps) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" {...props}><path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12h18M3 18h18M3 6h18" /></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" {...props as any}><path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12h18M3 18h18M3 6h18" /></svg>
   )
 }
 
 export function CarIcon({ size, ...props }: IconSvgProps) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 94 65" {...props} fill="none">
+    <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 94 65" {...props as any} fill="none">
       <path d="M76.9391 47.0593C74.6545 47.0593 72.4841 47.9541 70.8468 49.5724C69.2095 51.2097 68.2957 53.342 68.2957 55.6267C68.2957 57.9113 69.1905 60.0436 70.8468 61.6809C72.5032 63.2992 74.6545 64.194 76.9391 64.194C81.6226 64.194 85.4303 60.3482 85.4303 55.6267C85.4303 50.9051 81.6226 47.0593 76.9391 47.0593ZM76.9391 60.3863C74.3118 60.3863 72.1033 58.2159 72.1033 55.6267C72.1033 53.0374 74.3118 50.867 76.9391 50.867C79.5283 50.867 81.6226 52.9993 81.6226 55.6267C81.6226 58.254 79.5283 60.3863 76.9391 60.3863Z" fill="currentColor" fill-opacity="0.5" />
       <path d="M79.1466 18.5206C78.8039 18.1969 78.347 18.0256 77.871 18.0256H68.1043C67.0572 18.0256 66.2004 18.8823 66.2004 19.9295V35.541C66.2004 36.5882 67.0572 37.4449 68.1043 37.4449H83.6016C84.6487 37.4449 85.5054 36.5882 85.5054 35.541V25.0889C85.5054 24.5558 85.277 24.0418 84.8772 23.68L79.1466 18.5206ZM81.6977 33.6372H70.0081V21.8143H77.1285L81.6977 25.9266V33.6372Z" fill="currentColor" fill-opacity="0.5" />
       <path d="M30.4496 47.0593C28.165 47.0593 25.9946 47.9541 24.3573 49.5724C22.72 51.2097 21.8062 53.342 21.8062 55.6267C21.8062 57.9113 22.701 60.0436 24.3573 61.6809C26.0137 63.2992 28.165 64.194 30.4496 64.194C35.1331 64.194 38.9408 60.3482 38.9408 55.6267C38.9408 50.9051 35.1331 47.0593 30.4496 47.0593ZM30.4496 60.3863C27.8223 60.3863 25.6138 58.2159 25.6138 55.6267C25.6138 53.0374 27.8223 50.867 30.4496 50.867C33.0388 50.867 35.1331 52.9993 35.1331 55.6267C35.1331 58.254 33.0388 60.3863 30.4496 60.3863Z" fill="currentColor" fill-opacity="0.5" />
@@ -226,7 +226,7 @@ export function CarIcon({ size, ...props }: IconSvgProps) {
 
 export function QuestionIcon({ size, ...props }: IconSvgProps) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" {...props}>
+    <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" {...props as any}>
       {/* Icon from Material Symbols by Google - https://github.com/google/material-design-icons/blob/master/LICENSE */}
       <path fill="currentColor" d="m12 22l-.25-3h-.25q-3.55 0-6.025-2.475T3 10.5t2.475-6.025T11.5 2q1.775 0 3.313.662t2.7 1.825t1.824 2.7T20 10.5q0 1.875-.612 3.6t-1.676 3.2t-2.525 2.675T12 22m-.525-6.025q.425 0 .725-.3t.3-.725t-.3-.725t-.725-.3t-.725.3t-.3.725t.3.725t.725.3M10.75 12.8h1.5q0-.75.15-1.05t.95-1.1q.45-.45.75-.975t.3-1.125q0-1.275-.862-1.913T11.5 6q-1.1 0-1.85.613T8.6 8.1l1.4.55q.125-.425.475-.837T11.5 7.4t1.013.375t.337.825q0 .425-.25.763t-.6.687q-.875.75-1.062 1.188T10.75 12.8"></path>
     </svg>
@@ -235,7 +235,7 @@ export function QuestionIcon({ size, ...props }: IconSvgProps) {
 
 export function ScreenFullIcon(props: SVGProps<SVGSVGElement>) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" {...props}>
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" {...props as any}>
       {/* Icon from Lets Icons by Leonid Tsvetkov - https://creativecommons.org/licenses/by/4.0/ */}
       <path fill="currentColor" d="M4 20H3v1h1zm5.707-4.293a1 1 0 0 0-1.414-1.414zM3 14v6h2v-6zm1 7h6v-2H4zm.707-.293l5-5l-1.414-1.414l-5 5zM20 4h1V3h-1zm-5.707 4.293a1 1 0 0 0 1.414 1.414zM21 10V4h-2v6zm-1-7h-6v2h6zm-.707.293l-5 5l1.414 1.414l5-5z"></path>
     </svg>
@@ -244,24 +244,24 @@ export function ScreenFullIcon(props: SVGProps<SVGSVGElement>) {
 
 export function MaterialSymbolsArrowForwardIosRounded(props: SVGProps<SVGSVGElement>) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" {...props}>{/* Icon from Material Symbols by Google - https://github.com/google/material-design-icons/blob/master/LICENSE */}<path fill="currentColor" d="m14.475 12l-7.35-7.35q-.375-.375-.363-.888t.388-.887t.888-.375t.887.375l7.675 7.7q.3.3.45.675t.15.75t-.15.75t-.45.675l-7.7 7.7q-.375.375-.875.363T7.15 21.1t-.375-.888t.375-.887z"></path></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" {...props as any}>{/* Icon from Material Symbols by Google - https://github.com/google/material-design-icons/blob/master/LICENSE */}<path fill="currentColor" d="m14.475 12l-7.35-7.35q-.375-.375-.363-.888t.388-.887t.888-.375t.887.375l7.675 7.7q.3.3.45.675t.15.75t-.15.75t-.45.675l-7.7 7.7q-.375.375-.875.363T7.15 21.1t-.375-.888t.375-.887z"></path></svg>
   )
 }
 
 export function MaterialSymbolsArrowCoolDownRounded(props: SVGProps<SVGSVGElement>) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" {...props}>{/* Icon from Material Symbols by Google - https://github.com/google/material-design-icons/blob/master/LICENSE */}<path fill="currentColor" d="M12 21.9q-.2 0-.375-.075T11.3 21.6l-5.6-5.575q-.275-.275-.275-.7T5.7 14.6q.3-.3.713-.3t.712.3L11 18.5v-6.175q0-.425.288-.712t.712-.288t.713.288t.287.712V18.5l3.9-3.9q.275-.275.688-.275t.712.3q.275.275.275.7t-.275.7L12.7 21.6q-.15.15-.325.225T12 21.9m0-12.575q-.425 0-.712-.287T11 8.325v-1q0-.425.288-.712T12 6.325t.713.288t.287.712v1q0 .425-.288.713T12 9.325m0-5q-.425 0-.712-.287T11 3.325t.288-.712t.712-.288t.713.288t.287.712t-.288.713t-.712.287"></path></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" {...props as any}>{/* Icon from Material Symbols by Google - https://github.com/google/material-design-icons/blob/master/LICENSE */}<path fill="currentColor" d="M12 21.9q-.2 0-.375-.075T11.3 21.6l-5.6-5.575q-.275-.275-.275-.7T5.7 14.6q.3-.3.713-.3t.712.3L11 18.5v-6.175q0-.425.288-.712t.712-.288t.713.288t.287.712V18.5l3.9-3.9q.275-.275.688-.275t.712.3q.275.275.275.7t-.275.7L12.7 21.6q-.15.15-.325.225T12 21.9m0-12.575q-.425 0-.712-.287T11 8.325v-1q0-.425.288-.712T12 6.325t.713.288t.287.712v1q0 .425-.288.713T12 9.325m0-5q-.425 0-.712-.287T11 3.325t.288-.712t.712-.288t.713.288t.287.712t-.288.713t-.712.287"></path></svg>
   )
 }
 
 export function MaterialSymbolsLightEyeTrackingRounded(props: SVGProps<SVGSVGElement>) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" {...props}>{/* Icon from Material Symbols Light by Google - https://github.com/google/material-design-icons/blob/master/LICENSE */}<path fill="currentColor" d="M3.616 22q-.691 0-1.153-.462T2 20.385v-2.116q0-.212.144-.356t.357-.144t.356.144t.143.356v2.116q0 .269.173.442t.443.173H5.73q.212 0 .356.144t.144.357t-.144.356T5.73 22zm16.769 0h-2.116q-.212 0-.356-.144t-.144-.357t.144-.356t.356-.143h2.116q.269 0 .442-.173t.173-.442v-2.116q0-.212.144-.356t.357-.144t.356.144t.143.356v2.116q0 .69-.462 1.153T20.385 22M12 17.73q-2.42 0-4.39-1.226q-1.972-1.227-3.15-3.46q-.122-.242-.182-.495q-.06-.252-.06-.514q0-.283.055-.56t.187-.52q1.178-2.232 3.15-3.459Q9.58 6.27 12 6.27t4.39 1.227t3.15 3.46q.131.242.187.507t.056.537t-.056.538t-.186.506q-1.18 2.233-3.15 3.46Q14.419 17.73 12 17.73m0-2.866q1.2 0 2.033-.832T14.866 12t-.833-2.033T12 9.135t-2.033.832T9.135 12t.832 2.033t2.033.833m-.001-1q-.778 0-1.321-.545q-.544-.544-.544-1.322t.545-1.321t1.322-.543t1.321.544t.544 1.322t-.545 1.321q-.545.544-1.322.544M22 3.616V5.73q0 .212-.144.356t-.357.144t-.356-.144T21 5.731V3.616q0-.27-.173-.443T20.385 3h-2.116q-.212 0-.356-.144t-.144-.357t.144-.356t.356-.143h2.116q.69 0 1.152.463T22 3.616M3.616 2H5.73q.212 0 .356.144t.144.357t-.144.356T5.731 3H3.616q-.27 0-.443.173T3 3.616V5.73q0 .212-.144.356t-.357.144t-.356-.144T2 5.731V3.616q0-.691.463-1.153T3.616 2"></path></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" {...props as any}>{/* Icon from Material Symbols Light by Google - https://github.com/google/material-design-icons/blob/master/LICENSE */}<path fill="currentColor" d="M3.616 22q-.691 0-1.153-.462T2 20.385v-2.116q0-.212.144-.356t.357-.144t.356.144t.143.356v2.116q0 .269.173.442t.443.173H5.73q.212 0 .356.144t.144.357t-.144.356T5.73 22zm16.769 0h-2.116q-.212 0-.356-.144t-.144-.357t.144-.356t.356-.143h2.116q.269 0 .442-.173t.173-.442v-2.116q0-.212.144-.356t.357-.144t.356.144t.143.356v2.116q0 .69-.462 1.153T20.385 22M12 17.73q-2.42 0-4.39-1.226q-1.972-1.227-3.15-3.46q-.122-.242-.182-.495q-.06-.252-.06-.514q0-.283.055-.56t.187-.52q1.178-2.232 3.15-3.459Q9.58 6.27 12 6.27t4.39 1.227t3.15 3.46q.131.242.187.507t.056.537t-.056.538t-.186.506q-1.18 2.233-3.15 3.46Q14.419 17.73 12 17.73m0-2.866q1.2 0 2.033-.832T14.866 12t-.833-2.033T12 9.135t-2.033.832T9.135 12t.832 2.033t2.033.833m-.001-1q-.778 0-1.321-.545q-.544-.544-.544-1.322t.545-1.321t1.322-.543t1.321.544t.544 1.322t-.545 1.321q-.545.544-1.322.544M22 3.616V5.73q0 .212-.144.356t-.357.144t-.356-.144T21 5.731V3.616q0-.27-.173-.443T20.385 3h-2.116q-.212 0-.356-.144t-.144-.357t.144-.356t.356-.143h2.116q.69 0 1.152.463T22 3.616M3.616 2H5.73q.212 0 .356.144t.144.357t-.144.356T5.731 3H3.616q-.27 0-.443.173T3 3.616V5.73q0 .212-.144.356t-.357.144t-.356-.144T2 5.731V3.616q0-.691.463-1.153T3.616 2"></path></svg>
   )
 }
 
 export function MingcuteWarningFill(props: SVGProps<SVGSVGElement>) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" {...props}>{/* Icon from MingCute Icon by MingCute Design - https://github.com/Richard9394/MingCute/blob/main/LICENSE */}<g fill="none"><path d="m12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.018-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"></path><path fill="currentColor" d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2m0 13a1 1 0 1 0 0 2a1 1 0 0 0 0-2m0-9a1 1 0 0 0-.993.883L11 7v6a1 1 0 0 0 1.993.117L13 13V7a1 1 0 0 0-1-1"></path></g></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" {...props as any}>{/* Icon from MingCute Icon by MingCute Design - https://github.com/Richard9394/MingCute/blob/main/LICENSE */}<g fill="none"><path d="m12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.018-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"></path><path fill="currentColor" d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2m0 13a1 1 0 1 0 0 2a1 1 0 0 0 0-2m0-9a1 1 0 0 0-.993.883L11 7v6a1 1 0 0 0 1.993.117L13 13V7a1 1 0 0 0-1-1"></path></g></svg>
   )
 }
