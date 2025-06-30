@@ -131,6 +131,7 @@ export interface Product {
 }
 export interface ProductStats {
   name: string;
+  product: number;
   description: string;
   image: string;
   totalValueSecured?: string;
@@ -343,6 +344,7 @@ export interface OrderPutDto {
 }
 export interface StatsItem {
   name: string;
+  product: number;
   description: string;
   image: string;
   totalValueSecured?: string;

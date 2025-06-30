@@ -192,10 +192,9 @@ export default function IndexPage() {
         <div className="mb-6">
           Started {stats?.start}
         </div>
-        <div className="w-full flex justify-center gap-4 flex-col sm:flex-row overflow-x-auto ">
+        <div className="w-full flex justify-center gap-4 lg:gap-8 flex-col sm:flex-row overflow-x-auto ">
           {stats?.stats.map(stat => (
             <Card className='w-full sm:max-w-[300px] lg:max-w-[300px] xl:max-w-[320px] xxl:max-w-[380px] flex-shrink-0 flex flex-col' key={stat.name}>
-
               <CardHeader className="pt-4 pb-2 flex flex-col items-start">
                 <Chip
                   className='mb-4'
@@ -221,7 +220,6 @@ export default function IndexPage() {
                   className="object-cover aspect-square"
                   src={stat.image}
                 />
-
                 <div className='flex justify-between mt-3 mb-2'>
                   <span>Total Value Secured:</span>
                   <span>
@@ -246,12 +244,12 @@ export default function IndexPage() {
                 />
                 <Switch value={stat.status}>
                   <Case cond="starting">
-                    <Button className='mt-6' radius='md' color="success" variant='flat'>
+                    <Button onPress={() => router.push(`/products/${stat.product}`)} className='mt-6' radius='md' color="success" variant='flat'>
                       <u>In progress</u>
                     </Button>
                   </Case>
                   <Case cond="ending-soon">
-                    <Button className='mt-6 !opacity-50' radius='md' color="warning" variant='flat' disabled>
+                    <Button onPress={() => router.push(`/products/${stat.product}`)} className='mt-6' radius='md' color="warning" variant='flat' disabled>
                       <u>Get Yours Now</u>
                     </Button>
                   </Case>
