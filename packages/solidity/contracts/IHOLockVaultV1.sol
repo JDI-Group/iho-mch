@@ -35,7 +35,7 @@ error StakeFinished();
 error InvalidTargetAmount();
 
 
-contract IHOLockVaultV2 is VerifiableUpgradeable, BidirectionalTransfer, UUPSUpgradeable, OwnableUpgradeable {
+contract IHOLockVaultV1 is VerifiableUpgradeable, BidirectionalTransfer, UUPSUpgradeable, OwnableUpgradeable {
   /// @custom:oz-upgrades-unsafe-allow constructor
   constructor() { _disableInitializers(); }
   

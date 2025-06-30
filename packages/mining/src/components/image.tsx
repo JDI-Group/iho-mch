@@ -2,7 +2,6 @@
 import type { ImageProps as HeroImageProps } from '@heroui/react'
 import type { ReactNode } from 'react'
 import { useImage } from '@heroui/react'
-import { forwardRef } from '@heroui/system'
 import { cloneElement } from 'react'
 
 export interface ImageProps extends HeroImageProps {
@@ -10,7 +9,7 @@ export interface ImageProps extends HeroImageProps {
   fallback?: ReactNode
 }
 
-export const Image = forwardRef<'img', ImageProps>((props, ref) => {
+export function Image({ ref, ...props }: ImageProps & { ref?: React.RefObject<'img' | null> }) {
   const {
     Component,
     domRef,
@@ -58,6 +57,6 @@ export const Image = forwardRef<'img', ImageProps>((props, ref) => {
   }
 
   return content
-})
+}
 
 Image.displayName = 'HeroUI.ImageCustom'
