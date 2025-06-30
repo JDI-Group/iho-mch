@@ -23,6 +23,26 @@ export async function getProduct(config?: RequestInit) {
  * @method get
  * @tags Product
  */
+export async function getProductStatistics(config?: RequestInit) {
+  const response = await fetch(`${baseURL}/product/statistics`, {
+    ...config,
+  })
+  return response.json() as Promise<Types.ProductStats[]>
+}
+/**
+ * @method get
+ * @tags Product
+ */
+export async function getProductStatisticsId(paths: Types.GetProductStatisticsIdPath, config?: RequestInit) {
+  const response = await fetch(`${baseURL}/product/statistics/${paths.id}`, {
+    ...config,
+  })
+  return response.json() as Promise<Types.ProductStats>
+}
+/**
+ * @method get
+ * @tags Product
+ */
 export async function getProductId(paths: Types.GetProductIdPath, config?: RequestInit) {
   const response = await fetch(`${baseURL}/product/${paths.id}`, {
     ...config,
@@ -48,16 +68,6 @@ export async function getProductIdVariationsVariation(paths: Types.GetProductIdV
     ...config,
   })
   return response.json() as Promise<Types.Variation>
-}
-/**
- * @method get
- * @tags Product
- */
-export async function getProductIdStatistics(paths: Types.GetProductIdStatisticsPath, config?: RequestInit) {
-  const response = await fetch(`${baseURL}/product/${paths.id}/statistics`, {
-    ...config,
-  })
-  return response.json() as Promise<Types.Statistics>
 }
 /**
  * @method get

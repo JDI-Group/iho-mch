@@ -129,6 +129,19 @@ export interface Product {
   brands: string[]
   _links: Links
 }
+export interface ProductStats {
+  name: string
+  description: string
+  totalValueSecured: any
+  weeklyValueSecured: any
+  activeStakes: any
+  totalParticipants: any
+  updateAt: number
+  completedAt: any
+  status: string
+  orders: number
+  target: number
+}
 export interface Variation {
   id: number
   ether: string
@@ -176,12 +189,6 @@ export interface Variation {
   name: string
   parent_id: number
   _links: Links
-}
-export interface Statistics {
-  totalValueSecured: any
-  weeklyValueSecured: any
-  activeStakes: any
-  totalParticipants: any
 }
 export interface Lineitem {
   id: number
@@ -369,6 +376,9 @@ export interface CustomerUpdateDto {
   meta_data?: string[]
   _links?: string[]
 }
+export interface GetProductStatisticsIdPath {
+  id: number
+}
 export interface GetProductIdPath {
   id: number
 }
@@ -378,9 +388,6 @@ export interface GetProductIdVariationsPath {
 export interface GetProductIdVariationsVariationPath {
   id: number
   variation: number
-}
-export interface GetProductIdStatisticsPath {
-  id: number
 }
 export interface GetOrderQuery {
   page?: number

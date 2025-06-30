@@ -9,10 +9,11 @@ export async function helperStake(params: { order: number } | { product: number,
 
   const ihoContracts = {
     1: getIhoLockVaultV1,
-    // 2: getIhoLockVaultV2,
+    2: getIhoLockVaultV2,
   }
 
-  const iho = ihoContracts[process.env.NEXT_PUBLIC_MARKET_BATCH as '1']({ runner: wallet })
+  const batch = process.env.NEXT_PUBLIC_MARKET_BATCH as unknown as keyof typeof ihoContracts
+  const iho = ihoContracts[batch]({ runner: wallet })
 
   let detail: OrderDataDto | null = null
   if (product)

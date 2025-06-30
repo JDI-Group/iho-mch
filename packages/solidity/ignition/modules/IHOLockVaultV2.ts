@@ -1,7 +1,7 @@
 import { buildModule } from '@nomicfoundation/hardhat-ignition/modules'
 
 const IHOLockVaultV2Module = buildModule('IHOLockVaultV2', (m) => {
-  const implement = m.contract('IHOLockVaultV2', [], { id: 'IHOLockVaultV1Implement' })
+  const implement = m.contract('IHOLockVaultV2', [], { id: 'IHOLockVaultV2Implement' })
 
   const data = m.encodeFunctionCall(implement, 'initialize', [m.getAccount(1)])
 
