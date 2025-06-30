@@ -1,7 +1,7 @@
 import type { OrderDataDto } from '@/apis/index.type'
+import type { TransactionReceipt } from 'ethers'
 import { wait } from '@hairy/ether-lib'
 import { addToast } from '@heroui/toast'
-import { TransactionReceipt } from 'ethers'
 
 export async function helperStake(params: { order: number }): Promise<TransactionReceipt | undefined | null>
 export async function helperStake(params: { product: number, variation?: number }): Promise<TransactionReceipt | undefined | null>

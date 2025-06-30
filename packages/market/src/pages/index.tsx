@@ -1,19 +1,20 @@
 import { variants } from '@/config/variants'
+import { formatEther } from '@hairy/ether-lib'
 import { Case, If, Switch } from '@hairy/react-lib'
+import { riposte } from '@hairy/utils'
 import { Accordion, AccordionItem } from '@heroui/accordion'
 import { Button } from '@heroui/button'
-import { Chip } from '@heroui/chip'
 import { Card, CardBody, CardHeader } from '@heroui/card'
-import { Link } from '@heroui/link'
-import { Steps } from 'antd'
-import { AnimatePresence } from 'framer-motion'
-import { useAsync, useWindowScroll } from 'react-use'
-import { riposte } from '@hairy/utils'
+import { Chip } from '@heroui/chip'
 import { Image } from '@heroui/image'
+import { Link } from '@heroui/link'
 import { Progress } from '@heroui/progress'
-import { formatEther } from '@hairy/ether-lib'
+import { Steps } from 'antd'
 import dayjs from 'dayjs'
 import duration from 'dayjs/plugin/duration'
+import { AnimatePresence } from 'framer-motion'
+import { useAsync, useWindowScroll } from 'react-use'
+
 dayjs.extend(duration)
 const accordions = [
   {
@@ -72,8 +73,8 @@ export default function IndexPage() {
   const router = useRouter()
   const scroll = useWindowScroll()
 
-  const { value: [stats] = [], loading } = useAsync(
-    () => getStats()
+  const { value: [stats] = [] } = useAsync(
+    () => getStats(),
   )
 
   function onNavigateProducts() {
@@ -194,10 +195,10 @@ export default function IndexPage() {
         </div>
         <div className="w-full flex justify-center gap-4 lg:gap-8 flex-col sm:flex-row overflow-x-auto ">
           {stats?.stats.map(stat => (
-            <Card className='w-full sm:max-w-[300px] lg:max-w-[300px] xl:max-w-[320px] xxl:max-w-[380px] flex-shrink-0 flex flex-col' key={stat.name}>
+            <Card className="w-full sm:max-w-[300px] lg:max-w-[300px] xl:max-w-[320px] xxl:max-w-[380px] flex-shrink-0 flex flex-col" key={stat.name}>
               <CardHeader className="pt-4 pb-2 flex flex-col items-start">
                 <Chip
-                  className='mb-4'
+                  className="mb-4"
                   size="lg"
                   variant="flat"
                   color={riposte(
@@ -212,22 +213,22 @@ export default function IndexPage() {
                 <p className="text-lg text-default-500 line-clamp-2">{stat.description}</p>
               </CardHeader>
 
-              <div className='flex-1' />
-              <CardBody className='flex-none'>
+              <div className="flex-1" />
+              <CardBody className="flex-none">
                 <Image
                   alt="Card background"
                   width="100%"
                   className="object-cover aspect-square"
                   src={stat.image}
                 />
-                <div className='flex justify-between mt-3 mb-2'>
+                <div className="flex justify-between mt-3 mb-2">
                   <span>Total Value Secured:</span>
                   <span>
                     {formatEther(stat.totalValueSecuredMXC)}
                     MXC
                   </span>
                 </div>
-                <div className='flex justify-between mb-2'>
+                <div className="flex justify-between mb-2">
                   <span>Participants:</span>
                   <span>
                     {stat.orders || 0} / {stat.target}
@@ -244,17 +245,17 @@ export default function IndexPage() {
                 />
                 <Switch value={stat.status}>
                   <Case cond="starting">
-                    <Button onPress={() => router.push(`/products/${stat.product}`)} className='mt-6' radius='md' color="success" variant='flat'>
+                    <Button onPress={() => router.push(`/products/${stat.product}`)} className="mt-6" radius="md" color="success" variant="flat">
                       <u>In progress</u>
                     </Button>
                   </Case>
                   <Case cond="ending-soon">
-                    <Button onPress={() => router.push(`/products/${stat.product}`)} className='mt-6' radius='md' color="warning" variant='flat'>
+                    <Button onPress={() => router.push(`/products/${stat.product}`)} className="mt-6" radius="md" color="warning" variant="flat">
                       <u>Get Yours Now</u>
                     </Button>
                   </Case>
                   <Case cond="completed">
-                    <Button className='mt-6' radius='md' color="success" variant='flat' disabled>
+                    <Button className="mt-6" radius="md" color="success" variant="flat" disabled>
                       <u>Ended within {dayjs.duration(stat.confirmAt! - stat.createAt, 'seconds').format('HH[h] mm[m] ss[s]')}</u>
                     </Button>
                   </Case>
