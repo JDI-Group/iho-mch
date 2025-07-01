@@ -11,6 +11,7 @@ import { Navigation } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/navigation'
+import { Card, CardBody } from '@heroui/card'
 
 const accordions = [
   {
@@ -128,7 +129,7 @@ export default function IndexPage() {
             <HomeFloatProjects />
           </div>
         </div>
-        <If cond={scroll.y < 50} tag={AnimatePresence}>
+        <If cond={scroll.y < 100} tag={AnimatePresence}>
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -176,44 +177,47 @@ export default function IndexPage() {
         </div>
       </motion.section>
 
-      <motion.section
-        className={container({ className: 'w-full min-h-screen py-12 md:py-4 relative flex flex-col justify-center items-center text-defa' })}
-        variants={variants.fadeOpacity}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-      >
-        <div className="hidden sm:block w-full">
-          <Swiper
-            spaceBetween={50}
-            style={{ '--swiper-navigation-color': 'var(--heroui-default)' } as any}
-            modules={[Navigation]}
-            navigation
-          >
-            {stats.map(item => (
-              <SwiperSlide key={item.batch} className="w-full">
-                <HomeStatsBatchItem item={item} />
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
-        <div className="block sm:hidden w-full">
-          <Swiper
-            spaceBetween={20}
-            slidesPerView={1.1}
-          >
-            {stats.map(batch => (
-              batch.stats.map(item => (
-                <SwiperSlide key={item.name}>
-                  <HomeStatsItem item={item} batch={batch.batch} start={batch.start} />
+      <If cond={stats.length > 0}>
+        <motion.section
+          className={container({ className: 'w-full min-h-screen py-12 md:py-4 relative flex flex-col justify-center items-center text-defa' })}
+          variants={variants.fadeOpacity}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          <div className="hidden sm:block w-full">
+            <Swiper
+              spaceBetween={50}
+              style={{ '--swiper-navigation-color': 'var(--heroui-default)' } as any}
+              modules={[Navigation]}
+              navigation
+            >
+              {stats.map(item => (
+                <SwiperSlide key={item.batch} className="w-full">
+                  <HomeStatsBatchItem item={item} />
                 </SwiperSlide>
-              ))
-            ))}
-          </Swiper>
-        </div>
-      </motion.section>
+              ))}
+            </Swiper>
+          </div>
+          <div className="block sm:hidden w-full">
+            <Swiper
+              spaceBetween={20}
+              slidesPerView={1.1}
+            >
+              {stats.map(batch => (
+                batch.stats.map(item => (
+                  <SwiperSlide key={item.name}>
+                    <HomeStatsItem item={item} batch={batch.batch} start={batch.start} />
+                  </SwiperSlide>
+                ))
+              ))}
+            </Swiper>
+          </div>
+        </motion.section>
 
-      <section className="flex w-full justify-center items-center lg:flex-row lg:justify-between flex-col gap-8 lg:gap-12 py-12 min-h-[30vh] lg:h-[80vh] font-bold relative">
+      </If>
+
+      <section className="flex w-full justify-center items-center lg:flex-row lg:justify-between flex-col gap-8 lg:gap-12 py-12 min-h-[30vh] lg:h-[80vh] relative">
         <motion.div
           className={container({ className: 'relative z-10 w-full flex justify-center items-center py-4' })}
           variants={variants.fadeOpacity}
@@ -221,26 +225,25 @@ export default function IndexPage() {
           whileInView="visible"
           viewport={{ once: true }}
         >
-          <div className="overflow-x-auto pb-2">
-            <Steps
-              direction="horizontal"
-              current={3}
-              progressDot
-              items={[
-                {
-                  title: 'SELECT',
-                  description: 'Select the mining hardware you want for free',
-                },
-                {
-                  title: 'STAKE',
-                  description: 'Stake your Moonchain on your own wallet',
-                },
-                {
-                  title: 'MINE',
-                  description: 'Your mining hardware is delivered FREE, connect & start mining!',
-                },
-              ]}
-            />
+          <div className='flex flex-wrap gap-8 lg:gap-12 xl:gap-24'>
+            <Card className='!shadow-none w-full h-32 sm:h-64 sm:max-w-[300px] lg:max-w-[300px] xl:max-w-[320px] xxl:max-w-[340px] backdrop-blur-lg bg-[radial-gradient(_rgba(191,_191,_191,_0.20)_0%,_rgba(236,_236,_236,_0.04)_77.08%,_rgba(221,_221,_221,_0.00)_100%)]'>
+              <CardBody className='flex flex-col items-center justify-center px-10 text-center'>
+                <h2 className="font-bold text-3xl">Step 1 - SELECT</h2>
+                <span className='text-lg'>Select the mining hardware you want for free</span>
+              </CardBody>
+            </Card>
+            <Card className='!shadow-none w-full h-32 sm:h-64 sm:max-w-[300px] lg:max-w-[300px] xl:max-w-[320px] xxl:max-w-[340px] backdrop-blur-lg bg-[radial-gradient(_rgba(191,_191,_191,_0.20)_0%,_rgba(236,_236,_236,_0.04)_77.08%,_rgba(221,_221,_221,_0.00)_100%)]'>
+              <CardBody className='flex flex-col items-center justify-center px-10 text-center'>
+                <h2 className="font-bold text-3xl">Step 2 - STAKE</h2>
+                <span className='text-lg'>Stake your Moonchain on your own wallet</span>
+              </CardBody>
+            </Card>
+            <Card className='!shadow-none w-full h-32 sm:h-64 sm:max-w-[300px] lg:max-w-[300px] xl:max-w-[320px] xxl:max-w-[340px] backdrop-blur-lg bg-[radial-gradient(_rgba(191,_191,_191,_0.20)_0%,_rgba(236,_236,_236,_0.04)_77.08%,_rgba(221,_221,_221,_0.00)_100%)]'>
+              <CardBody className='flex flex-col items-center justify-center px-10 text-center'>
+                <h2 className="font-bold text-3xl">Step 3 - MINE</h2>
+                <span className='text-lg'>Your mining hardware is delivered FREE, connect & start mining!</span>
+              </CardBody>
+            </Card>
           </div>
         </motion.div>
         <video style={{ maskImage: 'linear-gradient(to bottom, transparent, black 50%, transparent)' }} className="hidden dark:block absolute top-0 left-0 w-full h-full object-cover opacity-80" autoPlay loop muted preload="auto" playsInline>
