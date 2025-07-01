@@ -3,15 +3,14 @@ import { variants } from '@/config/variants'
 import { If } from '@hairy/react-lib'
 import { Accordion, AccordionItem } from '@heroui/accordion'
 import { Button } from '@heroui/button'
+import { Card, CardBody } from '@heroui/card'
 import { Link } from '@heroui/link'
-import { Steps } from 'antd'
 import { AnimatePresence } from 'framer-motion'
 import { useAsync, useWindowScroll } from 'react-use'
 import { Navigation } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/navigation'
-import { Card, CardBody } from '@heroui/card'
 
 const accordions = [
   {
@@ -225,23 +224,23 @@ export default function IndexPage() {
           whileInView="visible"
           viewport={{ once: true }}
         >
-          <div className='flex flex-wrap gap-8 lg:gap-12 xl:gap-24'>
-            <Card className='!shadow-none w-full h-32 sm:h-64 sm:max-w-[300px] lg:max-w-[300px] xl:max-w-[320px] xxl:max-w-[340px] backdrop-blur-lg bg-[radial-gradient(_rgba(191,_191,_191,_0.20)_0%,_rgba(236,_236,_236,_0.04)_77.08%,_rgba(221,_221,_221,_0.00)_100%)]'>
-              <CardBody className='flex flex-col items-center justify-center px-10 text-center'>
+          <div className="flex flex-wrap gap-8 lg:gap-12 xl:gap-24">
+            <Card className="!shadow-none w-full h-32 sm:h-64 sm:max-w-[300px] lg:max-w-[300px] xl:max-w-[320px] xxl:max-w-[340px] backdrop-blur-lg bg-[radial-gradient(_rgba(191,_191,_191,_0.20)_0%,_rgba(236,_236,_236,_0.04)_77.08%,_rgba(221,_221,_221,_0.00)_100%)]">
+              <CardBody className="flex flex-col items-center justify-center px-10 text-center">
                 <h2 className="font-bold text-3xl">Step 1 - SELECT</h2>
-                <span className='text-lg'>Select the mining hardware you want for free</span>
+                <span className="text-lg">Select the mining hardware you want for free</span>
               </CardBody>
             </Card>
-            <Card className='!shadow-none w-full h-32 sm:h-64 sm:max-w-[300px] lg:max-w-[300px] xl:max-w-[320px] xxl:max-w-[340px] backdrop-blur-lg bg-[radial-gradient(_rgba(191,_191,_191,_0.20)_0%,_rgba(236,_236,_236,_0.04)_77.08%,_rgba(221,_221,_221,_0.00)_100%)]'>
-              <CardBody className='flex flex-col items-center justify-center px-10 text-center'>
+            <Card className="!shadow-none w-full h-32 sm:h-64 sm:max-w-[300px] lg:max-w-[300px] xl:max-w-[320px] xxl:max-w-[340px] backdrop-blur-lg bg-[radial-gradient(_rgba(191,_191,_191,_0.20)_0%,_rgba(236,_236,_236,_0.04)_77.08%,_rgba(221,_221,_221,_0.00)_100%)]">
+              <CardBody className="flex flex-col items-center justify-center px-10 text-center">
                 <h2 className="font-bold text-3xl">Step 2 - STAKE</h2>
-                <span className='text-lg'>Stake your Moonchain on your own wallet</span>
+                <span className="text-lg">Stake your Moonchain on your own wallet</span>
               </CardBody>
             </Card>
-            <Card className='!shadow-none w-full h-32 sm:h-64 sm:max-w-[300px] lg:max-w-[300px] xl:max-w-[320px] xxl:max-w-[340px] backdrop-blur-lg bg-[radial-gradient(_rgba(191,_191,_191,_0.20)_0%,_rgba(236,_236,_236,_0.04)_77.08%,_rgba(221,_221,_221,_0.00)_100%)]'>
-              <CardBody className='flex flex-col items-center justify-center px-10 text-center'>
+            <Card className="!shadow-none w-full h-32 sm:h-64 sm:max-w-[300px] lg:max-w-[300px] xl:max-w-[320px] xxl:max-w-[340px] backdrop-blur-lg bg-[radial-gradient(_rgba(191,_191,_191,_0.20)_0%,_rgba(236,_236,_236,_0.04)_77.08%,_rgba(221,_221,_221,_0.00)_100%)]">
+              <CardBody className="flex flex-col items-center justify-center px-10 text-center">
                 <h2 className="font-bold text-3xl">Step 3 - MINE</h2>
-                <span className='text-lg'>Your mining hardware is delivered FREE, connect & start mining!</span>
+                <span className="text-lg">Your mining hardware is delivered FREE, connect & start mining!</span>
               </CardBody>
             </Card>
           </div>

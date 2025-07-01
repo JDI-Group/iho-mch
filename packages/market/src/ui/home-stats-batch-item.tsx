@@ -14,10 +14,10 @@ export function HomeStatsBatchItem(props: HomeStatsBatchItemProps) {
   return (
     <div className="flex-col justify-center items-center">
       <div className="mb-4 flex flex-col items-center justify-center">
-        <h3 className="inline-flex justify-center text-2xl lg:text-4xl font-bold text-white mb-2" >
+        <h3 className="inline-flex justify-center text-2xl lg:text-4xl font-bold text-white mb-2">
           IHO Batch A{props.item.batch}
         </h3>
-        <Link className='text-default-500 hover:cursor-pointer border-b' onClick={onToExplorer}>
+        <Link className="text-default-500 hover:cursor-pointer border-b" onClick={onToExplorer}>
           {address}
         </Link>
       </div>

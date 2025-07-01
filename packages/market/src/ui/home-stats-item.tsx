@@ -1,7 +1,7 @@
 import type { StatsItem } from '@/apis/index.type'
 import { formatEther } from '@hairy/ether-lib'
 import { Case, If, Switch } from '@hairy/react-lib'
-import { cover, redirectTo, riposte } from '@hairy/utils'
+import { redirectTo, riposte } from '@hairy/utils'
 import { Button } from '@heroui/button'
 import { Card, CardBody, CardHeader } from '@heroui/card'
 import { Chip } from '@heroui/chip'
@@ -38,7 +38,7 @@ export function HomeStatsItem({ item: stat, batch, start }: HomeStatsItemProps) 
               </Chip>
               <Chip
                 size="sm"
-                className='font-bold'
+                className="font-bold"
                 variant="flat"
                 color={riposte(
                   [stat.status === 'starting', 'success'],
