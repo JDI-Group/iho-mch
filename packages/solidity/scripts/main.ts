@@ -2,7 +2,7 @@ import { network } from 'hardhat'
 import IHOLockVaultV1Module from '../ignition/modules/IHOLockVaultV1'
 
 async function main() {
-  const { ignition, viem } = await network.connect('moonchain')
+  const { ignition } = await network.connect('moonchain')
   const { market } = await ignition.deploy(IHOLockVaultV1Module)
 
   await market.write.confirm([22714n])
