@@ -109,7 +109,7 @@ export function HomeStatsItem({ item: stat, batch, start }: HomeStatsItemProps) 
             [stat.status === 'ending-soon', 'warning'],
             [stat.status === 'completed', 'primary'],
           )}
-          maxValue={stat.target}
+          maxValue={stat.status === 'ended' ? stat.orders : stat.target}
           value={stat.orders}
         />
         <Switch value={stat.status}>
