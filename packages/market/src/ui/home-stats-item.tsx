@@ -1,6 +1,6 @@
 import type { StatsItem } from '@/apis/index.type'
 import { formatEther } from '@hairy/ether-lib'
-import { Case, If, Switch } from '@hairy/react-lib'
+import { Case, Else, If, Switch, Then } from '@hairy/react-lib'
 import { redirectTo, riposte } from '@hairy/utils'
 import { Button } from '@heroui/button'
 import { Card, CardBody, CardHeader } from '@heroui/card'
@@ -94,9 +94,14 @@ export function HomeStatsItem({ item: stat, batch, start }: HomeStatsItemProps) 
 
         <div className="flex justify-between mb-2">
           <span>Participants:</span>
-          <span>
-            {stat.orders || 0} / {stat.target}
-          </span>
+          <If cond={stat.status === 'ended'}>
+            <Then tag="span">
+              {stat.orders} / {stat.orders}
+            </Then>
+            <Else tag="span">
+              {stat.orders} / {stat.target}
+            </Else>
+          </If>
         </div>
         <Progress
           color={riposte(
