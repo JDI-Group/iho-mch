@@ -257,8 +257,10 @@ contract IHOLockVaultV1 is VerifiableUpgradeable, BidirectionalTransfer, UUPSUpg
   }
 
   function confirm(uint256 pid) external onlyOwner {
-    projects[pid].confirmed = true;
-    emit ProjectConfirm(pid, int(block.number), block.timestamp);
+    if (!projects[pid].confirmed) {
+      projects[pid].confirmed = true;
+      emit ProjectConfirm(pid, int(block.number), block.timestamp);
+    }
   }
 
   function withdraw(address token, uint256 amount) external onlyOwner {

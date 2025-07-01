@@ -11,7 +11,13 @@ const config = defineConfig({
         {
           key: 'modulePath',
           message: 'Select the module you want to deploy',
-          options: readModuleOptions,
+          options: async () => {
+            const files = await fs.readdir('./ignition/modules')
+            return files.map(file => ({
+              value: `./ignition/modules/${file}`,
+              label: file.replace('.ts', ''),
+            }))
+          },
         },
         {
           key: 'network',
@@ -37,6 +43,43 @@ const config = defineConfig({
       ],
       command: 'hardhat --build-profile production ignition deploy $modulePath --network $network',
     },
+    exec: {
+      prompts: [
+        {
+          key: 'filepath',
+          message: 'Select the module you want to deploy',
+          options: async () => {
+            const files = await fs.readdir('./scripts')
+            return files.map(file => ({
+              value: `./scripts/${file}`,
+              label: `./scripts/${file}`,
+            }))
+          },
+        },
+        {
+          key: 'network',
+          message: 'Select the network to deploy to',
+          options: [
+            {
+              value: 'hardhat',
+              label: 'Hardhat',
+              hint: 'localhost',
+            },
+            {
+              value: 'moonchainGeneva',
+              label: 'Moonchain Geneva',
+              hint: 'geneva-rpc.moonchain.com',
+            },
+            {
+              value: 'moonchain',
+              label: 'Moonchain Mainnet',
+              hint: 'rpc.moonchain.com',
+            },
+          ],
+        },
+      ],
+      command: 'hardhat --build-profile production --network $network run $filepath',
+    },
     test: {
       message: 'Please select the scope you want to test',
       options: [
@@ -59,14 +102,6 @@ const config = defineConfig({
     },
   },
 })
-
-async function readModuleOptions() {
-  const files = await fs.readdir('./ignition/modules')
-  return files.map(file => ({
-    value: `./ignition/modules/${file}`,
-    label: file.replace('.ts', ''),
-  }))
-}
 
 // pnpm hardhat verify blockscout <address> --network moonchain --build-profile production --force
 

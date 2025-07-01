@@ -1,21 +1,16 @@
 import { variants } from '@/config/variants'
-import { formatEther } from '@hairy/ether-lib'
-import { Case, If, Switch } from '@hairy/react-lib'
-import { riposte } from '@hairy/utils'
+import { If } from '@hairy/react-lib'
 import { Accordion, AccordionItem } from '@heroui/accordion'
 import { Button } from '@heroui/button'
-import { Card, CardBody, CardHeader } from '@heroui/card'
-import { Chip } from '@heroui/chip'
-import { Image } from '@heroui/image'
 import { Link } from '@heroui/link'
-import { Progress } from '@heroui/progress'
 import { Steps } from 'antd'
-import dayjs from 'dayjs'
-import duration from 'dayjs/plugin/duration'
 import { AnimatePresence } from 'framer-motion'
 import { useAsync, useWindowScroll } from 'react-use'
+import { Navigation } from 'swiper/modules'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import 'swiper/css'
+import 'swiper/css/navigation'
 
-dayjs.extend(duration)
 const accordions = [
   {
     value: 'item-1',
@@ -73,7 +68,7 @@ export default function IndexPage() {
   const router = useRouter()
   const scroll = useWindowScroll()
 
-  const { value: [stats] = [] } = useAsync(
+  const { value: stats = [] } = useAsync(
     () => getStats(),
   )
 
@@ -181,89 +176,39 @@ export default function IndexPage() {
       </motion.section>
 
       <motion.section
-        className={container({ className: 'w-full min-h-screen py-12 md:py-4 relative flex flex-col justify-center items-center' })}
+        className={container({ className: 'w-full min-h-screen py-12 md:py-4 relative flex flex-col justify-center items-center text-defa' })}
         variants={variants.fadeOpacity}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
       >
-        <div className="flex justify-center text-2xl lg:text-4xl font-bold mb-4">
-          IHO Batch A{stats?.batch}
+        <div className="hidden sm:block w-full">
+          <Swiper
+            spaceBetween={50}
+            style={{ '--swiper-navigation-color': 'var(--heroui-default)' } as any}
+            modules={[Navigation]}
+            navigation
+          >
+            {stats.map(item => (
+              <SwiperSlide key={item.batch} className="w-full">
+                <HomeStatsBatchItem item={item} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
-        <div className="mb-6">
-          Started {stats?.start}
-        </div>
-        <div className="w-full flex justify-center gap-4 lg:gap-8 flex-col sm:flex-row overflow-x-auto ">
-          {stats?.stats.map(stat => (
-            <Card className="w-full sm:max-w-[300px] lg:max-w-[300px] xl:max-w-[320px] xxl:max-w-[380px] flex-shrink-0 flex flex-col" key={stat.name}>
-              <CardHeader className="pt-4 pb-2 flex flex-col items-start">
-                <Chip
-                  className="mb-4"
-                  size="lg"
-                  variant="flat"
-                  color={riposte(
-                    [stat.status === 'starting', 'success'],
-                    [stat.status === 'ending-soon', 'warning'],
-                    [stat.status === 'completed', 'primary'],
-                  )}
-                >
-                  {stat.status}
-                </Chip>
-                <h2 className="text-2xl font-semibold">{stat.name}</h2>
-                <p className="text-lg text-default-500 line-clamp-2">{stat.description}</p>
-              </CardHeader>
-
-              <div className="flex-1" />
-              <CardBody className="flex-none">
-                <Image
-                  alt="Card background"
-                  width="100%"
-                  className="object-cover aspect-square"
-                  src={stat.image}
-                />
-                <div className="flex justify-between mt-3 mb-2">
-                  <span>Total Value Secured:</span>
-                  <span>
-                    {formatEther(stat.totalValueSecuredMXC)}
-                    MXC
-                  </span>
-                </div>
-                <div className="flex justify-between mb-2">
-                  <span>Participants:</span>
-                  <span>
-                    {stat.orders || 0} / {stat.target}
-                  </span>
-                </div>
-                <Progress
-                  color={riposte(
-                    [stat.status === 'starting', 'success'],
-                    [stat.status === 'ending-soon', 'warning'],
-                    [stat.status === 'completed', 'primary'],
-                  )}
-                  maxValue={stat.target}
-                  value={stat.orders}
-                />
-                <Switch value={stat.status}>
-                  <Case cond="starting">
-                    <Button onPress={() => router.push(`/products/${stat.product}`)} className="mt-6" radius="md" color="success" variant="flat">
-                      <u>In progress</u>
-                    </Button>
-                  </Case>
-                  <Case cond="ending-soon">
-                    <Button onPress={() => router.push(`/products/${stat.product}`)} className="mt-6" radius="md" color="warning" variant="flat">
-                      <u>Get Yours Now</u>
-                    </Button>
-                  </Case>
-                  <Case cond="completed">
-                    <Button className="mt-6" radius="md" color="success" variant="flat" disabled>
-                      <u>Ended within {dayjs.duration(stat.confirmAt! - stat.createAt, 'seconds').format('HH[h] mm[m] ss[s]')}</u>
-                    </Button>
-                  </Case>
-                </Switch>
-              </CardBody>
-            </Card>
-          ))}
-
+        <div className="block sm:hidden w-full">
+          <Swiper
+            spaceBetween={20}
+            slidesPerView={1.1}
+          >
+            {stats.map(batch => (
+              batch.stats.map(item => (
+                <SwiperSlide key={item.name}>
+                  <HomeStatsItem item={item} batch={batch.batch} start={batch.start} />
+                </SwiperSlide>
+              ))
+            ))}
+          </Swiper>
         </div>
       </motion.section>
 

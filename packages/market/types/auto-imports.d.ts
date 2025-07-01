@@ -18,6 +18,8 @@ declare global {
   const HeartFilledIcon: typeof import('../src/components/icons')['HeartFilledIcon']
   const HomeFloatProjects: typeof import('../src/ui/home-float-projects')['HomeFloatProjects']
   const HomeFloatProjectsUnline: typeof import('../src/ui/home-float-projects-unline')['HomeFloatProjectsUnline']
+  const HomeStatsBatchItem: typeof import('../src/ui/home-stats-batch-item')['HomeStatsBatchItem']
+  const HomeStatsItem: typeof import('../src/ui/home-stats-item')['HomeStatsItem']
   const InjectsProvider: typeof import('../src/components/injects-provider')['InjectsProvider']
   const InputPhoneNumber: typeof import('../src/components/form-shipping')['InputPhoneNumber']
   const Lens: typeof import('../src/components/lens')['Lens']
@@ -170,6 +172,12 @@ declare global {
   // @ts-ignore
   export type { ThemeSwitchProps } from '../src/components/theme-switch'
   import('../src/components/theme-switch')
+  // @ts-ignore
+  export type { HomeStatsBatchItemProps } from '../src/ui/home-stats-batch-item'
+  import('../src/ui/home-stats-batch-item')
+  // @ts-ignore
+  export type { HomeStatsItemProps } from '../src/ui/home-stats-item'
+  import('../src/ui/home-stats-item')
   // @ts-ignore
   export type { ProductDescriptionProps } from '../src/ui/product-description'
   import('../src/ui/product-description')

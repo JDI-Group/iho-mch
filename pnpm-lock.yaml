@@ -211,6 +211,9 @@ importers:
       react-use:
         specifier: ^17.6.0
         version: 17.6.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      swiper:
+        specifier: ^11.2.10
+        version: 11.2.10
       viem:
         specifier: ^2.30.0
         version: 2.30.0(patch_hash=a81798b4482d92f8120cca6f01f06322694a76466b2548d025e0c935e7664da4)(bufferutil@4.0.9)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.24.4)
@@ -344,7 +347,7 @@ importers:
         version: 0.0.21
       autoprefixer:
         specifier: 10.4.19
-        version: 10.4.19(postcss@8.4.49)
+        version: 10.4.19(postcss@8.5.6)
       etherlib-generator:
         specifier: ^0.0.4
         version: 0.0.4(bufferutil@4.0.9)(hardhat@3.0.0-next.20(patch_hash=d999397812469b6cc38a733cc57eaf35bac0aadfa9902244c29d1eeb17fc6f82)(bufferutil@4.0.9)(utf-8-validate@5.0.10))(magicast@0.3.5)(typescript@5.8.3)(utf-8-validate@5.0.10)
@@ -7941,6 +7944,10 @@ packages:
     resolution: {integrity: sha512-OoohrmuUlBs8B8o6MB2Aevn+pRIH9zDALSR+6hhqVfa6fRwG/Qw9VUMSMW9VNg2CFc/MTIfabtdOVl9ODIJjpw==}
     engines: {node: '>=14.0.0'}
     hasBin: true
+
+  swiper@11.2.10:
+    resolution: {integrity: sha512-RMeVUUjTQH+6N3ckimK93oxz6Sn5la4aDlgPzB+rBrG/smPdCTicXyhxa+woIpopz+jewEloiEE3lKo1h9w2YQ==}
+    engines: {node: '>= 4.7.0'}
 
   synckit@0.10.3:
     resolution: {integrity: sha512-R1urvuyiTaWfeCggqEvpDJwAlDVdsT9NM+IP//Tk2x7qHCkSvBk/fwFgw/TLAHzZlrAnnazMcRw0ZD8HlYFTEQ==}
@@ -16722,6 +16729,16 @@ snapshots:
       postcss: 8.4.49
       postcss-value-parser: 4.2.0
 
+  autoprefixer@10.4.19(postcss@8.5.6):
+    dependencies:
+      browserslist: 4.24.5
+      caniuse-lite: 1.0.30001717
+      fraction.js: 4.3.7
+      normalize-range: 0.1.2
+      picocolors: 1.1.1
+      postcss: 8.5.6
+      postcss-value-parser: 4.2.0
+
   autosize@6.0.1: {}
 
   available-typed-arrays@1.0.7:
@@ -20976,6 +20993,8 @@ snapshots:
       css-what: 6.1.0
       csso: 5.0.5
       picocolors: 1.1.1
+
+  swiper@11.2.10: {}
 
   synckit@0.10.3:
     dependencies:
