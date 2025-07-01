@@ -10,6 +10,7 @@ import { Navigation } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/navigation'
+import { StatsBatchItem } from '@/apis/index.type'
 
 const accordions = [
   {
@@ -69,7 +70,7 @@ export default function IndexPage() {
   const scroll = useWindowScroll()
 
   const { value: stats = [] } = useAsync(
-    () => getStats(),
+    (): Promise<StatsBatchItem[]> => getStats().then(stats => stats.sort((a, b) => b.batch - a.batch)),
   )
 
   function onNavigateProducts() {

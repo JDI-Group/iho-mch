@@ -32,9 +32,23 @@ export function HomeStatsItem({ item: stat, batch, start }: HomeStatsItemProps) 
         <div className="mb-4 w-full items-center flex justify-between">
           <div className="flex gap-2">
             <If cond={start}>
-              <Chip>IHO Batch A{batch}</Chip>
+              <Chip size="md" onClick={onToExplorer}>
+                <span className='border-b'>IHO Batch A{batch}</span>
+              </Chip>
+              <Chip
+                size="md"
+                variant="flat"
+                color={riposte(
+                  [stat.status === 'starting', 'success'],
+                  [stat.status === 'ending-soon', 'warning'],
+                  [stat.status === 'completed', 'primary'],
+                )}
+              >
+                {stat.status}
+              </Chip>
             </If>
             <Chip
+              className='hidden sm:inline-flex'
               size="lg"
               variant="flat"
               color={riposte(
