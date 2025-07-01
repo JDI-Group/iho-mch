@@ -33,7 +33,7 @@ export function HomeStatsItem({ item: stat, batch, start }: HomeStatsItemProps) 
           <div className="flex gap-2">
             <If cond={start}>
               <Chip size="md" onClick={onToExplorer}>
-                <span className='border-b'>IHO Batch A{batch}</span>
+                <span className="border-b">IHO Batch A{batch}</span>
               </Chip>
               <Chip
                 size="md"
@@ -48,7 +48,7 @@ export function HomeStatsItem({ item: stat, batch, start }: HomeStatsItemProps) 
               </Chip>
             </If>
             <Chip
-              className='hidden sm:inline-flex'
+              className="hidden sm:inline-flex"
               size="lg"
               variant="flat"
               color={riposte(

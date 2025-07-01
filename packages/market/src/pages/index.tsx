@@ -1,3 +1,4 @@
+import type { StatsBatchItem } from '@/apis/index.type'
 import { variants } from '@/config/variants'
 import { If } from '@hairy/react-lib'
 import { Accordion, AccordionItem } from '@heroui/accordion'
@@ -10,7 +11,6 @@ import { Navigation } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/navigation'
-import { StatsBatchItem } from '@/apis/index.type'
 
 const accordions = [
   {
