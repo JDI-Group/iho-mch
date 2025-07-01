@@ -43,6 +43,16 @@ export async function getProductStatisticsId(paths: Types.GetProductStatisticsId
  * @method get
  * @tags Product
  */
+export async function getProductBatch(config?: RequestInit) {
+  const response = await fetch(`${baseURL}/product/batch`, {
+    ...config,
+  })
+  return response.text() as Promise<string>
+}
+/**
+ * @method get
+ * @tags Product
+ */
 export async function getProductId(paths: Types.GetProductIdPath, config?: RequestInit) {
   const response = await fetch(`${baseURL}/product/${paths.id}`, {
     ...config,

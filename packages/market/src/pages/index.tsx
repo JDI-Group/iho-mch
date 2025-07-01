@@ -175,7 +175,6 @@ export default function IndexPage() {
           </Button>
         </div>
       </motion.section>
-
       <If cond={stats.length > 0}>
         <motion.section
           className={container({ className: 'w-full min-h-screen py-12 md:py-4 relative flex flex-col justify-center items-center text-defa' })}
