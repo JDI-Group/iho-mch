@@ -6,15 +6,19 @@ export interface HomeStatsBatchItemProps {
   item: StatsBatchItem
 }
 export function HomeStatsBatchItem(props: HomeStatsBatchItemProps) {
+  const address = Reflect.get(addresses, `IHOLockVaultV${props.item.batch}`)[chain.id]
   function onToExplorer() {
-    const url = `${chain.blockExplorers.default.url}/address/${Reflect.get(addresses, `IHOLockVaultV${props.item.batch}`)[chain.id]}`
+    const url = `${chain.blockExplorers.default.url}/address/${address}`
     redirectTo(url, '_blank')
   }
   return (
     <div className="flex-col justify-center items-center">
-      <div className="mb-4 flex justify-center">
-        <Link className="inline-flex justify-center text-2xl lg:text-4xl font-bold text-white hover:cursor-pointer border-b" onClick={onToExplorer}>
+      <div className="mb-4 flex flex-col items-center justify-center">
+        <h3 className="inline-flex justify-center text-2xl lg:text-4xl font-bold text-white mb-2" >
           IHO Batch A{props.item.batch}
+        </h3>
+        <Link className='text-default-500 hover:cursor-pointer border-b' onClick={onToExplorer}>
+          {address}
         </Link>
       </div>
       <div className="text-center mb-6">

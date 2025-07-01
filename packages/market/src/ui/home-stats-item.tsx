@@ -1,7 +1,7 @@
 import type { StatsItem } from '@/apis/index.type'
 import { formatEther } from '@hairy/ether-lib'
 import { Case, If, Switch } from '@hairy/react-lib'
-import { redirectTo, riposte } from '@hairy/utils'
+import { cover, redirectTo, riposte } from '@hairy/utils'
 import { Button } from '@heroui/button'
 import { Card, CardBody, CardHeader } from '@heroui/card'
 import { Chip } from '@heroui/chip'
@@ -18,10 +18,11 @@ export interface HomeStatsItemProps {
   start?: string
 }
 export function HomeStatsItem({ item: stat, batch, start }: HomeStatsItemProps) {
+  const address = Reflect.get(addresses, `IHOLockVaultV${batch}`)[chain.id]
   const router = useRouter()
 
   function onToExplorer() {
-    const url = `${chain.blockExplorers.default.url}/address/${Reflect.get(addresses, `IHOLockVaultV${batch}`)[chain.id]}`
+    const url = `${chain.blockExplorers.default.url}/address/${address}`
     redirectTo(url, '_blank')
   }
 
@@ -32,11 +33,12 @@ export function HomeStatsItem({ item: stat, batch, start }: HomeStatsItemProps) 
         <div className="mb-4 w-full items-center flex justify-between">
           <div className="flex gap-2">
             <If cond={start}>
-              <Chip size="md" onClick={onToExplorer}>
-                <span className="border-b">IHO Batch A{batch}</span>
+              <Chip size="sm" onClick={onToExplorer}>
+                <span className="border-b ">IHO Batch A{batch}#{address.slice(0, 6)}</span>
               </Chip>
               <Chip
-                size="md"
+                size="sm"
+                className='font-bold'
                 variant="flat"
                 color={riposte(
                   [stat.status === 'starting', 'success'],
