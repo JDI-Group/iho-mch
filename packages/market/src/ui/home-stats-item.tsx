@@ -1,6 +1,6 @@
 import type { StatsItem } from '@/apis/index.type'
 import { formatEther } from '@hairy/ether-lib'
-import { Case, Else, If, Switch, Then } from '@hairy/react-lib'
+import { Case, Else, If, Switch, Then, useStore } from '@hairy/react-lib'
 import { redirectTo, riposte } from '@hairy/utils'
 import { Button } from '@heroui/button'
 import { Card, CardBody, CardHeader } from '@heroui/card'
@@ -20,6 +20,11 @@ export interface HomeStatsItemProps {
 export function HomeStatsItem({ item: stat, batch, start }: HomeStatsItemProps) {
   const address = Reflect.get(addresses, `IHOLockVaultV${batch}`)[chain.id]
   const router = useRouter()
+  const config = useStore(store.config)
+  const currentBatch = Number(process.env.NEXT_PUBLIC_MARKET_BATCH)
+
+  const isLasted = config.batch === batch
+  const isLastedThis = currentBatch === batch
 
   function onToExplorer() {
     const url = `${chain.blockExplorers.default.url}/address/${address}`
@@ -114,9 +119,18 @@ export function HomeStatsItem({ item: stat, batch, start }: HomeStatsItemProps) 
         />
         <Switch value={stat.status}>
           <Case cond="starting">
-            <Button onPress={() => router.push(`/products/${stat.product}`)} className="mt-6" radius="md" color="success" variant="flat">
-              <u>In progress</u>
-            </Button>
+            <If cond={isLasted && !isLastedThis}>
+              <Then>
+                <Button className="mt-6" radius="md" variant="flat">
+                  Coming Soon
+                </Button>
+              </Then>
+              <Else>
+                <Button onPress={() => router.push(`/products/${stat.product}`)} className="mt-6" radius="md" color="success" variant="flat">
+                  <u>In progress</u>
+                </Button>
+              </Else>
+            </If>
           </Case>
           <Case cond="ending-soon">
             <Button onPress={() => router.push(`/products/${stat.product}`)} className="mt-6" radius="md" color="warning" variant="flat">

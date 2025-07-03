@@ -131,6 +131,9 @@ export function BootstrapProvider(props: React.PropsWithChildren) {
     },
     [chainId],
   )
-
+  useMount(async () => {
+    const batch = await getProductBatch()
+    store.config.$state.batch = Number(batch)
+  })
   return props.children
 }

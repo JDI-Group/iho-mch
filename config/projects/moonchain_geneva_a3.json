@@ -6,8 +6,7 @@
     "expire": 31536000,
     "target": 10,
     "price": 1,
-    "limit": 2,
-    "upcoming": true
+    "limit": 2
   },
   {
     "product": 22609,
@@ -16,7 +15,8 @@
     "expire": 31536000,
     "target": 10,
     "price": 1,
-    "limit": 2
+    "limit": 2,
+    "upcoming": true
   },
   {
     "product": 22643,
