@@ -34,7 +34,7 @@ export function HomeStatsItem({ item: stat, batch, start }: HomeStatsItemProps) 
           <div className="flex gap-2">
             <If cond={start}>
               <Chip size="sm" onClick={onToExplorer}>
-                <span className="border-b ">IHO Batch A{batch}#{address.slice(0, 6)}</span>
+                <span className="border-b ">IHO Batch A{batch}#{address?.slice?.(0, 6)}</span>
               </Chip>
               <Chip
                 size="sm"
