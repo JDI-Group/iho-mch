@@ -24,12 +24,12 @@ export function HomeStatsBatchItem(props: HomeStatsBatchItemProps) {
         </h3>
         <If cond={isLastedThis && !config.isLasted}>
           <Then>
-            <span>-</span>
-          </Then>
-          <Else>
             <Link className="text-default-500 hover:cursor-pointer border-b" onClick={onToExplorer}>
               {address}
             </Link>
+          </Then>
+          <Else>
+            <span>-</span>
           </Else>
         </If>
 
