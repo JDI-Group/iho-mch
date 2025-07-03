@@ -41,6 +41,7 @@
     "description": "Unlock wellness at your fingertips. Get your Blueberry Ring now and start your journey to better health.",
     "expire": 31536000,
     "target": 10,
+    "price": 1000,
     "limit": 2
   }
 ]
