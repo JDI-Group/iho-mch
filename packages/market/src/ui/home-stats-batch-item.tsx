@@ -1,4 +1,5 @@
 import type { StatsBatchItem } from '@/apis/index.type'
+import { Else, If, Then, useStore } from '@hairy/react-lib'
 import { redirectTo } from '@hairy/utils'
 import { Link } from '@heroui/link'
 
@@ -7,6 +8,10 @@ export interface HomeStatsBatchItemProps {
 }
 export function HomeStatsBatchItem(props: HomeStatsBatchItemProps) {
   const address = Reflect.get(addresses, `IHOLockVaultV${props.item.batch}`)[chain.id]
+  const config = useStore(store.config)
+
+  const isLastedThis = config.batch === props.item.batch
+
   function onToExplorer() {
     const url = `${chain.blockExplorers.default.url}/address/${address}`
     redirectTo(url, '_blank')
@@ -17,9 +22,17 @@ export function HomeStatsBatchItem(props: HomeStatsBatchItemProps) {
         <h3 className="inline-flex justify-center text-2xl lg:text-4xl font-bold text-white mb-2">
           IHO Batch A{props.item.batch}
         </h3>
-        <Link className="text-default-500 hover:cursor-pointer border-b" onClick={onToExplorer}>
-          {address}
-        </Link>
+        <If cond={isLastedThis && !config.isLasted}>
+          <Then>
+            <span>-</span>
+          </Then>
+          <Else>
+            <Link className="text-default-500 hover:cursor-pointer border-b" onClick={onToExplorer}>
+              {address}
+            </Link>
+          </Else>
+        </If>
+
       </div>
       <div className="text-center mb-6">
         Started {props.item.start}
