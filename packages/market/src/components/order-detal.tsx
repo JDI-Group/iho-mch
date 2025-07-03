@@ -24,7 +24,8 @@ export function OrderDetail(props: OrderDetailProps) {
   const [status, actions] = useAsyncCallbacks({
     stake: async () => {
       const receipt = await helperStake({ order: props.detail!.id })
-      props.onChange?.({ ...props.detail!, hash: receipt?.hash })
+      if (receipt)
+        props.onChange?.({ ...props.detail!, hash: receipt?.hash })
     },
     cancel: async () => {
       await openCancelConfirmDialog()
