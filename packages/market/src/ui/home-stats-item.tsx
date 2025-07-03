@@ -22,9 +22,7 @@ export function HomeStatsItem({ item: stat, batch, start }: HomeStatsItemProps) 
   const router = useRouter()
   const config = useStore(store.config)
 
-  const currentBatch = Number(process.env.NEXT_PUBLIC_MARKET_BATCH)
-  const isLasted = config.batch === batch
-  const isLastedThis = currentBatch === batch
+  const isLastedThis = config.batch === batch
 
   function onToExplorer() {
     const url = `${chain.blockExplorers.default.url}/address/${address}`
@@ -34,13 +32,14 @@ export function HomeStatsItem({ item: stat, batch, start }: HomeStatsItemProps) 
   return (
     <Card className="w-full sm:max-w-[300px] lg:max-w-[300px] xl:max-w-[320px] xxl:max-w-[340px] flex-shrink-0 flex flex-col" key={stat.name}>
       <CardHeader className="pt-4 pb-2 flex flex-col items-start">
-
         <div className="mb-4 w-full items-center flex justify-between">
           <div className="flex gap-2">
             <If cond={start}>
-              <Chip size="sm" onClick={onToExplorer}>
-                <span className="border-b ">IHO Batch A{batch}#{address?.slice?.(0, 6)}</span>
-              </Chip>
+              <If cond={!isLastedThis || config.isLasted}>
+                <Chip size="sm" onClick={onToExplorer}>
+                  <span className="border-b ">IHO Batch A{batch}#{address?.slice?.(0, 6)}</span>
+                </Chip>
+              </If>
               <Chip
                 size="sm"
                 className="font-bold"
@@ -119,7 +118,7 @@ export function HomeStatsItem({ item: stat, batch, start }: HomeStatsItemProps) 
         />
         <Switch value={stat.status}>
           <Case cond="starting">
-            <If cond={isLasted && !isLastedThis}>
+            <If cond={config.isLasted && !isLastedThis}>
               <Then>
                 <Button className="mt-6" radius="md" variant="flat">
                   Coming Soon

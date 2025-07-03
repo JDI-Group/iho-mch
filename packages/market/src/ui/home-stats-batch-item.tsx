@@ -22,13 +22,13 @@ export function HomeStatsBatchItem(props: HomeStatsBatchItemProps) {
         <h3 className="inline-flex justify-center text-2xl lg:text-4xl font-bold text-white mb-2">
           IHO Batch A{props.item.batch}
         </h3>
-        <If cond={isLastedThis && !config.isLasted}>
+        <If cond={!isLastedThis || config.isLasted}>
           <Then>
             <Link className="text-default-500 hover:cursor-pointer border-b" onClick={onToExplorer}>
               {address}
             </Link>
           </Then>
-          <Else>
+          <Else cond={config.batch}>
             <span>-</span>
           </Else>
         </If>
