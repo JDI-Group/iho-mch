@@ -8,7 +8,7 @@ export async function helperStake(params: { product: number, variation?: number 
 export async function helperStake(params: { order: number } | { product: number, variation?: number }) {
   const { order, product, variation } = params as { order?: number, product?: number, variation?: number }
 
-  if (!store.config.$state.isLasted) {
+  if (!store.config.$getters.isLasted) {
     addToast({ description: 'Coming soon', color: 'danger' })
     return
   }
