@@ -48,7 +48,7 @@ export default function Page() {
             {products.map(product => (
               <div
                 key={product.id}
-                onClick={() => !product.upcoming && router.push(`/products/${product.id}`)}
+                onClick={() => !product.upcoming && isLastedBatch && router.push(`/products/${product.id}`)}
                 className="relative w-full md:w-[294px]"
               >
                 <If cond={product.upcoming || !isLastedBatch}>
