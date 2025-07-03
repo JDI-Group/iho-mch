@@ -11,6 +11,7 @@ export async function helperStake(params: { order: number } | { product: number,
   const ihoContracts = {
     1: getIhoLockVaultV1,
     2: getIhoLockVaultV2,
+    3: getIhoLockVaultV3,
   }
 
   const batch = process.env.NEXT_PUBLIC_MARKET_BATCH as unknown as keyof typeof ihoContracts
