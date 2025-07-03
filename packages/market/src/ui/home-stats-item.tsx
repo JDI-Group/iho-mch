@@ -21,8 +21,8 @@ export function HomeStatsItem({ item: stat, batch, start }: HomeStatsItemProps) 
   const address = Reflect.get(addresses, `IHOLockVaultV${batch}`)[chain.id]
   const router = useRouter()
   const config = useStore(store.config)
-  const currentBatch = Number(process.env.NEXT_PUBLIC_MARKET_BATCH)
 
+  const currentBatch = Number(process.env.NEXT_PUBLIC_MARKET_BATCH)
   const isLasted = config.batch === batch
   const isLastedThis = currentBatch === batch
 

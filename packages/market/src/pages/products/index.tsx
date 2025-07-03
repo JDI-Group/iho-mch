@@ -1,4 +1,4 @@
-import { Else, If, Then } from '@hairy/react-lib'
+import { Else, If, Then, useStore } from '@hairy/react-lib'
 import { Card, CardBody, CardHeader } from '@heroui/card'
 import { Image } from '@heroui/image'
 import { Spinner } from '@heroui/spinner'
@@ -9,7 +9,11 @@ export default function Page() {
   const { value: products = [], loading } = useAsync(
     () => getProduct(),
   )
+  const config = useStore(store.config)
   const router = useRouter()
+
+  const isLastedBatch = config.batch === Number(process.env.NEXT_PUBLIC_MARKET_BATCH)
+
   return (
     <layouts.default>
       <section>
@@ -47,7 +51,7 @@ export default function Page() {
                 onClick={() => !product.upcoming && router.push(`/products/${product.id}`)}
                 className="relative w-full md:w-[294px]"
               >
-                <If cond={product.upcoming}>
+                <If cond={product.upcoming || !isLastedBatch}>
                   <div className="absolute inset-0 rounded-lg bg-black bg-opacity-25 z-50 flex justify-center items-center">
                     <span className="text-white font-spacex blur-[0.5px]">Coming Soon</span>
                   </div>
