@@ -30,9 +30,8 @@
   },
   {
     "product": 22668,
-    "upcoming": true,
-    "name": "Moonchain DIMO: A GPS and health tracker for your car",
-    "description": "DIMO Macaron is smartest way to track and improve the health and value of your car.",
+    "name": "Moonchain Smart Watch: Engineered for performance and style",
+    "description": "Introducing Moonchain Smart Watch, where cutting-edge design meets real-world utility. Engineered for performance and style, this sleek wearable tracks your health, keeps you connected, and syncs seamlessly with your crypto-powered lifestyle.",
     "expire": 31536000,
     "target": 10,
     "price": 1,
@@ -40,11 +39,20 @@
   },
   {
     "product": 22291,
+    "upcoming": true,
     "name": "BlueBerry AI - WearFI",
     "description": "Unlock wellness at your fingertips. Get your Blueberry Ring now and start your journey to better health.",
     "expire": 31536000,
     "target": 10,
     "price": 1,
+    "limit": 2
+  },
+  {
+    "product": 22920,
+    "name": "Moonchain Drone: crypto-native drone",
+    "description": "Meet the Moonchain Drone — the first-ever autonomous, crypto-native drone distributed through an Initial Hardware Offering (IHO). Engineered for performance, connectivity, and profitability, the IHO Drone isn’t just a flying machine — it’s a physical validator in your decentralized economy.",
+    "expire": 31536000,
+    "target": 10,
     "limit": 2
   }
 ]

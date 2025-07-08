@@ -13,14 +13,10 @@ export async function helperStake(params: { order: number } | { product: number,
     return
   }
 
-  const ihoContracts = {
-    1: getIhoLockVaultV1,
-    2: getIhoLockVaultV2,
-    3: getIhoLockVaultV3,
-  }
-
-  const batch = process.env.NEXT_PUBLIC_MARKET_BATCH as unknown as keyof typeof ihoContracts
-  const iho = ihoContracts[batch]({ runner: wallet })
+  const iho = getIhoLockVaultV3({
+    address: Reflect.get(chain.contracts, `IHOLockVaultV${process.env.NEXT_PUBLIC_MARKET_BATCH}`)?.address,
+    runner: wallet,
+  })
 
   let detail: OrderDataDto | null = null
   if (product)
