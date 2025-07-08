@@ -36,9 +36,9 @@ export function DetailStatusBar(props: DetailStatusBarProps) {
             </div>
           )}
         />
-        <div className="flex-1 flex flex-col justify-between py-[1px]">
+        <div className="flex-1 flex flex-col justify-between py-[1px] min-w-0">
           <If cond={!props.loading} else={<Skeleton className="h-[18px] rounded-lg" />}>
-            <span className="text-lg leading-none">{props.miner?.name}</span>
+            <span className="text-base leading-none truncate">{props.miner?.name}</span>
           </If>
           <Chip
             size="sm"
@@ -78,7 +78,7 @@ export function DetailStatusBar(props: DetailStatusBarProps) {
 
           </div>
         </div>
-        <div className="flex flex-col justify-between">
+        <div className="flex -ml-5 flex-col justify-between">
           <div className="flex justify-end">
             <Chip className="p-0 border-0 h-6" color="success" variant="dot">
               Online

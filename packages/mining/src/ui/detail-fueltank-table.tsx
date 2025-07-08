@@ -82,7 +82,7 @@ export function DetailFueltankTable(props: DetailFueltankTableProps) {
           <TableColumn key="status">Status</TableColumn>
           <TableColumn key="actions">Actions</TableColumn>
         </TableHeader>
-        <TableBody items={unlocks}>
+        <TableBody items={unlocks} emptyContent={<span className="text-sm">No rows to display.</span>}>
           {item => (
             <TableRow key={item.index}>
               {columnKey => <TableCell>{renderCell(item, columnKey)}</TableCell>}
