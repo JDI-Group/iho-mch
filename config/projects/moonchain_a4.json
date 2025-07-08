@@ -9,14 +9,6 @@
     "limit": 2
   },
   {
-    "product": 22713,
-    "name": "Moonchain Headphones: Sound Meets On-Chain Utility",
-    "description": "The Moonchain Headphones redefine what it means to listen with purpose. Delivered through our exclusive Initial Hardware Offering (IHO), these wireless headphones fuse high-fidelity audio with blockchain utility — no upfront cost, just stake-to-own.",
-    "expire": 31536000,
-    "target": 100,
-    "limit": 2
-  },
-  {
     "product": 22714,
     "upcoming": true,
     "name": "Moonchain DIMO: A GPS and health tracker for your car",
@@ -41,6 +33,14 @@
     "description": "Unlock wellness at your fingertips. Get your Blueberry Ring now and start your journey to better health.",
     "expire": 31536000,
     "target": 10,
+    "limit": 2
+  },
+  {
+    "product": 22713,
+    "name": "Moonchain Headphones: Sound Meets On-Chain Utility",
+    "description": "The Moonchain Headphones redefine what it means to listen with purpose. Delivered through our exclusive Initial Hardware Offering (IHO), these wireless headphones fuse high-fidelity audio with blockchain utility — no upfront cost, just stake-to-own.",
+    "expire": 31536000,
+    "target": 100,
     "limit": 2
   },
   {

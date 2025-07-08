@@ -1,13 +1,5 @@
 [
-  {
-    "product": 22649,
-    "name": "Moonchain Headphones: Sound Meets On-Chain Utility",
-    "description": "The Moonchain Headphones redefine what it means to listen with purpose. Delivered through our exclusive Initial Hardware Offering (IHO), these wireless headphones fuse high-fidelity audio with blockchain utility — no upfront cost, just stake-to-own.",
-    "expire": 31536000,
-    "target": 10,
-    "price": 1,
-    "limit": 2
-  },
+
   {
     "product": 22609,
     "upcoming": true,
@@ -45,6 +37,15 @@
     "description": "Meet the Moonchain Drone — the first-ever autonomous, crypto-native drone distributed through an Initial Hardware Offering (IHO). Engineered for performance, connectivity, and profitability, the IHO Drone isn’t just a flying machine — it’s a physical validator in your decentralized economy.",
     "expire": 31536000,
     "target": 10,
+    "limit": 2
+  },
+  {
+    "product": 22649,
+    "name": "Moonchain Headphones: Sound Meets On-Chain Utility",
+    "description": "The Moonchain Headphones redefine what it means to listen with purpose. Delivered through our exclusive Initial Hardware Offering (IHO), these wireless headphones fuse high-fidelity audio with blockchain utility — no upfront cost, just stake-to-own.",
+    "expire": 31536000,
+    "target": 10,
+    "price": 1,
     "limit": 2
   },
   {
