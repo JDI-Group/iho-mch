@@ -8,13 +8,13 @@ function Page() {
   const [isTimeout, setIsTimeout] = useState<boolean>(false)
   useMount(() => setTimeout(() => setIsTimeout(true), 3000))
   const { value: products = [] } = useAsync(() => getProduct())
-
+  const router = useRouter()
   return (
     <layouts.default header={false}>
       <HeroUINavbar className="mb-6">
         <NavbarContent>
           <NavbarBrand className="gap-3 max-w-fit">
-            <Icon fontSize="24" icon="solar:arrow-left-broken" />
+            <Icon onClick={() => router.back()} fontSize="24" icon="solar:arrow-left-broken" />
           </NavbarBrand>
         </NavbarContent>
         <NavbarContent justify="center">
@@ -59,7 +59,7 @@ function Page() {
       </section>
       <section className="px-4 mb-4">
         <Card>
-          <CardHeader className="pb-0 flex-col items-start">
+          <CardHeader className="flex-col items-start">
             <div className="text-sm">Manually adding devices</div>
           </CardHeader>
           <CardBody className="grid grid-cols-2 gap-4">
