@@ -17,7 +17,7 @@ export function HomeStatsBatchItem(props: HomeStatsBatchItemProps) {
     redirectTo(url, '_blank')
   }
   return (
-    <div className="flex-col justify-center items-center">
+    <div className="inline-flex flex-col justify-center items-center pb-12">
       <div className="mb-4 flex flex-col items-center justify-center">
         <h3 className="inline-flex justify-center text-2xl lg:text-4xl font-bold text-white mb-2">
           IHO Batch A{props.item.batch}
@@ -37,7 +37,7 @@ export function HomeStatsBatchItem(props: HomeStatsBatchItemProps) {
       <div className="text-center mb-6">
         Started {props.item.start}
       </div>
-      <div className="w-full flex justify-center gap-4 lg:gap-8 flex-col sm:flex-row overflow-x-auto ">
+      <div className="inline-flex justify-center gap-4 lg:gap-8 flex-col sm:flex-row overflow-x-auto ">
         {props.item.stats.map(item => <HomeStatsItem key={item.name} item={item} batch={props.item.batch} />)}
       </div>
     </div>

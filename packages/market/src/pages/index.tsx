@@ -7,10 +7,11 @@ import { Card, CardBody } from '@heroui/card'
 import { Link } from '@heroui/link'
 import { AnimatePresence } from 'framer-motion'
 import { useAsync, useWindowScroll } from 'react-use'
-import { Navigation } from 'swiper/modules'
+import { Navigation, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/navigation'
+import 'swiper/css/pagination'
 
 const accordions = [
   {
@@ -177,7 +178,7 @@ export default function IndexPage() {
       </motion.section>
       <If cond={stats.length > 0}>
         <motion.section
-          className={container({ className: 'w-full min-h-screen py-12 md:py-4 relative flex flex-col justify-center items-center text-defa' })}
+          className="mx-0 md:px-52 min-h-screen py-12 md:py-4 relative flex flex-col justify-center items-center"
           variants={variants.fadeOpacity}
           initial="hidden"
           whileInView="visible"
@@ -186,12 +187,18 @@ export default function IndexPage() {
           <div className="hidden sm:block w-full">
             <Swiper
               spaceBetween={50}
-              style={{ '--swiper-navigation-color': 'var(--heroui-default)' } as any}
-              modules={[Navigation]}
-              navigation
+              style={{
+                '--swiper-navigation-color': 'var(--heroui-default)',
+                '--swiper-pagination-bottom': '0',
+                '--swiper-pagination-bullet-inactive-color': 'hsl(var(--heroui-default-800) / 1)',
+                '--swiper-pagination-bullet-width': '10px',
+                '--swiper-pagination-bullet-height': '10px',
+              } as any}
+              modules={[Navigation, Pagination]}
+              pagination={{ clickable: true }}
             >
               {stats.map(item => (
-                <SwiperSlide key={item.batch} className="w-full">
+                <SwiperSlide key={item.batch} className="!flex justify-center">
                   <HomeStatsBatchItem item={item} />
                 </SwiperSlide>
               ))}
