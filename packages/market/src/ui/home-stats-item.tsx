@@ -118,7 +118,7 @@ export function HomeStatsItem({ item: stat, batch, start }: HomeStatsItemProps) 
         />
         <Switch value={stat.status}>
           <Case cond="starting">
-            <If cond={config.isLasted && !isLastedThis}>
+            <If cond={!config.isLasted && isLastedThis}>
               <Then>
                 <Button className="mt-6" radius="md" variant="flat">
                   Coming Soon
