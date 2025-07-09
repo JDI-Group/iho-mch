@@ -63,12 +63,12 @@ function Page() {
             <div className="text-sm">Manually adding devices</div>
           </CardHeader>
           <CardBody className="grid grid-cols-2 gap-4">
-            {products.map(product => (
+            {products.sort((a, b) => b.name.length - a.name.length).map(product => (
               <Card key={product.id} className="shadow-none border">
                 <CardBody>
                   <div className="flex">
                     <Image className="h-8 rounded-md" src={product.images[0].src} />
-                    <span className="flex-1 min-w-0 truncate">{(product.name.split('-')[1] || product.name).trim()}</span>
+                    <span className="flex-1 flex items-center justify-end">{(product.name.split('-')[1] || product.name).trim()}</span>
                   </div>
                 </CardBody>
               </Card>
