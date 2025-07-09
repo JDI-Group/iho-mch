@@ -27,6 +27,12 @@ const nextConfig: NextConfig = {
               ['default', 'clsx'],
             ],
           },
+          {
+            from: '@iconify/react',
+            imports: [
+              'Icon',
+            ],
+          },
         ],
         dts: 'src/types/auto-imports.d.ts',
         dirs: [

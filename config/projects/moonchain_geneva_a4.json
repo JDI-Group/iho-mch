@@ -20,16 +20,7 @@
     "price": 1,
     "limit": 2
   },
-  {
-    "product": 22291,
-    "upcoming": true,
-    "name": "Moonchain Ring: BlueBerry AI - WearFI",
-    "description": "Unlock wellness at your fingertips. Get your Blueberry Ring now and start your journey to better health.",
-    "expire": 31536000,
-    "target": 10,
-    "price": 1,
-    "limit": 2
-  },
+
   {
     "product": 22920,
     "upcoming": true,
@@ -41,6 +32,7 @@
   },
   {
     "product": 22649,
+    "upcoming": true,
     "name": "Moonchain Headphones: Sound Meets On-Chain Utility",
     "description": "The Moonchain Headphones redefine what it means to listen with purpose. Delivered through our exclusive Initial Hardware Offering (IHO), these wireless headphones fuse high-fidelity audio with blockchain utility — no upfront cost, just stake-to-own.",
     "expire": 31536000,
@@ -50,8 +42,44 @@
   },
   {
     "product": 22920,
+    "upcoming": true,
     "name": "Moonchain Smart Watch: Engineered for performance and style",
     "description": "Introducing Moonchain Smart Watch, where cutting-edge design meets real-world utility. Engineered for performance and style, this sleek wearable tracks your health, keeps you connected, and syncs seamlessly with your crypto-powered lifestyle.",
+    "expire": 31536000,
+    "target": 10,
+    "price": 1,
+    "limit": 2
+  },
+  {
+    "product": 22951,
+    "name": "Moonchain Sunglasses: JBL wireless audio sunglasses",
+    "description": "Introducing the ultimate fusion of fashion, function, and freedom — JBL Sunglasses powered by Moonchain. As part of our latest Initial Hardware Offering (IHO), you can now lock your $Moonchain tokens to claim a pair of wireless audio sunglasses crafted in collaboration with JBL, the global leader in sound innovation.",
+    "expire": 31536000,
+    "target": 10,
+    "price": 1,
+    "limit": 2
+  },
+  {
+    "product": 22956,
+    "name": "Moonchain Mining: Multi Token Miner",
+    "description": "Step into the future of passive income with the IoT Multi-Token Miner, available exclusively through Moonchain’s Initial Hardware Offering (IHO). This compact, energy-efficient device connects seamlessly to your Wi-Fi and silently mines multiple on-chain tokens 24/7 — no technical setup, no noise, no hassle.",
+    "expire": 31536000,
+    "target": 10,
+    "limit": 2
+  },
+  {
+    "product": 22668,
+    "name": "Moonchain DIMO: A GPS and health tracker for your car",
+    "description": "DIMO Macaron is smartest way to track and improve the health and value of your car.",
+    "expire": 31536000,
+    "target": 10,
+    "price": 1,
+    "limit": 2
+  },
+  {
+    "product": 22291,
+    "name": "Moonchain Ring: BlueBerry AI - WearFI",
+    "description": "Unlock wellness at your fingertips. Get your Blueberry Ring now and start your journey to better health.",
     "expire": 31536000,
     "target": 10,
     "price": 1,

@@ -23,6 +23,7 @@ declare global {
   const HomeMiningItem: typeof import('../ui/home-mining-item')['HomeMiningItem']
   const HomePage: typeof import('../ui/home-page')['HomePage']
   const HomeRevenueCard: typeof import('../ui/home-revenue-card')['HomeRevenueCard']
+  const Icon: typeof import('@iconify/react')['Icon']
   const Image: typeof import('../components/image')['Image']
   const MaterialSymbolsArrowDownwardAltRounded: typeof import('../components/rainbowkit-widget')['MaterialSymbolsArrowDownwardAltRounded']
   const MinerConfirmDialog: typeof import('../components/miner-confirm-dialog')['MinerConfirmDialog']
@@ -33,6 +34,7 @@ declare global {
   const QuestionTooltip: typeof import('../components/question-tooltip')['QuestionTooltip']
   const RainbowkitWidget: typeof import('../components/rainbowkit-widget')['RainbowkitWidget']
   const SubscribeWagmiConfig: typeof import('../generated/index')['SubscribeWagmiConfig']
+  const Tooltip: typeof import('../components/tooltip')['Tooltip']
   const TrendCard: typeof import('../components/trend-card')['TrendCard']
   const TrendCardS: typeof import('../components/trend-card')['TrendCardS']
   const addresses: typeof import('../generated/index')['addresses']
@@ -89,6 +91,7 @@ declare global {
   const getIhoMining: typeof import('../generated/index')['getIhoMining']
   const getIihoFuel: typeof import('../generated/index')['getIihoFuel']
   const getMinerMac: typeof import('../apis/index')['getMinerMac']
+  const getProduct: typeof import('../apis/index')['getProduct']
   const getVerifiableUpgradeable: typeof import('../generated/index')['getVerifiableUpgradeable']
   const ierc6551AccountAbi: typeof import('../generated/index')['ierc6551AccountAbi']
   const ierc6551AccountAddress: typeof import('../generated/index')['ierc6551AccountAddress']
@@ -123,6 +126,7 @@ declare global {
   const motion: typeof import('framer-motion')['motion']
   const postSignRegister: typeof import('../apis/index')['postSignRegister']
   const postSignRegisterDevice: typeof import('../apis/index')['postSignRegisterDevice']
+  const postTaskManuallyTriggerRewards: typeof import('../apis/index')['postTaskManuallyTriggerRewards']
   const readBidirectionalTransfer: typeof import('../generated/index')['readBidirectionalTransfer']
   const readErc1967Proxy: typeof import('../generated/index')['readErc1967Proxy']
   const readErc20: typeof import('../generated/index')['readErc20']
@@ -1245,6 +1249,9 @@ declare global {
   // @ts-ignore
   export type { RainbowkitWidgetProps } from '../components/rainbowkit-widget'
   import('../components/rainbowkit-widget')
+  // @ts-ignore
+  export type { TooltipProps } from '../components/tooltip'
+  import('../components/tooltip')
   // @ts-ignore
   export type { DetailFueltankTableProps } from '../ui/detail-fueltank-table'
   import('../ui/detail-fueltank-table')

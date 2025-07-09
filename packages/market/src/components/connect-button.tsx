@@ -1,6 +1,5 @@
 import { shapes } from '@dicebear/collection'
 import { Button } from '@heroui/button'
-import { Icon } from '@iconify/react/dist/iconify.js'
 import { ConnectButton as RainbowConnectButton } from '@rainbow-me/rainbowkit'
 import { useAccount } from 'wagmi'
 

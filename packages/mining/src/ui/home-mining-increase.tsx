@@ -12,10 +12,10 @@ export interface HomeMiningIncreaseProps {
 
 export function HomeMiningIncrease(props: HomeMiningIncreaseProps) {
   const { address } = useAccount()
-
+  const router = useRouter()
   const openMinerConfirmDialog = useOverlayInject(MinerConfirmDialog)
 
-  const [loading, register] = useAsyncCallback(async () => {
+  const [loading, _register] = useAsyncCallback(async () => {
     const device = await navigator.bluetooth.requestDevice({ acceptAllDevices: true })
 
     await openMinerConfirmDialog({ device })
@@ -33,8 +33,8 @@ export function HomeMiningIncrease(props: HomeMiningIncreaseProps) {
   })
 
   return (
-    <div onClick={!loading ? register : undefined}>
-      <Card className="border-none w-[100px] h-[100px]" radius="lg" onClick={register}>
+    <div onClick={() => router.push('/scanner')}>
+      <Card className="border-none w-[100px] h-[100px]" radius="lg">
         <CardBody className="flex justify-center items-center">
           {loading ? <Spinner size="sm" variant="gradient" /> : <Icon fontSize="28" icon="ri:add-line" />}
         </CardBody>

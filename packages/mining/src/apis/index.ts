@@ -11,6 +11,16 @@ export const baseURL = process.env.NEXT_PUBLIC_MINING_SERVICE_URL
 
 /**
  * @method get
+ * @tags Product
+ */
+export async function getProduct(config?: RequestInit) {
+  const response = await fetch(`${baseURL}/product`, {
+    ...config,
+  })
+  return response.json() as Promise<Types.Product[]>
+}
+/**
+ * @method get
  * @tags Miner
  */
 export async function getMinerMac(paths: Types.GetMinerMacPath, config?: RequestInit) {
@@ -31,4 +41,16 @@ export async function postSignRegisterDevice(body: Types.SignatureRegisterBody, 
     ...config,
   })
   return response.json() as Promise<Types.SignatureResponse>
+}
+/**
+ * @method post
+ * @tags Task
+ */
+export async function postTaskManuallyTriggerRewards(body: Types.ManuallyTriggerRewardsBody, config?: RequestInit) {
+  await fetch(`${baseURL}/task/manually-trigger/rewards`, {
+    headers: { 'Content-Type': 'application/json' },
+    method: 'post',
+    body: JSON.stringify(body),
+    ...config,
+  })
 }

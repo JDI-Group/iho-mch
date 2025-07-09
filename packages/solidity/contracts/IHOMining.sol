@@ -87,6 +87,7 @@ contract IHOMining is
    * @param amount The amount of the token
    */
   struct Device {
+    uint256 product;
     string name;
     string mac;
   }
@@ -115,6 +116,7 @@ contract IHOMining is
     address indexed owner,
     address indexed token,
     uint256 indexed tokenId,
+    uint256 product,
     string name,
     string mac,
     address account,
@@ -187,24 +189,25 @@ contract IHOMining is
    *
    * Creates a new ERC721 token and associates it with an ERC6551 account
    */
-  function register(string memory name, string memory mac, bytes memory signature) public {
+  function register(uint256 product, string memory name, string memory mac, bytes memory signature) public {
     if (bytes(mac).length < 6)
       revert InvalidMacFormat();
     if (DeviceMapToken[mac].tokenContract != address(0))
       revert DeviceRegistered();
 
-    verify(keccak256(abi.encodePacked(msg.sender, name, mac)), signature);
+    verify(keccak256(abi.encodePacked(product, msg.sender, name, mac)), signature);
 
     uint256 _tokenID = _mint(msg.sender);
     address _account = _mintAccount(address(this), _tokenID);
 
-    TokenMapDevice[address(this)][_tokenID] = Device(name, mac);
+    TokenMapDevice[address(this)][_tokenID] = Device(product, name, mac);
     DeviceMapToken[mac] = Token(address(this), _tokenID);
 
     emit Registered(
       msg.sender,
       address(this),
       _tokenID,
+      product,
       name,
       mac,
       _account,
