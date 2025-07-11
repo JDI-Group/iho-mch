@@ -1,5 +1,5 @@
-import { Image } from '@/components/image'
 import type { PropsWithDetailedHTML } from '@hairy/react-lib'
+import { Image } from '@/components/image'
 import { Card, CardFooter } from '@heroui/react'
 import { Icon } from '@iconify/react/dist/iconify.js'
 

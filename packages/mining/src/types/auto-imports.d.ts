@@ -1278,9 +1278,6 @@ declare global {
   export type { DetailStatusBarProps } from '../ui/detail-status-bar'
   import('../ui/detail-status-bar')
   // @ts-ignore
-  export type { HomeMiningIncreaseProps } from '../ui/home-mining-increase'
-  import('../ui/home-mining-increase')
-  // @ts-ignore
   export type { HomeMiningItemProps } from '../ui/home-mining-item'
   import('../ui/home-mining-item')
 }

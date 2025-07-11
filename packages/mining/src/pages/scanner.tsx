@@ -6,10 +6,10 @@ import type { PropsWithDetailedHTML } from '@hairy/react-lib'
 import type { Hex } from 'viem'
 import { variants } from '@/config'
 import { If } from '@hairy/react-lib'
+import { delay } from '@hairy/utils'
 import { addToast, Card, CardBody, CardHeader, Divider, Navbar as HeroUINavbar, Image, NavbarBrand, NavbarContent } from '@heroui/react'
 import { useOverlayInject } from '@overlastic/react'
 import { useAsync, useMount } from 'react-use'
-import { delay } from '@hairy/utils'
 
 function Page() {
   const [isTimeout, setIsTimeout] = useState<boolean>(false)
@@ -41,11 +41,11 @@ function Page() {
     await transactionWaitingReceipt(hash)
     addToast({
       title: 'Device registered successfully',
-      size: "sm",
-      description: <span className='text-sm'>Your device {device.name} has been registered.</span>,
+      size: 'sm',
+      description: <span className="text-sm">Your device {device.name} has been registered.</span>,
       color: 'success',
       shouldShowTimeoutProgress: true,
-      timeout: 3000
+      timeout: 3000,
     })
   }
 

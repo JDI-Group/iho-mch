@@ -1,7 +1,6 @@
 import { Unless, useAsyncState } from '@hairy/react-lib'
 import { Spinner } from '@heroui/react'
 import { useMount } from 'react-use'
-import { getAbiItem } from 'viem'
 import { useAccount } from 'wagmi'
 
 export function HomePage() {

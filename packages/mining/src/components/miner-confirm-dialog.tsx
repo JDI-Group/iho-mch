@@ -44,7 +44,7 @@ export function MinerConfirmDialog(props: MinerConfirmDialogProps) {
         <ModalHeader className="flex flex-col gap-1">
           Confirm Your Device
         </ModalHeader>
-        <ModalBody className='py-0'>
+        <ModalBody className="py-0">
           <div className="space-y-4">
             <p className="text-sm">
               Do you want to register the following device？
@@ -78,7 +78,7 @@ export function MinerConfirmDialog(props: MinerConfirmDialogProps) {
             </p>
           </div>
         </ModalBody>
-        <ModalFooter className='pt-3'>
+        <ModalFooter className="pt-3">
           <Button color="warning" onPress={cancel} disabled={loading}>
             Cancel
           </Button>

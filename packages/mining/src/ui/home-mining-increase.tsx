@@ -1,11 +1,7 @@
 import { Card, CardBody } from '@heroui/react'
 import { Icon } from '@iconify/react/dist/iconify.js'
 
-export interface HomeMiningIncreaseProps {
-  onRegistered?: () => void
-}
-
-export function HomeMiningIncrease(props: HomeMiningIncreaseProps) {
+export function HomeMiningIncrease() {
   const router = useRouter()
 
   return (
