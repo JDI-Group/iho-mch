@@ -27,7 +27,7 @@ export function Image({ ref, ...props }: ImageProps & { ref?: React.RefObject<'i
     ...props,
     ref,
   })
-  const showFallbackNode = !!props.fallback || !props.src
+  const showFallbackNode = !props.src && props.fallback
 
   const content = showFallbackNode
     ? props.fallback as any

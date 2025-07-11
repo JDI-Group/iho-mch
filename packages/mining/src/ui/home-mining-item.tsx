@@ -1,5 +1,5 @@
-import type { PropsWithDetailedHTML } from '@hairy/react-lib'
 import { Image } from '@/components/image'
+import type { PropsWithDetailedHTML } from '@hairy/react-lib'
 import { Card, CardFooter } from '@heroui/react'
 import { Icon } from '@iconify/react/dist/iconify.js'
 
@@ -8,10 +8,12 @@ export interface HomeMiningItemProps extends PropsWithDetailedHTML {
   src?: string
   name: string
   id: string
+  address: string
 }
 
 export function HomeMiningItem({
   id,
+  address,
   name,
   src,
   status = 'active',
@@ -19,7 +21,7 @@ export function HomeMiningItem({
 }: HomeMiningItemProps) {
   const router = useRouter()
   return (
-    <div className={clsx('flex flex-col gap-2', props.className)} onClick={() => { router.push(`/${encodeURIComponent(id)}`) }}>
+    <div className={clsx('flex flex-col gap-2', props.className)} onClick={() => { router.push(`/device/${address}`) }}>
       <Card isFooterBlurred className="border-none" radius="lg">
         <Image
           alt="Woman listing to music"

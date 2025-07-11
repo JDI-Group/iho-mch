@@ -5,9 +5,7 @@ export function DetailPage() {
   const router = useRouter()
 
   const [{ value: miner, loading }] = useAsyncState(
-    async () => {
-      return getMinerMac({ mac: encodeURIComponent(router.query.id as string) })
-    },
+    async () => getMinerAccount({ account: router.query.address as string }),
     [router.query.id],
     { immediate: true },
   )

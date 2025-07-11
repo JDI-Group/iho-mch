@@ -5,9 +5,10 @@ import { useAsyncState, useEventBus } from '@hairy/react-lib'
 import { Button, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from '@heroui/react'
 import dayjs from 'dayjs'
 import Countdown from 'react-countdown'
+import { encodeFunctionData } from 'viem'
 
 export interface DetailFueltankTableProps {
-  address: string
+  address: Address
 }
 
 export function DetailFueltankTable(props: DetailFueltankTableProps) {
@@ -19,10 +20,31 @@ export function DetailFueltankTable(props: DetailFueltankTableProps) {
     },
     [address],
   )
+
+  async function claim(index: bigint) {
+    const data = encodeFunctionData({
+      abi: ihoFueltankAbi,
+      functionName: 'claim',
+      args: [index],
+    })
+    const hash = await writeIerc6551AccountExecute({
+      address,
+      args: [
+        chain.contracts.IHOFueltank.address,
+        0n,
+        data,
+      ],
+    })
+
+    await transactionWaitingReceipt(hash)
+    await transactionConfirmedToast(hash)
+    await reloadUnlocks()
+  }
+
   function renderCell(unlock: typeof unlocks[number], key: Key) {
     const cellValue = unlock[key as keyof typeof unlock] as any
     const unlocktime = dayjs.unix(Number(unlock.unlocktime))
-    const locked = dayjs().isAfter(unlocktime)
+    const locked = dayjs().isBefore(unlocktime)
     switch (key) {
       case 'unlocktime':
         return unlocktime.format('MM/DD HH:mm')
@@ -43,11 +65,6 @@ export function DetailFueltankTable(props: DetailFueltankTableProps) {
       case 'actions':
         return locked
           ? (
-              <Button className="h-6" color="primary" size="sm">
-                Claim
-              </Button>
-            )
-          : (
               <Button className="h-6" isDisabled size="sm">
                 <Countdown
                   date={unlocktime.valueOf()}
@@ -55,6 +72,11 @@ export function DetailFueltankTable(props: DetailFueltankTableProps) {
                     return dayjs.duration(total).format('D[d] H:mm:ss')
                   }}
                 />
+              </Button>
+            )
+          : (
+              <Button onPress={() => claim(unlock.index)} className="h-6" color="primary" size="sm">
+                Claim
               </Button>
             )
       default:

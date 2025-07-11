@@ -29,6 +29,8 @@ declare global {
   const MinerConfirmDialog: typeof import('../components/miner-confirm-dialog')['MinerConfirmDialog']
   const MinerFueltankDialog: typeof import('../components/miner-fueltank-dialog')['MinerFueltankDialog']
   const MinerScannerDialog: typeof import('../components/miner-scanner-dialog')['MinerScannerDialog']
+  const MinerScanning: typeof import('../components/miner-scanning-dialog')['MinerScanning']
+  const MinerScanningDialog: typeof import('../components/miner-scanning-dialog')['MinerScanningDialog']
   const MinerWithdrawDialog: typeof import('../components/miner-withdraw-dialog')['MinerWithdrawDialog']
   const NonNotExitsConnect: typeof import('../components/non-not-exits-connect')['NonNotExitsConnect']
   const QuestionTooltip: typeof import('../components/question-tooltip')['QuestionTooltip']
@@ -90,8 +92,11 @@ declare global {
   const getIhoMarket: typeof import('../generated/index')['getIhoMarket']
   const getIhoMining: typeof import('../generated/index')['getIhoMining']
   const getIihoFuel: typeof import('../generated/index')['getIihoFuel']
+  const getMiner: typeof import('../apis/index')['getMiner']
+  const getMinerAccount: typeof import('../apis/index')['getMinerAccount']
   const getMinerMac: typeof import('../apis/index')['getMinerMac']
   const getProduct: typeof import('../apis/index')['getProduct']
+  const getProductSearch: typeof import('../apis/index')['getProductSearch']
   const getVerifiableUpgradeable: typeof import('../generated/index')['getVerifiableUpgradeable']
   const ierc6551AccountAbi: typeof import('../generated/index')['ierc6551AccountAbi']
   const ierc6551AccountAddress: typeof import('../generated/index')['ierc6551AccountAddress']
@@ -277,6 +282,7 @@ declare global {
   const readIhoMiningSupportsInterface: typeof import('../generated/index')['readIhoMiningSupportsInterface']
   const readIhoMiningSymbol: typeof import('../generated/index')['readIhoMiningSymbol']
   const readIhoMiningTokenOf: typeof import('../generated/index')['readIhoMiningTokenOf']
+  const readIhoMiningTokenOfAccount: typeof import('../generated/index')['readIhoMiningTokenOfAccount']
   const readIhoMiningTokenUri: typeof import('../generated/index')['readIhoMiningTokenUri']
   const readIhoMiningTotalSupply: typeof import('../generated/index')['readIhoMiningTotalSupply']
   const readIhoMiningUpgradeInterfaceVersion: typeof import('../generated/index')['readIhoMiningUpgradeInterfaceVersion']
@@ -623,6 +629,7 @@ declare global {
   const useReadIhoMiningSupportsInterface: typeof import('../generated/index')['useReadIhoMiningSupportsInterface']
   const useReadIhoMiningSymbol: typeof import('../generated/index')['useReadIhoMiningSymbol']
   const useReadIhoMiningTokenOf: typeof import('../generated/index')['useReadIhoMiningTokenOf']
+  const useReadIhoMiningTokenOfAccount: typeof import('../generated/index')['useReadIhoMiningTokenOfAccount']
   const useReadIhoMiningTokenUri: typeof import('../generated/index')['useReadIhoMiningTokenUri']
   const useReadIhoMiningTotalSupply: typeof import('../generated/index')['useReadIhoMiningTotalSupply']
   const useReadIhoMiningUpgradeInterfaceVersion: typeof import('../generated/index')['useReadIhoMiningUpgradeInterfaceVersion']
@@ -1240,6 +1247,9 @@ declare global {
   // @ts-ignore
   export type { MinerFueltankDialogProps, ContentProps } from '../components/miner-fueltank-dialog'
   import('../components/miner-fueltank-dialog')
+  // @ts-ignore
+  export type { MinerScanningDialogProps } from '../components/miner-scanning-dialog'
+  import('../components/miner-scanning-dialog')
   // @ts-ignore
   export type { MinerWithdrawDialogProps } from '../components/miner-withdraw-dialog'
   import('../components/miner-withdraw-dialog')

@@ -8,15 +8,7 @@ export function HomePage() {
   const { address } = useAccount()
 
   const [{ value: miners = [], loading }, reloadMiners] = useAsyncState(
-    async () => {
-      const logs = await client.getLogs({
-        event: getAbiItem({ abi: ihoMiningAbi, name: 'Registered' }),
-        address: addresses.IHOMining[5167004],
-        toBlock: 'latest',
-        fromBlock: 0n,
-      })
-      return logs.map(log => log.args)
-    },
+    async () => getMiner({ user: address! }),
     [address],
     { immediate: true },
   )
@@ -45,7 +37,9 @@ export function HomePage() {
               <HomeMiningItem
                 key={miner.account}
                 name={miner.name || 'Unnamed Device'}
+                address={miner.account}
                 id={miner.mac!}
+                src={miner.image}
               />
             ))}
             <HomeMiningIncrease onRegistered={reloadMiners} />

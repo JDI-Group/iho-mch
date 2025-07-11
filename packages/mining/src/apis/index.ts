@@ -5,9 +5,9 @@
  * @version 1.0.0
  */
 
-import type * as Types from './index.type'
+import * as Types from "./index.type";
 
-export const baseURL = process.env.NEXT_PUBLIC_MINING_SERVICE_URL
+export const baseURL = process.env.NEXT_PUBLIC_MINING_SERVICE_URL;
 
 /**
  * @method get
@@ -16,18 +16,40 @@ export const baseURL = process.env.NEXT_PUBLIC_MINING_SERVICE_URL
 export async function getProduct(config?: RequestInit) {
   const response = await fetch(`${baseURL}/product`, {
     ...config,
-  })
-  return response.json() as Promise<Types.Product[]>
+  });
+  return response.json() as Promise<Types.Product[]>;
+}
+/**
+ * @method get
+ * @tags Product
+ */
+export async function getProductSearch(query: Types.GetProductSearchQuery, config?: RequestInit) {
+  const querystr = new URLSearchParams(Object.entries(query || {}));
+  const response = await fetch(`${baseURL}/product/search?${querystr}`, {
+    ...config,
+  });
+  return response.json() as Promise<Types.Product>;
 }
 /**
  * @method get
  * @tags Miner
  */
-export async function getMinerMac(paths: Types.GetMinerMacPath, config?: RequestInit) {
-  const response = await fetch(`${baseURL}/miner/${paths.mac}`, {
+export async function getMiner(query: Types.GetMinerQuery, config?: RequestInit) {
+  const querystr = new URLSearchParams(Object.entries(query || {}));
+  const response = await fetch(`${baseURL}/miner?${querystr}`, {
     ...config,
-  })
-  return response.json() as Promise<Types.Miner>
+  });
+  return response.json() as Promise<Types.Miner[]>;
+}
+/**
+ * @method get
+ * @tags Miner
+ */
+export async function getMinerAccount(paths: Types.GetMinerAccountPath, config?: RequestInit) {
+  const response = await fetch(`${baseURL}/miner/${paths.account}`, {
+    ...config,
+  });
+  return response.json() as Promise<Types.Miner>;
 }
 /**
  * @method post
@@ -35,12 +57,12 @@ export async function getMinerMac(paths: Types.GetMinerMacPath, config?: Request
  */
 export async function postSignRegisterDevice(body: Types.SignatureRegisterBody, config?: RequestInit) {
   const response = await fetch(`${baseURL}/sign/registerDevice`, {
-    headers: { 'Content-Type': 'application/json' },
-    method: 'post',
+    headers: { "Content-Type": "application/json" },
+    method: "post",
     body: JSON.stringify(body),
     ...config,
-  })
-  return response.json() as Promise<Types.SignatureResponse>
+  });
+  return response.json() as Promise<Types.SignatureResponse>;
 }
 /**
  * @method post
@@ -48,9 +70,9 @@ export async function postSignRegisterDevice(body: Types.SignatureRegisterBody, 
  */
 export async function postTaskManuallyTriggerRewards(body: Types.ManuallyTriggerRewardsBody, config?: RequestInit) {
   await fetch(`${baseURL}/task/manually-trigger/rewards`, {
-    headers: { 'Content-Type': 'application/json' },
-    method: 'post',
+    headers: { "Content-Type": "application/json" },
+    method: "post",
     body: JSON.stringify(body),
     ...config,
-  })
+  });
 }

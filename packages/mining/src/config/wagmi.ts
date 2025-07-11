@@ -5,7 +5,7 @@ const wallets = getDefaultWallets().wallets
 const connectors = connectorsForWallets(wallets, { appName: 'Starter', projectId: '019ca23f39a338bb3d0600cf1cae08fa' })
 
 export const wagmiConfig = createConfig(<any>{
-  chains: Object.values(chains),
+  chains: process.env.NEXT_PUBLIC_NETWORK === 'moonchain_geneva' ? [chains.moonchainGeneva] : [chains.moonchain],
   connectors,
   ssr: true,
 })

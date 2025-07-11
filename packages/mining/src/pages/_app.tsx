@@ -3,7 +3,7 @@ import { Injector } from '@hairy/react-lib'
 import { ToastProvider } from '@heroui/react'
 import { OverlaysProvider } from '@overlastic/react'
 import { RainbowKitProvider } from '@rainbow-me/rainbowkit'
-
+import {SubscribeWagmiConfig} from '@/generated'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import Head from 'next/head'
 import { useMount } from 'react-use'
@@ -13,7 +13,6 @@ import '@rainbow-me/rainbowkit/styles.css'
 
 export default function App({ Component, pageProps }: any) {
   const client = new QueryClient()
-  const SubscribeWagmiConfigClone = SubscribeWagmiConfig as any
   useMount(() => {
     if (process.env.NEXT_PUBLIC_NETWORK === 'moonchain_geneva')
       Reflect.get(window, 'eruda')?.init()
@@ -37,7 +36,7 @@ export default function App({ Component, pageProps }: any) {
       >
         <ToastProvider placement="top-center" />
         <Component {...pageProps} />
-        <SubscribeWagmiConfigClone />
+        <SubscribeWagmiConfig />
       </Injector>
     </>
   )
