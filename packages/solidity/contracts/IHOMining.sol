@@ -94,7 +94,10 @@ contract IHOMining is
 
   /// @notice Mapping from device identifier to token information
   mapping(string mac => Token) private DeviceMapToken;
-  
+
+  /// @notice Mapping from account address to token information
+  mapping(address account => Token) private AccountMapToken;
+
   /// @notice Mapping from token address and ID to device identifier
   mapping(address token => mapping(uint256 tokenId => Device)) private TokenMapDevice;
   
@@ -201,6 +204,7 @@ contract IHOMining is
     address _account = _mintAccount(address(this), _tokenID);
 
     TokenMapDevice[address(this)][_tokenID] = Device(product, name, mac);
+    AccountMapToken[_account] = Token(address(this), _tokenID);
     DeviceMapToken[mac] = Token(address(this), _tokenID);
 
     emit Registered(
@@ -298,6 +302,15 @@ contract IHOMining is
    */
   function tokenOf(string memory mac) public view returns (Token memory) {
     return DeviceMapToken[mac];
+  }
+
+  /**
+   * @dev Gets the token information for an account
+   * @param account The account address
+   * @return Token structure with token address and ID
+   */
+  function tokenOfAccount(address account) public view returns (Token memory) {
+    return AccountMapToken[account];
   }
 
   /**
