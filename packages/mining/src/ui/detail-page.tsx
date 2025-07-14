@@ -9,6 +9,11 @@ export function DetailPage() {
     [router.query.id],
     { immediate: true },
   )
+  const [{ value: rewards = [] }] = useAsyncState(
+    async () => getMinerAccountDailyRewards({ account: router.query.address as string }),
+    [router.query.id],
+    { immediate: true },
+  )
   return (
     <>
       <section className="px-4 pb-4">
@@ -17,10 +22,10 @@ export function DetailPage() {
       <section className="px-4">
         <Tabs aria-label="Tabs variants" size="md" variant="underlined">
           <Tab key="reward" title="Reward">
-            <DetailRewards loading={loading} miner={miner} />
+            <DetailRewards loading={loading} miner={miner} rewards={rewards} />
           </Tab>
           <Tab key="fuel-tank" title="Fuel tank">
-            <DetailFueltank loading={loading} miner={miner} />
+            <DetailFueltank loading={loading} miner={miner} rewards={rewards} />
           </Tab>
         </Tabs>
       </section>

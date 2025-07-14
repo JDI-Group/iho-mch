@@ -1,3 +1,4 @@
+import { formatEther } from '@hairy/ether-lib'
 import React from 'react'
 import {
   Area,
@@ -10,24 +11,26 @@ import {
   YAxis,
 } from 'recharts'
 
-const fuelData = [
-  { time: '10/01', fuel: 1200, revenue: 2400 },
-  { time: '10/02', fuel: 3000, revenue: 5200 },
-  { time: '10/03', fuel: 2000, revenue: 4200 },
-  { time: '10/04', fuel: 2780, revenue: 4900 },
-  { time: '10/05', fuel: 1890, revenue: 3800 },
-  { time: '10/06', fuel: 2390, revenue: 4700 },
-  { time: '10/07', fuel: 1800, revenue: 3500 },
-]
+export interface DetailFueltankChartData {
+  date: string
+  reward?: bigint
+  fueltank?: bigint
+}
+export interface DetailFueltankChartsProps {
+  rewards?: DetailFueltankChartData[]
+}
 
-export function DetailFueltankChart() {
+export function DetailFueltankCharts(props: DetailFueltankChartsProps) {
   return (
     <ResponsiveContainer width="100%" height="100%">
       <AreaChart
-        data={fuelData}
+        data={props.rewards?.map(reward => ({
+          ...reward,
+          reward: +formatEther(reward.reward, { delimiters: false }),
+          fueltank: +formatEther(reward.fueltank, { delimiters: false }),
+        }))}
         margin={{ left: 18, right: -10 }}
       >
-
         <defs>
           <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
             <stop offset="5%" stopColor="#a3ffcb" stopOpacity={0.5} />
@@ -60,19 +63,20 @@ export function DetailFueltankChart() {
             angle: 90,
             position: 'insideRight',
           }}
+          domain={[5000, (max: number) => Math.max(max, 3000) * 1.2]}
         />
 
         <Tooltip
           formatter={(value, name) => {
-            if (name === 'Fuel')
-              return [`${value} MXC`, 'Fuel']
+            if (name === 'Fueltank')
+              return [`${value} MXC`, 'Fueltank']
             return [`${value} MXC`, 'Revenue']
           }}
         />
         <Area
           type="natural"
-          dataKey="fuel"
-          name="Fuel"
+          dataKey="fueltank"
+          name="Fueltank"
           stroke="#17c964"
           fillOpacity={1}
           fill="url(#colorUv)"
@@ -81,7 +85,7 @@ export function DetailFueltankChart() {
 
         <Area
           type="natural"
-          dataKey="revenue"
+          dataKey="reward"
           name="Revenue"
           stroke="#70ADF8"
           fill="url(#colorRevenue)"

@@ -1,4 +1,5 @@
 /* eslint-disable react/no-unstable-default-props */
+import { formatEther } from '@hairy/ether-lib'
 import { If } from '@hairy/react-lib'
 import { arange } from '@hairy/utils'
 import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
@@ -12,12 +13,12 @@ export interface DetailRewardsChartProps {
   data?: DetailRewardsChartData[]
 }
 
-export function DetailRewardsChart(props: DetailRewardsChartProps) {
+export function DetailRewardsCharts(props: DetailRewardsChartProps) {
   const { data = [] } = props
   const total = data.reduce((acc, item) => acc + (item.reward || 0n), 0n)
   const formattedData = data.map(item => ({
     date: item.date,
-    reward: Number(item.reward || 0),
+    reward: +formatEther(item.reward || 0, { delimiters: false }),
   }))
   return (
     <>

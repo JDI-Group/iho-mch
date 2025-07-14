@@ -8,7 +8,7 @@ import Countdown from 'react-countdown'
 import { encodeFunctionData } from 'viem'
 
 export interface DetailFueltankTableProps {
-  address: Address
+  address: string
 }
 
 export function DetailFueltankTable(props: DetailFueltankTableProps) {
@@ -28,7 +28,7 @@ export function DetailFueltankTable(props: DetailFueltankTableProps) {
       args: [index],
     })
     const hash = await writeIerc6551AccountExecute({
-      address,
+      address: address as Address,
       args: [
         chain.contracts.IHOFueltank.address,
         0n,

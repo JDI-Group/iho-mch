@@ -9,12 +9,14 @@ declare global {
   const ConnectWidget: typeof import('../components/connect-widget')['ConnectWidget']
   const DetailFuelTank: typeof import('../ui/detail-fueltank')['DetailFuelTank']
   const DetailFueltank: typeof import('../ui/detail-fueltank')['DetailFueltank']
-  const DetailFueltankChart: typeof import('../ui/detail-fueltank-chart')['DetailFueltankChart']
+  const DetailFueltankChart: typeof import('../ui/detail-fueltank-charts')['DetailFueltankChart']
+  const DetailFueltankCharts: typeof import('../ui/detail-fueltank-charts')['DetailFueltankCharts']
   const DetailFueltankTable: typeof import('../ui/detail-fueltank-table')['DetailFueltankTable']
   const DetailPage: typeof import('../ui/detail-page')['DetailPage']
-  const DetailRewardChart: typeof import('../ui/detail-rewards-chart')['DetailRewardChart']
+  const DetailRewardChart: typeof import('../ui/detail-rewards-charts')['DetailRewardChart']
   const DetailRewards: typeof import('../ui/detail-rewards')['DetailRewards']
-  const DetailRewardsChart: typeof import('../ui/detail-rewards-chart')['DetailRewardsChart']
+  const DetailRewardsChart: typeof import('../ui/detail-rewards-charts')['DetailRewardsChart']
+  const DetailRewardsCharts: typeof import('../ui/detail-rewards-charts')['DetailRewardsCharts']
   const DetailRewardsTable: typeof import('../ui/detail-rewards-table')['DetailRewardsTable']
   const DetailStatusBar: typeof import('../ui/detail-status-bar')['DetailStatusBar']
   const DeviceConfirmDialog: typeof import('../components/device-confirm-dialog')['DeviceConfirmDialog']
@@ -68,6 +70,7 @@ declare global {
   const erc721MockAbi: typeof import('../generated/index')['erc721MockAbi']
   const erc721MockAddress: typeof import('../generated/index')['erc721MockAddress']
   const forwardRef: typeof import('react')['forwardRef']
+  const generate7dayData: typeof import('../utils/index')['generate7dayData']
   const getBidirectionalTransfer: typeof import('../generated/index')['getBidirectionalTransfer']
   const getContract: typeof import('../generated/index')['getContract']
   const getErc1967Proxy: typeof import('../generated/index')['getErc1967Proxy']
@@ -94,9 +97,12 @@ declare global {
   const getIihoFuel: typeof import('../generated/index')['getIihoFuel']
   const getMiner: typeof import('../apis/index')['getMiner']
   const getMinerAccount: typeof import('../apis/index')['getMinerAccount']
+  const getMinerAccountDailyRewards: typeof import('../apis/index')['getMinerAccountDailyRewards']
   const getMinerMac: typeof import('../apis/index')['getMinerMac']
   const getProduct: typeof import('../apis/index')['getProduct']
   const getProductSearch: typeof import('../apis/index')['getProductSearch']
+  const getUserOwnerDailyRewards: typeof import('../apis/index')['getUserOwnerDailyRewards']
+  const getUserOwnerMiners: typeof import('../apis/index')['getUserOwnerMiners']
   const getVerifiableUpgradeable: typeof import('../generated/index')['getVerifiableUpgradeable']
   const ierc6551AccountAbi: typeof import('../generated/index')['ierc6551AccountAbi']
   const ierc6551AccountAddress: typeof import('../generated/index')['ierc6551AccountAddress']
@@ -1263,14 +1269,17 @@ declare global {
   export type { TooltipProps } from '../components/tooltip'
   import('../components/tooltip')
   // @ts-ignore
+  export type { DetailFueltankChartData, DetailFueltankChartsProps } from '../ui/detail-fueltank-charts'
+  import('../ui/detail-fueltank-charts')
+  // @ts-ignore
   export type { DetailFueltankTableProps } from '../ui/detail-fueltank-table'
   import('../ui/detail-fueltank-table')
   // @ts-ignore
   export type { DetailFueltankProps } from '../ui/detail-fueltank'
   import('../ui/detail-fueltank')
   // @ts-ignore
-  export type { DetailRewardsChartData, DetailRewardsChartProps } from '../ui/detail-rewards-chart'
-  import('../ui/detail-rewards-chart')
+  export type { DetailRewardsChartData, DetailRewardsChartProps } from '../ui/detail-rewards-charts'
+  import('../ui/detail-rewards-charts')
   // @ts-ignore
   export type { DetailRewardsProps } from '../ui/detail-rewards'
   import('../ui/detail-rewards')

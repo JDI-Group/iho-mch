@@ -1,18 +1,15 @@
 import { Unless, useAsyncState } from '@hairy/react-lib'
 import { Spinner } from '@heroui/react'
-import { useMount } from 'react-use'
 import { useAccount } from 'wagmi'
 
 export function HomePage() {
   const { address } = useAccount()
 
-  const [{ value: miners = [], loading }, reloadMiners] = useAsyncState(
-    async () => getMiner({ user: address! }),
+  const [{ value: miners = [], loading }] = useAsyncState(
+    async () => getUserOwnerMiners({ owner: address! }),
     [address],
     { immediate: true },
   )
-
-  useMount(reloadMiners)
 
   return (
     <>
@@ -41,7 +38,7 @@ export function HomePage() {
                 src={miner.image}
               />
             ))}
-            <HomeMiningIncrease onRegistered={reloadMiners} />
+            <HomeMiningIncrease />
           </div>
         </Unless>
       </section>

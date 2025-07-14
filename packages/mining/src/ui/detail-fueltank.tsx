@@ -1,16 +1,19 @@
-import type { Miner } from '@/apis/index.type'
+import type { Miner, MinerDailyReward } from '@/apis/index.type'
 import type { Address } from 'viem'
 import { formatEther } from '@hairy/ether-lib'
 import { useAsyncCallback, useAsyncState, useEventBus } from '@hairy/react-lib'
+import { keyBy, values } from '@hairy/utils'
 import { Button } from '@heroui/react'
 import { Icon } from '@iconify/react/dist/iconify.js'
 import { useOverlayInject } from '@overlastic/react'
+import dayjs from 'dayjs'
 import { zeroAddress } from 'viem'
-import { DetailFueltankChart } from './detail-fueltank-chart'
+import { DetailFueltankCharts } from './detail-fueltank-charts'
 import { DetailFueltankTable } from './detail-fueltank-table'
 
 export interface DetailFueltankProps {
   loading?: boolean
+  rewards?: MinerDailyReward[]
   miner?: Miner
 }
 
@@ -26,6 +29,21 @@ export function DetailFueltank(props: DetailFueltankProps) {
     },
     [miner?.account],
   )
+
+  const records = useMemo(() => {
+    const data = (props.rewards ?? []).map((reward) => {
+      const date = dayjs.unix(reward.timestamp).format('MM/DD')
+      return { date, ...reward }
+    })
+    const handled = values(
+      Object.assign(
+        keyBy(generate7dayData({ reward: 1000n, fueltank: 0n }), 'date'),
+        keyBy(data, 'date'),
+      ),
+    )
+    return handled.sort((a, b) => a.timestamp - b.timestamp)
+  }, [props.rewards])
+
   const reloadFueltankTable = useEventBus('fueltank-table:reload').emit
   const [depositLoading, deposit] = useAsyncCallback(async () => {
     await openMinerFueltankDialog({ type: 'deposit', miner: miner! })
@@ -39,7 +57,7 @@ export function DetailFueltank(props: DetailFueltankProps) {
   return (
     <div className="flex flex-col">
       <div className="mb-2 h-40">
-        <DetailFueltankChart />
+        <DetailFueltankCharts rewards={records} />
       </div>
       <div className="mb-2 flex gap-6">
         <div className="flex flex-col">

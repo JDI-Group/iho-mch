@@ -1,6 +1,7 @@
 import type { Hex } from 'viem'
 import { addToast, closeAll, Link } from '@heroui/react'
 import { Icon } from '@iconify/react/dist/iconify.js'
+import dayjs from 'dayjs'
 import { createElement } from 'react'
 
 export async function clipboardCopy(name: string, value: string, description?: string) {
@@ -52,4 +53,15 @@ export async function transactionConfirmedToast(hash: Hex) {
       }, 'Click to view transaction details', createElement(Icon, { className: 'text-sm', icon: 'solar:round-arrow-right-up-broken' })))
     ),
   })
+}
+export function generate7dayData<T>(item: T): (T & { timestamp: number, date: string })[] {
+  return [
+    { timestamp: dayjs().subtract(6, 'day').unix(), date: dayjs().subtract(6, 'day').format('MM/DD'), ...item },
+    { timestamp: dayjs().subtract(5, 'day').unix(), date: dayjs().subtract(5, 'day').format('MM/DD'), ...item },
+    { timestamp: dayjs().subtract(4, 'day').unix(), date: dayjs().subtract(4, 'day').format('MM/DD'), ...item },
+    { timestamp: dayjs().subtract(3, 'day').unix(), date: dayjs().subtract(3, 'day').format('MM/DD'), ...item },
+    { timestamp: dayjs().subtract(2, 'day').unix(), date: dayjs().subtract(2, 'day').format('MM/DD'), ...item },
+    { timestamp: dayjs().subtract(1, 'day').unix(), date: dayjs().subtract(1, 'day').format('MM/DD'), ...item },
+    { timestamp: dayjs().unix(), date: dayjs().format('MM/DD'), ...item },
+  ]
 }

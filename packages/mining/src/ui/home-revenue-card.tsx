@@ -3,9 +3,7 @@ import { useAsyncState } from '@hairy/react-lib'
 import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@heroui/react'
 import { Icon } from '@iconify/react/dist/iconify.js'
 import dayjs from 'dayjs'
-import { ZeroAddress } from 'ethers'
 import { useMount } from 'react-use'
-import { getAbiItem } from 'viem'
 import { useAccount } from 'wagmi'
 
 const options = [
@@ -25,22 +23,13 @@ export function HomeRevenueCard() {
 
   const [{ value: rewards }, reloadRewards] = useAsyncState(
     async () => {
-      const logs = await client.getLogs({
-        event: getAbiItem({ abi: ihoMiningAbi, name: 'Claimed' }),
-        address: chain.contracts.IHOMining.address,
-        toBlock: 'latest',
-        fromBlock: 0n,
-        args: { owner: address },
-      })
+      const logs = await getUserOwnerDailyRewards({ owner: address! })
       // filter out rewards with main currency
-      return logs
-        .flatMap(log => (log.args.rewards || []).map(reward => ({
-          ...reward,
-          timestamp: log.args.timestamp!,
-          blockNumber: log.blockNumber,
-          blockHash: log.blockHash,
-        })))
-        .filter(reward => reward.token === ZeroAddress)
+      return logs.map(log => ({
+        ...log,
+        amount: BigInt(log.reward),
+        timestamp: Number(log.timestamp),
+      }))
     },
     [address],
     { immediate: true },

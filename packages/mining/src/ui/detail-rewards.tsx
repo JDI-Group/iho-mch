@@ -1,28 +1,35 @@
-import type { Miner } from '@/apis/index.type'
+import type { Miner, MinerDailyReward } from '@/apis/index.type'
 import type { Address } from 'viem'
 import { formatEther } from '@hairy/ether-lib'
 import { useAsyncCallback, useAsyncState } from '@hairy/react-lib'
+import { keyBy, values } from '@hairy/utils'
 import { addToast, Button } from '@heroui/react'
 import { useOverlayInject } from '@overlastic/react'
 import dayjs from 'dayjs'
 
 export interface DetailRewardsProps {
   miner?: Miner
+  rewards?: MinerDailyReward[]
   loading?: boolean
 }
 
 export function DetailRewards(props: DetailRewardsProps) {
   const openMinerWithdrawDialog = useOverlayInject(MinerWithdrawDialog)
   // Collect data for seven days
-  const defaultDaysRecords = [
-    { date: dayjs().subtract(6, 'day').format('MM/DD'), reward: 0n },
-    { date: dayjs().subtract(5, 'day').format('MM/DD'), reward: null },
-    { date: dayjs().subtract(4, 'day').format('MM/DD'), reward: null },
-    { date: dayjs().subtract(3, 'day').format('MM/DD'), reward: null },
-    { date: dayjs().subtract(2, 'day').format('MM/DD'), reward: null },
-    { date: dayjs().subtract(1, 'day').format('MM/DD'), reward: null },
-    { date: dayjs().format('MM/DD'), reward: null },
-  ]
+
+  const records = useMemo(() => {
+    const data = (props.rewards ?? []).map((reward) => {
+      const date = dayjs.unix(reward.timestamp).format('MM/DD')
+      return { date, ...reward }
+    })
+    const handled = values(
+      Object.assign(
+        keyBy(generate7dayData({ reward: 0n }), 'date'),
+        keyBy(data, 'date'),
+      ),
+    )
+    return handled.sort((a, b) => a.timestamp - b.timestamp)
+  }, [props.rewards])
 
   const [{ value: balance }, reloadBalance] = useAsyncState(
     async () => {
@@ -53,7 +60,7 @@ export function DetailRewards(props: DetailRewardsProps) {
   return (
     <div className="flex flex-col">
       <div className="mb-2 h-40 relative">
-        <DetailRewardsChart data={defaultDaysRecords} />
+        <DetailRewardsCharts data={records} />
       </div>
       <div className="mb-2 flex gap-6">
         <div className="flex flex-col">
@@ -62,7 +69,7 @@ export function DetailRewards(props: DetailRewardsProps) {
         </div>
         <div className="flex flex-col">
           <div className="text-base">Today's reward</div>
-          <div className="text-sm">214 MXC</div>
+          <div className="text-sm">{formatEther(records.at(0)?.reward)} MXC</div>
         </div>
       </div>
       <div className="mb-4 flex gap-2">
