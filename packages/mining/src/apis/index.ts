@@ -5,9 +5,9 @@
  * @version 1.0.0
  */
 
-import * as Types from "./index.type";
+import type * as Types from './index.type'
 
-export const baseURL = process.env.NEXT_PUBLIC_MINING_SERVICE_URL;
+export const baseURL = process.env.NEXT_PUBLIC_MINING_SERVICE_URL
 
 /**
  * @method get
@@ -16,19 +16,19 @@ export const baseURL = process.env.NEXT_PUBLIC_MINING_SERVICE_URL;
 export async function getProduct(config?: RequestInit) {
   const response = await fetch(`${baseURL}/product`, {
     ...config,
-  });
-  return response.json() as Promise<Types.Product[]>;
+  })
+  return response.json() as Promise<Types.Product[]>
 }
 /**
  * @method get
  * @tags Product
  */
 export async function getProductSearch(query: Types.GetProductSearchQuery, config?: RequestInit) {
-  const querystr = new URLSearchParams(Object.entries(query || {}));
+  const querystr = new URLSearchParams(Object.entries(query || {}))
   const response = await fetch(`${baseURL}/product/search?${querystr}`, {
     ...config,
-  });
-  return response.json() as Promise<Types.Product>;
+  })
+  return response.json() as Promise<Types.Product>
 }
 /**
  * @method get
@@ -37,8 +37,8 @@ export async function getProductSearch(query: Types.GetProductSearchQuery, confi
 export async function getMinerAccount(paths: Types.GetMinerAccountPath, config?: RequestInit) {
   const response = await fetch(`${baseURL}/miner/${paths.account}`, {
     ...config,
-  });
-  return response.json() as Promise<Types.Miner>;
+  })
+  return response.json() as Promise<Types.Miner>
 }
 /**
  * @method get
@@ -47,8 +47,8 @@ export async function getMinerAccount(paths: Types.GetMinerAccountPath, config?:
 export async function getMinerAccountDailyRewards(paths: Types.GetMinerAccountDailyRewardsPath, config?: RequestInit) {
   const response = await fetch(`${baseURL}/miner/${paths.account}/daily-rewards`, {
     ...config,
-  });
-  return response.json() as Promise<Types.MinerDailyReward[]>;
+  })
+  return response.json() as Promise<Types.MinerDailyReward[]>
 }
 /**
  * @method get
@@ -57,8 +57,8 @@ export async function getMinerAccountDailyRewards(paths: Types.GetMinerAccountDa
 export async function getUserOwnerMiners(paths: Types.GetUserOwnerMinersPath, config?: RequestInit) {
   const response = await fetch(`${baseURL}/user/${paths.owner}/miners`, {
     ...config,
-  });
-  return response.json() as Promise<Types.Miner[]>;
+  })
+  return response.json() as Promise<Types.Miner[]>
 }
 /**
  * @method get
@@ -67,8 +67,8 @@ export async function getUserOwnerMiners(paths: Types.GetUserOwnerMinersPath, co
 export async function getUserOwnerDailyRewards(paths: Types.GetUserOwnerDailyRewardsPath, config?: RequestInit) {
   const response = await fetch(`${baseURL}/user/${paths.owner}/daily-rewards`, {
     ...config,
-  });
-  return response.json() as Promise<Types.UserDailyReward[]>;
+  })
+  return response.json() as Promise<Types.UserDailyReward[]>
 }
 /**
  * @method post
@@ -76,12 +76,12 @@ export async function getUserOwnerDailyRewards(paths: Types.GetUserOwnerDailyRew
  */
 export async function postSignRegister(body: Types.SignatureRegisterBody, config?: RequestInit) {
   const response = await fetch(`${baseURL}/sign/register`, {
-    headers: { "Content-Type": "application/json" },
-    method: "post",
+    headers: { 'Content-Type': 'application/json' },
+    method: 'post',
     body: JSON.stringify(body),
     ...config,
-  });
-  return response.json() as Promise<Types.SignatureResponse>;
+  })
+  return response.json() as Promise<Types.SignatureResponse>
 }
 /**
  * @method post
@@ -89,9 +89,9 @@ export async function postSignRegister(body: Types.SignatureRegisterBody, config
  */
 export async function postTaskManuallyTriggerRewards(body: Types.ManuallyTriggerRewardsBody, config?: RequestInit) {
   await fetch(`${baseURL}/task/manually-trigger/rewards`, {
-    headers: { "Content-Type": "application/json" },
-    method: "post",
+    headers: { 'Content-Type': 'application/json' },
+    method: 'post',
     body: JSON.stringify(body),
     ...config,
-  });
+  })
 }
