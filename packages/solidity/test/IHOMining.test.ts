@@ -78,11 +78,11 @@ function solidityPackedRegisterSignatureKeccak256(
   owner: Address,
   name: string,
   mac: string,
-  product: number,
-  order: number,
+  product: bigint,
+  order: bigint,
 ) {
   const packed = encodePacked(
-    ['address', 'string', 'string', 'uint24', 'uint24'],
+    ['address', 'string', 'string', 'uint128', 'uint128'],
     [owner, name, mac, product, order],
   )
   return keccak256(packed)
@@ -94,8 +94,8 @@ export interface RegisterParameters {
 }
 
 export interface RegisterOverrides {
-  product?: number
-  order?: number
+  product?: bigint
+  order?: bigint
   name?: string
   mac?: string
 }
@@ -103,8 +103,8 @@ export interface RegisterOverrides {
 async function randomRegisterArgs({ owner, verifier }: RegisterParameters, overrides?: RegisterOverrides) {
   const name = overrides?.name ?? nanoid(5)
   const mac = overrides?.mac ?? nanoid(8)
-  const product = overrides?.product ?? +integer(randomNumber(0, 1000000))
-  const order = overrides?.order ?? +integer(randomNumber(0, 1000000))
+  const product = overrides?.product ?? BigInt(integer(randomNumber(0, 1000000)))
+  const order = overrides?.order ?? BigInt(integer(randomNumber(0, 1000000)))
 
   const raw = solidityPackedRegisterSignatureKeccak256(owner.account.address, name, mac, product, order)
   const signature = await verifier.signMessage({ message: { raw } })

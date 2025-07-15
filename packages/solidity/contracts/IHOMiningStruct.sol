@@ -32,7 +32,7 @@ struct Reward {
  * @param amount The amount of the token
  */
 struct Device {
-  uint24 product;
+  uint128 product;
   string name;
   string mac;
 }

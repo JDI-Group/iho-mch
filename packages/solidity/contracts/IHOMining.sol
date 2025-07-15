@@ -90,12 +90,12 @@ contract IHOMining is
     address indexed token,
     uint256 indexed tokenId,
     address account,
-    uint24 product,
-    uint24 order,
+    uint128 product,
+    uint128 order,
     string name,
     string mac,
     int256 blockHeight,
-    uint32 timestamp
+    uint256 timestamp
   );
 
   /**
@@ -121,7 +121,7 @@ contract IHOMining is
     string mac,
     string memo,
     int256 blockHeight,
-    uint32 timestamp
+    uint256 timestamp
   );
 
   /// @custom:oz-upgrades-unsafe-allow constructor
@@ -166,8 +166,8 @@ contract IHOMining is
   function register(
     string memory name,
     string memory mac,
-    uint24 product,
-    uint24 order,
+    uint128 product,
+    uint128 order,
     bytes memory signature
   ) public {
     if (bytes(mac).length < 6)
@@ -201,7 +201,7 @@ contract IHOMining is
       name,
       mac,
       int(block.number),
-      uint32(block.timestamp)
+      uint256(block.timestamp)
     );
   }
 
@@ -255,7 +255,7 @@ contract IHOMining is
       device.mac,
       memo,
       int(block.number),
-      uint32(block.timestamp)
+      uint256(block.timestamp)
     );
   }
 
