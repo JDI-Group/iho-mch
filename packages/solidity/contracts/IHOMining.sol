@@ -89,11 +89,11 @@ contract IHOMining is
     address indexed owner,
     address indexed token,
     uint256 indexed tokenId,
+    address account,
     uint24 product,
     uint24 order,
     string name,
     string mac,
-    address account,
     int256 blockHeight,
     uint32 timestamp
   );
@@ -116,9 +116,9 @@ contract IHOMining is
     address indexed token,
     uint256 indexed tokenId,
     address account,
+    Coin[] rewards,
     string name,
     string mac,
-    Coin[] rewards,
     string memo,
     int256 blockHeight,
     uint32 timestamp
@@ -195,11 +195,11 @@ contract IHOMining is
       msg.sender,
       address(this),
       _tokenID,
+      _account,
       product,
       order,
       name,
       mac,
-      _account,
       int(block.number),
       uint32(block.timestamp)
     );
@@ -250,9 +250,9 @@ contract IHOMining is
       token.tokenContract,
       token.tokenId,
       account,
+      rewards,
       device.name,
       device.mac,
-      rewards,
       memo,
       int(block.number),
       uint32(block.timestamp)
