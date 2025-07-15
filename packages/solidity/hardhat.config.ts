@@ -17,14 +17,16 @@ const config = {
   },
   solidity: {
     profiles: {
-      default: { version: '0.8.28' },
+      default: {
+        settings: {
+          optimizer: { enabled: true, runs: 50 },
+        },
+        version: '0.8.28',
+      },
       production: {
         settings: {
+          optimizer: { enabled: true, runs: 200 },
           evmVersion: 'shanghai',
-          optimizer: {
-            enabled: true,
-            runs: 200,
-          },
         },
         version: '0.8.28',
       },

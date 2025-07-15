@@ -9,6 +9,7 @@ import "./utils/VerifiableUpgradeable.sol";
 import "./utils/BidirectionalTransfer.sol";
 import "./interfaces/IIHOFuel.sol";
 import "./erc6551/interfaces/IERC6551Registry.sol";
+import "./IHOMiningStruct.sol";
 
 /**
  * @title IHOMining
@@ -58,45 +59,14 @@ contract IHOMining is
   /// @notice The total number of tokens minted
   uint128 public totalSupply;
 
-  /**
-   * @dev Structure mapping a device to its token information
-   * @param token The token contract address
-   * @param tokenId The token ID
-   */
-  struct Token {
-    address tokenContract;
-    uint256 tokenId;
-  }
-
-  /**
-   * @dev Structure representing a reward with token address and amount
-   * @param token The token contract address
-   * @param amount The amount of the token
-   */
-  struct Reward {
-    string id;
-    string mac;
-    Coin[] rewards;
-    bool fuelling;
-    string memo;
-  }
-
-  /**
-   * @dev Structure representing a coin with token address and amount
-   * @param token The token contract address
-   * @param amount The amount of the token
-   */
-  struct Device {
-    uint256 product;
-    string name;
-    string mac;
-  }
 
   /// @notice Mapping from device identifier to token information
   mapping(string mac => Token) private DeviceMapToken;
 
   /// @notice Mapping from account address to token information
   mapping(address account => Token) private AccountMapToken;
+
+  mapping(uint256 order => Token) private OrderMapToken;
 
   /// @notice Mapping from token address and ID to device identifier
   mapping(address token => mapping(uint256 tokenId => Device)) private TokenMapDevice;
@@ -119,12 +89,13 @@ contract IHOMining is
     address indexed owner,
     address indexed token,
     uint256 indexed tokenId,
-    uint256 product,
+    uint24 product,
+    uint24 order,
     string name,
     string mac,
     address account,
     int256 blockHeight,
-    uint256 timestamp
+    uint32 timestamp
   );
 
   /**
@@ -150,12 +121,12 @@ contract IHOMining is
     Coin[] rewards,
     string memo,
     int256 blockHeight,
-    uint256 timestamp
+    uint32 timestamp
   );
 
   /// @custom:oz-upgrades-unsafe-allow constructor
   constructor() { _disableInitializers(); }
-  
+
   /**
    * @dev Authorizes an upgrade to a new implementation
    * @param newImplementation The address of the new implementation
@@ -192,38 +163,52 @@ contract IHOMining is
    *
    * Creates a new ERC721 token and associates it with an ERC6551 account
    */
-  function register(uint256 product, string memory name, string memory mac, bytes memory signature) public {
+  function register(
+    string memory name,
+    string memory mac,
+    uint24 product,
+    uint24 order,
+    bytes memory signature
+  ) public {
     if (bytes(mac).length < 6)
       revert InvalidMacFormat();
-    if (DeviceMapToken[mac].tokenContract != address(0))
+
+    if (
+      DeviceMapToken[mac].tokenContract != address(0) || 
+      OrderMapToken[order].tokenContract != address(0)
+    )
       revert DeviceRegistered();
 
-    verify(keccak256(abi.encodePacked(product, msg.sender, name, mac)), signature);
+    verify(keccak256(abi.encodePacked(msg.sender, name, mac, product, order)), signature);
 
     uint256 _tokenID = _mint(msg.sender);
     address _account = _mintAccount(address(this), _tokenID);
 
-    TokenMapDevice[address(this)][_tokenID] = Device(product, name, mac);
-    AccountMapToken[_account] = Token(address(this), _tokenID);
-    DeviceMapToken[mac] = Token(address(this), _tokenID);
+    Token memory token = Token(address(this), _tokenID);
+    Device memory device = Device(product, name, mac);
+    TokenMapDevice[address(this)][_tokenID] = device;
+    AccountMapToken[_account] = token;
+    DeviceMapToken[mac] = token;
+    OrderMapToken[order] = token;
 
     emit Registered(
       msg.sender,
       address(this),
       _tokenID,
       product,
+      order,
       name,
       mac,
       _account,
       int(block.number),
-      block.timestamp
+      uint32(block.timestamp)
     );
   }
 
   /**
    * @dev Claims rewards for a registered device
    * @param id Unique identifier for this claim
-   * @param mac The device MAC address
+   * @param account The device MAC address
    * @param rewards Array of rewards (tokens and amounts)
    * @param signature Verification signature from authorized verifier
    * @param fuelling Whether to deposit rewards to fuel contract or directly to account
@@ -231,50 +216,46 @@ contract IHOMining is
    */
   function claim(
     string memory id,
-    string memory mac,
+    address  account,
     Coin[] memory rewards,
     bytes memory signature,
     bool fuelling,
     string memory memo
   ) public payable {
-    Token memory tok = DeviceMapToken[mac];
+    Token memory token = AccountMapToken[account];
   
-    if (bytes(mac).length < 6)
-      revert InvalidMacFormat();
-    if (tok.tokenContract == address(0))
+    if (token.tokenContract == address(0))
       revert DeviceUnregistered();
     if (ClaimedIDs[id])
       revert ClaimAlreadyUsed();
   
     if (msg.sender != owner()) {
       bytes32 rewardsHash = keccak256(abi.encode(rewards));
-      bytes32 claimHash = keccak256(abi.encodePacked(id, mac, rewardsHash));
+      bytes32 claimHash = keccak256(abi.encodePacked(id, account, rewardsHash));
       verify(claimHash, signature);
     }
     
     // Mark claim as used
     ClaimedIDs[id] = true;
     
-    address _account = accountOf(mac);
-    
     if (fuelling)
-      _fills(_account, rewards);
+      _fills(account, rewards);
     else
-      _gifts(_account, rewards);
+      _gifts(account, rewards);
     
-    Device memory device = TokenMapDevice[tok.tokenContract][tok.tokenId];
+    Device memory device = TokenMapDevice[token.tokenContract][token.tokenId];
 
     emit Claimed(
-      IERC721(tok.tokenContract).ownerOf(tok.tokenId),
-      tok.tokenContract,
-      tok.tokenId,
-      _account,
+      IERC721(token.tokenContract).ownerOf(token.tokenId),
+      token.tokenContract,
+      token.tokenId,
+      account,
       device.name,
       device.mac,
       rewards,
       memo,
       int(block.number),
-      block.timestamp
+      uint32(block.timestamp)
     );
   }
 
@@ -286,7 +267,7 @@ contract IHOMining is
     for (uint256 i = 0; i < rewards.length; i++) {
       claim(
         rewards[i].id,
-        rewards[i].mac,
+        rewards[i].account,
         rewards[i].rewards,
         new bytes(0),
         rewards[i].fuelling,
@@ -300,7 +281,7 @@ contract IHOMining is
    * @param mac The device MAC address
    * @return Token structure with token address and ID
    */
-  function tokenOf(string memory mac) public view returns (Token memory) {
+  function tokenOfDevice(string memory mac) public view returns (Token memory) {
     return DeviceMapToken[mac];
   }
 
@@ -309,7 +290,7 @@ contract IHOMining is
    * @param account The account address
    * @return Token structure with token address and ID
    */
-  function tokenOfAccount(address account) public view returns (Token memory) {
+  function tokenOf(address account) public view returns (Token memory) {
     return AccountMapToken[account];
   }
 
@@ -319,8 +300,17 @@ contract IHOMining is
    * @param tokenId The token ID
    * @return The device identifier
    */
-  function deviceOf(address token, uint256 tokenId) public view returns (Device memory) {
+  function deviceOfToken(address token, uint256 tokenId) public view returns (Device memory) {
     return TokenMapDevice[token][tokenId];
+  }
+  /**
+   * @dev Gets the device identifier for a account
+   * @param account The account address
+   * @return The device identifier
+   */
+  function deviceOf(address account) public view returns (Device memory) {
+    Token memory token = AccountMapToken[account];
+    return deviceOfToken(token.tokenContract, token.tokenId);
   }
 
   /**
@@ -328,17 +318,11 @@ contract IHOMining is
    * @param mac The device MAC address
    * @return The account address (or address(0) if device not registered)
    */
-  function accountOf(string memory mac) public view returns (address) {
-    Token memory tok = DeviceMapToken[mac];
-    if (tok.tokenContract == address(0))
+  function accountOfDevice(string memory mac) public view returns (address) {
+    Token memory token = DeviceMapToken[mac];
+    if (token.tokenContract == address(0))
       return address(0);
-    return erc6551Registry.account(
-      erc6551AccountImplementation,
-      block.chainid,
-      tok.tokenContract,
-      tok.tokenId,
-      0
-    );
+    return accountOf(token.tokenContract, token.tokenId);
   }
 
   /**
@@ -347,7 +331,7 @@ contract IHOMining is
    * @param tokenId The token ID
    * @return The account address
    */
-  function accountOfToken(address token, uint256 tokenId) public view returns (address) {
+  function accountOf(address token, uint256 tokenId) public view returns (address) {
     return erc6551Registry.account(
       erc6551AccountImplementation,
       block.chainid,

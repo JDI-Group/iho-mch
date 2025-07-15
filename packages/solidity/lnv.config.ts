@@ -103,6 +103,4 @@ const config = defineConfig({
   },
 })
 
-// pnpm hardhat verify blockscout <address> --network moonchain --build-profile production --force
-
 export default config
