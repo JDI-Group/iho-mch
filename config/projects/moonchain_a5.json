@@ -56,7 +56,7 @@
   {
     "product": 22714,
     "upcoming": true,
-    "name": "Moonchain VR: A GPS and health tracker for your car",
+    "name": "Moonchain DIMO: A GPS and health tracker for your car",
     "description": "DIMO Macaron is smartest way to track and improve the health and value of your car.",
     "expire": 31536000,
     "target": 100,
@@ -64,7 +64,7 @@
   },
   {
     "product": 23033,
-    "name": "Moonchain DIMO: Oculus Quest 2",
+    "name": "Moonchain VR: Oculus Quest 2",
     "description": "The Oculus Quest 2 is your all-in-one ticket to next-level virtual reality. With stunning graphics, wireless freedom, and a growing universe of immersive apps and games, it’s the ultimate VR headset for gamers, creators, and explorers.",
     "expire": 31536000,
     "target": 100,
