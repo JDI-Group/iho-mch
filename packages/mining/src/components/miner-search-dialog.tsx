@@ -11,11 +11,10 @@ export interface MinerSearchDialogProps {
   data: Device
 }
 
-
 export function MinerSearchDialog(props: MinerSearchDialogProps) {
   const overlay = useExtendOverlay({ duration: 300 })
   const [value, setValue] = useState(0)
-  const {address} = useAccount()
+  const { address } = useAccount()
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -43,7 +42,8 @@ export function MinerSearchDialog(props: MinerSearchDialogProps) {
 
       Object.assign(device, { mac: generateMac() })
       overlay.resolve(device)
-    } catch (error: any) {
+    }
+    catch {
       overlay.reject()
     }
   }

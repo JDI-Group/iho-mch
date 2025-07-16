@@ -45,7 +45,7 @@ function Page() {
         product: product.id,
         order: +input,
         mac: '',
-      }
+      },
     })
     await delay(300)
     await register(device)

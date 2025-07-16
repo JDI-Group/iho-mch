@@ -1,6 +1,7 @@
 import { wagmiConfig } from '@/config'
 import { SubscribeWagmiConfig } from '@/generated'
 import { Injector, useFetchResponseIntercept } from '@hairy/react-lib'
+import { jsonTryParse } from '@hairy/utils'
 import { addToast, ToastProvider } from '@heroui/react'
 import { OverlaysProvider } from '@overlastic/react'
 import { RainbowKitProvider } from '@rainbow-me/rainbowkit'
@@ -10,7 +11,6 @@ import { useMount } from 'react-use'
 import { WagmiProvider } from 'wagmi'
 import '@/styles/globals.css'
 import '@rainbow-me/rainbowkit/styles.css'
-import { jsonTryParse } from '@hairy/utils'
 
 export default function App({ Component, pageProps }: any) {
   const client = new QueryClient()

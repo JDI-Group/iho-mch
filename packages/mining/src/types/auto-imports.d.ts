@@ -31,7 +31,6 @@ declare global {
   const MinerConfirmDialog: typeof import('../components/miner-confirm-dialog')['MinerConfirmDialog']
   const MinerFueltankDialog: typeof import('../components/miner-fueltank-dialog')['MinerFueltankDialog']
   const MinerScannerDialog: typeof import('../components/miner-scanner-dialog')['MinerScannerDialog']
-  const MinerSearch: typeof import('..../components/miner-search-dialog['MinerSearch']
   const MinerSearchDialog: typeof import('../components/miner-search-dialog')['MinerSearchDialog']
   const MinerWithdrawDialog: typeof import('../components/miner-withdraw-dialog')['MinerWithdrawDialog']
   const NonNotExitsConnect: typeof import('../components/non-not-exits-connect')['NonNotExitsConnect']
