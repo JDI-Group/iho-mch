@@ -1,7 +1,7 @@
 import { wagmiConfig } from '@/config'
 import { SubscribeWagmiConfig } from '@/generated'
-import { Injector } from '@hairy/react-lib'
-import { ToastProvider } from '@heroui/react'
+import { Injector, useFetchResponseIntercept } from '@hairy/react-lib'
+import { addToast, ToastProvider } from '@heroui/react'
 import { OverlaysProvider } from '@overlastic/react'
 import { RainbowKitProvider } from '@rainbow-me/rainbowkit'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
@@ -10,12 +10,28 @@ import { useMount } from 'react-use'
 import { WagmiProvider } from 'wagmi'
 import '@/styles/globals.css'
 import '@rainbow-me/rainbowkit/styles.css'
+import { jsonTryParse } from '@hairy/utils'
 
 export default function App({ Component, pageProps }: any) {
   const client = new QueryClient()
   useMount(() => {
     if (process.env.NEXT_PUBLIC_NETWORK === 'moonchain_geneva')
       Reflect.get(window, 'eruda')?.init()
+  })
+
+  useFetchResponseIntercept(async (response, init) => {
+    const text = await response.clone().text()
+    const data = jsonTryParse(text)
+    if (data?.statusCode) {
+      if (data.error && !Reflect.get(init || {}, 'skipMessage'))
+        addToast({ color: 'danger', description: data.message })
+      throw data
+    }
+
+    if (!data)
+      return response
+    const value = JSON.stringify(data)
+    return new Response(value, response)
   })
 
   return (

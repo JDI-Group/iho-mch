@@ -23,7 +23,7 @@ export function HomeRevenueCard() {
 
   const [{ value: rewards }, reloadRewards] = useAsyncState(
     async () => {
-      const logs = await getUserOwnerDailyRewards({ owner: address! })
+      const logs = await getMinerRewardsDaily({ owner: address! })
       // filter out rewards with main currency
       return logs.map(log => ({
         ...log,

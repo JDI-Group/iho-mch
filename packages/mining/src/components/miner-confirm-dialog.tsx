@@ -1,4 +1,4 @@
-import type { DeviceMetadata } from '@/types'
+import type { Device } from '@/apis/index.type'
 import type { Hex } from 'viem'
 import { fonts } from '@/config/fonts'
 import { useAsyncCallback } from '@hairy/react-lib'
@@ -7,7 +7,7 @@ import { useExtendOverlay } from '@overlastic/react'
 import { useAccount } from 'wagmi'
 
 export interface MinerConfirmDialogProps {
-  device: DeviceMetadata
+  device: Device
 }
 
 export function MinerConfirmDialog(props: MinerConfirmDialogProps) {
@@ -15,18 +15,20 @@ export function MinerConfirmDialog(props: MinerConfirmDialogProps) {
   const { address } = useAccount()
 
   const [loading, register] = useAsyncCallback(async () => {
-    const { data: signature } = await postSignRegisterDevice({
+    const { data: signature } = await postSignRegister({
       product: props.device.product,
       name: props.device.name,
-      mac: props.device.id,
+      mac: props.device.mac!,
+      order: props.device.order,
       owner: address!,
     })
 
     const hash = await writeIhoMiningRegister({
       args: [
-        BigInt(props.device.product),
         props.device.name!,
-        props.device.id,
+        props.device.mac,
+        BigInt(props.device.product),
+        BigInt(props.device.order),
         signature as Hex,
       ],
     })
@@ -54,11 +56,14 @@ export function MinerConfirmDialog(props: MinerConfirmDialogProps) {
                 alt="Woman listing to music"
                 className="object-cover"
                 height={80}
-                src={props.device.image}
+                src={props.device.images[0].src}
                 width={80}
               />
               <div className="flex flex-col">
-                <div className="text-sm mb-2 mt-1 font-bold">{props.device.name || 'Unknown Device'}</div>
+                <div className="text-sm mb-2 mt-1 font-bold">
+                  {props.device.name || 'Unknown Device'}
+                  {` #${props.device.order}`}
+                </div>
                 <div className="flex gap-1 mb-1">
                   <Chip size="sm" className="h-[18px] text-tiny text-default-500">
                     No traits
@@ -68,7 +73,7 @@ export function MinerConfirmDialog(props: MinerConfirmDialogProps) {
                 </div>
                 <Chip size="sm" className="h-[18px] text-tiny bg-default-700 text-default-50 px-1">
                   <div className="flex items-center gap-1">
-                    <span>{props.device.id}</span>
+                    <span>{props.device.mac}</span>
                   </div>
                 </Chip>
               </div>

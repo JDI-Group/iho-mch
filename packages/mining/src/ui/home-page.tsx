@@ -6,7 +6,7 @@ export function HomePage() {
   const { address } = useAccount()
 
   const [{ value: miners = [], loading }] = useAsyncState(
-    async () => getUserOwnerMiners({ owner: address! }),
+    async () => getMiner({ owner: address! }),
     [address],
     { immediate: true },
   )

@@ -65,3 +65,9 @@ export function generate7dayData<T>(item: T): (T & { timestamp: number, date: st
     { timestamp: dayjs().unix(), date: dayjs().format('MM/DD'), ...item },
   ]
 }
+
+export function generateMac() {
+  return Array.from({ length: 6 }, () => Math.floor(Math.random() * 256))
+    .map(num => num.toString(16).padStart(2, '0'))
+    .join(':')
+}

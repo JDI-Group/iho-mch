@@ -31,12 +31,13 @@ declare global {
   const MinerConfirmDialog: typeof import('../components/miner-confirm-dialog')['MinerConfirmDialog']
   const MinerFueltankDialog: typeof import('../components/miner-fueltank-dialog')['MinerFueltankDialog']
   const MinerScannerDialog: typeof import('../components/miner-scanner-dialog')['MinerScannerDialog']
-  const MinerScanning: typeof import('../components/miner-scanning-dialog')['MinerScanning']
-  const MinerScanningDialog: typeof import('../components/miner-scanning-dialog')['MinerScanningDialog']
+  const MinerSearch: typeof import('..../components/miner-search-dialog['MinerSearch']
+  const MinerSearchDialog: typeof import('../components/miner-search-dialog')['MinerSearchDialog']
   const MinerWithdrawDialog: typeof import('../components/miner-withdraw-dialog')['MinerWithdrawDialog']
   const NonNotExitsConnect: typeof import('../components/non-not-exits-connect')['NonNotExitsConnect']
   const QuestionTooltip: typeof import('../components/question-tooltip')['QuestionTooltip']
   const RainbowkitWidget: typeof import('../components/rainbowkit-widget')['RainbowkitWidget']
+  const ScannerDeviceItem: typeof import('../ui/scanner-device-item')['ScannerDeviceItem']
   const SubscribeWagmiConfig: typeof import('../generated/index')['SubscribeWagmiConfig']
   const Tooltip: typeof import('../components/tooltip')['Tooltip']
   const TrendCard: typeof import('../components/trend-card')['TrendCard']
@@ -71,8 +72,11 @@ declare global {
   const erc721MockAddress: typeof import('../generated/index')['erc721MockAddress']
   const forwardRef: typeof import('react')['forwardRef']
   const generate7dayData: typeof import('../utils/index')['generate7dayData']
+  const generateMac: typeof import('../utils/index')['generateMac']
   const getBidirectionalTransfer: typeof import('../generated/index')['getBidirectionalTransfer']
   const getContract: typeof import('../generated/index')['getContract']
+  const getDevice: typeof import('../apis/index')['getDevice']
+  const getDeviceOrder: typeof import('../apis/index')['getDeviceOrder']
   const getErc1967Proxy: typeof import('../generated/index')['getErc1967Proxy']
   const getErc20: typeof import('../generated/index')['getErc20']
   const getErc20Mock: typeof import('../generated/index')['getErc20Mock']
@@ -98,7 +102,12 @@ declare global {
   const getMiner: typeof import('../apis/index')['getMiner']
   const getMinerAccount: typeof import('../apis/index')['getMinerAccount']
   const getMinerAccountDailyRewards: typeof import('../apis/index')['getMinerAccountDailyRewards']
+  const getMinerAccountRewardsDaily: typeof import('../apis/index')['getMinerAccountRewardsDaily']
   const getMinerMac: typeof import('../apis/index')['getMinerMac']
+  const getMinerOwnerRewardsDaily: typeof import('../apis/index')['getMinerOwnerRewardsDaily']
+  const getMinerRewardsDaily: typeof import('../apis/index')['getMinerRewardsDaily']
+  const getPlaceholder: typeof import('../apis/index')['getPlaceholder']
+  const getPlaceholderOrder: typeof import('../apis/index')['getPlaceholderOrder']
   const getProduct: typeof import('../apis/index')['getProduct']
   const getProductSearch: typeof import('../apis/index')['getProductSearch']
   const getUserOwnerDailyRewards: typeof import('../apis/index')['getUserOwnerDailyRewards']
@@ -1260,8 +1269,8 @@ declare global {
   export type { MinerFueltankDialogProps, ContentProps } from '../components/miner-fueltank-dialog'
   import('../components/miner-fueltank-dialog')
   // @ts-ignore
-  export type { MinerScanningDialogProps } from '../components/miner-scanning-dialog'
-  import('../components/miner-scanning-dialog')
+  export type { MinerSearchDialogProps } from '../components/miner-search-dialog'
+  import('../components/miner-search-dialog')
   // @ts-ignore
   export type { MinerWithdrawDialogProps } from '../components/miner-withdraw-dialog'
   import('../components/miner-withdraw-dialog')
@@ -1295,4 +1304,7 @@ declare global {
   // @ts-ignore
   export type { HomeMiningItemProps } from '../ui/home-mining-item'
   import('../ui/home-mining-item')
+  // @ts-ignore
+  export type { ScannerDeviceItemProps } from '../ui/scanner-device-item'
+  import('../ui/scanner-device-item')
 }

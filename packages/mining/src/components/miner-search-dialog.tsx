@@ -1,24 +1,21 @@
-import type { Product } from '@/apis/index.type'
+import type { Device } from '@/apis/index.type'
 import type { PropsWithDetailedHTML } from '@hairy/react-lib'
 import { variants } from '@/config'
 import { fonts } from '@/config/fonts'
-import { Image, Modal, ModalBody, ModalContent, ModalHeader, Progress } from '@heroui/react'
+import { addToast, Image, Modal, ModalBody, ModalContent, ModalHeader, Progress } from '@heroui/react'
 import { useExtendOverlay } from '@overlastic/react'
 import { useMount } from 'react-use'
+import { useAccount } from 'wagmi'
 
-export interface MinerScanningDialogProps {
-  product: Product
+export interface MinerSearchDialogProps {
+  data: Device
 }
 
-function randomMAC() {
-  return Array.from({ length: 6 }, () => Math.floor(Math.random() * 256))
-    .map(num => num.toString(16).padStart(2, '0'))
-    .join(':')
-}
 
-export function MinerScanningDialog(props: MinerScanningDialogProps) {
+export function MinerSearchDialog(props: MinerSearchDialogProps) {
   const overlay = useExtendOverlay({ duration: 300 })
   const [value, setValue] = useState(0)
+  const {address} = useAccount()
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -28,13 +25,27 @@ export function MinerScanningDialog(props: MinerScanningDialogProps) {
     return () => clearInterval(interval)
   }, [])
 
-  function confirm() {
-    overlay.resolve({
-      product: props.product.id,
-      name: props.product.name,
-      image: props.product.images[0].src,
-      id: randomMAC(),
-    })
+  async function confirm() {
+    try {
+      const device = await getDeviceOrder({ order: props.data.order })
+
+      if (device.owner.toLowerCase() !== address?.toLowerCase()) {
+        addToast({ color: 'danger', description: 'You are not the owner of the device' })
+        overlay.reject()
+        return
+      }
+
+      if (device.product !== props.data.product) {
+        addToast({ color: 'danger', description: 'Product category mismatch' })
+        overlay.reject()
+        return
+      }
+
+      Object.assign(device, { mac: generateMac() })
+      overlay.resolve(device)
+    } catch (error: any) {
+      overlay.reject()
+    }
   }
 
   useMount(() => {
@@ -45,8 +56,8 @@ export function MinerScanningDialog(props: MinerScanningDialogProps) {
     <Modal className={fonts.barlow.className} isOpen={overlay.visible} onOpenChange={overlay.reject}>
       <ModalContent>
         <ModalHeader className="flex flex-col gap-1">
-          <h2>Scanning...</h2>
-          <span className="text-sm">{props.product.name}</span>
+          <h2>Searching...</h2>
+          <span className="text-sm">{props.data.name}</span>
         </ModalHeader>
         <ModalBody className="pb-20">
           <div className="flex flex-col items-center justify-center">
@@ -55,7 +66,7 @@ export function MinerScanningDialog(props: MinerScanningDialogProps) {
             <div className="w-full mt-2 mb-1">
               <Progress value={value} size="sm" className="mx-16 w-auto" />
             </div>
-            <span>Scanning device, please wait...</span>
+            <span>Search device, please wait...</span>
           </div>
         </ModalBody>
       </ModalContent>

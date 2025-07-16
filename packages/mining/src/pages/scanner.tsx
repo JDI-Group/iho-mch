@@ -1,42 +1,57 @@
-import type { Product } from '@/apis/index.type'
-import type { MinerConfirmDialogProps } from '@/components/miner-confirm-dialog'
-import type { MinerScanningDialogProps } from '@/components/miner-scanning-dialog'
-import type { DeviceMetadata } from '@/types'
+import type { Device, Product } from '@/apis/index.type'
 import type { PropsWithDetailedHTML } from '@hairy/react-lib'
 import type { Hex } from 'viem'
 import { variants } from '@/config'
-import { If } from '@hairy/react-lib'
+import { Else, If, Then, useAsyncCallback, useWhenever } from '@hairy/react-lib'
 import { delay } from '@hairy/utils'
-import { addToast, Card, CardBody, CardHeader, Divider, Navbar as HeroUINavbar, Image, NavbarBrand, NavbarContent } from '@heroui/react'
+import { addToast, Button, Card, CardBody, CardHeader, Divider, Navbar as HeroUINavbar, Image, Input, NavbarBrand, NavbarContent } from '@heroui/react'
 import { useOverlayInject } from '@overlastic/react'
+import { AnimatePresence } from 'framer-motion'
 import { useAsync, useMount } from 'react-use'
+import { useAccount } from 'wagmi'
 
 function Page() {
   const [isTimeout, setIsTimeout] = useState<boolean>(false)
-  useMount(() => setTimeout(() => setIsTimeout(true), 3000))
-  const { value: products = [] } = useAsync(() => getProduct())
+  useMount(resetTimeout)
 
-  const openMinerScanningDialog = useOverlayInject<MinerScanningDialogProps, DeviceMetadata>(MinerScanningDialog)
+  const { value: products = [] } = useAsync(() => getProduct())
+  const { address } = useAccount()
+
+  const openMinerSearchDialog = useOverlayInject<MinerSearchDialogProps, Device>(MinerSearchDialog)
   const openMinerConfirmDialog = useOverlayInject<MinerConfirmDialogProps, Hex>(MinerConfirmDialog)
 
+  const [devices, setDevices] = useState<Device[]>([])
+  const [product, setProduct] = useState<Product>()
+  const [input, setInput] = useState('')
   const router = useRouter()
 
-  async function scan() {
-    const _device = await navigator.bluetooth.requestDevice({
-      filters: [
-        { namePrefix: 'Xbox Wireless' },
-        { namePrefix: 'EasySMX-M15' },
-      ],
-    })
+  const [loading, scan] = useAsyncCallback(async () => {
+    resetTimeout()
+    setDevices(await getDevice({ owner: address! }))
+  })
+
+  function resetTimeout() {
+    setTimeout(() => setIsTimeout(true), 3000)
+    setIsTimeout(false)
   }
 
-  async function manually(product: Product) {
-    const device = await openMinerScanningDialog({ product })
+  async function manually() {
+    if (!input || !product)
+      return
+
+    const device = await openMinerSearchDialog({
+      data: {
+        ...product as any,
+        product: product.id,
+        order: +input,
+        mac: '',
+      }
+    })
     await delay(300)
     await register(device)
   }
 
-  async function register(device: DeviceMetadata) {
+  async function register(device: Device) {
     const hash = await openMinerConfirmDialog({ device })
     await transactionWaitingReceipt(hash)
     addToast({
@@ -49,7 +64,7 @@ function Page() {
     })
   }
 
-  useMount(scan)
+  useWhenever(address, scan)
   return (
     <layouts.default header={false}>
       <HeroUINavbar className="mb-6">
@@ -83,19 +98,36 @@ function Page() {
       <section className="px-4 mb-4">
         <Card>
           <CardHeader className="pb-0 flex-col items-start">
-            <div className="text-sm">Scan nearby devices</div>
-            <div className="text-tiny text-default-500">Scanning in progress...</div>
+            <div className="text-sm">Search account devices</div>
+            <div className="text-tiny text-default-500">Searching in progress...</div>
           </CardHeader>
-          <CardBody>
-            <div className="flex text-center px-12 flex-col justify-center items-center pt-8 pb-16">
-              <CircleRipples className="-mb-[23px]" />
-              <Image width="60" src="/phone.png" />
-              <span className="text-default-700 text-xs">Please try to get as close as possible to the device you want to add</span>
-              <If cond={isTimeout} tag="span" className="text-warning-500 text-tiny">
-                No device found, you can choose to add it from the list below
-                or <a className="text-blue-500" onClick={scan}>try again</a>
-              </If>
-            </div>
+          <CardBody className="h-[237px]">
+            <If cond={!loading && devices.length}>
+              <Then tag="div" className="grid grid-cols-2 gap-4">
+                <AnimatePresence>
+                  {devices.map((device, index) => (
+                    <motion.div
+                      onClick={() => register({ ...device, mac: generateMac() })}
+                      key={device.order}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1, transition: { duration: 1.5, delay: index * 0.15 } }}
+                      exit={{ opacity: 0 }}
+                    >
+                      <ScannerDeviceItem device={device} />
+                    </motion.div>
+                  ))}
+                </AnimatePresence>
+              </Then>
+              <Else tag="div" className="flex text-center px-12 flex-col justify-center items-center pt-8 pb-16">
+                <CircleRipples className="-mb-[23px]" />
+                <Image width="60" src="/phone.png" />
+                <span className="text-default-700 text-xs">Please try to get as close as possible to the device you want to add</span>
+                <If cond={isTimeout} tag="span" className="text-warning-500 text-tiny">
+                  No device found, you can choose to add it from the list below
+                  or <a className="text-blue-500" onClick={scan}>try again</a>
+                </If>
+              </Else>
+            </If>
           </CardBody>
         </Card>
       </section>
@@ -104,19 +136,28 @@ function Page() {
           <CardHeader className="flex-col items-start">
             <div className="text-sm">Manually adding devices</div>
           </CardHeader>
-          <CardBody className="grid grid-cols-2 gap-4">
-            {products.sort((a, b) => b.name.length - a.name.length).map(product => (
-              <div key={product.id} onClick={() => manually(product)}>
-                <Card className="shadow-none border">
-                  <CardBody>
-                    <div className="flex gap-2">
-                      <Image className="h-8 rounded-md" src={product.images[0].src} />
-                      <span className="flex-1 flex items-center justify-end min-w-0 text-sm truncate">{product.name}</span>
-                    </div>
-                  </CardBody>
-                </Card>
-              </div>
-            ))}
+          <CardBody>
+            <div className="grid grid-cols-2 gap-4">
+              {products.sort((a, b) => b.name.length - a.name.length).map(item => (
+                <div key={item.id} onClick={() => setProduct(item)}>
+                  <ScannerDeviceItem device={item} select={product?.id === item.id} />
+                </div>
+              ))}
+            </div>
+            <div className="flex gap-4 mt-6">
+              <Input
+                radius="sm"
+                type="number"
+                onChange={event => setInput(event.target.value)}
+                value={input}
+                className="flex-1"
+                classNames={{ inputWrapper: 'min-h-9 h-9', innerWrapper: 'h-9' }}
+                placeholder="Enter order number"
+              />
+              <Button radius="sm" className="h-9" color="primary" disabled={!product || !input} onPress={manually}>
+                Confrim
+              </Button>
+            </div>
           </CardBody>
         </Card>
       </section>

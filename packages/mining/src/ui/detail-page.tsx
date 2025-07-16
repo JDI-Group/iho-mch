@@ -10,7 +10,7 @@ export function DetailPage() {
     { immediate: true },
   )
   const [{ value: rewards = [] }] = useAsyncState(
-    async () => getMinerAccountDailyRewards({ account: router.query.address as string }),
+    async () => getMinerAccountRewardsDaily({ account: router.query.address as string }),
     [router.query.id],
     { immediate: true },
   )
