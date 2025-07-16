@@ -101,7 +101,7 @@ function Page() {
             <div className="text-sm">Search account devices</div>
             <div className="text-tiny text-default-500">Searching in progress...</div>
           </CardHeader>
-          <CardBody className="h-[237px]">
+          <CardBody className="min-h-[237px] box-border">
             <If cond={!loading && devices.length}>
               <Then tag="div" className="grid grid-cols-2 gap-4">
                 <AnimatePresence>
