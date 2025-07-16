@@ -1,0 +1,81 @@
+[
+  {
+    "product": 22715,
+    "upcoming": true,
+    "name": "Moonchain Drone: Crypto-native drone",
+    "description": "Meet the Moonchain Drone — the first-ever autonomous, crypto-native drone distributed through an Initial Hardware Offering (IHO). Engineered for performance, connectivity, and profitability, the IHO Drone isn’t just a flying machine — it’s a physical validator in your decentralized economy.",
+    "expire": 31536000,
+    "target": 0,
+    "limit": 0
+  },
+  {
+    "product": 22711,
+    "upcoming": true,
+    "name": "Moonchain Grip: The Ultimate Mobile Game Controller",
+    "description": "Introducing the Moonchain Grip — a next-generation mobile gaming controller engineered for precision, speed, and immersive gameplay. Designed for both Android and iPhone users, the Moonchain Grip redefines mobile esports with pro-level control and Web3-powered ownership.",
+    "expire": 31536000,
+    "target": 0,
+    "limit": 0
+  },
+  {
+    "product": 22713,
+    "upcoming": true,
+    "name": "Moonchain Headphones: Sound Meets On-Chain Utility",
+    "description": "The Moonchain Headphones redefine what it means to listen with purpose. Delivered through our exclusive Initial Hardware Offering (IHO), these wireless headphones fuse high-fidelity audio with blockchain utility — no upfront cost, just stake-to-own.",
+    "expire": 31536000,
+    "target": 0,
+    "limit": 0
+  },
+  {
+    "product": 22923,
+    "upcoming": true,
+    "name": "Moonchain Smart Watch: Engineered for performance and style",
+    "description": "Introducing Moonchain Smart Watch, where cutting-edge design meets real-world utility. Engineered for performance and style, this sleek wearable tracks your health, keeps you connected, and syncs seamlessly with your crypto-powered lifestyle.",
+    "expire": 31536000,
+    "target": 0,
+    "limit": 0
+  },
+  {
+    "product": 22950,
+    "upcoming": true,
+    "name": "Moonchain Mining: Multi Token Miner",
+    "description": "Step into the future of passive income with the IoT Multi-Token Miner, available exclusively through Moonchain’s Initial Hardware Offering (IHO). This compact, energy-efficient device connects seamlessly to your Wi-Fi and silently mines multiple on-chain tokens 24/7 — no technical setup, no noise, no hassle.",
+    "expire": 31536000,
+    "target": 10,
+    "limit": 2
+  },
+  {
+    "product": 22927,
+    "upcoming": true,
+    "name": "Moonchain Sunglasses: JBL wireless audio sunglasses",
+    "description": "Introducing the ultimate fusion of fashion, function, and freedom — JBL Sunglasses powered by Moonchain. As part of our latest Initial Hardware Offering (IHO), you can now lock your $Moonchain tokens to claim a pair of wireless audio sunglasses crafted in collaboration with JBL, the global leader in sound innovation.",
+    "expire": 31536000,
+    "target": 10,
+    "limit": 2
+  },
+  {
+    "product": 22714,
+    "upcoming": true,
+    "name": "Moonchain DIMO: A GPS and health tracker for your car",
+    "description": "DIMO Macaron is smartest way to track and improve the health and value of your car.",
+    "expire": 31536000,
+    "target": 100,
+    "limit": 2
+  },
+  {
+    "product": 23033,
+    "name": "Moonchain DIMO: Oculus Quest 2",
+    "description": "The Oculus Quest 2 is your all-in-one ticket to next-level virtual reality. With stunning graphics, wireless freedom, and a growing universe of immersive apps and games, it’s the ultimate VR headset for gamers, creators, and explorers.",
+    "expire": 31536000,
+    "target": 100,
+    "limit": 2
+  },
+  {
+    "product": 22701,
+    "name": "Moonchain Ring: BlueBerry AI - WearFI",
+    "description": "Unlock wellness at your fingertips. Get your Blueberry Ring now and start your journey to better health.",
+    "expire": 31536000,
+    "target": 100,
+    "limit": 2
+  }
+]

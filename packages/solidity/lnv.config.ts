@@ -41,7 +41,7 @@ const config = defineConfig({
           ],
         },
       ],
-      command: 'hardhat --build-profile production ignition deploy $modulePath --network $network && etherlib generate',
+      command: 'hardhat --build-profile production ignition deploy $modulePath --network $network',
     },
     exec: {
       prompts: [
