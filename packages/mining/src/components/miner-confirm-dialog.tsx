@@ -22,8 +22,7 @@ export function MinerConfirmDialog(props: MinerConfirmDialogProps) {
       order: props.device.order,
       owner: address!,
     })
-
-    const hash = await writeIhoMiningRegister({
+    const parameters = {
       args: [
         props.device.name!,
         props.device.mac,
@@ -31,7 +30,10 @@ export function MinerConfirmDialog(props: MinerConfirmDialogProps) {
         BigInt(props.device.order),
         signature as Hex,
       ],
-    })
+    } as const
+
+    await simulateIhoMiningRegister(parameters)
+    const hash = await writeIhoMiningRegister(parameters)
     overlay.resolve(hash)
   })
 
