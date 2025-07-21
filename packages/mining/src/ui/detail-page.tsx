@@ -14,6 +14,7 @@ export function DetailPage() {
     [router.query.id],
     { immediate: true },
   )
+
   return (
     <>
       <section className="px-4 pb-4">

@@ -1,12 +1,13 @@
 import type { Account, Address, Chain, Hash, Transport, WalletClient } from 'viem'
 import assert from 'node:assert/strict'
 import { describe, it } from 'node:test'
-import { integer, randomNumber } from '@hairy/utils'
+import { arange, integer, randomNumber, randomString } from '@hairy/utils'
 import { network } from 'hardhat'
 import { nanoid } from 'nanoid'
-import { encodeAbiParameters, encodeFunctionData, encodePacked, getAddress, keccak256, zeroAddress } from 'viem'
-import { generatePrivateKey, privateKeyToAccount } from 'viem/accounts'
+import { encodeAbiParameters, encodeFunctionData, encodePacked, getAbiItem, getAddress, keccak256, zeroAddress } from 'viem'
+import { generatePrivateKey, privateKeyToAddress } from 'viem/accounts'
 import IHOMiningModule from '../ignition/modules/IHOMining'
+
 /**
  * Load test environment
  * Returns deployed contracts and test accounts
@@ -108,8 +109,8 @@ async function randomRegisterArgs({ owner, verifier }: RegisterParameters, overr
 
   const raw = solidityPackedRegisterSignatureKeccak256(owner.account.address, name, mac, product, order)
   const signature = await verifier.signMessage({ message: { raw } })
-  // eslint-disable-next-line style/array-bracket-spacing
-  const args = [ name, mac, product, order, signature ] as const
+
+  const args = [name, mac, product, order, signature] as const
   const objs = { name, mac, product, order, signature }
 
   return Object.assign(args, objs)
@@ -161,7 +162,7 @@ describe('iHOMining', async () => {
 
     assert.equal(await client.getBalance({ address }), 100n)
 
-    const recipient = privateKeyToAccount(generatePrivateKey()).address
+    const recipient = privateKeyToAddress(generatePrivateKey())
 
     await account.write.execute([
       recipient,
@@ -327,5 +328,90 @@ describe('iHOMining', async () => {
     // The reward for device 2 should be deposited into the fuel contract
     assert.equal(await fuel.read.balanceOf([address2, zeroAddress]), AMOUNT_2)
     assert.equal(await client.getBalance({ address: address2 }), 0n)
+  })
+
+  // Test ClaimTrigger event after batch claim
+  it('should emit ClaimTrigger event with correct rewards after batch claim', async () => {
+    const CLAIM_ID_1 = nanoid(8)
+    const CLAIM_ID_2 = nanoid(8)
+    const AMOUNT_1 = 123n
+    const AMOUNT_2 = 456n
+    const MEMO_1 = 'Batch event 1'
+    const MEMO_2 = 'Batch event 2'
+    const rewards1 = [{ amount: AMOUNT_1, token: zeroAddress }]
+    const rewards2 = [{ amount: AMOUNT_2, token: zeroAddress }]
+
+    const { mining, owner, verifier, client } = await loadFixture()
+    const registerArgs1 = await randomRegisterArgs({ owner, verifier })
+    const registerArgs2 = await randomRegisterArgs({ owner, verifier })
+    await mining.write.register(registerArgs1 as never)
+    await mining.write.register(registerArgs2 as never)
+    const address1 = await mining.read.accountOfDevice([registerArgs1.mac])
+    const address2 = await mining.read.accountOfDevice([registerArgs2.mac])
+    await owner.sendTransaction({ to: mining.address, value: AMOUNT_1 + AMOUNT_2 })
+
+    const batchRewards = [
+      {
+        id: CLAIM_ID_1,
+        account: address1,
+        rewards: rewards1,
+        fuelling: false,
+        memo: MEMO_1,
+      },
+      {
+        id: CLAIM_ID_2,
+        account: address2,
+        rewards: rewards2,
+        fuelling: false,
+        memo: MEMO_2,
+      },
+    ]
+
+    // 记录当前区块高度
+    const startBlock = await client.getBlockNumber()
+
+    // 执行批量 claims
+    await mining.write.claims([batchRewards], { value: 0n })
+
+    // 查询 ClaimTrigger 事件日志
+    const logs = await client.getLogs({
+      address: mining.address,
+      event: getAbiItem({ abi: mining.abi, name: 'ClaimTrigger' }),
+      fromBlock: startBlock,
+      toBlock: 'latest',
+    })
+
+    assert.ok(logs.length > 0, 'ClaimTrigger event should be emitted')
+    // 用 viem 的 decodeEventLog 解析参数
+    const { trigger, rewards = [] } = logs[0].args
+
+    // 检查事件参数
+    assert.equal(trigger, owner.account.address)
+    assert.equal(rewards.length, batchRewards.length)
+    for (let i = 0; i < rewards.length; i++) {
+      assert.equal(rewards[i].id, batchRewards[i].id)
+      assert.equal(rewards[i].account, batchRewards[i].account)
+      assert.equal(rewards[i].rewards.length, batchRewards[i].rewards.length)
+      for (let j = 0; j < rewards[i].rewards.length; j++) {
+        assert.equal(rewards[i].rewards[j].token, batchRewards[i].rewards[j].token)
+        assert.equal(rewards[i].rewards[j].amount, batchRewards[i].rewards[j].amount)
+      }
+      assert.equal(rewards[i].fuelling, batchRewards[i].fuelling)
+      assert.equal(rewards[i].memo, batchRewards[i].memo)
+    }
+  })
+
+  it('should mass triggering should not result in errors', async () => {
+    const { mining } = await loadFixture()
+    const batchRewards = arange(0, 2000).map(() => {
+      return {
+        id: randomString(100),
+        account: privateKeyToAddress(generatePrivateKey()),
+        rewards: [{ token: zeroAddress, amount: 0n }],
+        fuelling: false,
+        memo: '',
+      }
+    })
+    await mining.write.claims([batchRewards])
   })
 })

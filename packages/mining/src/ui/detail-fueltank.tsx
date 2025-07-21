@@ -30,6 +30,10 @@ export function DetailFueltank(props: DetailFueltankProps) {
     [miner?.account],
   )
 
+  const [{ value: indicator }] = useAsyncState(
+    async () => getSystemIndicator(),
+  )
+
   const records = useMemo(() => {
     const data = (props.rewards ?? []).map((reward) => {
       const date = dayjs.unix(reward.timestamp).format('MM/DD')
@@ -65,13 +69,17 @@ export function DetailFueltank(props: DetailFueltankProps) {
           <div className="text-sm">{formatEther(balance)} MXC</div>
         </div>
         <div className="flex flex-col">
+          <div className="text-base">World Rewards</div>
+          <div className="text-sm">{formatEther(indicator?.daily ?? 0n)} MXC</div>
+        </div>
+        <div className="flex flex-col">
           <div className="flex items-center gap-1 text-base">
             <span>Dividend ratio</span>
             <QuestionTooltip content="The proportion will gradually decrease as the number of participants increases, and you can invest more MXC to obtain a higher proportion" />
           </div>
           <div className="inline-flex items-center text-sm text-success">
             <Icon key="up" height={12} icon="solar:arrow-right-up-linear" width={12} />
-            <span>0.5%</span>
+            <span>{props.miner?.ratio}%</span>
           </div>
         </div>
       </div>

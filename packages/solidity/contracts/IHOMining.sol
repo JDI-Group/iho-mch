@@ -124,6 +124,13 @@ contract IHOMining is
     uint256 timestamp
   );
 
+  event ClaimTrigger(
+    address indexed trigger,
+    Reward[] rewards,
+    int256 blockHeight,
+    uint256 timestamp
+  );
+
   /// @custom:oz-upgrades-unsafe-allow constructor
   constructor() { _disableInitializers(); }
 
@@ -274,6 +281,7 @@ contract IHOMining is
         rewards[i].memo
       );
     }
+    emit ClaimTrigger(msg.sender, rewards, int(block.number), uint256(block.timestamp));
   }
 
   /**
