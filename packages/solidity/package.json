@@ -10,8 +10,8 @@
   "scripts": {
     "test": "lnv test",
     "exec": "lnv exec",
-    "deploy": "lnv deploy",
-    "postinstall": "hardhat compile --build-profile production && etherlib generate"
+    "deploy": "lnv deploy && etherlib generate",
+    "postinstall": "lnv compile && etherlib generate"
   },
   "dependencies": {
     "@openzeppelin/contracts": "^5.3.0",

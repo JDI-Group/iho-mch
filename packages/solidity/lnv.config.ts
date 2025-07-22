@@ -6,6 +6,8 @@ const config = defineConfig({
     entries: ['vault'],
   },
   scripts: {
+    compile: 'hardhat compile --build-profile production',
+
     deploy: {
       prompts: [
         {
