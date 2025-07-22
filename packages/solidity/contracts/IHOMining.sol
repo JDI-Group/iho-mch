@@ -384,6 +384,10 @@ contract IHOMining is
     return tokenId;
   }
 
+  function withdraw(address token, uint256 amount) external onlyOwner {
+    transfer(address(this), msg.sender, token, amount);
+  }
+
   /**
    * @dev Internal function to create an ERC6551 account for a token
    * @param token The token contract address

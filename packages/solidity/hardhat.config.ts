@@ -43,7 +43,7 @@ const config = {
     5167004: {
       name: 'Moonchain Geneva',
       blockExplorers: {
-        blockscout: { apiUrl: 'https://geneva-explorer.moonchain.com/api', url: 'https://geneva-explorer.moonchain.com' },
+        blockscout: { apiUrl: 'https://geneva-explorer-v1.moonchain.com/api', url: 'https://geneva-explorer.moonchain.com' },
       },
     },
   },
@@ -85,3 +85,5 @@ export default config
 // pnpm hardhat verify blockscout 0x3D19769221Eb1D4c749c3A9CD04702e2ce4DF2F2 --contract contracts/IHOLockVaultV1.sol:IHOLockVaultV1 --network moonchain --build-profile production
 
 // pnpm hardhat verify blockscout 0x352B0273B9e08CB169b3301f440d387F9810CA5D --contract contracts/IHOLockVaultV1.sol:IHOLockVaultV1 --network moonchain --build-profile production
+
+// pnpm hardhat verify blockscout 0xee58Fb14F1561Ee326aCD96278F75fD5CFdAFB1A --network moonchainGeneva --build-profile production
