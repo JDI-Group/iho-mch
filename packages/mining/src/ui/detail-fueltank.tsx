@@ -41,7 +41,7 @@ export function DetailFueltank(props: DetailFueltankProps) {
     })
     const handled = values(
       Object.assign(
-        keyBy(generate7dayData({ reward: 1000n, fueltank: 0n }), 'date'),
+        keyBy(generate7dayData({ reward: 0n, fueltank: 0n }), 'date'),
         keyBy(data, 'date'),
       ),
     )

@@ -24,7 +24,7 @@ export function DetailRewards(props: DetailRewardsProps) {
     })
     const handled = values(
       Object.assign(
-        keyBy(generate7dayData({ reward: 0n }), 'date'),
+        keyBy(generate7dayData({ reward: 0 }), 'date'),
         keyBy(data, 'date'),
       ),
     )
@@ -60,7 +60,7 @@ export function DetailRewards(props: DetailRewardsProps) {
   return (
     <div className="flex flex-col">
       <div className="mb-2 h-40 relative">
-        <DetailRewardsCharts data={records} />
+        <DetailRewardsCharts data={records as any} />
       </div>
       <div className="mb-2 flex gap-6">
         <div className="flex flex-col">

@@ -16,9 +16,9 @@ export interface DetailRewardsChartProps {
 export function DetailRewardsCharts(props: DetailRewardsChartProps) {
   const { data = [] } = props
   const total = data.reduce((acc, item) => acc + (item.reward || 0n), 0n)
-  const formattedData = data.map(item => ({
+  const formattedData = data.map((item, index) => ({
     date: item.date,
-    reward: +formatEther(item.reward || 0, { delimiters: false }),
+    reward: (item.reward || data[index + 1]?.reward || data[index - 1]?.reward) ? +formatEther(item.reward || 0, { delimiters: false }) : undefined,
   }))
   return (
     <>

@@ -24,10 +24,10 @@ export function DetailFueltankCharts(props: DetailFueltankChartsProps) {
   return (
     <ResponsiveContainer width="100%" height="100%">
       <AreaChart
-        data={props.rewards?.map(reward => ({
+        data={props.rewards?.map((reward, index) => ({
           ...reward,
-          reward: +formatEther(reward.reward, { delimiters: false }),
-          fueltank: +formatEther(reward.fueltank, { delimiters: false }),
+          reward: (reward.reward || props.rewards?.[index + 1]?.reward || props.rewards?.[index - 1]?.reward) ? +formatEther(reward.reward, { delimiters: false }) : undefined,
+          fueltank: (reward.fueltank || props.rewards?.[index + 1]?.fueltank || props.rewards?.[index - 1]?.fueltank) ? +formatEther(reward.fueltank, { delimiters: false }) : undefined,
         }))}
         margin={{ left: 18, right: -10 }}
       >
