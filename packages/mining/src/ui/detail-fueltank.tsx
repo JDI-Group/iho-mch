@@ -2,7 +2,7 @@ import type { Miner, MinerDailyReward } from '@/apis/index.type'
 import type { Address } from 'viem'
 import { formatEther } from '@hairy/ether-lib'
 import { useAsyncCallback, useAsyncState, useEventBus } from '@hairy/react-lib'
-import { keyBy, values } from '@hairy/utils'
+import { formatNumeric, keyBy, values } from '@hairy/utils'
 import { Button } from '@heroui/react'
 import { Icon } from '@iconify/react/dist/iconify.js'
 import { useOverlayInject } from '@overlastic/react'
@@ -79,7 +79,7 @@ export function DetailFueltank(props: DetailFueltankProps) {
           </div>
           <div className="inline-flex items-center text-sm text-success">
             <Icon key="up" height={12} icon="solar:arrow-right-up-linear" width={12} />
-            <span>{props.miner?.ratio}%</span>
+            <span>{formatNumeric((props.miner?.ratio || 0) * 100, { decimals: 0 })}%</span>
           </div>
         </div>
       </div>
