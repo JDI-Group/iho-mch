@@ -35,9 +35,7 @@ export function DetailRewards(props: DetailRewardsProps) {
     async () => {
       if (!props.miner?.account)
         return 0n
-      return client.getBalance({
-        address: props.miner.account as `0x${string}`,
-      })
+      return client.getBalance({ address: props.miner.account as `0x${string}` })
     },
     [props.miner?.account],
   )

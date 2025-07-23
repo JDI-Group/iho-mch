@@ -62,13 +62,13 @@ contract IHOFueltank is
   mapping(address => UnlockCoin[]) private UnlockCoins;
   
   /// @notice Emitted when tokens are deposited
-  event Deposited(address indexed sender, address indexed token, uint256 amount);
+  event Deposited(address indexed owner, address indexed token, uint256 amount);
   
   /// @notice Emitted when a withdrawal is initiated (enters unlock period)
-  event Cancelled(address indexed sender, uint256 index, address indexed token, uint256 amount, uint256 unlocktime);
+  event Cancelled(address indexed owner, uint256 index, address indexed token, uint256 amount, uint256 unlocktime);
   
   /// @notice Emitted when tokens are claimed after the unlock period
-  event Claimed(address indexed sender, uint256 index, address indexed token, uint256 amount);
+  event Claimed(address indexed owner, uint256 index, address indexed token, uint256 amount);
 
   /// @custom:oz-upgrades-unsafe-allow constructor
   constructor() { _disableInitializers(); }

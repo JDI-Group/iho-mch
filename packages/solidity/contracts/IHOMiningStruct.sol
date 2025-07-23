@@ -22,7 +22,6 @@ struct Reward {
   string id;
   address account;
   BidirectionalTransfer.Coin[] rewards;
-  bool fuelling;
   string memo;
 }
 

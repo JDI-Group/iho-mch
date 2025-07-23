@@ -7,7 +7,6 @@ import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "./utils/VerifiableUpgradeable.sol";
 import "./utils/BidirectionalTransfer.sol";
-import "./interfaces/IIHOFuel.sol";
 import "./erc6551/interfaces/IERC6551Registry.sol";
 import "./IHOMiningStruct.sol";
 
@@ -39,19 +38,9 @@ contract IHOMining is
   /// @notice The ERC6551 registry contract for creating token-bound accounts
   IERC6551Registry erc6551Registry;
   
-  /// @notice The address of the IHOFuel contract for token deposits
-  address public fuel;
   
   /// @notice The implementation address for ERC6551 accounts
   address public erc6551AccountImplementation;
-  
-  /**
-   * @dev Sets the fuel contract address
-   * @param _fuel The new fuel contract address
-   */
-  function setFuel(address _fuel) public onlyOwner {
-    fuel = _fuel;
-  }
 
   /// @notice The next token ID to be minted
   uint256 private _tokenId;
@@ -142,18 +131,15 @@ contract IHOMining is
 
   /**
    * @dev Initializes the contract
-   * @param _fuelAddress The address of the IHOFuel contract
    * @param _registryAddress The address of the ERC6551Registry contract
    * @param _erc6551AccountImplementation The implementation address for ERC6551 accounts
    * @param _verifier The address of the verifier for signatures
    */
   function initialize(
-    address _fuelAddress,
     address _registryAddress,
     address _erc6551AccountImplementation,
     address _verifier
   ) public initializer {
-    fuel = _fuelAddress;
     erc6551Registry = IERC6551Registry(_registryAddress);
     erc6551AccountImplementation = _erc6551AccountImplementation;
     __ERC721_init("IHOMining", "IHOM");
@@ -170,20 +156,11 @@ contract IHOMining is
    *
    * Creates a new ERC721 token and associates it with an ERC6551 account
    */
-  function register(
-    string memory name,
-    string memory mac,
-    uint128 product,
-    uint128 order,
-    bytes memory signature
-  ) public {
+  function register(string memory name, string memory mac, uint128 product, uint128 order, bytes memory signature) public {
     if (bytes(mac).length < 6)
       revert InvalidMacFormat();
 
-    if (
-      DeviceMapToken[mac].tokenContract != address(0) || 
-      OrderMapToken[order].tokenContract != address(0)
-    )
+    if (DeviceMapToken[mac].tokenContract != address(0) || OrderMapToken[order].tokenContract != address(0))
       revert DeviceRegistered();
 
     verify(keccak256(abi.encodePacked(msg.sender, name, mac, product, order)), signature);
@@ -218,17 +195,9 @@ contract IHOMining is
    * @param account The device MAC address
    * @param rewards Array of rewards (tokens and amounts)
    * @param signature Verification signature from authorized verifier
-   * @param fuelling Whether to deposit rewards to fuel contract or directly to account
    * @param memo Additional information about the claim
    */
-  function claim(
-    string memory id,
-    address  account,
-    Coin[] memory rewards,
-    bytes memory signature,
-    bool fuelling,
-    string memory memo
-  ) public payable {
+  function claim(string memory id, address  account, Coin[] memory rewards, bytes memory signature, string memory memo) public payable {
     Token memory token = AccountMapToken[account];
   
     if (token.tokenContract == address(0))
@@ -241,15 +210,12 @@ contract IHOMining is
       bytes32 claimHash = keccak256(abi.encodePacked(id, account, rewardsHash));
       verify(claimHash, signature);
     }
-    
+
     // Mark claim as used
     ClaimedIDs[id] = true;
-    
-    if (fuelling)
-      _fills(account, rewards);
-    else
-      _gifts(account, rewards);
-    
+
+    _gifts(account, rewards);
+
     Device memory device = TokenMapDevice[token.tokenContract][token.tokenId];
 
     emit Claimed(
@@ -277,11 +243,15 @@ contract IHOMining is
         rewards[i].account,
         rewards[i].rewards,
         new bytes(0),
-        rewards[i].fuelling,
         rewards[i].memo
       );
     }
-    emit ClaimTrigger(msg.sender, rewards, int(block.number), uint256(block.timestamp));
+    emit ClaimTrigger(
+      msg.sender,
+      rewards,
+      int(block.number),
+      uint256(block.timestamp)
+    );
   }
 
   /**
@@ -349,19 +319,6 @@ contract IHOMining is
     );
   }
 
-  /**
-   * @dev Internal function to deposit rewards to the fuel contract
-   * @param owner The recipient address
-   * @param coins Array of rewards (tokens and amounts)
-   */
-  function _fills(address owner, Coin[] memory coins) internal {
-    for (uint256 i = 0; i < coins.length; i++)
-      if (coins[i].token == address(0))
-        IIHOFuel(fuel).deposit{ value: coins[i].amount }(owner, coins[i].token, coins[i].amount);
-      else
-        IIHOFuel(fuel).deposit(owner, coins[i].token, coins[i].amount);
-  }
-  
   /**
    * @dev Internal function to transfer rewards directly to the recipient
    * @param owner The recipient address

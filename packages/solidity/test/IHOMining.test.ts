@@ -1,7 +1,7 @@
 import type { Account, Address, Chain, Hash, Transport, WalletClient } from 'viem'
 import assert from 'node:assert/strict'
 import { describe, it } from 'node:test'
-import { arange, integer, randomNumber, randomString } from '@hairy/utils'
+import { integer, randomNumber } from '@hairy/utils'
 import { network } from 'hardhat'
 import { nanoid } from 'nanoid'
 import { encodeAbiParameters, encodeFunctionData, encodePacked, getAbiItem, getAddress, keccak256, zeroAddress } from 'viem'
@@ -14,7 +14,7 @@ import IHOMiningModule from '../ignition/modules/IHOMining'
  */
 async function loadFixture() {
   const { ignition, viem } = await network.connect()
-  const { mining, fuel } = await ignition.deploy(IHOMiningModule)
+  const { mining } = await ignition.deploy(IHOMiningModule)
   const client = await viem.getPublicClient()
   const owner = await viem.getWalletClients().then(clients => clients[0])
   const verifier = await viem.getWalletClients().then(clients => clients[1])
@@ -25,7 +25,6 @@ async function loadFixture() {
     ignition,
     viem,
     mining,
-    fuel,
     owner,
     verifier,
   }
@@ -202,7 +201,6 @@ describe('iHOMining', async () => {
         address,
         rewards,
         signature,
-        false,
         '',
       ],
     })
@@ -230,50 +228,6 @@ describe('iHOMining', async () => {
     assert.equal(await mining.read.ownerOf([tm2.tokenId]), owner.account.address)
   })
 
-  // Test claiming rewards with fuelling option enabled
-  it('should be able claim with fuelling=true', async () => {
-    const CLAIM_ID = nanoid(8)
-    const AMOUNT = 100n
-    const rewards = [{ amount: AMOUNT, token: zeroAddress }]
-    const { client, mining, viem, owner, verifier, fuel } = await loadFixture()
-
-    const registerArgs = await randomRegisterArgs({ owner, verifier })
-
-    assert.equal(await mining.read.fuel(), fuel.address)
-
-    await mining.write.register(registerArgs as never)
-    await owner.sendTransaction({ to: mining.address, value: AMOUNT })
-
-    const address = await mining.read.accountOfDevice([registerArgs.mac])
-    const account = await viem.getContractAt('ERC6551Account', address)
-
-    const rewardsHash = solidityPackedCoinsKeccak256(rewards)
-    const messageByte = solidityPackedClaimSignatureKeccak256(CLAIM_ID, address, rewardsHash)
-    const signature = await verifier.signMessage({ message: { raw: messageByte } })
-
-    const encodeMiningClamiData = encodeFunctionData({
-      abi: mining.abi,
-      functionName: 'claim',
-      args: [
-        CLAIM_ID,
-        address,
-        rewards,
-        signature,
-        true,
-        '',
-      ],
-    })
-
-    await account.write.execute([
-      mining.address,
-      0n,
-      encodeMiningClamiData,
-    ])
-
-    assert.equal(await fuel.read.balanceOf([address, zeroAddress]), AMOUNT)
-    assert.equal(await client.getBalance({ address }), 0n)
-  })
-
   // Test batch claiming rewards for multiple devices by owner
   it('should be able to batch claim rewards for multiple devices', async () => {
     // 设置测试参数
@@ -288,7 +242,7 @@ describe('iHOMining', async () => {
     const rewards1 = [{ amount: AMOUNT_1, token: zeroAddress }]
     const rewards2 = [{ amount: AMOUNT_2, token: zeroAddress }]
 
-    const { client, mining, owner, verifier, fuel } = await loadFixture()
+    const { client, mining, owner, verifier } = await loadFixture()
 
     const registerArgs1 = await randomRegisterArgs({ owner, verifier })
     const registerArgs2 = await randomRegisterArgs({ owner, verifier })
@@ -306,14 +260,12 @@ describe('iHOMining', async () => {
         id: CLAIM_ID_1,
         account: address1,
         rewards: rewards1,
-        fuelling: false, // Directly send to account
         memo: MEMO_1,
       },
       {
         id: CLAIM_ID_2,
         account: address2,
         rewards: rewards2,
-        fuelling: true, // Send to fuel contract
         memo: MEMO_2,
       },
     ]
@@ -324,10 +276,7 @@ describe('iHOMining', async () => {
     // Verification results
     // Device 1 should receive ETH directly
     assert.equal(await client.getBalance({ address: address1 }), AMOUNT_1)
-
-    // The reward for device 2 should be deposited into the fuel contract
-    assert.equal(await fuel.read.balanceOf([address2, zeroAddress]), AMOUNT_2)
-    assert.equal(await client.getBalance({ address: address2 }), 0n)
+    assert.equal(await client.getBalance({ address: address2 }), AMOUNT_2)
   })
 
   // Test ClaimTrigger event after batch claim
@@ -355,14 +304,12 @@ describe('iHOMining', async () => {
         id: CLAIM_ID_1,
         account: address1,
         rewards: rewards1,
-        fuelling: false,
         memo: MEMO_1,
       },
       {
         id: CLAIM_ID_2,
         account: address2,
         rewards: rewards2,
-        fuelling: false,
         memo: MEMO_2,
       },
     ]
@@ -396,22 +343,7 @@ describe('iHOMining', async () => {
         assert.equal(rewards[i].rewards[j].token, batchRewards[i].rewards[j].token)
         assert.equal(rewards[i].rewards[j].amount, batchRewards[i].rewards[j].amount)
       }
-      assert.equal(rewards[i].fuelling, batchRewards[i].fuelling)
       assert.equal(rewards[i].memo, batchRewards[i].memo)
     }
-  })
-
-  it('should mass triggering should not result in errors', async () => {
-    const { mining } = await loadFixture()
-    const batchRewards = arange(0, 2000).map(() => {
-      return {
-        id: randomString(100),
-        account: privateKeyToAddress(generatePrivateKey()),
-        rewards: [{ token: zeroAddress, amount: 0n }],
-        fuelling: false,
-        memo: '',
-      }
-    })
-    await mining.write.claims([batchRewards])
   })
 })
