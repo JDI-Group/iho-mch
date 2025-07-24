@@ -80,7 +80,7 @@ export default function Page() {
                       </Else>
                     </If>
                     <div className="min-h-14">
-                      <small className="text-default-500 line-clamp-3">{product.description}</small>
+                      <small className="text-default-500 line-clamp-3">{product.text}</small>
                     </div>
                   </CardHeader>
                   <CardBody className="overflow-visible py-2">

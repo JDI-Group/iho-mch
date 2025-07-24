@@ -61,6 +61,8 @@ export interface Product {
   target: number
   limit: number
   name: string
+  text: string
+  short_description: string
   slug: string
   permalink: string
   date_created: string
@@ -72,7 +74,6 @@ export interface Product {
   featured: boolean
   catalog_visibility: string
   description: string
-  short_description: string
   sku: string
   price: string
   regular_price: string
@@ -133,6 +134,7 @@ export interface ProductStats {
   name: string
   product: number
   description: string
+  text: string
   image: string
   totalValueSecured?: string
   totalValueSecuredMXC?: string
@@ -347,6 +349,7 @@ export interface StatsItem {
   name: string
   product: number
   description: string
+  text: string
   image: string
   totalValueSecured?: string
   totalValueSecuredMXC?: string
@@ -364,6 +367,27 @@ export interface StatsItem {
 export interface StatsBatchItem {
   batch: number
   stats: StatsItem[]
+  start: string
+}
+export interface StatsProductItem {
+  name: string
+  product: number
+  description: string
+  text: string
+  image: string
+  totalValueSecured?: string
+  totalValueSecuredMXC?: string
+  weeklyValueSecured?: string
+  weeklyValueSecuredMXC?: string
+  activeStakes?: number
+  totalParticipants?: number
+  updateAt: number
+  createAt: number
+  confirmAt?: number
+  status: string
+  orders: number
+  target: number
+  batch: number
   start: string
 }
 export interface VerifyDto {
@@ -418,17 +442,26 @@ export interface GetProductIdVariationsVariationPath {
   id: number
   variation: number
 }
+export interface GetOrderAllQuery {
+  page?: number
+  offset?: number
+  limit?: number
+  status?: string[]
+  product?: number
+}
 export interface GetOrderQuery {
   page?: number
   offset?: number
   limit?: number
   status?: string[]
+  product?: number
 }
 export interface PostOrderQuery {
   page?: number
   offset?: number
   limit?: number
   status?: string[]
+  product?: number
 }
 export interface PostOrderHeader {
   token?: string
@@ -439,6 +472,9 @@ export interface GetOrderIdPath {
 }
 export interface DeleteOrderIdPath {
   id: number
+}
+export interface GetStatsProductPath {
+  product: number
 }
 export interface GetUserInspectHeader {
   token?: string

@@ -1,12 +1,9 @@
-import { ProductDescription } from '@/ui/product-description'
-import { formatEther } from '@hairy/ether-lib'
-
 import { Else, If, Then } from '@hairy/react-lib'
-import { formatNumeric, whenever } from '@hairy/utils'
-import { Card, CardBody } from '@heroui/card'
+import { whenever } from '@hairy/utils'
+// import { Card, CardBody } from '@heroui/card'
 import { Spinner } from '@heroui/spinner'
-import { Divider } from 'antd'
-import dayjs from 'dayjs'
+// import { Divider } from 'antd'
+// import dayjs from 'dayjs'
 import { useAsync } from 'react-use'
 
 function Page() {
@@ -21,10 +18,10 @@ function Page() {
     async () => whenever(detail?.id, id => getProductIdVariations({ id: +id })),
     [detail],
   )
-  const { value: statistics } = useAsync(
-    async () => whenever(detail?.id, id => getProductStatisticsId({ id })),
-    [detail],
-  )
+  // const { value: statistics } = useAsync(
+  //   async () => whenever(detail?.id, id => getProductStatisticsId({ id })),
+  //   [detail],
+  // )
 
   return (
     <layouts.default>
@@ -38,7 +35,7 @@ function Page() {
               />
             </div>
             <div className="flex flex-1 flex-col">
-              <ProductDescription
+              <ProductShortDescription
                 description={detail?.short_description}
                 orders={detail?.orders}
                 target={detail?.target}
@@ -56,7 +53,8 @@ function Page() {
               />
             </div>
           </div>
-          <h1 className="text-2xl font-bold mt-6 mb-4">
+          <ProductDescription product={detail?.id} description={detail?.description} />
+          {/* <h1 className="text-2xl font-bold mt-6 mb-4">
             Cumulative statistics
           </h1>
           <Card className="shadow-none mb-2 bg-gray-100 bg-opacity-50 dark:bg-content1 dark:bg-opacity-50">
@@ -92,7 +90,7 @@ function Page() {
           </Card>
           <div className="flex justify-end">
             <span className="text-default-500">Last updated: {dayjs().format('MMMM D, YYYY - h:mm A')}</span>
-          </div>
+          </div> */}
         </Then>
         <Else tag="div" className="w-full h-[50vh] flex justify-center items-center">
           <Spinner />

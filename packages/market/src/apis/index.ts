@@ -83,6 +83,17 @@ export async function getProductIdVariationsVariation(paths: Types.GetProductIdV
  * @method get
  * @tags Order
  */
+export async function getOrderAll(query?: Types.GetOrderAllQuery, config?: RequestInit) {
+  const querystr = new URLSearchParams(Object.entries(query || {}))
+  const response = await fetch(`${baseURL}/order/all?${querystr}`, {
+    ...config,
+  })
+  return response
+}
+/**
+ * @method get
+ * @tags Order
+ */
 export async function getOrder(query?: Types.GetOrderQuery, config?: RequestInit) {
   const querystr = new URLSearchParams(Object.entries(query || {}))
   const response = await fetch(`${baseURL}/order?${querystr}`, {
@@ -160,6 +171,16 @@ export async function getStats(config?: RequestInit) {
     ...config,
   })
   return response.json() as Promise<Types.StatsBatchItem[]>
+}
+/**
+ * @method get
+ * @tags Stats
+ */
+export async function getStatsProduct(paths: Types.GetStatsProductPath, config?: RequestInit) {
+  const response = await fetch(`${baseURL}/stats/${paths.product}`, {
+    ...config,
+  })
+  return response.json() as Promise<Types.StatsProductItem>
 }
 /**
  * @method get

@@ -38,6 +38,7 @@ declare global {
   const ProductDetailDialog: typeof import('../src/components/product-detail-dialog')['ProductDetailDialog']
   const ProductForm: typeof import('../src/ui/product-form')['ProductForm']
   const ProductImages: typeof import('../src/ui/product-images')['ProductImages']
+  const ProductShortDescription: typeof import('../src/ui/product-description-short')['ProductShortDescription']
   const QuestionIcon: typeof import('../src/components/icons')['QuestionIcon']
   const ScreenFullIcon: typeof import('../src/components/icons')['ScreenFullIcon']
   const SearchIcon: typeof import('../src/components/icons')['SearchIcon']
@@ -80,10 +81,12 @@ declare global {
   const getIhoLockVaultV3: typeof import('../src/generated/index')['getIhoLockVaultV3']
   const getIhoLockVaultV4: typeof import('../src/generated/index')['getIhoLockVaultV4']
   const getIhoLockVaultV5: typeof import('../src/generated/index')['getIhoLockVaultV5']
+  const getIhoLockVaultV6: typeof import('../src/generated/index')['getIhoLockVaultV6']
   const getIhoMarket: typeof import('../src/generated/index')['getIhoMarket']
   const getIhoMining: typeof import('../src/generated/index')['getIhoMining']
   const getIihoFuel: typeof import('../src/generated/index')['getIihoFuel']
   const getOrder: typeof import('../src/apis/index')['getOrder']
+  const getOrderAll: typeof import('../src/apis/index')['getOrderAll']
   const getOrderId: typeof import('../src/apis/index')['getOrderId']
   const getProduct: typeof import('../src/apis/index')['getProduct']
   const getProductBatch: typeof import('../src/apis/index')['getProductBatch']
@@ -93,6 +96,7 @@ declare global {
   const getProductStatistics: typeof import('../src/apis/index')['getProductStatistics']
   const getProductStatisticsId: typeof import('../src/apis/index')['getProductStatisticsId']
   const getStats: typeof import('../src/apis/index')['getStats']
+  const getStatsProduct: typeof import('../src/apis/index')['getStatsProduct']
   const getUser: typeof import('../src/apis/index')['getUser']
   const getUserInspect: typeof import('../src/apis/index')['getUserInspect']
   const getUserLogout: typeof import('../src/apis/index')['getUserLogout']
@@ -108,6 +112,7 @@ declare global {
   const ihoLockVaultV3Abi: typeof import('../src/generated/index')['ihoLockVaultV3Abi']
   const ihoLockVaultV4Abi: typeof import('../src/generated/index')['ihoLockVaultV4Abi']
   const ihoLockVaultV5Abi: typeof import('../src/generated/index')['ihoLockVaultV5Abi']
+  const ihoLockVaultV6Abi: typeof import('../src/generated/index')['ihoLockVaultV6Abi']
   const ihoMarketAbi: typeof import('../src/generated/index')['ihoMarketAbi']
   const ihoMiningAbi: typeof import('../src/generated/index')['ihoMiningAbi']
   const iihoFuelAbi: typeof import('../src/generated/index')['iihoFuelAbi']
@@ -183,6 +188,9 @@ declare global {
   // @ts-ignore
   export type { HomeStatsItemProps } from '../src/ui/home-stats-item'
   import('../src/ui/home-stats-item')
+  // @ts-ignore
+  export type { ProductShortDescriptionProps } from '../src/ui/product-description-short'
+  import('../src/ui/product-description-short')
   // @ts-ignore
   export type { ProductDescriptionProps } from '../src/ui/product-description'
   import('../src/ui/product-description')

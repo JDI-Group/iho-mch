@@ -10,6 +10,7 @@ export function HomeStatsBatchItem(props: HomeStatsBatchItemProps) {
   const address = Reflect.get(addresses, `IHOLockVaultV${props.item.batch}`)[chain.id]
   const config = useStore(store.config)
 
+  const isLasted = config.batch === Number(process.env.NEXT_PUBLIC_MARKET_BATCH)
   const isLastedThis = config.batch === props.item.batch
 
   function onToExplorer() {
@@ -22,7 +23,7 @@ export function HomeStatsBatchItem(props: HomeStatsBatchItemProps) {
         <h3 className="inline-flex justify-center text-2xl lg:text-4xl font-bold text-white mb-2">
           IHO Batch A{props.item.batch}
         </h3>
-        <If cond={!isLastedThis || config.isLasted}>
+        <If cond={!isLastedThis || isLasted}>
           <Then>
             <Link className="text-default-500 hover:cursor-pointer border-b" onClick={onToExplorer}>
               {address}

@@ -23,6 +23,7 @@ export function HomeStatsItem({ item: stat, batch, start }: HomeStatsItemProps) 
   const config = useStore(store.config)
 
   const isLastedThis = config.batch === batch
+  const isLasted = config.batch === Number(process.env.NEXT_PUBLIC_MARKET_BATCH)
 
   function onToExplorer() {
     const url = `${chain.blockExplorers.default.url}/address/${address}`
@@ -35,7 +36,7 @@ export function HomeStatsItem({ item: stat, batch, start }: HomeStatsItemProps) 
         <div className="mb-4 w-full items-center flex justify-between">
           <div className="flex gap-2">
             <If cond={start}>
-              <If cond={!isLastedThis || config.isLasted}>
+              <If cond={!isLastedThis || isLasted}>
                 <Chip size="sm" onClick={onToExplorer}>
                   <span className="border-b ">IHO Batch A{batch}#{address?.slice?.(0, 6)}</span>
                 </Chip>
@@ -118,7 +119,7 @@ export function HomeStatsItem({ item: stat, batch, start }: HomeStatsItemProps) 
         />
         <Switch value={stat.status}>
           <Case cond="starting">
-            <If cond={!config.isLasted && isLastedThis}>
+            <If cond={!isLasted && isLastedThis}>
               <Then>
                 <Button className="mt-6" radius="md" variant="flat">
                   Coming Soon
