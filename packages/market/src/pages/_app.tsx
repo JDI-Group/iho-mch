@@ -6,6 +6,9 @@ import { pageviewCount } from '@waline/client'
 import { ThemeProvider as NextThemesProvider } from 'next-themes'
 import '@/styles/globals.css'
 import '@rainbow-me/rainbowkit/styles.css'
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
 
 export default function App({ Component, pageProps, router }: AppProps) {
   useWatch(

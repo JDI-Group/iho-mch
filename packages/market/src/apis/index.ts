@@ -5,9 +5,9 @@
  * @version 1.0
  */
 
-import type * as Types from './index.type'
+import * as Types from "./index.type";
 
-export const baseURL = process.env.NEXT_PUBLIC_MARKET_SERVICE_URL!
+export const baseURL = process.env.NEXT_PUBLIC_MARKET_SERVICE_URL!;
 
 /**
  * @method get
@@ -16,8 +16,8 @@ export const baseURL = process.env.NEXT_PUBLIC_MARKET_SERVICE_URL!
 export async function getProduct(config?: RequestInit) {
   const response = await fetch(`${baseURL}/product`, {
     ...config,
-  })
-  return response.json() as Promise<Types.Product[]>
+  });
+  return response.json() as Promise<Types.Product[]>;
 }
 /**
  * @method get
@@ -26,8 +26,8 @@ export async function getProduct(config?: RequestInit) {
 export async function getProductStatistics(config?: RequestInit) {
   const response = await fetch(`${baseURL}/product/statistics`, {
     ...config,
-  })
-  return response.json() as Promise<Types.ProductStats[]>
+  });
+  return response.json() as Promise<Types.ProductStats[]>;
 }
 /**
  * @method get
@@ -36,8 +36,8 @@ export async function getProductStatistics(config?: RequestInit) {
 export async function getProductStatisticsId(paths: Types.GetProductStatisticsIdPath, config?: RequestInit) {
   const response = await fetch(`${baseURL}/product/statistics/${paths.id}`, {
     ...config,
-  })
-  return response.json() as Promise<Types.ProductStats>
+  });
+  return response.json() as Promise<Types.ProductStats>;
 }
 /**
  * @method get
@@ -46,8 +46,8 @@ export async function getProductStatisticsId(paths: Types.GetProductStatisticsId
 export async function getProductBatch(config?: RequestInit) {
   const response = await fetch(`${baseURL}/product/batch`, {
     ...config,
-  })
-  return response.text() as Promise<string>
+  });
+  return response.text() as Promise<string>;
 }
 /**
  * @method get
@@ -56,8 +56,8 @@ export async function getProductBatch(config?: RequestInit) {
 export async function getProductId(paths: Types.GetProductIdPath, config?: RequestInit) {
   const response = await fetch(`${baseURL}/product/${paths.id}`, {
     ...config,
-  })
-  return response.json() as Promise<Types.Product>
+  });
+  return response.json() as Promise<Types.Product>;
 }
 /**
  * @method get
@@ -66,8 +66,8 @@ export async function getProductId(paths: Types.GetProductIdPath, config?: Reque
 export async function getProductIdVariations(paths: Types.GetProductIdVariationsPath, config?: RequestInit) {
   const response = await fetch(`${baseURL}/product/${paths.id}/variations`, {
     ...config,
-  })
-  return response.json() as Promise<Types.Variation[]>
+  });
+  return response.json() as Promise<Types.Variation[]>;
 }
 /**
  * @method get
@@ -76,44 +76,44 @@ export async function getProductIdVariations(paths: Types.GetProductIdVariations
 export async function getProductIdVariationsVariation(paths: Types.GetProductIdVariationsVariationPath, config?: RequestInit) {
   const response = await fetch(`${baseURL}/product/${paths.id}/variations/${paths.variation}`, {
     ...config,
-  })
-  return response.json() as Promise<Types.Variation>
+  });
+  return response.json() as Promise<Types.Variation>;
 }
 /**
  * @method get
  * @tags Order
  */
 export async function getOrderAll(query?: Types.GetOrderAllQuery, config?: RequestInit) {
-  const querystr = new URLSearchParams(Object.entries(query || {}))
+  const querystr = new URLSearchParams(Object.entries(query || {}));
   const response = await fetch(`${baseURL}/order/all?${querystr}`, {
     ...config,
-  })
-  return response
+  });
+  return response;
 }
 /**
  * @method get
  * @tags Order
  */
 export async function getOrder(query?: Types.GetOrderQuery, config?: RequestInit) {
-  const querystr = new URLSearchParams(Object.entries(query || {}))
+  const querystr = new URLSearchParams(Object.entries(query || {}));
   const response = await fetch(`${baseURL}/order?${querystr}`, {
     ...config,
-  })
-  return response.json() as Promise<Types.Order[]>
+  });
+  return response.json() as Promise<Types.Order[]>;
 }
 /**
  * @method post
  * @tags Order
  */
 export async function postOrder(body: Types.OrderCreateDto, query?: Types.PostOrderQuery, headers?: Types.PostOrderHeader, config?: RequestInit) {
-  const querystr = new URLSearchParams(Object.entries(query || {}))
+  const querystr = new URLSearchParams(Object.entries(query || {}));
   const response = await fetch(`${baseURL}/order?${querystr}`, {
-    headers: { 'Content-Type': 'application/json', ...headers },
-    method: 'post',
+    headers: { "Content-Type": "application/json", ...headers },
+    method: "post",
     body: JSON.stringify(body),
     ...config,
-  })
-  return response.json() as Promise<Types.OrderDataDto>
+  });
+  return response.json() as Promise<Types.OrderDataDto>;
 }
 /**
  * @method get
@@ -122,8 +122,8 @@ export async function postOrder(body: Types.OrderCreateDto, query?: Types.PostOr
 export async function getOrderId(paths: Types.GetOrderIdPath, config?: RequestInit) {
   const response = await fetch(`${baseURL}/order/${paths.id}`, {
     ...config,
-  })
-  return response.json() as Promise<Types.Order>
+  });
+  return response.json() as Promise<Types.Order>;
 }
 /**
  * @method delete
@@ -131,10 +131,10 @@ export async function getOrderId(paths: Types.GetOrderIdPath, config?: RequestIn
  */
 export async function deleteOrderId(paths: Types.DeleteOrderIdPath, config?: RequestInit) {
   const response = await fetch(`${baseURL}/order/${paths.id}`, {
-    method: 'delete',
+    method: "delete",
     ...config,
-  })
-  return response
+  });
+  return response;
 }
 /**
  * @method post
@@ -142,12 +142,12 @@ export async function deleteOrderId(paths: Types.DeleteOrderIdPath, config?: Req
  */
 export async function postOrderPay(body: Types.OrderPutDto, config?: RequestInit) {
   const response = await fetch(`${baseURL}/order/pay`, {
-    headers: { 'Content-Type': 'application/json' },
-    method: 'post',
+    headers: { "Content-Type": "application/json" },
+    method: "post",
     body: JSON.stringify(body),
     ...config,
-  })
-  return response.json() as Promise<Types.OrderDataDto>
+  });
+  return response.json() as Promise<Types.OrderDataDto>;
 }
 /**
  * @method put
@@ -155,12 +155,12 @@ export async function postOrderPay(body: Types.OrderPutDto, config?: RequestInit
  */
 export async function putOrderCancel(body: Types.OrderPutDto, config?: RequestInit) {
   const response = await fetch(`${baseURL}/order/cancel`, {
-    headers: { 'Content-Type': 'application/json' },
-    method: 'put',
+    headers: { "Content-Type": "application/json" },
+    method: "put",
     body: JSON.stringify(body),
     ...config,
-  })
-  return response
+  });
+  return response;
 }
 /**
  * @method get
@@ -169,8 +169,8 @@ export async function putOrderCancel(body: Types.OrderPutDto, config?: RequestIn
 export async function getStats(config?: RequestInit) {
   const response = await fetch(`${baseURL}/stats`, {
     ...config,
-  })
-  return response.json() as Promise<Types.StatsBatchItem[]>
+  });
+  return response.json() as Promise<Types.StatsBatchItem[]>;
 }
 /**
  * @method get
@@ -179,8 +179,8 @@ export async function getStats(config?: RequestInit) {
 export async function getStatsProduct(paths: Types.GetStatsProductPath, config?: RequestInit) {
   const response = await fetch(`${baseURL}/stats/${paths.product}`, {
     ...config,
-  })
-  return response.json() as Promise<Types.StatsProductItem>
+  });
+  return response.json() as Promise<Types.StatsProductItem[]>;
 }
 /**
  * @method get
@@ -189,8 +189,8 @@ export async function getStatsProduct(paths: Types.GetStatsProductPath, config?:
 export async function getUserNonce(config?: RequestInit) {
   const response = await fetch(`${baseURL}/user/nonce`, {
     ...config,
-  })
-  return response.text() as Promise<string>
+  });
+  return response.text() as Promise<string>;
 }
 /**
  * @method post
@@ -198,12 +198,12 @@ export async function getUserNonce(config?: RequestInit) {
  */
 export async function postUserVerify(body: Types.VerifyDto, config?: RequestInit) {
   const response = await fetch(`${baseURL}/user/verify`, {
-    headers: { 'Content-Type': 'application/json' },
-    method: 'post',
+    headers: { "Content-Type": "application/json" },
+    method: "post",
     body: JSON.stringify(body),
     ...config,
-  })
-  return response.text() as Promise<string>
+  });
+  return response.text() as Promise<string>;
 }
 /**
  * @method get
@@ -212,8 +212,8 @@ export async function postUserVerify(body: Types.VerifyDto, config?: RequestInit
 export async function getUserLogout(config?: RequestInit) {
   const response = await fetch(`${baseURL}/user/logout`, {
     ...config,
-  })
-  return response
+  });
+  return response;
 }
 /**
  * @method get
@@ -223,8 +223,8 @@ export async function getUserInspect(headers?: Types.GetUserInspectHeader, confi
   const response = await fetch(`${baseURL}/user/inspect`, {
     headers,
     ...config,
-  })
-  return response
+  });
+  return response;
 }
 /**
  * @method get
@@ -234,8 +234,8 @@ export async function getUser(headers?: Types.GetUserHeader, config?: RequestIni
   const response = await fetch(`${baseURL}/user`, {
     headers,
     ...config,
-  })
-  return response.json() as Promise<Types.Customer>
+  });
+  return response.json() as Promise<Types.Customer>;
 }
 /**
  * @method put
@@ -243,10 +243,10 @@ export async function getUser(headers?: Types.GetUserHeader, config?: RequestIni
  */
 export async function putUser(body: Types.CustomerUpdateDto, headers?: Types.PutUserHeader, config?: RequestInit) {
   const response = await fetch(`${baseURL}/user`, {
-    headers: { 'Content-Type': 'application/json', ...headers },
-    method: 'put',
+    headers: { "Content-Type": "application/json", ...headers },
+    method: "put",
     body: JSON.stringify(body),
     ...config,
-  })
-  return response
+  });
+  return response;
 }

@@ -27,7 +27,7 @@ function Page() {
     <layouts.default>
       <If cond={!loading} tag="section" className="flex flex-col gap-4 px-0 py-8 md:py-10">
         <Then cond={detail} tag="div">
-          <div className="flex flex-col md:flex-row gap-2 md:gap-14">
+          <div className="flex flex-col md:flex-row gap-2 md:gap-14 mb-8">
             <div className="flex-1 flex flex-col gap-2">
               <ProductImages
                 name={detail?.name}
