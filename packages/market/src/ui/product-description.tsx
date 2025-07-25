@@ -4,6 +4,7 @@ import { cover, redirectTo, riposte, whenever } from '@hairy/utils'
 import { Card, CardBody, CardHeader } from '@heroui/card'
 import { Chip } from '@heroui/chip'
 import { Link } from '@heroui/link'
+import { useWindowSize } from 'react-use'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
 export interface ProductDescriptionProps {
@@ -33,13 +34,14 @@ export function ProductDescription({ description, product }: ProductDescriptionP
     const url = `${chain.blockExplorers.default.url}/address/${address}`
     redirectTo(url, '_blank')
   }
+  const { width } = useWindowSize()
   return (
     <div className="my-6">
       {/* <h2 className="text-2xl font-bold mt-6 mb-4">Product Description</h2> */}
       <Swiper
         className="mb-6"
         spaceBetween={20}
-        slidesPerView={3.5}
+        slidesPerView={width < 640 ? 1 : width < 768 ? 2 : 3.5}
       >
         {stats.map(item => (
           <SwiperSlide key={item.batch}>
