@@ -34,10 +34,10 @@ export function ProductDescription({ description, product }: ProductDescriptionP
     redirectTo(url, '_blank')
   }
   return (
-    <div>
+    <div className="my-6">
       {/* <h2 className="text-2xl font-bold mt-6 mb-4">Product Description</h2> */}
       <Swiper
-        className="mb-8"
+        className="mb-6"
         spaceBetween={20}
         slidesPerView={3.5}
       >

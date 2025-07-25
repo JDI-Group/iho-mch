@@ -48,35 +48,30 @@ export default function Page() {
             {products.map(product => (
               <div
                 key={product.id}
-                onClick={() => !product.upcoming && isLastedBatch && router.push(`/products/${product.id}`)}
+                onClick={() => router.push(`/products/${product.id}`)}
                 className="relative w-full md:w-[294px]"
               >
                 <If cond={product.upcoming || !isLastedBatch}>
-                  <div className="absolute inset-0 rounded-lg bg-black bg-opacity-25 z-50 flex justify-center items-center">
+                  {/* <div className="absolute inset-0 rounded-lg bg-black bg-opacity-25 z-50 flex justify-center items-center">
                     <span className="text-white font-spacex blur-[0.5px]">Coming Soon</span>
-                  </div>
+                  </div> */}
                 </If>
-                <Card className={
-                  clsx(
-                    'w-full py-4 cursor-pointer',
-                    product.upcoming ? 'blur-sm' : '',
-                  )
-                }
-                >
+                <Card className="w-full py-4 cursor-pointer">
                   <CardHeader className="pb-0 pt-0 px-4 flex-col items-start">
                     <h4 className="font-bold text-large w-full">
                       <div className="truncate">{product.name}</div>
                     </h4>
-                    <If cond={product.ready}>
-                      <Then>
-                        <p className="text-green-500 text-[10px]">
+                    <If cond={!product.upcoming}>
+                      <Then cond={product.ready}>
+                        <Then tag="p" className="text-green-500 text-[12px]">
                           Immediate Delivery
-                        </p>
-                      </Then>
-                      <Else>
-                        <p className="text-[10px] text-lime-500">
+                        </Then>
+                        <Else tag="p" className="text-[12px] text-lime-500">
                           In progress
-                        </p>
+                        </Else>
+                      </Then>
+                      <Else tag="p" className="text-warning text-[12px]">
+                        Coming Soon
                       </Else>
                     </If>
                     <div className="min-h-14">

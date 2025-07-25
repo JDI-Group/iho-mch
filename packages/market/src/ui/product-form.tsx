@@ -15,6 +15,7 @@ import { useAccount } from 'wagmi'
 export interface ProductFormProps {
   id?: number
   attributes?: Attribute[]
+  upcoming?: boolean
   price?: string
   variations?: Variation[]
   onChange?: (variation?: Variation) => void
@@ -191,13 +192,13 @@ export function ProductForm(props: ProductFormProps) {
         <Button
           isLoading={loading}
           type="submit"
-          className="w-full"
+          className={clsx('w-full', props.upcoming ? '!opacity-50 cursor-not-allowed' : '')}
           color="primary"
           size="lg"
+          disabled={props.upcoming}
         >
-          STAKE NOW
+          {props.upcoming ? 'Coming Soon' : 'Stake Now'}
         </Button>
-
       </Form>
     </>
   )
