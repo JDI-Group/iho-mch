@@ -81,7 +81,7 @@ export function ProductDescription({ description, product }: ProductDescriptionP
                 <div className="flex items-end justify-between">
                   <div>Total Value Secured:</div>
                   <div className="font-bold text-lg">
-                    {whenever(item?.totalValueSecuredMXC, () => `${formatEther(item?.totalValueSecuredMXC)}MXC`) || '-'}
+                    {whenever(item?.totalValueSecuredMXC, () => `${formatEther(item?.totalValueSecuredMXC)} MXC`) || '-'}
                   </div>
                 </div>
                 <div className="flex items-end justify-between">
