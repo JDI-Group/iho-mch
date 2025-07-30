@@ -87,3 +87,5 @@ export default config
 // pnpm hardhat verify blockscout 0x352B0273B9e08CB169b3301f440d387F9810CA5D --contract contracts/IHOLockVaultV1.sol:IHOLockVaultV1 --network moonchain --build-profile production
 
 // pnpm hardhat verify blockscout 0xee58Fb14F1561Ee326aCD96278F75fD5CFdAFB1A --network moonchainGeneva --build-profile production
+
+// pnpm hardhat verify blockscout 0x06aF307F0694d2335Ed2fC5e30e2C5626B2332e5 --network moonchain --build-profile production
