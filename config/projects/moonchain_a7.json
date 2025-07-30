@@ -82,6 +82,7 @@
   },
   {
     "product": 23078,
+    "upcoming": true,
     "name": "CyberCharge Web 3 Plug",
     "description": "The world’s first Web3 smart charger, CyberCharge transforms routine charging into a rewarding experience.",
     "expire": 31536000,
@@ -90,8 +91,25 @@
   },
   {
     "product": 23075,
+    "upcoming": true,
     "name": "Nothing Headphone 1",
     "description": "The Nothing Headphone (1) redefines immersive listening with a custom-engineered 40mm dynamic driver, developed in collaboration with KEF for natural, studio-grade clarity.",
+    "expire": 31536000,
+    "target": 100,
+    "limit": 2
+  },
+  {
+    "product": 23147,
+    "name": "Zap Sourceful Energy  P1",
+    "description": "Zap isn't just a P1 meter reader - it's your entry point to the Sourceful Energy network and your gateway to smarter energy.",
+    "expire": 31536000,
+    "target": 100,
+    "limit": 2
+  },
+  {
+    "product": 23150,
+    "name": "Nintendo Switch Lite",
+    "description": "The Nintendo Switch Lite is a compact, lightweight console with integrated controllers.",
     "expire": 31536000,
     "target": 100,
     "limit": 2
