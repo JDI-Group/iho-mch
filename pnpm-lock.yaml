@@ -32,8 +32,8 @@ importers:
         specifier: ^3.5.0
         version: 3.5.0(@swc/helpers@0.5.17)
       '@hairy/lnv':
-        specifier: ^8.1.0
-        version: 8.1.0(@swc/core@1.11.24(@swc/helpers@0.5.17))(@types/node@20.5.7)(typescript@5.6.3)
+        specifier: ^9.0.0
+        version: 9.0.0(@swc/core@1.11.24(@swc/helpers@0.5.17))(@types/node@20.5.7)(typescript@5.6.3)
       '@types/node':
         specifier: 20.5.7
         version: 20.5.7
@@ -1179,8 +1179,8 @@ packages:
     peerDependencies:
       ethers: '>=6'
 
-  '@hairy/lnv@8.1.0':
-    resolution: {integrity: sha512-TeSL5ndh35suI8S3LRUyy9DaJD8/JxgDVmRe/Vyt1p5MS+KrLe1sByNUfMCkP5Hu8pZNFexJMFNC4s7YzgyD3g==}
+  '@hairy/lnv@9.0.0':
+    resolution: {integrity: sha512-PfGouISpyp9xu7mA4PKsVfMjawkzk6pqXoLBOhwAcrBht7sQcuIP/EjQIZ00y5vsbUrmWK6LypHcdBFwdY7J9A==}
     hasBin: true
 
   '@hairy/react-lib@1.33.0':
@@ -2391,9 +2391,6 @@ packages:
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
 
-  '@nomicfoundation/hardhat-errors@3.0.0-next.20':
-    resolution: {integrity: sha512-jJaGIzPs5YzB8oreLhYAyAo5veLJXXwiJt8oVkLRYPvfsT8+RWrIwJjcbwktfMObNNceAO8PgDP1d2YBuPwlDw==}
-
   '@nomicfoundation/hardhat-errors@3.0.0-next.21':
     resolution: {integrity: sha512-mNvlNTphEtnJamcz6pvfAyPn9K8IZ+fPPFpyraHZe5voD9+YNW+iVdPsPU4jnKP8zWjwYfVL/wm4a9sAJ8PNAQ==}
 
@@ -2444,9 +2441,6 @@ packages:
       hardhat: ^3.0.0-next.21
       viem: ^2.30.0
 
-  '@nomicfoundation/hardhat-utils@3.0.0-next.20':
-    resolution: {integrity: sha512-/uLGNOgj6SfhzMhAH7Vony5l/IHYvSdgUxXg9mTuS8qLe6L/RlqcekdtNBWZhanltIaWegD1qfDIbz+b5HJPbQ==}
-
   '@nomicfoundation/hardhat-utils@3.0.0-next.21':
     resolution: {integrity: sha512-OUzfqEgIgkpKxf2Yl2XlmyltHaPEQfYwu6k2OOsugu46zr360teYEw2ksNX4LAZYb6+pevDYOkrhnk8ZoxDBMg==}
 
@@ -2467,11 +2461,6 @@ packages:
     peerDependencies:
       hardhat: ^3.0.0-next.21
       viem: ^2.30.0
-
-  '@nomicfoundation/hardhat-zod-utils@3.0.0-next.20':
-    resolution: {integrity: sha512-t3IRLHShtEnmLwNv2p4uGaklBrEgwGHEp5/auOXf2OhQTvfDQ4F2MLx1ZhL/xsp6XksFdPRtf+6kOYB/rsJr3w==}
-    peerDependencies:
-      zod: ^3.23.8
 
   '@nomicfoundation/hardhat-zod-utils@3.0.0-next.21':
     resolution: {integrity: sha512-0XxPtC43619DJDbALXc4L+vFnJIXnWVNz6vRhMa2H+hf9VDAszLG9xJ1xmykon88DpY/ZTp8u8Im4Uv83jXQqw==}
@@ -9586,10 +9575,11 @@ snapshots:
       ethers: 6.14.3(bufferutil@4.0.9)(utf-8-validate@5.0.10)
       mitt: 3.0.1
 
-  '@hairy/lnv@8.1.0(@swc/core@1.11.24(@swc/helpers@0.5.17))(@types/node@20.5.7)(typescript@5.6.3)':
+  '@hairy/lnv@9.0.0(@swc/core@1.11.24(@swc/helpers@0.5.17))(@types/node@20.5.7)(typescript@5.6.3)':
     dependencies:
       '@antfu/utils': 9.2.0
       '@clack/prompts': 0.11.0
+      '@hairy/utils': 1.34.0
       consola: 3.4.2
       dotenv: 16.5.0
       dotenv-vault: 1.26.2(@swc/core@1.11.24(@swc/helpers@0.5.17))(@types/node@20.5.7)(typescript@5.6.3)
@@ -11996,12 +11986,6 @@ snapshots:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.19.1
 
-  '@nomicfoundation/hardhat-errors@3.0.0-next.20':
-    dependencies:
-      '@nomicfoundation/hardhat-utils': 3.0.0-next.20
-    transitivePeerDependencies:
-      - supports-color
-
   '@nomicfoundation/hardhat-errors@3.0.0-next.21':
     dependencies:
       '@nomicfoundation/hardhat-utils': 3.0.0-next.21
@@ -12039,9 +12023,9 @@ snapshots:
     dependencies:
       '@noble/ciphers': 1.2.1
       '@noble/hashes': 1.7.1
-      '@nomicfoundation/hardhat-errors': 3.0.0-next.20
-      '@nomicfoundation/hardhat-utils': 3.0.0-next.20
-      '@nomicfoundation/hardhat-zod-utils': 3.0.0-next.20(zod@3.24.4)
+      '@nomicfoundation/hardhat-errors': 3.0.0-next.21
+      '@nomicfoundation/hardhat-utils': 3.0.0-next.21
+      '@nomicfoundation/hardhat-zod-utils': 3.0.0-next.21(zod@3.24.4)
       chalk: 5.4.1
       debug: 4.4.1(supports-color@8.1.1)
       hardhat: 3.0.0-next.21(patch_hash=d999397812469b6cc38a733cc57eaf35bac0aadfa9902244c29d1eeb17fc6f82)(bufferutil@4.0.9)(utf-8-validate@5.0.10)
@@ -12051,8 +12035,8 @@ snapshots:
 
   '@nomicfoundation/hardhat-network-helpers@3.0.0-next.8(hardhat@3.0.0-next.21(patch_hash=d999397812469b6cc38a733cc57eaf35bac0aadfa9902244c29d1eeb17fc6f82)(bufferutil@4.0.9)(utf-8-validate@5.0.10))':
     dependencies:
-      '@nomicfoundation/hardhat-errors': 3.0.0-next.20
-      '@nomicfoundation/hardhat-utils': 3.0.0-next.20
+      '@nomicfoundation/hardhat-errors': 3.0.0-next.21
+      '@nomicfoundation/hardhat-utils': 3.0.0-next.21
       hardhat: 3.0.0-next.21(patch_hash=d999397812469b6cc38a733cc57eaf35bac0aadfa9902244c29d1eeb17fc6f82)(bufferutil@4.0.9)(utf-8-validate@5.0.10)
     transitivePeerDependencies:
       - supports-color
@@ -12065,10 +12049,10 @@ snapshots:
 
   '@nomicfoundation/hardhat-node-test-runner@3.0.0-next.8(hardhat@3.0.0-next.21(patch_hash=d999397812469b6cc38a733cc57eaf35bac0aadfa9902244c29d1eeb17fc6f82)(bufferutil@4.0.9)(utf-8-validate@5.0.10))':
     dependencies:
-      '@nomicfoundation/hardhat-errors': 3.0.0-next.20
+      '@nomicfoundation/hardhat-errors': 3.0.0-next.21
       '@nomicfoundation/hardhat-node-test-reporter': 3.0.0-next.8
-      '@nomicfoundation/hardhat-utils': 3.0.0-next.20
-      '@nomicfoundation/hardhat-zod-utils': 3.0.0-next.20(zod@3.24.4)
+      '@nomicfoundation/hardhat-utils': 3.0.0-next.21
+      '@nomicfoundation/hardhat-zod-utils': 3.0.0-next.21(zod@3.24.4)
       hardhat: 3.0.0-next.21(patch_hash=d999397812469b6cc38a733cc57eaf35bac0aadfa9902244c29d1eeb17fc6f82)(bufferutil@4.0.9)(utf-8-validate@5.0.10)
       tsx: 4.19.4
       zod: 3.24.4
@@ -12088,19 +12072,6 @@ snapshots:
       '@nomicfoundation/ignition-core': 3.0.0-next.21(bufferutil@4.0.9)(utf-8-validate@5.0.10)
       hardhat: 3.0.0-next.21(patch_hash=d999397812469b6cc38a733cc57eaf35bac0aadfa9902244c29d1eeb17fc6f82)(bufferutil@4.0.9)(utf-8-validate@5.0.10)
       viem: 2.30.0(patch_hash=a81798b4482d92f8120cca6f01f06322694a76466b2548d025e0c935e7664da4)(bufferutil@4.0.9)(typescript@5.5.4)(utf-8-validate@5.0.10)(zod@3.24.4)
-
-  '@nomicfoundation/hardhat-utils@3.0.0-next.20':
-    dependencies:
-      '@streamparser/json-node': 0.0.22
-      debug: 4.4.1(supports-color@8.1.1)
-      env-paths: 2.2.1
-      ethereum-cryptography: 2.2.1
-      fast-equals: 5.2.2
-      json-stream-stringify: 3.1.6
-      rfdc: 1.4.1
-      undici: 6.21.2
-    transitivePeerDependencies:
-      - supports-color
 
   '@nomicfoundation/hardhat-utils@3.0.0-next.21':
     dependencies:
@@ -12131,8 +12102,8 @@ snapshots:
 
   '@nomicfoundation/hardhat-viem-assertions@3.0.0-next.20(@nomicfoundation/hardhat-viem@3.0.0-next.21(hardhat@3.0.0-next.21(patch_hash=d999397812469b6cc38a733cc57eaf35bac0aadfa9902244c29d1eeb17fc6f82)(bufferutil@4.0.9)(utf-8-validate@5.0.10))(viem@2.30.0(patch_hash=a81798b4482d92f8120cca6f01f06322694a76466b2548d025e0c935e7664da4)(bufferutil@4.0.9)(typescript@5.5.4)(utf-8-validate@5.0.10)(zod@3.24.4)))(hardhat@3.0.0-next.21(patch_hash=d999397812469b6cc38a733cc57eaf35bac0aadfa9902244c29d1eeb17fc6f82)(bufferutil@4.0.9)(utf-8-validate@5.0.10))(viem@2.30.0(patch_hash=a81798b4482d92f8120cca6f01f06322694a76466b2548d025e0c935e7664da4)(bufferutil@4.0.9)(typescript@5.5.4)(utf-8-validate@5.0.10)(zod@3.24.4))':
     dependencies:
-      '@nomicfoundation/hardhat-errors': 3.0.0-next.20
-      '@nomicfoundation/hardhat-utils': 3.0.0-next.20
+      '@nomicfoundation/hardhat-errors': 3.0.0-next.21
+      '@nomicfoundation/hardhat-utils': 3.0.0-next.21
       '@nomicfoundation/hardhat-viem': 3.0.0-next.21(hardhat@3.0.0-next.21(patch_hash=d999397812469b6cc38a733cc57eaf35bac0aadfa9902244c29d1eeb17fc6f82)(bufferutil@4.0.9)(utf-8-validate@5.0.10))(viem@2.30.0(patch_hash=a81798b4482d92f8120cca6f01f06322694a76466b2548d025e0c935e7664da4)(bufferutil@4.0.9)(typescript@5.5.4)(utf-8-validate@5.0.10)(zod@3.24.4))
       hardhat: 3.0.0-next.21(patch_hash=d999397812469b6cc38a733cc57eaf35bac0aadfa9902244c29d1eeb17fc6f82)(bufferutil@4.0.9)(utf-8-validate@5.0.10)
       viem: 2.30.0(patch_hash=a81798b4482d92f8120cca6f01f06322694a76466b2548d025e0c935e7664da4)(bufferutil@4.0.9)(typescript@5.5.4)(utf-8-validate@5.0.10)(zod@3.24.4)
@@ -12145,13 +12116,6 @@ snapshots:
       '@nomicfoundation/hardhat-utils': 3.0.0-next.21
       hardhat: 3.0.0-next.21(patch_hash=d999397812469b6cc38a733cc57eaf35bac0aadfa9902244c29d1eeb17fc6f82)(bufferutil@4.0.9)(utf-8-validate@5.0.10)
       viem: 2.30.0(patch_hash=a81798b4482d92f8120cca6f01f06322694a76466b2548d025e0c935e7664da4)(bufferutil@4.0.9)(typescript@5.5.4)(utf-8-validate@5.0.10)(zod@3.24.4)
-    transitivePeerDependencies:
-      - supports-color
-
-  '@nomicfoundation/hardhat-zod-utils@3.0.0-next.20(zod@3.24.4)':
-    dependencies:
-      '@nomicfoundation/hardhat-utils': 3.0.0-next.20
-      zod: 3.24.4
     transitivePeerDependencies:
       - supports-color
 

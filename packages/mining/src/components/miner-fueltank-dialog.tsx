@@ -60,16 +60,22 @@ function DepositFueltank({ miner, onCancel, onConfirm }: ContentProps) {
 
       const parsedAmount = parseEther(String(amount))
 
+      const parameters = {
+        args: [
+          miner.account as Address,
+          zeroAddress,
+          parsedAmount,
+        ],
+        value: parsedAmount,
+      } as const
+
+      const data = encodeFunctionData({
+        abi: ihoFueltankAbi,
+        functionName: 'deposit',
+        args: parameters.args,
+      })
+
       if (accountType === 'miner') {
-        const data = encodeFunctionData({
-          abi: ihoFueltankAbi,
-          functionName: 'deposit',
-          args: [
-            miner.account as Address,
-            zeroAddress,
-            parsedAmount,
-          ],
-        })
         hash = await writeIerc6551AccountExecute({
           address: miner.account as Address,
           args: [
@@ -80,14 +86,7 @@ function DepositFueltank({ miner, onCancel, onConfirm }: ContentProps) {
         })
       }
       else {
-        hash = await writeIhoFueltankDeposit({
-          args: [
-            miner.account as Address,
-            zeroAddress,
-            parsedAmount,
-          ],
-          value: parsedAmount,
-        })
+        hash = await writeIhoFueltankDeposit(parameters)
       }
 
       await transactionWaitingReceipt(hash)

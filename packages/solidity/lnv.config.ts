@@ -11,6 +11,7 @@ const config = defineConfig({
     deploy: {
       prompts: [
         {
+          type: 'select',
           key: 'modulePath',
           message: 'Select the module you want to deploy',
           options: async () => {
@@ -22,6 +23,7 @@ const config = defineConfig({
           },
         },
         {
+          type: 'select',
           key: 'network',
           message: 'Select the network to deploy to',
           options: [
@@ -48,6 +50,7 @@ const config = defineConfig({
     exec: {
       prompts: [
         {
+          type: 'select',
           key: 'filepath',
           message: 'Select the module you want to deploy',
           options: async () => {
@@ -60,6 +63,7 @@ const config = defineConfig({
         },
         {
           key: 'network',
+          type: 'select',
           message: 'Select the network to deploy to',
           options: [
             {
@@ -84,7 +88,7 @@ const config = defineConfig({
     },
     test: {
       message: 'Please select the scope you want to test',
-      options: [
+      command: [
         {
           value: 'hardhat test',
           label: 'Default',

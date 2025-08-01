@@ -2,6 +2,10 @@ import { network } from 'hardhat'
 import IHOLockVaultV6Module from '../ignition/modules/IHOLockVaultV6'
 
 async function main() {
+  _confirm()
+}
+
+async function _setProjects() {
   const { ignition } = await network.connect('moonchain')
   const { market } = await ignition.deploy(IHOLockVaultV6Module)
   await market.write.setProject([23078n, 100n, 0n])
@@ -15,8 +19,8 @@ async function _confirm() {
   const { market } = await ignition.deploy(IHOLockVaultV6Module)
 
   const products = [
-    23033n,
-    22701n,
+    23147n,
+    23150n,
   ]
 
   for (const product of products) {
