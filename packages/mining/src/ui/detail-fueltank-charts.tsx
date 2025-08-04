@@ -18,17 +18,27 @@ export interface DetailFueltankChartData {
 }
 export interface DetailFueltankChartsProps {
   rewards?: DetailFueltankChartData[]
+  threshold?: number
 }
 
 export function DetailFueltankCharts(props: DetailFueltankChartsProps) {
+  const data = useMemo(
+    () => {
+      const data = props.rewards?.map((reward, index) => ({
+        ...reward,
+        reward: (reward.reward || props.rewards?.[index + 1]?.reward || props.rewards?.[index - 1]?.reward) ? +formatEther(reward.reward, { delimiters: false }) : undefined,
+        fueltank: (reward.fueltank || props.rewards?.[index + 1]?.fueltank || props.rewards?.[index - 1]?.fueltank) ? +formatEther(reward.fueltank, { delimiters: false }) : undefined,
+      })) || []
+      data[data.length - 1].reward ??= 0
+      data[data.length - 1].fueltank ??= 0
+      return data
+    },
+    [props.rewards],
+  )
   return (
     <ResponsiveContainer width="100%" height="100%">
       <AreaChart
-        data={props.rewards?.map((reward, index) => ({
-          ...reward,
-          reward: (reward.reward || props.rewards?.[index + 1]?.reward || props.rewards?.[index - 1]?.reward) ? +formatEther(reward.reward, { delimiters: false }) : undefined,
-          fueltank: (reward.fueltank || props.rewards?.[index + 1]?.fueltank || props.rewards?.[index - 1]?.fueltank) ? +formatEther(reward.fueltank, { delimiters: false }) : undefined,
-        }))}
+        data={data}
         margin={{ left: 18, right: -10 }}
       >
         <defs>
@@ -96,7 +106,7 @@ export function DetailFueltankCharts(props: DetailFueltankChartsProps) {
         />
 
         <ReferenceLine
-          y={1500}
+          y={props.threshold}
           stroke="#e74c3c"
           strokeDasharray="3 3"
           label={{

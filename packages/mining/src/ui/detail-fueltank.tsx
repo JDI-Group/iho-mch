@@ -61,7 +61,7 @@ export function DetailFueltank(props: DetailFueltankProps) {
   return (
     <div className="flex flex-col">
       <div className="mb-2 h-40">
-        <DetailFueltankCharts rewards={records} />
+        <DetailFueltankCharts rewards={records} threshold={+formatEther(indicator?.threshold ?? '0')} />
       </div>
       <div className="mb-2 flex gap-6">
         <div className="flex flex-col">

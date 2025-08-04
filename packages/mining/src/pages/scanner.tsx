@@ -62,9 +62,10 @@ function Page() {
       shouldShowTimeoutProgress: true,
       timeout: 3000,
     })
+    await scan()
   }
 
-  useWhenever(address, scan)
+  useWhenever(address, scan, { immediate: true })
   return (
     <layouts.default header={false}>
       <HeroUINavbar className="mb-6">
