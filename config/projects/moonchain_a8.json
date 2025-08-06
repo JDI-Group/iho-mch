@@ -88,7 +88,7 @@
     "name": "Nothing Headphone 1",
     "description": "The Nothing Headphone (1) redefines immersive listening with a custom-engineered 40mm dynamic driver, developed in collaboration with KEF for natural, studio-grade clarity.",
     "expire": 31536000,
-    "target": 5,
+    "target": 100,
     "limit": 2
   },
   {
@@ -96,7 +96,7 @@
     "name": "BlueBerry AI - WearFI",
     "description": "Unlock wellness at your fingertips. Get your Blueberry Ring now and start your journey to better health.",
     "expire": 31536000,
-    "target": 5,
+    "target": 100,
     "limit": 2
   },
   {
@@ -104,7 +104,7 @@
     "name": "DIMO",
     "description": "DIMO Macaron is smartest way to track and improve the health and value of your car.",
     "expire": 31536000,
-    "target": 5,
+    "target": 100,
     "limit": 2
   },
   {
@@ -112,7 +112,7 @@
     "name": "Crypto-native drone",
     "description": "Meet the Moonchain Drone — the first-ever autonomous, crypto-native drone distributed through an Initial Hardware Offering (IHO). Engineered for performance, connectivity, and profitability, the IHO Drone isn’t just a flying machine — it’s a physical validator in your decentralized economy.",
     "expire": 31536000,
-    "target": 5,
+    "target": 100,
     "limit": 2
   }
 ]
