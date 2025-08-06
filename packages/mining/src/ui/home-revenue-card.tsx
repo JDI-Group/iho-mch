@@ -36,51 +36,66 @@ export function HomeRevenueCard() {
   )
 
   // 根据选择的时间范围过滤收益数据
-  const data = useMemo(() => {
+  // const data = useMemo(() => {
+  //   if (!rewards || rewards.length === 0)
+  //     return []
+
+  //   const now = dayjs()
+  //   const startOfToday = now.startOf('day')
+  //   const startOfYesterday = now.subtract(1, 'day').startOf('day')
+  //   const endOfYesterday = now.subtract(1, 'day').endOf('day')
+
+  //   // 按时间戳排序
+  //   const sortedRewards = [...rewards].sort((a, b) => Number(a.timestamp - b.timestamp))
+
+  //   if (type === 'today') {
+  //     return sortedRewards
+  //       .filter(reward => dayjs.unix(Number(reward.timestamp)).isAfter(startOfToday))
+  //       .map(reward => ({
+  //         time: dayjs.unix(Number(reward.timestamp)).format('HH:mm'),
+  //         value: Number(formatEther(reward.amount)),
+  //       }))
+  //   }
+
+  //   if (type === 'yesterday') {
+  //     return sortedRewards
+  //       .filter((reward) => {
+  //         const rewardTime = dayjs.unix(Number(reward.timestamp))
+  //         return rewardTime.isAfter(startOfYesterday) && rewardTime.isBefore(endOfYesterday)
+  //       })
+  //       .map(reward => ({
+  //         time: dayjs.unix(Number(reward.timestamp)).format('HH:mm'),
+  //         value: Number(formatEther(reward.amount)),
+  //       }))
+  //   }
+
+  //   if (type === 'this-week') {
+  //     const startOfWeek = now.subtract(7, 'day').startOf('day')
+  //     return sortedRewards
+  //       .filter(reward => dayjs.unix(Number(reward.timestamp)).isAfter(startOfWeek))
+  //       .map(reward => ({
+  //         time: dayjs.unix(Number(reward.timestamp)).format('MM-DD'),
+  //         value: Number(formatEther(reward.amount)),
+  //       }))
+  //   }
+
+  //   return []
+  // }, [rewards, type])
+
+  const thisWeekData = useMemo(() => {
     if (!rewards || rewards.length === 0)
       return []
 
     const now = dayjs()
-    const startOfToday = now.startOf('day')
-    const startOfYesterday = now.subtract(1, 'day').startOf('day')
-    const endOfYesterday = now.subtract(1, 'day').endOf('day')
-
-    // 按时间戳排序
     const sortedRewards = [...rewards].sort((a, b) => Number(a.timestamp - b.timestamp))
-
-    if (type === 'today') {
-      return sortedRewards
-        .filter(reward => dayjs.unix(Number(reward.timestamp)).isAfter(startOfToday))
-        .map(reward => ({
-          time: dayjs.unix(Number(reward.timestamp)).format('HH:mm'),
-          value: Number(formatEther(reward.amount)),
-        }))
-    }
-
-    if (type === 'yesterday') {
-      return sortedRewards
-        .filter((reward) => {
-          const rewardTime = dayjs.unix(Number(reward.timestamp))
-          return rewardTime.isAfter(startOfYesterday) && rewardTime.isBefore(endOfYesterday)
-        })
-        .map(reward => ({
-          time: dayjs.unix(Number(reward.timestamp)).format('HH:mm'),
-          value: Number(formatEther(reward.amount)),
-        }))
-    }
-
-    if (type === 'this-week') {
-      const startOfWeek = now.subtract(7, 'day').startOf('day')
-      return sortedRewards
-        .filter(reward => dayjs.unix(Number(reward.timestamp)).isAfter(startOfWeek))
-        .map(reward => ({
-          time: dayjs.unix(Number(reward.timestamp)).format('MM-DD'),
-          value: Number(formatEther(reward.amount)),
-        }))
-    }
-
-    return []
-  }, [rewards, type])
+    const startOfWeek = now.subtract(7, 'day').startOf('day')
+    return sortedRewards
+      .filter(reward => dayjs.unix(Number(reward.timestamp)).isAfter(startOfWeek))
+      .map(reward => ({
+        time: dayjs.unix(Number(reward.timestamp)).format('MM-DD'),
+        value: Number(formatEther(reward.amount)),
+      }))
+  }, [rewards])
 
   // 计算总收益
   const total = useMemo(() => {
@@ -203,7 +218,7 @@ export function HomeRevenueCard() {
         'yesterday': ' vs before yesterday',
         'this-week': ' vs last week',
       }[type]}
-      areaData={data}
+      areaData={thisWeekData}
       areaType="natural"
       areaKey="value"
       extra={(

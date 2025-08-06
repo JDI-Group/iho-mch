@@ -24,11 +24,15 @@ export interface DetailFueltankChartsProps {
 export function DetailFueltankCharts(props: DetailFueltankChartsProps) {
   const data = useMemo(
     () => {
-      const data = props.rewards?.map((reward, index) => ({
-        ...reward,
-        reward: (reward.reward || props.rewards?.[index + 1]?.reward || props.rewards?.[index - 1]?.reward) ? +formatEther(reward.reward, { delimiters: false }) : undefined,
-        fueltank: (reward.fueltank || props.rewards?.[index + 1]?.fueltank || props.rewards?.[index - 1]?.fueltank) ? +formatEther(reward.fueltank, { delimiters: false }) : undefined,
-      })) || []
+      const data = props.rewards?.map(
+        (reward, index) => {
+          return {
+            ...reward,
+            reward: props.rewards?.slice(0, index + 1).reduce((acc, curr) => acc + (curr.reward ? +formatEther(curr.reward, { delimiters: false }) : 0), 0),
+            fueltank: +formatEther(reward.fueltank, { delimiters: false }),
+          }
+        },
+      ) || []
       data[data.length - 1].reward ??= 0
       data[data.length - 1].fueltank ??= 0
       return data
@@ -53,7 +57,7 @@ export function DetailFueltankCharts(props: DetailFueltankChartsProps) {
         </defs>
         <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
         <XAxis
-          dataKey="time"
+          dataKey="date"
           fontSize="12"
           tickLine={false}
           label={{
@@ -73,7 +77,7 @@ export function DetailFueltankCharts(props: DetailFueltankChartsProps) {
             angle: 90,
             position: 'insideRight',
           }}
-          domain={[5000, (max: number) => Math.max(max, 3000) * 1.2]}
+          domain={[(props.threshold || 0), (max: number) => Math.max(max, props.threshold || 0) * 1.2]}
         />
 
         <Tooltip

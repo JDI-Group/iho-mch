@@ -1,5 +1,5 @@
 import { Unless, useAsyncState } from '@hairy/react-lib'
-import { Spinner } from '@heroui/react'
+import { Alert, Link, Spinner } from '@heroui/react'
 import { useAccount } from 'wagmi'
 
 export function HomePage() {
@@ -10,11 +10,21 @@ export function HomePage() {
     [address],
     { immediate: true },
   )
-
+  const ihoUrl = process.env.NEXT_PUBLIC_NETWORK === 'moonchain_geneva'
+    ? 'testnet-iho.moonchain.com'
+    : 'iho.moonchain.com'
   return (
     <>
       <section className="px-4 mb-4">
         <HomeRevenueCard />
+      </section>
+      <section className="px-4">
+        <Alert className="items-center">
+          <div>
+            <span>IHO mining is only available for iho pledge. If you do not have the equipment yet, please go to </span>
+            <Link className="inline" href={`https://${ihoUrl}`} target="_blank">{ihoUrl}</Link>
+          </div>
+        </Alert>
       </section>
       <section className="px-4 mb-4">
         <div className="my-4">

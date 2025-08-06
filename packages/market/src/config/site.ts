@@ -13,10 +13,10 @@ export const siteConfig = {
       label: 'Products',
       href: '/products',
     },
-    // {
-    //   label: 'Mining',
-    //   href: '/mining',
-    // },
+    {
+      label: 'Mining',
+      href: process.env.NEXT_PUBLIC_NETWORK === 'moonchain_geneva' ? 'https://testnet-iho-mining.moonchain.com/' : 'https://iho-mining.moonchain.com/',
+    },
   ],
   navMenuItems: [
     {
