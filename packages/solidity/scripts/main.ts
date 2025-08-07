@@ -1,5 +1,5 @@
 import { network } from 'hardhat'
-import IHOLockVaultV6Module from '../ignition/modules/IHOLockVaultV6'
+import IHOLockVaultV7Module from '../ignition/modules/IHOLockVaultV7'
 
 async function main() {
   _confirm()
@@ -7,7 +7,7 @@ async function main() {
 
 async function _setProjects() {
   const { ignition } = await network.connect('moonchain')
-  const { market } = await ignition.deploy(IHOLockVaultV6Module)
+  const { market } = await ignition.deploy(IHOLockVaultV7Module)
   await market.write.setProject([23078n, 100n, 0n])
   await market.write.setProject([23075n, 100n, 0n])
 
@@ -16,7 +16,7 @@ async function _setProjects() {
 
 async function _confirm() {
   const { ignition } = await network.connect('moonchain')
-  const { market } = await ignition.deploy(IHOLockVaultV6Module)
+  const { market } = await ignition.deploy(IHOLockVaultV7Module)
 
   const products = [
     23147n,

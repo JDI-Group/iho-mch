@@ -118,7 +118,6 @@
   },
   {
     "product": 22668,
-    "upcoming": true,
     "name": "DIMO",
     "description": "DIMO Macaron is smartest way to track and improve the health and value of your car.",
     "expire": 31536000,
@@ -128,7 +127,6 @@
   },
   {
     "product": 22643,
-    "upcoming": true,
     "name": "Crypto-native drone",
     "description": "Meet the Moonchain Drone — the first-ever autonomous, crypto-native drone distributed through an Initial Hardware Offering (IHO). Engineered for performance, connectivity, and profitability, the IHO Drone isn’t just a flying machine — it’s a physical validator in your decentralized economy.",
     "expire": 31536000,
