@@ -204,7 +204,7 @@ function WithdrawFueltank({ miner, onCancel, onConfirm }: ContentProps) {
           classNames={{ description: 'ml-0' }}
           className="items-center p-2"
           color="warning"
-          description="Withdrawals will reduce the fuel tank amount and enter a lock up period of nearly 30 days. After the lock up period, you can claim it by listing."
+          description="Withdrawals will reduce the fuel tank amount and enter a lock up period of nearly 30 days. After the lock up period, you can claim it."
         />
       </ModalBody>
       <ModalFooter className="pt-2">
