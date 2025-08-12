@@ -136,7 +136,7 @@ contract IHOLockVaultV1 is VerifiableUpgradeable, BidirectionalTransfer, UUPSUpg
     uint256 timestamp
   );
 
-
+  
   /**
    * @dev Creates a new project
    * @param pid The project ID
@@ -187,8 +187,6 @@ contract IHOLockVaultV1 is VerifiableUpgradeable, BidirectionalTransfer, UUPSUpg
 
     if (projects[pid].target == 0)
       revert ProjectNotFound(pid);
-    if (projects[pid].confirmed)
-      revert ProjectAlreadyConfirmed(pid);
     if (stakes[pid][oid].timestamp != 0)
       revert StakeAlreadyExists(pid, oid);
 
@@ -253,7 +251,6 @@ contract IHOLockVaultV1 is VerifiableUpgradeable, BidirectionalTransfer, UUPSUpg
   function setProject(uint256 pid, uint256 target, uint256 quantity) external onlyOwner {
     projects[pid].target = target;
     projects[pid].quantity = quantity;
-    projects[pid].confirmed = false;
   }
 
   function confirm(uint256 pid) external onlyOwner {

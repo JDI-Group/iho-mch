@@ -38,44 +38,8 @@ const config = {
     },
     dependenciesToCompile: ['@openzeppelin/contracts/proxy/ERC1967/ERC1967Proxy.sol'],
   },
-  chainDescriptors: {
-    18686: {
-      name: 'Moonchain',
-      blockExplorers: {
-        blockscout: { apiUrl: 'https://explorer-v1.moonchain.com/api', url: 'https://explorer.moonchain.com' },
-      },
-    },
-    5167004: {
-      name: 'Moonchain Geneva',
-      blockExplorers: {
-        blockscout: { apiUrl: 'https://geneva-explorer-v1.moonchain.com/api', url: 'https://geneva-explorer.moonchain.com' },
-      },
-    },
-  },
+  chainDescriptors: {},
   networks: {
-    moonchainGeneva: {
-      name: 'Moonchain Geneva',
-      currency: { decimals: 18, name: 'MXC Token', symbol: 'MXC' },
-      explorer: { name: 'etherscan', url: 'https://geneva-explorer.moonchain.com' },
-      icon: 'https://raw.githubusercontent.com/MXCzkEVM/metadata/main/logo-circle.svg',
-      url: 'https://geneva-rpc.moonchain.com',
-      chainId: 5167004,
-      type: 'http',
-      chainType: 'l1',
-      testnet: true,
-      accounts,
-    },
-    moonchain: {
-      name: 'Moonchain',
-      currency: { decimals: 18, name: 'MXC Token', symbol: 'MXC' },
-      explorer: { name: 'etherscan', url: 'https://explorer.moonchain.com' },
-      icon: 'https://raw.githubusercontent.com/MXCzkEVM/metadata/main/logo-circle.svg',
-      url: 'https://rpc.moonchain.com',
-      type: 'http',
-      chainId: 18686,
-      chainType: 'l1',
-      accounts,
-    },
     mchainGeneva: {
       name: 'Moonchain Hudson',
       currency: { name: 'MCH', symbol: 'MCH', decimals: 18 },
