@@ -7,7 +7,6 @@ const config = defineConfig([
   {
     output: '../mining/src/generated',
     fragments: { ERC20: erc20Abi },
-
     plugins: [
       hardhat(),
       wagmi(),

@@ -6,6 +6,11 @@ import hardhatToolboxViemPlugin from '@nomicfoundation/hardhat-toolbox-viem'
 import hardhatVerifyPlugin from '@nomicfoundation/hardhat-verify'
 import { generatePrivateKey } from 'viem/accounts'
 
+const accounts = [
+  process.env.DEPLOYER_PRIVATE_KEY || generatePrivateKey(),
+  process.env.VERIFIER_PRIVATE_KEY || generatePrivateKey(),
+]
+
 const config = {
   plugins: [
     hardhatIgnitionViewPlugin,
@@ -58,10 +63,7 @@ const config = {
       type: 'http',
       chainType: 'l1',
       testnet: true,
-      accounts: [
-        process.env.DEPLOYER_PRIVATE_KEY || generatePrivateKey(),
-        process.env.VERIFIER_PRIVATE_KEY || generatePrivateKey(),
-      ],
+      accounts,
     },
     moonchain: {
       name: 'Moonchain',
@@ -72,10 +74,17 @@ const config = {
       type: 'http',
       chainId: 18686,
       chainType: 'l1',
-      accounts: [
-        process.env.DEPLOYER_PRIVATE_KEY || generatePrivateKey(),
-        process.env.VERIFIER_PRIVATE_KEY || generatePrivateKey(),
-      ],
+      accounts,
+    },
+    mchainGeneva: {
+      name: 'Moonchain Hudson',
+      currency: { name: 'MCH', symbol: 'MCH', decimals: 18 },
+      explorer: { name: 'etherscan', url: 'https://hudson-explorer.mchain.ai' },
+      url: 'https://rpc.mchain.com',
+      type: 'http',
+      chainId: 177888,
+      chainType: 'l1',
+      accounts,
     },
   },
 } as const satisfies HardhatUserConfig
