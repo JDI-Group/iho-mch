@@ -40,7 +40,7 @@ const config = {
   },
   chainDescriptors: {},
   networks: {
-    mchainGeneva: {
+    moonchainHudson: {
       name: 'Moonchain Hudson',
       currency: { name: 'MCH', symbol: 'MCH', decimals: 18 },
       explorer: { name: 'etherscan', url: 'https://hudson-explorer.mchain.ai' },
