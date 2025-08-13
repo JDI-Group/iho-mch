@@ -44,7 +44,7 @@ const config = {
       name: 'Moonchain Hudson',
       currency: { name: 'MCH', symbol: 'MCH', decimals: 18 },
       explorer: { name: 'etherscan', url: 'https://hudson-explorer.mchain.ai' },
-      url: 'https://rpc.mchain.com',
+      url: 'https://hudson-rpc.mchain.ai',
       type: 'http',
       chainId: 177888,
       chainType: 'l1',

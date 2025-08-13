@@ -33,14 +33,9 @@ const config = defineConfig({
               hint: 'localhost',
             },
             {
-              value: 'moonchainGeneva',
-              label: 'Moonchain Geneva',
-              hint: 'geneva-rpc.moonchain.com',
-            },
-            {
-              value: 'moonchain',
-              label: 'Moonchain Mainnet',
-              hint: 'rpc.moonchain.com',
+              value: 'mchainGeneva',
+              label: 'Mchain Geneva',
+              hint: 'hudson-rpc.mchain.ai',
             },
           ],
         },
