@@ -13,7 +13,7 @@ export async function helperStake(params: { order: number } | { product: number,
     return
   }
 
-  const iho = getIhoLockVaultV3({
+  const iho = getIhoLockVaultV1({
     address: Reflect.get(chain.contracts, `IHOLockVaultV${process.env.NEXT_PUBLIC_MARKET_BATCH}`)?.address,
     runner: wallet,
   })
