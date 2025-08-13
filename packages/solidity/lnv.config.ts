@@ -33,8 +33,8 @@ const config = defineConfig({
               hint: 'localhost',
             },
             {
-              value: 'mchainGeneva',
-              label: 'Mchain Geneva',
+              value: 'moonchainHudson',
+              label: 'Moonchain Hudson',
               hint: 'hudson-rpc.mchain.ai',
             },
           ],
