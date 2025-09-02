@@ -19,8 +19,18 @@ export async function helperStake(params: { order: number } | { product: number,
   })
 
   let detail: OrderDataDto | null = null
+
   if (product)
     detail = await postOrder({ variation, product }, undefined, undefined, { skipMessage: true } as any)
+
+  if (detail) {
+    const filter = iho.filters.StakeConfirmed(undefined, undefined, detail.order)
+    const events = await iho.queryFilter(filter)
+    if (events.length > 0) {
+      addToast({ description: 'Please wait for the order index to continue', color: 'danger' })
+      return
+    }
+  }
 
   if (order) {
     detail = await postOrderPay({ order })
