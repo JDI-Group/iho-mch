@@ -28,7 +28,7 @@ export async function helperStake(params: { order: number } | { product: number,
     const events = await iho.queryFilter(filter)
     if (events.length > 0) {
       addToast({ description: 'Please wait for the order index to continue', color: 'danger' })
-      return
+      throw new Error('Please wait for the order index to continue')
     }
   }
 
