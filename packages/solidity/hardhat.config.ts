@@ -50,6 +50,16 @@ const config = {
       chainType: 'l1',
       accounts,
     },
+    moonchain: {
+      name: 'Moonchain',
+      currency: { name: 'MCH', symbol: 'MCH', decimals: 18 },
+      explorer: { name: 'etherscan', url: 'https://explorer.mchain.ai' },
+      url: 'https://rpc.mchain.ai',
+      type: 'http',
+      chainId: 0,
+      chainType: 'l1',
+      accounts,
+    }
   },
 } as const satisfies HardhatUserConfig
 
