@@ -56,7 +56,7 @@ const config = {
       explorer: { name: 'etherscan', url: 'https://explorer.mchain.ai' },
       url: 'https://rpc.mchain.ai',
       type: 'http',
-      chainId: 0,
+      chainId: 1,
       chainType: 'l1',
       accounts,
     }

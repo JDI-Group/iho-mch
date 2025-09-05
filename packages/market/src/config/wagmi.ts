@@ -24,9 +24,8 @@ export const connectors = connectorsForWallets(
   },
 )
 
-export const wagmiConfig = createConfig({
-  // @ts-expect-error
-  chains: process.env.NEXT_PUBLIC_NETWORK === 'moonchain_geneva' ? [chains.moonchainHudson] : [],
+export const wagmiConfig = createConfig(<any>{
+  chains: process.env.NEXT_PUBLIC_NETWORK === 'moonchain_geneva' ? [chains.moonchainHudson] : [chains.moonchain],
   connectors,
   ssr: true,
 })
