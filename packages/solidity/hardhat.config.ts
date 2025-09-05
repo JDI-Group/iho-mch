@@ -54,9 +54,9 @@ const config = {
       name: 'Moonchain',
       currency: { name: 'MCH', symbol: 'MCH', decimals: 18 },
       explorer: { name: 'etherscan', url: 'https://explorer.mchain.ai' },
-      url: 'https://rpc.mchain.ai',
+      url: 'http://207.246.101.30:8545',
       type: 'http',
-      chainId: 1,
+      chainId: 999888,
       chainType: 'l1',
       accounts,
     }

@@ -50,9 +50,10 @@ export function Navbar(props: NavbarProps) {
                   'data-[active=true]:text-primary data-[active=true]:font-medium',
                   'flex gap-1 items-center',
                   router.asPath === item.href && 'border-b',
+                  item.disabled && 'opacity-50 cursor-not-allowed',
                 )}
                 color="foreground"
-                href={item.href}
+                href={item.disabled ? '' : item.href}
               >
                 {item.label}
               </NextLink>
@@ -104,7 +105,7 @@ export function Navbar(props: NavbarProps) {
             <NavbarMenuItem key={`${item}-${index}`}>
               <Link
                 color="foreground"
-                href={item.href}
+                href={item.disabled ? '' : item.href}
                 size="lg"
               >
                 {item.label}

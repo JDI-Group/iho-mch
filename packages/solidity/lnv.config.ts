@@ -37,6 +37,11 @@ const config = defineConfig({
               label: 'Moonchain Hudson',
               hint: 'hudson-rpc.mchain.ai',
             },
+            {
+              value: 'moonchain',
+              label: 'Moonchain',
+              hint: 'rpc.mchain.ai',
+            },
           ],
         },
       ],

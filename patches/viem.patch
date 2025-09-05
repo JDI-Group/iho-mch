@@ -15,28 +15,28 @@ index 0000000000000000000000000000000000000000..40b1a88f923bbe8126e1e93a96fd27c5
 +    },
 +    rpcUrls: {
 +        default: {
-+            http: ['https://rpc.mxc.com'],
++            http: ['https://rpc.mchain.ai'],
 +        },
 +    },
 +    blockExplorers: {
 +        default: {
 +            name: 'Moonchain Explorer',
-+            url: 'https://explorer.moonchain.com',
++            url: 'https://explorer.mchain.ai',
 +        },
 +    },
 +    testnet: false,
 +});
 \ No newline at end of file
-diff --git a/_esm/chains/definitions/moonchainGeneva.js b/_esm/chains/definitions/moonchainGeneva.js
+diff --git a/_esm/chains/definitions/moonchainHudson.js b/_esm/chains/definitions/moonchainHudson.js
 new file mode 100644
 index 0000000000000000000000000000000000000000..e9ec0477c48d2c9b1ef5a4856d747ffb27098db8
 --- /dev/null
-+++ b/_esm/chains/definitions/moonchainGeneva.js
++++ b/_esm/chains/definitions/moonchainHudson.js
 @@ -0,0 +1,22 @@
 +import { defineChain } from '../../utils/chain/defineChain.js';
-+export const moonchainGeneva = /*#__PURE__*/ defineChain({
++export const moonchainHudson = /*#__PURE__*/ defineChain({
 +    id: 5167004,
-+    name: 'Moonchain Geneva',
++    name: 'Moonchain Hudson',
 +    nativeCurrency: {
 +        decimals: 18,
 +        name: 'MXC',
@@ -44,13 +44,13 @@ index 0000000000000000000000000000000000000000..e9ec0477c48d2c9b1ef5a4856d747ffb
 +    },
 +    rpcUrls: {
 +        default: {
-+            http: ['https://geneva-rpc.mxc.com'],
++            http: ['https://hudson-rpc.mchain.ai'],
 +        },
 +    },
 +    blockExplorers: {
 +        default: {
 +            name: 'Moonchain Explorer',
-+            url: 'https://geneva-explorer.moonchain.com',
++            url: 'https://hudson-explorer.mchain.ai',
 +        },
 +    },
 +    testnet: true,
@@ -65,7 +65,7 @@ index 55864784913ff0b724fcb5fc5d72c9e79b6dee60..95bbe3b60af4175462bda1bba06caf69
  export { apeChain } from './definitions/apeChain.js';
  export { apexTestnet } from './definitions/apexTestnet.js';
 +export { moonchain } from './definitions/moonchain.js';
-+export { moonchainGeneva } from './definitions/moonchainGeneva.js';
++export { moonchainHudson } from './definitions/moonchainHudson.js';
  export { arbitrum } from './definitions/arbitrum.js';
  export { arbitrumGoerli } from './definitions/arbitrumGoerli.js';
  export { arbitrumNova } from './definitions/arbitrumNova.js';
