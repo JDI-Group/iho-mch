@@ -93,7 +93,7 @@ export function HomeStatsItem({ item: stat, batch, start }: HomeStatsItemProps) 
           <span>Total Value Secured:</span>
           <span>
             {formatEther(stat.totalValueSecuredMXC)}
-            MXC
+            MCH
           </span>
         </div>
 

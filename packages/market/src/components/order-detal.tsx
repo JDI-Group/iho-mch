@@ -97,7 +97,7 @@ export function OrderDetail(props: OrderDetailProps) {
         <div className="flex justify-between">
           <div className="font-bold">Total</div>
           <div>
-            <span>{formatEther(props.detail?.ether)} MXC</span>
+            <span>{formatEther(props.detail?.ether)} MCH</span>
             <span className="mx-2">/</span>
             <span>${props.detail?.total}</span>
           </div>

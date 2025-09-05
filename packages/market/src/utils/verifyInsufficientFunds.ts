@@ -7,7 +7,7 @@ export async function verifyInsufficientFunds(value: string) {
   if (BigInt(value) > balance) {
     closeAll()
     addToast({
-      description: `Insufficient funds, Need ${formatEther(value)} MXC`,
+      description: `Insufficient funds, Need ${formatEther(value)} MCH`,
       color: 'danger',
     })
     throw new Error('Insufficient funds')

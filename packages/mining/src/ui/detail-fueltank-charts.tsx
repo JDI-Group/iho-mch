@@ -70,7 +70,7 @@ export function DetailFueltankCharts(props: DetailFueltankChartsProps) {
           orientation="right"
           fontSize="12"
           width={70}
-          tickFormatter={value => value > 0 ? `${value} MXC` : ''}
+          tickFormatter={value => value > 0 ? `${value} MCH` : ''}
           tickLine={false}
           axisLine={{ stroke: 'rgba(0,0,0,0.5)' }}
           label={{
@@ -83,8 +83,8 @@ export function DetailFueltankCharts(props: DetailFueltankChartsProps) {
         <Tooltip
           formatter={(value, name) => {
             if (name === 'Fueltank')
-              return [`${value} MXC`, 'Fueltank']
-            return [`${value} MXC`, 'Revenue']
+              return [`${value} MCH`, 'Fueltank']
+            return [`${value} MCH`, 'Revenue']
           }}
         />
         <Area

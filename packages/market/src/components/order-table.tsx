@@ -34,7 +34,7 @@ export function OrderTable(props: OrderTableProps) {
       case 'date_modified':
         return formatDate(value)
       case 'total':
-        return (<span>{formatEther(item?.ether)} MXC</span>)
+        return (<span>{formatEther(item?.ether)} MCH</span>)
       case 'tracking':
         // eslint-disable-next-line no-case-declarations
         const [tracking] = parseOrderTracking(item.line_items)

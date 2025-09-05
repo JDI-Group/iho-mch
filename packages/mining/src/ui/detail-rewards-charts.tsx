@@ -47,7 +47,7 @@ export function DetailRewardsCharts(props: DetailRewardsChartProps) {
             axisLine={{ stroke: 'rgba(0,0,0,0.5)' }}
             orientation="right"
             width={80}
-            tickFormatter={value => value > 0 ? `${value} MXC` : ''}
+            tickFormatter={value => value > 0 ? `${value} MCH` : ''}
           />
 
           <Area
@@ -59,7 +59,7 @@ export function DetailRewardsCharts(props: DetailRewardsChartProps) {
           />
           <CartesianGrid vertical={false} strokeDasharray="3 3" fillOpacity={0.1} horizontalCoordinatesGenerator={props => arange(1, 3).map(index => (props.height / 4) * index)} />
           <Tooltip
-            formatter={value => [`${value} MXC`, 'Rewards']}
+            formatter={value => [`${value} MCH`, 'Rewards']}
           />
         </AreaChart>
       </ResponsiveContainer>

@@ -66,16 +66,16 @@ export function DetailFueltank(props: DetailFueltankProps) {
       <div className="mb-2 flex gap-6">
         <div className="flex flex-col">
           <div className="text-base">Fuel tank Balance Of</div>
-          <div className="text-sm">{formatEther(balance)} MXC</div>
+          <div className="text-sm">{formatEther(balance)} MCH</div>
         </div>
         <div className="flex flex-col">
           <div className="text-base">World Rewards</div>
-          <div className="text-sm">{formatEther(indicator?.daily ?? 0n)} MXC</div>
+          <div className="text-sm">{formatEther(indicator?.daily ?? 0n)} MCH</div>
         </div>
         <div className="flex flex-col">
           <div className="flex items-center gap-1 text-base">
             <span>Dividend ratio</span>
-            <QuestionTooltip content="The proportion will gradually decrease as the number of participants increases, and you can invest more MXC to obtain a higher proportion" />
+            <QuestionTooltip content="The proportion will gradually decrease as the number of participants increases, and you can invest more MCH to obtain a higher proportion" />
           </div>
           <div className="inline-flex items-center text-sm text-success">
             <Icon key="up" height={12} icon="solar:arrow-right-up-linear" width={12} />

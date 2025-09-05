@@ -63,11 +63,11 @@ export function DetailRewards(props: DetailRewardsProps) {
       <div className="mb-2 flex gap-6">
         <div className="flex flex-col">
           <div className="text-base">Mining Balance Of</div>
-          <div className="text-sm">{formatEther(balance)} MXC</div>
+          <div className="text-sm">{formatEther(balance)} MCH</div>
         </div>
         <div className="flex flex-col">
           <div className="text-base">Today's reward</div>
-          <div className="text-sm">{formatEther(records.at(0)?.reward)} MXC</div>
+          <div className="text-sm">{formatEther(records.at(0)?.reward)} MCH</div>
         </div>
       </div>
       <div className="mb-4 flex gap-2">

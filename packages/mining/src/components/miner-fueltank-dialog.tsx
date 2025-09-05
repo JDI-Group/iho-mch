@@ -125,7 +125,7 @@ function DepositFueltank({ miner, onCancel, onConfirm }: ContentProps) {
               value={amount}
               onChange={value => typeof value === 'number' ? setAmount(value) : setAmount(undefined)}
             />
-            <span className="absolute right-2 top-2 text-tiny text-default-500">{formatEther(balance)} MXC</span>
+            <span className="absolute right-2 top-2 text-tiny text-default-500">{formatEther(balance)} MCH</span>
           </div>
 
         </div>
@@ -198,7 +198,7 @@ function WithdrawFueltank({ miner, onCancel, onConfirm }: ContentProps) {
             value={amount}
             onChange={value => typeof value === 'number' ? setAmount(value) : setAmount(undefined)}
           />
-          <span className="absolute right-2 top-2 text-tiny text-default-500">{formatEther(balance)} MXC</span>
+          <span className="absolute right-2 top-2 text-tiny text-default-500">{formatEther(balance)} MCH</span>
         </div>
         <Alert
           classNames={{ description: 'ml-0' }}

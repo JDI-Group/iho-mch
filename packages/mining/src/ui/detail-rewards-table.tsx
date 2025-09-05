@@ -24,7 +24,7 @@ export function DetailRewardsTable() {
           <TableRow key="1">
             <TableCell># 5</TableCell>
             <TableCell>01/24/25</TableCell>
-            <TableCell>100 MXC</TableCell>
+            <TableCell>100 MCH</TableCell>
             <TableCell className="text-tiny">
               <span className="text-tiny h-4 text-success-500">
                 Withdrawn
@@ -34,7 +34,7 @@ export function DetailRewardsTable() {
           <TableRow key="2">
             <TableCell># 5</TableCell>
             <TableCell>01/24/25</TableCell>
-            <TableCell>100 MXC</TableCell>
+            <TableCell>100 MCH</TableCell>
             <TableCell>
               <span className="text-tiny h-4 text-success-500">
                 Withdrawn

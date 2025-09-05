@@ -76,7 +76,7 @@ export function MinerWithdrawDialog(props: MinerWithdrawDialogProps) {
                 value={amount}
                 onChange={value => typeof value === 'number' ? setAmount(value) : setAmount(undefined)}
               />
-              <span className="absolute right-2 top-2 text-tiny text-default-500">{formatEther(props.balance)} MXC</span>
+              <span className="absolute right-2 top-2 text-tiny text-default-500">{formatEther(props.balance)} MCH</span>
             </div>
             <If cond={!fueltank}>
               <div className="flex justify-center">

@@ -49,7 +49,7 @@ export function DetailFueltankTable(props: DetailFueltankTableProps) {
       case 'unlocktime':
         return unlocktime.format('MM/DD HH:mm')
       case 'amount':
-        return `${formatEther(cellValue)} MXC`
+        return `${formatEther(cellValue)} MCH`
       case 'status':
         return locked
           ? (
