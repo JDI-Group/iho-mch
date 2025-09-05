@@ -59,7 +59,7 @@ const config = {
       chainId: 999888,
       chainType: 'l1',
       accounts,
-    }
+    },
   },
 } as const satisfies HardhatUserConfig
 

@@ -1,4 +1,3 @@
-/* eslint-disable ts/ban-ts-comment */
 import { connectorsForWallets, getDefaultWallets } from '@rainbow-me/rainbowkit'
 import { createConfig } from 'wagmi'
 import { metaMaskWallet, moonBaseWallet } from './wagmi.wallets'
