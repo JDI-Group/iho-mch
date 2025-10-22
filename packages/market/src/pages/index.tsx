@@ -54,12 +54,12 @@ const accordions = [
   {
     value: 'item-9',
     question: 'How many tokens do you expect to earn by IHO mining?',
-    answer: `With IHO mining on Moonchain, you're mining zkEVM $MXC tokens. The number of tokens you can earn depends on how much $MXC you stake on your hardware. The more $MXC you stake, the more you will mine with your device. Your rewards scale with your staking amount, so maximizing your stake can increase your mining output.`,
+    answer: `With IHO mining on Moonchain, you're mining zkEVM $MCH tokens. The number of tokens you can earn depends on how much $MCH you stake on your hardware. The more $MCH you stake, the more you will mine with your device. Your rewards scale with your staking amount, so maximizing your stake can increase your mining output.`,
   },
   {
     value: 'item-10',
     question: 'What are the token release rules?',
-    answer: `Since the IHO provides you with hardware for free, your $MXC tokens will be locked for 12 months. There is no option for early release—the tokens will only become available after the 12-month locking period.`,
+    answer: `Since the IHO provides you with hardware for free, your $MCH tokens will be locked for 12 months. There is no option for early release—the tokens will only become available after the 12-month locking period.`,
   },
 ]
 
