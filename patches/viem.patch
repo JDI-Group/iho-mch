@@ -10,8 +10,8 @@ index 0000000000000000000000000000000000000000..40b1a88f923bbe8126e1e93a96fd27c5
 +    name: 'Moonchain',
 +    nativeCurrency: {
 +        decimals: 18,
-+        name: 'MXC',
-+        symbol: 'MXC',
++        name: 'MCH',
++        symbol: 'MCH',
 +    },
 +    rpcUrls: {
 +        default: {
@@ -39,8 +39,8 @@ index 0000000000000000000000000000000000000000..e9ec0477c48d2c9b1ef5a4856d747ffb
 +    name: 'Moonchain Hudson',
 +    nativeCurrency: {
 +        decimals: 18,
-+        name: 'MXC',
-+        symbol: 'MXC',
++        name: 'MCH',
++        symbol: 'MCH',
 +    },
 +    rpcUrls: {
 +        default: {

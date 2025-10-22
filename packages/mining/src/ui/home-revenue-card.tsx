@@ -210,7 +210,7 @@ export function HomeRevenueCard() {
     <TrendCard
       title={`${options.find(o => o.key === type)?.label || 'Today'}'s Revenue`}
       value={formatEther(total)}
-      symbol="MXC"
+      symbol="MCH"
       change={`${contrast}%`}
       changeType={contrast > 0 ? 'positive' : contrast < 0 ? 'negative' : 'neutral'}
       changeText={{
